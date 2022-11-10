@@ -1,4 +1,5 @@
-package com.backend.domain.review.domain;
+package com.backend.domain.order.domain;
+
 import com.backend.domain.product.domain.Product;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -6,19 +7,20 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Review {
+@Getter
+@Entity
+public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reviewId;
+    private Long orderProductId;
 
     @Column(nullable = false)
-    private String reviewWriter;
+    private int orderProductQuantity;
 
-    @Column(nullable = false)
-    private String reviewContent;
+    @ManyToOne
+    @JoinColumn(name = "oreder_id")
+    private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

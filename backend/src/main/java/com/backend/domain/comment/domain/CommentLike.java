@@ -1,4 +1,4 @@
-package com.backend.domain.point.domain;
+package com.backend.domain.comment.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,10 +12,9 @@ import javax.persistence.Id;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Point {
-
+public class CommentLike {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pointId;
+    private Long commentLikeId;
 
 }

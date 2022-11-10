@@ -1,4 +1,4 @@
-package com.backend.domain.commnet.dao;
+package com.backend.domain.comment.dao;
 
 public interface CommentRepository {
 }
