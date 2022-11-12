@@ -1,7 +1,6 @@
 package com.backend.domain.product.domain;
 
 import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.question.domain.Question;
 import com.backend.domain.review.domain.Review;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -34,9 +33,6 @@ public class Product {
 
     @Column(nullable = false)
     private int discountPrice;
-
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Question> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
