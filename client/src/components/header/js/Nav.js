@@ -26,7 +26,7 @@ export default function Nav() {
 
   return (
     <>
-      <div style={fixNav}>
+      <div style={fixNav} className="navbar">
         <nav>
           <div className="navLeft" onScroll={scroll}>
             <button>Shop</button>
