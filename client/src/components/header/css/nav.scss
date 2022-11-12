@@ -1,8 +1,64 @@
 nav{
   display: flex;
-  align-items: center;
+  margin: 25px 0px;
   width: 100%;
-  height: 100%;
-  max-width: 1264px;
-  border: 1px solid red;
+  
+  button{
+    color: #5C4B29;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    i{
+      color: #5C4B29;
+    }
+    @media (max-width: 980px) {
+      font-size: 12px;
+    }
+  }
+  button:hover{
+    color: #FFB526;
+  }
+
+  .navLeft{
+    position: absolute;
+    left: 160px;
+    button{
+      margin-right: 50px;
+    }
+    @media (max-width: 980px) {
+      left: 30px;
+    }
+  }
+
+  .navRight{
+    position: absolute;
+    right: 160px;
+    button{
+      margin-left: 50px;
+    }
+    i{
+      margin-right: 10px;
+    }
+    i:hover{
+      color: #FFB526;
+    }
+    @media (max-width: 980px) {
+      right: 30px;
+    }
+  }
+
+  .textLogo{
+    img{
+      height: 20px;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      cursor: pointer;
+      @media (max-width: 980px) {
+        height: 15px;
+      }
+      @media (max-width: 640px) {
+        display: none;
+      }
+    }
+  }
 }

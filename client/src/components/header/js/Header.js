@@ -1,12 +1,16 @@
 import '../css/header.scss';
 import Nav from './Nav';
+import logo from '../../../assets/img/logo_white.png';
 
 export default function Header() {
   return (
     <>
-      <header>
+      <div>
+        <div className="header">
+          <img src={logo} alt="logo" />
+        </div>
         <Nav />
-      </header>
+      </div>
     </>
   );
 }
