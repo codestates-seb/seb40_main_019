@@ -24,4 +24,8 @@ public class Review {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "review_star_id")
+    private ReviewStar reviewStar;
+
 }

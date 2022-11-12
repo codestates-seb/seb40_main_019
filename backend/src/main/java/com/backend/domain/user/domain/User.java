@@ -1,7 +1,6 @@
 package com.backend.domain.user.domain;
 
 
-import com.backend.domain.community.domain.Community;
 import com.backend.domain.order.domain.Order;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -41,8 +40,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Community> communities = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
