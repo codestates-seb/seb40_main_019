@@ -1,4 +1,4 @@
-package com.backend.domain.cart.domain;
+package com.backend.domain.review.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,12 +9,12 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Cart {
+public class ReviewStar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartId;
+    private Long reviewStarId;
 
-    @Column(nullable = false)
-    private int ProductCount;
+    @Column(name = "star_score", nullable = false)
+    private int star_score;
 
 }

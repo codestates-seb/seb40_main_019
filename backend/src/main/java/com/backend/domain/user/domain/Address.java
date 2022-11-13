@@ -1,4 +1,4 @@
-package com.backend.domain.cart.domain;
+package com.backend.domain.user.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -9,12 +9,18 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Cart {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long cartId;
+    private Long addressId;
 
     @Column(nullable = false)
-    private int ProductCount;
+    private String zipCode;
+
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private String detailsAddress;
 
 }
