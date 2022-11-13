@@ -1,4 +1,4 @@
-import '../css/Main.scss';
+import '../css/main.scss';
 import { Outlet } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
