@@ -4,6 +4,9 @@ import Layout from './components/layout/js/Layout';
 import Home from './pages/home/js/Home';
 
 function App() {
+  //json-server 주소
+  //json-server --watch data.json --port 3001
+
   return (
     <>
       <Routes>

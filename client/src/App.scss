@@ -51,3 +51,16 @@ table {
   text-decoration: none;
   color: black;
 }
+button{
+	border: 0px;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+//var(--color-blue)
+:root {
+	--color-blue: #1885AE;
+	--color-yellow: #FFB526;
+	--color-brown: #5C4B29;
+	--color-white: #FFFFFF;
+}
