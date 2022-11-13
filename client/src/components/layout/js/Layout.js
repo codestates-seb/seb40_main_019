@@ -1,4 +1,4 @@
-import '../css/layout.scss';
+import '../css/Layout.scss';
 import { Outlet } from 'react-router-dom';
 import Header from '../../header/js/Header';
 import Main from '../../main/js/Main';

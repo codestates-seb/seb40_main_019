@@ -1,4 +1,4 @@
-import '../css/nav.scss';
+import '../css/Nav.scss';
 
 export default function Nav() {
   return (
