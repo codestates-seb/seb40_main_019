@@ -2,6 +2,7 @@ import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/js/Layout';
 import Home from './pages/home/js/Home';
+import Login from './pages/login/js/Login';
 
 function App() {
   //json-server 주소
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </>
