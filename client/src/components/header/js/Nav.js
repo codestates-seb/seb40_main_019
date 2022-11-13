@@ -18,6 +18,7 @@ export default function Nav() {
         top: '0',
         left: '0',
         right: '0',
+        zIndex: '2',
       });
     } else {
       setFixNav({});

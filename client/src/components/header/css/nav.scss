@@ -1,9 +1,11 @@
 nav{
   display: flex;
-  margin: 25px 0px;
   width: 100%;
+  background-color: var(--color-white);
+  height: 70px;
   
   button{
+    margin-top: 20px;
     color: #5C4B29;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
@@ -47,6 +49,7 @@ nav{
   }
 
   .textLogo{
+    margin-top: 20px;
     img{
       height: 20px;
       position: absolute;
