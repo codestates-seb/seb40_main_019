@@ -4,6 +4,10 @@ import video2 from '../../../assets/video/main3.webm';
 import video3 from '../../../assets/video/main4.webm';
 import video4 from '../../../assets/video/main5.webm';
 import video5 from '../../../assets/video/main6.webm';
+import mainImg1 from '../../../assets/img/mainImg1.png';
+import mainImg2 from '../../../assets/img/mainImg2.png';
+import mainImg3 from '../../../assets/img/mainImg3.jpg';
+import MainImg from '../../../components/home/js/MainImg';
 
 export default function Home() {
   return (
@@ -44,7 +48,11 @@ export default function Home() {
         </div>
         <div className="main2Wrap">
           <h3>BEST PRODUCTS</h3>
-          <div className="bestProducts"></div>
+          <div className="bestProducts">
+            <MainImg src={mainImg1} />
+            <MainImg src={mainImg2} />
+            <MainImg src={mainImg3} />
+          </div>
         </div>
       </div>
     </>
