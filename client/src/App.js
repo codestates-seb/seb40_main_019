@@ -1,7 +1,7 @@
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/js/Layout';
-import Home from './components/home/js/Home';
+import Home from './pages/home/js/Home';
 
 function App() {
   //json-server 주소
