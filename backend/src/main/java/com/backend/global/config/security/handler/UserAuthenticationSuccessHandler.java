@@ -3,6 +3,7 @@ package com.backend.global.config.security.handler;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.domain.AuthUser;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -10,13 +11,11 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@RequiredArgsConstructor
 @Component
 public class UserAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public UserAuthenticationSuccessHandler(RefreshTokenRepository refreshTokenRepository) {
-        this.refreshTokenRepository = refreshTokenRepository;
-    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
