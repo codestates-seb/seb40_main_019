@@ -56,7 +56,9 @@ button{
 	background-color: transparent;
 	cursor: pointer;
 }
-
+*::-webkit-scrollbar {
+	display: none;
+}
 //var(--color-blue)
 :root {
 	--color-blue: #1885AE;
