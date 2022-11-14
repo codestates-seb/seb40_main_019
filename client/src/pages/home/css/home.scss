@@ -95,7 +95,9 @@
     flex-direction: row;
 
     .aiDog {
-      width: 50%;
+      width: 55%;
+      position: relative;
+      right: 10vw;
     }
 
     .aiText {
@@ -111,7 +113,7 @@
           margin-bottom: 5px;
         }
         h1 {
-          font-size: 4vw;
+          font-size: 3vw;
           font-weight: 600;
           color: var(--color-brown);
         }
@@ -131,8 +133,11 @@
       button {
         background-color: var(--color-brown);
         color: var(--color-white);
+        font-size: 0.8vw;
         padding: 12px 20px;
         border-radius: 10px;
+        font-family: var(--font-notoSans);
+        font-weight: 300;
       }
     }
   }
@@ -188,6 +193,6 @@
   h3 {
     font-weight: 500;
     font-family: var(--font-notoSans);
-    margin-top: 50px;
+    margin: 50px 0px;
   }
 }

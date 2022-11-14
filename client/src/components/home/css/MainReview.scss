@@ -1,31 +1,43 @@
 .mainReview {
   .reviewBtn {
     display: flex;
+    margin-bottom: 30px;
+    margin-left: 9vw;
   }
   button {
     background-color: var(--color-blue);
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     border-radius: 50%;
+    margin-right: 10px;
   }
   i {
     color: var(--color-white);
-    font-size: 15px;
+    font-size: 20px;
   }
 
   .mainReviewWrap {
     display: flex;
-    white-space: nowrap;
+    overflow-y: hidden;
+    overflow: hidden;
+    width: 99vw;
+    padding: 0px 7vw;
+    
+    .reviewWrap{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all .5s;
 
-    .reviewImg {
-      width: 25vw;
-      height: 30vw;
-      border-radius: 15px;
-      background-color: rgb(224, 224, 224);
-      img {
-        width: 25vw;
-        height: 30vw;
+      .reviewImg {
         border-radius: 15px;
+        background-color: rgb(224, 224, 224);
+        margin: 0px 2vw;
+      }
+
+      .reviewStar{
+        width: 5vw;
+        margin: 15px 0px;
       }
     }
   }
