@@ -46,24 +46,27 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-*{
-  box-sizing: border-box;
-  text-decoration: none;
-  color: black;
-}
 button{
 	border: 0px;
 	background-color: transparent;
 	cursor: pointer;
 }
-
+*::-webkit-scrollbar {
+	display: none;
+}
 //var(--color-blue)
 :root {
 	--color-blue: #1885AE;
 	--color-yellow: #FFB526;
 	--color-brown: #5C4B29;
 	--color-white: #FFFFFF;
-
+	
 	--font-notoSans: 'Noto Sans KR', sans-serif;
 	--font-work: 'Work Sans', sans-serif;
+}
+*{
+	box-sizing: border-box;
+	text-decoration: none;
+	color: black;
+	font: var(--font-notoSans);
 }
