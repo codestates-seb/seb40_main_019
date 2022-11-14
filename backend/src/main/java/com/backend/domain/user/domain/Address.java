@@ -1,6 +1,7 @@
 package com.backend.domain.user.domain;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,7 +21,13 @@ public class Address {
     @Column(nullable = false)
     private String address;
 
-    @Column(nullable = false)
-    private String detailsAddress;
+//    @Column(nullable = false)
+//    private String detailsAddress;
+
+    @Builder
+    public Address(String zipCode, String address) {
+        this.zipCode = zipCode;
+        this.address = address;
+    }
 
 }

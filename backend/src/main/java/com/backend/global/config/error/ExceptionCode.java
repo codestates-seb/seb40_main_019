@@ -3,9 +3,22 @@ package com.backend.global.config.error;
 import lombok.Getter;
 
 public enum ExceptionCode {
+    // User
+    EMAIL_DUPLICATION(409, "Email Is Duplication"),
     USER_NOT_FOUND(404, "USER NOT FOUND"),
+    USERNAME_DUPLICATION(409, "UserName Is Duplicated"),
+    LOGIN_FAILED(400, "Login input is invalid"),
+    NOT_LOGIN_MEMBER(400, "Not Login Member"),
 
-    USER_EXIST(409, "USER EXIST"),
+    // Token
+    TOKEN_NOT_FOUND(400, "Token Not Found"),
+    TOKEN_EXPIRED(400, "Token Expired"),
+    TOKEN_INVALID(400, "Token Invalid"),
+    TOKEN_SIGNATURE_INVALID(400, "Token Signature Invalid"),
+    TOKEN_MALFORMED(400, "Token Malformed"),
+    TOKEN_UNSUPPORTED(400, "Token Unsupported"),
+    TOKEN_ILLEGAL_ARGUMENT(400, "Token Illegal Argument"),
+
 
     ANSWER_NOT_FOUND(404,"ANSWER_NOT_FOUND"),
 
