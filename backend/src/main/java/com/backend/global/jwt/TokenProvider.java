@@ -1,8 +1,9 @@
 package com.backend.global.jwt;
 
-import com.backend.domain.refreshToken.exception.*;
 import com.backend.domain.user.domain.AuthUser;
 import com.backend.domain.user.dto.TokenDto;
+import com.backend.global.config.error.ExceptionCode;
+import com.backend.global.config.security.exception.InvalidJwtTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -25,7 +26,7 @@ public class TokenProvider {
      */
 
     private static final String AUTHORITIES_KEY = "auth";
-    private static final String BEARER_TYPE = "bearer";
+    private static final String BEARER_TYPE = "Bearer ";
     private final Key key;
     @Value("${jwt.access-token-expiration-time}")
     private int ACCESS_TOKEN_EXPIRE_TIME;
@@ -99,36 +100,30 @@ public class TokenProvider {
 
     // 토큰 검증
     public boolean validateToken(String token) {
-
-        try {
-            parseClaims(token);
-            return true;
-        } catch (SignatureException e) {
-            log.info("Invalid JWT signature");
-            log.trace("Invalid JWT signature trace: {}", e);
-            throw new TokenSignatureInvalid();
-        } catch (MalformedJwtException e) {
-            log.info("Invalid JWT token");
-            log.trace("Invalid JWT token trace: {}", e);
-            throw new TokenMalformed();
-        } catch (ExpiredJwtException e) {
-            log.info("Expired JWT token");
-            log.trace("Expired JWT token trace: {}", e);
-            throw new TokenExpired();
-        } catch (UnsupportedJwtException e) {
-            log.info("Unsupported JWT token");
-            log.trace("Unsupported JWT token trace: {}", e);
-            throw new TokenUnsupported();
-        } catch (IllegalArgumentException e) {
-            log.info("JWT claims string is empty.");
-            log.trace("JWT claims string is empty trace: {}", e);
-            throw new TokenEmpty();
-        }
+        parseClaims(token);
+        return true;
     }
 
     public Claims parseClaims(String accessToken) {
 
-        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(accessToken).getBody();
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(accessToken)
+                    .getBody();
+        } catch (ExpiredJwtException expiredJwtException) {
+            throw new InvalidJwtTokenException(ExceptionCode.TOKEN_EXPIRED);
+        } catch (UnsupportedJwtException unsupportedJwtException) {
+            throw new InvalidJwtTokenException(ExceptionCode.TOKEN_UNSUPPORTED);
+        } catch (MalformedJwtException malformedJwtException) {
+            throw new InvalidJwtTokenException(ExceptionCode.TOKEN_MALFORMED);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            throw new InvalidJwtTokenException(ExceptionCode.TOKEN_ILLEGAL_ARGUMENT);
+        } catch (SignatureException signatureException) {
+            throw new InvalidJwtTokenException(ExceptionCode.TOKEN_SIGNATURE_INVALID);
+        }
+
 
     }
 

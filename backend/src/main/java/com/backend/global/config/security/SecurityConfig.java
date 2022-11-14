@@ -4,6 +4,7 @@ import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.global.config.security.filter.JwtAuthenticationFilter;
 import com.backend.global.config.security.filter.JwtVerificationFilter;
+import com.backend.global.config.security.handler.UserAuthenticationFailureHandler;
 import com.backend.global.config.security.handler.UserAuthenticationSuccessHandler;
 import com.backend.global.jwt.JwtAccessDeniedHandler;
 import com.backend.global.jwt.JwtAuthenticationEntryPoint;
@@ -99,7 +100,6 @@ public class SecurityConfig {
         configuration.addAllowedOrigin(LOCAL);
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
-        configuration.setMaxAge(3600L);
         configuration.setAllowCredentials(true);
         configuration.addExposedHeader("Authorization");
 
@@ -117,7 +117,7 @@ public class SecurityConfig {
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(tokenProvider, authenticationManager, userRepository);
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new UserAuthenticationSuccessHandler(refreshTokenRepository));
-//            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(tokenProvider);
 
