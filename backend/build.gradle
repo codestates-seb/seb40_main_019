@@ -53,6 +53,8 @@ dependencies {
 
     implementation 'com.google.code.gson:gson'
 
+    implementation 'com.coveo:spring-boot-parameter-store-integration:1.1.2'
+
 //    implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.2.6.RELEASE'
 }
 
