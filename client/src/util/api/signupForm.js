@@ -21,7 +21,7 @@ export const emailValidationCheck = async () => {
   try {
     const validationRequest = await axios.post('http://localhost:3000/');
     console.log(validationRequest);
-    return true;
+    return validationRequest;
   } catch (error) {
     return false;
   }

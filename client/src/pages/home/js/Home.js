@@ -17,7 +17,7 @@ export default function Home() {
         <div className="mainWrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
-              <MainVideo name={'video2'} src={video2}/>
+              <MainVideo name={'video2'} src={video2} />
               {/* <video className="video2" autoPlay={true} muted loop="true">
                 <source src={video2} type="video/webm" />
               </video> */}

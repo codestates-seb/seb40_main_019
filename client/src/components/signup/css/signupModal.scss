@@ -15,8 +15,51 @@
     background: #fff;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
     display: flex;
+    position: relative;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding: 20px;
     border-radius: 16px;
+    .logoImg{
+      width: 100px;
+      height: 100px;
+      background-repeat: no-repeat;
+      background-image: url(../../../assets/img/logo_blue.png);
+      margin-bottom: 15px;
+    }
+    h2{
+      color: #5C4B29;
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 35px;
+    }
+    p{
+      margin-bottom: 15px;
+      span{
+        font-weight: 700;
+        color: var(--color-blue);
+      }
+    }
+    .modalInner{
+      width: 60%;
+      input{
+        width: 100%;
+        padding: 0.6em 0.7em;
+        margin: 20px 0px;
+        font-size: 20px;
+        border: none;
+        border-radius: 5px;
+        outline: 3px solid #b5deff;
+        text-align: center;
+      }
+    }
+    .closeBtn{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+    }
   }
 }
