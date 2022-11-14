@@ -16,14 +16,19 @@ public class OrderProduct {
     private Long orderProductId;
 
     @Column(nullable = false)
-    private int orderProductQuantity;
+    private int orderProductQuantity;//주문 당시의 수량
 
     @ManyToOne
     @JoinColumn(name = "oreder_id")
-    private Order order;
+    private Order order;//주문정보
+
+    private int totalPrice;
+
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;
-
+    private Product product;//상품정보
 }
+    //상품정보
+
+

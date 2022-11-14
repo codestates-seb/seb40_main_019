@@ -7,9 +7,9 @@ public enum ExceptionCode {
 
     USER_EXIST(409, "USER EXIST"),
 
-    ANSWER_NOT_FOUND(404,"ANSWER_NOT_FOUND"),
+    ORDER_NOT_FOUND(404,"ANSWER_NOT_FOUND"),
 
-    POST_NOT_FOUND(404,"POST NOT FOUND");
+    REVIEW_NOT_FOUND(404,"POST NOT FOUND");
     @Getter
     private int status;
     @Getter
