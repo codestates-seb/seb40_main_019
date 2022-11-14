@@ -17,26 +17,15 @@ export default function Home() {
         <div className="mainWrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
-              <MainVideo name={'video2'} src={video2}/>
-              {/* <video className="video2" autoPlay={true} muted loop="true">
-                <source src={video2} type="video/webm" />
-              </video> */}
-              <video className="video4" autoPlay={true} muted loop="true">
-                <source src={video4} type="video/webm" />
-              </video>
+              <MainVideo name={'video2'} src={video2} />
+              <MainVideo name={'video4'} src={video4} />
             </div>
             <div className="videoCenterWrap">
-              <video className="video1" autoPlay={true} muted loop="true">
-                <source src={video1} type="video/webm" />
-              </video>
+              <MainVideo name={'video1'} src={video1} />
             </div>
             <div className="videoRightWrap">
-              <video className="video5" autoPlay={true} muted loop="true">
-                <source src={video5} type="video/webm" />
-              </video>
-              <video className="video3" autoPlay={true} muted loop="true">
-                <source src={video3} type="video/webm" />
-              </video>
+              <MainVideo name={'video5'} src={video5} />
+              <MainVideo name={'video3'} src={video3} />
             </div>
           </div>
           <div className="mainText">
