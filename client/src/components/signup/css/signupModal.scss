@@ -1,0 +1,22 @@
+.modalBackground{
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(110, 110, 110, 0.93);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .modal{
+    width: 450px;
+    height: 450px;
+    background: #fff;
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 16px;
+  }
+}
