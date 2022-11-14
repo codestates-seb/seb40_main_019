@@ -65,9 +65,9 @@ export default function Signup() {
       error = true;
     }
     if (!emailValidation) {
-      window.alert('이메일을 인증해주세요');
       error = true;
     }
+
     if (!error) {
       window.alert('submit');
     }
@@ -107,6 +107,7 @@ export default function Signup() {
 
     setAddress(fullAddress);
     setPostCode(data.zonecode);
+    setAddressError(false);
   };
 
   const postCodeHandler = (e) => {
