@@ -2,7 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   open: false,
+  name: '',
   email: '',
+  password: '',
+  address: '',
+  postCode: '',
   emailValidation: false,
 };
 
@@ -16,16 +20,19 @@ export const modalSlice = createSlice({
     closeModal: (state) => {
       state.open = false;
     },
-    setEmail: (state, { payload }) => {
-      state.email = payload;
-    },
-    setEmailValidation: (state, { payload }) => {
-      state.emailValidation = payload;
+    setFormData: (state, { payload }) => {
+      return {
+        ...state,
+        name: payload.name,
+        email: payload.email,
+        password: payload.password,
+        address: payload.address,
+        postCode: payload.postCode,
+      };
     },
   },
 });
 
-export const { openModal, closeModal, setEmail, setEmailValidation } =
-  modalSlice.actions;
+export const { openModal, closeModal, setFormData } = modalSlice.actions;
 
 export default modalSlice.reducer;

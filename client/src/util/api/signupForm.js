@@ -3,11 +3,12 @@ import axios from 'axios';
 axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // 서버에 회원가입 입력 데이터 전송
 export const submitForm = async (userInfo) => {
   try {
     const submitResult = await axios.post(
-      'http://localhost:3000/',
+      `${REACT_APP_API_URL}users`,
       JSON.stringify(userInfo)
     );
     console.log(submitResult);

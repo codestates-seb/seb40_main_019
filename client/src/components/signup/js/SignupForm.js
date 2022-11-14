@@ -11,16 +11,15 @@ import SignupModal from './SignupModal';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   openModal,
-  setEmail,
-  setEmailValidation,
-} from '../../../redux/reducers/signupModal';
+  setFormData,
+} from '../../../redux/reducers/signupModalSlice';
 // eslint-disable-next-line no-useless-escape
 let emailExptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 let passwordExptext = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/;
 
 export default function Signup() {
-  const [address, setAddress] = useState(null);
-  const [postCode, setPostCode] = useState(null);
+  const [address, setAddress] = useState('');
+  const [postCode, setPostCode] = useState('');
   const [data, setDate] = useState({});
   // eslint-disable-next-line no-unused-vars
 
@@ -31,13 +30,11 @@ export default function Signup() {
   const [addressError, setAddressError] = useState(false);
 
   const modal = useSelector((state) => state.modal.open);
-  const emailValidation = useSelector((state) => state.modal.emailValidation);
 
   const dispatch = useDispatch();
   // 회원가입 폼 전송
   const formSubmit = (e) => {
     e.preventDefault();
-    console.log(data);
     let error = false;
 
     if (!data.Name) {
@@ -64,17 +61,12 @@ export default function Signup() {
       setAddressError(true);
       error = true;
     }
-    if (!emailValidation) {
-      error = true;
-    }
-
     if (!error) {
-      window.alert('submit');
+      openModalControl(e);
     }
   };
   // 인풋 변경 함수
   const onChangeInput = (e) => {
-    console.log(data);
     setDate({ ...data, [e.target.name]: e.target.value });
     if (emailExptext.test(data.Email)) {
       setEmailError(false);
@@ -104,7 +96,6 @@ export default function Signup() {
       }
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
-
     setAddress(fullAddress);
     setPostCode(data.zonecode);
     setAddressError(false);
@@ -117,20 +108,17 @@ export default function Signup() {
   // 이메일 인증 모달창 함수
   const openModalControl = (e) => {
     e.preventDefault();
-    if (emailExptext.test(data.Email)) {
-      dispatch(setEmail(data.Email));
-      dispatch(openModal());
-    } else {
-      setEmailError(true);
-    }
+    let temp = {
+      name: data.Name,
+      email: data.Email,
+      password: data.Password,
+      address: address,
+      postCode: postCode,
+    };
+    // console.log(temp);
+    dispatch(setFormData(temp));
+    dispatch(openModal());
   };
-  // 이메일 인증 취소 함수
-  const changeEmail = (e) => {
-    e.preventDefault();
-    dispatch(setEmail(''));
-    dispatch(setEmailValidation(false));
-  };
-
   return (
     <>
       <h1>Sign Up</h1>
@@ -148,33 +136,17 @@ export default function Signup() {
           placeholder="Please enter your name"
         />
         {nameError && <FormInputError text="Please enter your nickname." />}
-        {!emailValidation ? (
-          <div className="addressFlexBox">
-            <FormInput
-              labelName="Email"
-              inputId="Email"
-              inputType="email"
-              name="Email"
-              value={data.Email}
-              onChangeInput={onChangeInput}
-              placeholder="Please enter your email"
-            />
-            <button onClick={openModalControl}>인증</button>
-          </div>
-        ) : (
-          <div className="addressFlexBox">
-            <FormDisabledInput
-              labelName="Email"
-              inputId="Email"
-              inputType="email"
-              name="Email"
-              onChangeInput={onChangeInput}
-              placeholder="Please enter your email"
-              value={data.Email}
-            />
-            <button onClick={changeEmail}>변경</button>
-          </div>
-        )}
+        <div className="addressFlexBox">
+          <FormInput
+            labelName="Email"
+            inputId="Email"
+            inputType="email"
+            name="Email"
+            value={data.Email}
+            onChangeInput={onChangeInput}
+            placeholder="Please enter your email"
+          />
+        </div>
         {emailError && (
           <FormInputError text="The email is not a valid email address." />
         )}

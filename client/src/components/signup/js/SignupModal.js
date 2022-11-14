@@ -4,32 +4,24 @@ import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  closeModal,
-  setEmailValidation,
-} from '../../../redux/reducers/signupModal';
-import { emailValidationCheck } from '../../../util/api/signupForm';
+import { closeModal } from '../../../redux/reducers/signupModalSlice';
+import { submitForm } from '../../../util/api/signupForm';
 import FormInputError from '../../sign/js/FormInputError';
 
 export default function SignupModal() {
-  const [number, setNumber] = useState(null);
+  const [number, setNumber] = useState(123456);
   const [inputNumber, setInputNumber] = useState(null);
   const [error, setError] = useState(false);
 
+  const data = useSelector((state) => state.modal);
   const dispatch = useDispatch();
-  const email = useSelector((state) => state.modal.email);
-  console.log(inputNumber);
-
   useEffect(() => {
     // 인증번호 받아옴
-    let value = emailValidationCheck();
+    // let value = emailValidationCheck();
 
-    setNumber(value);
+    // setNumber(value);
     setNumber(123456);
-    console.log(value);
-    console.log(email);
-
-    console.log(number);
+    // console.log(value);
   }, []);
 
   const changeInputNumber = (e) => {
@@ -37,12 +29,23 @@ export default function SignupModal() {
     setError(false);
   };
   const checkValidation = () => {
-    console.log(number);
-    console.log(inputNumber);
     if (Number(number) === Number(inputNumber)) {
       console.log('성공');
-      dispatch(setEmailValidation(true));
-      dispatch(closeModal());
+
+      const dataTemp = {
+        username: data.name,
+        email: data.email,
+        password: data.password,
+        address: data.address,
+        zipcode: data.postCode,
+      };
+
+      console.log(dataTemp);
+      // 폼 데이터 전송.
+      let submit = submitForm(dataTemp);
+      console.log(submit);
+
+      // dispatch(closeModal());
     } else {
       setError(true);
       console.log('실패');

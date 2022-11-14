@@ -1,18 +1,12 @@
 // import React from 'react';
 import '../css/login.scss';
+import SigninForm from '../../../components/signin/js/SigninForm';
 
 export default function Login() {
   return (
     <>
       <div className="loginInner">
-        <h1>Sign Up</h1>
-        <form
-          className="loginForm"
-          action="#"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <div></div>
-        </form>
+        <SigninForm />
       </div>
     </>
   );
