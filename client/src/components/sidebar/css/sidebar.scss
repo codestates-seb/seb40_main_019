@@ -1,0 +1,39 @@
+.sidebarWrapper{
+    box-sizing: border-box;
+    position: sticky;
+    top: 0px;
+    
+    .logoBox{
+        background: url("../../../assets/img/logo_side_blue.png");
+        background-size: cover;
+        display: flex;
+        width: 42px;
+        height: 45px;
+        margin: 12px 12px;
+        cursor: pointer;
+        
+    
+    };
+        .logoBox:hover{
+            background: url("../../../assets/img/logo_side_yellow.png");
+            background-size: cover;
+        };
+    
+
+    .tittleList{
+
+     list-style: none;
+     cursor: pointer;
+        li{
+        padding: 6px;
+        color: var(--color-blue);
+        font-size: 12px;
+        
+        };
+        :hover{
+        color: var(--color-yellow);
+    };
+    
+  }
+
+};

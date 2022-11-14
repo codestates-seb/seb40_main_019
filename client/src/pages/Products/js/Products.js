@@ -1,9 +1,10 @@
 import '../css/products.scss';
+import Sidebar from './../../../components/sidebar/js/Sidebar';
 
 const Products = () => {
   return (
     <>
-      <div>shop페이지</div>
+      <Sidebar />
     </>
   );
 };
