@@ -1,1 +1,29 @@
 
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    username: admin
+    #    password: 1q2w3e4r!
+    #    url: jdbc:mysql://seb40-pre-017.c0vpeyinlsgj.ap-northeast-2.rds.amazonaws.com:3306/demo?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
+  jpa:
+    hibernate:
+      ddl-auto: update # create / update / validate / none
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${AWS_SECRET_KEY}
+    region:
+      static: ${AWS_REGION}
+    s3:
+      bucket: ${S3_BUCKET}
+    stack:
+      auto: false
+address:
+  local: ${LOCAL_ADDRESS}
+  domain: ${DOMAIN_ADDRESS}
+  front-local: ${FRONT_LOCAL}
+  front-s3: ${FRONT_S3}

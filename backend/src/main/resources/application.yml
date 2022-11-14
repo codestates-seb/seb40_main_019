@@ -1,1 +1,19 @@
-
+jwt:
+  access-token-expiration-time: ${ATK_EXP}
+  refresh-token-expiration-time: ${RTK_EXP}
+  secret: ${JWT_SECRET}
+spring:
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true      # (2) SQL 쿼리 출력
+    properties:
+      hibernate:
+        format_sql: true  # (3) SQL pretty print
+  profiles:
+    active: server # local / server
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG
