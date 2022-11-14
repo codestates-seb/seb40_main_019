@@ -1,0 +1,33 @@
+.itemContainer {
+    flex-wrap: wrap;
+    div{
+
+    text-align: center;
+    img{
+        width: 100px;
+    }
+    }
+    span{
+    font-size: 12px;
+    width: 100px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    }
+    
+    p{
+    display: flex;
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--color-blue);
+    }
+
+    button{
+        color: var(--color-white);
+        border-radius: 15px;
+        font-size: 10px;
+        float: right;
+    }
+
+}
