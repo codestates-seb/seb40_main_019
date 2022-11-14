@@ -8,6 +8,7 @@ import mainImg1 from '../../../assets/img/mainImg1.png';
 import mainImg2 from '../../../assets/img/mainImg2.png';
 import mainImg3 from '../../../assets/img/mainImg3.jpg';
 import MainImg from '../../../components/home/js/MainImg';
+import MainVideo from '../../../components/home/js/MainVideo';
 
 export default function Home() {
   return (
@@ -16,9 +17,10 @@ export default function Home() {
         <div className="mainWrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
-              <video className="video2" autoPlay={true} muted loop="true">
+              <MainVideo name={'video2'} src={video2}/>
+              {/* <video className="video2" autoPlay={true} muted loop="true">
                 <source src={video2} type="video/webm" />
-              </video>
+              </video> */}
               <video className="video4" autoPlay={true} muted loop="true">
                 <source src={video4} type="video/webm" />
               </video>
