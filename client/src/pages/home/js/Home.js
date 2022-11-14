@@ -10,6 +10,7 @@ import mainImg3 from '../../../assets/img/mainImg3.jpg';
 import aiDog from '../../../assets/img/aiDog.svg';
 import MainImg from '../../../components/home/js/MainImg';
 import MainVideo from '../../../components/home/js/MainVideo';
+import MainBox from '../../../components/home/js/MainBox';
 
 export default function Home() {
   return (
@@ -60,6 +61,19 @@ export default function Home() {
               </div>
               <button>AI 추천 바로가기</button>
             </div>
+          </div>
+        </div>
+        <div className="main4Wrap">
+          <div className="mainBoxWrap">
+            <div className="boxLeft">
+              <MainBox name={'boxOne'} idx={0} />
+              <MainBox name={'boxTwo'} idx={1} />
+            </div>
+            <div className="boxRight">
+              <MainBox name={'boxThree'} idx={2} />
+              <MainBox name={'boxFour'} idx={3} />
+            </div>
+            <div className="mainBoxBack"></div>
           </div>
         </div>
       </div>

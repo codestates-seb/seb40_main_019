@@ -86,7 +86,7 @@
 }
 
 .main3Wrap {
-  margin-bottom: 300px;
+  margin-bottom: 200px;
 
   .main3WrapParent {
     width: 100%;
@@ -135,5 +135,44 @@
         border-radius: 10px;
       }
     }
+  }
+}
+
+.main4Wrap {
+  .mainBoxWrap {
+    display: flex;
+    justify-content: center;
+
+    .boxLeft {
+      display: flex;
+      flex-direction: column;
+      margin-right: 30px;
+      :nth-child(2) {
+        margin-left: auto;
+      }
+      :nth-child(1) {
+        margin-bottom: 30px;
+      }
+    }
+
+    .boxRight {
+      flex-direction: column;
+      position: relative;
+      bottom: 50px;
+
+      :nth-child(1) {
+        margin-bottom: 30px;
+      }
+    }
+  }
+
+  .mainBoxBack {
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    width: 45vw;
+    height: 40vw;
+    background-color: #6ea9bf;
+    border-radius: 15px 0px 0px 15px;
   }
 }
