@@ -1,0 +1,32 @@
+.mainReview {
+  .reviewBtn {
+    display: flex;
+  }
+  button {
+    background-color: var(--color-blue);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+  i {
+    color: var(--color-white);
+    font-size: 15px;
+  }
+
+  .mainReviewWrap {
+    display: flex;
+    white-space: nowrap;
+
+    .reviewImg {
+      width: 25vw;
+      height: 30vw;
+      border-radius: 15px;
+      background-color: rgb(224, 224, 224);
+      img {
+        width: 25vw;
+        height: 30vw;
+        border-radius: 15px;
+      }
+    }
+  }
+}

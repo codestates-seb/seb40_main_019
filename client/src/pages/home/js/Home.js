@@ -8,9 +8,11 @@ import mainImg1 from '../../../assets/img/mainImg1.png';
 import mainImg2 from '../../../assets/img/mainImg2.png';
 import mainImg3 from '../../../assets/img/mainImg3.jpg';
 import aiDog from '../../../assets/img/aiDog.svg';
+import reviewBar from '../../../assets/img/reviewBar.svg';
 import MainImg from '../../../components/home/js/MainImg';
 import MainVideo from '../../../components/home/js/MainVideo';
 import MainBox from '../../../components/home/js/MainBox';
+import MainReview from '../../../components/home/js/MainReview';
 
 export default function Home() {
   return (
@@ -75,6 +77,12 @@ export default function Home() {
             </div>
             <div className="mainBoxBack"></div>
           </div>
+        </div>
+        <div className="main5Wrap">
+          <img src={reviewBar} alt="reviewBar" className="reviewBar" />
+          <div className="reviewWrap"></div>
+          <h3>REVIEW</h3>
+          <MainReview />
         </div>
       </div>
     </>

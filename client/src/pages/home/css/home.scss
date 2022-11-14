@@ -139,6 +139,7 @@
 }
 
 .main4Wrap {
+  margin-bottom: 150px;
   .mainBoxWrap {
     display: flex;
     justify-content: center;
@@ -174,5 +175,19 @@
     height: 40vw;
     background-color: #6ea9bf;
     border-radius: 15px 0px 0px 15px;
+  }
+}
+
+.main5Wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .reviewBar {
+    width: 60vw;
+  }
+  h3 {
+    font-weight: 500;
+    font-family: var(--font-notoSans);
+    margin-top: 50px;
   }
 }
