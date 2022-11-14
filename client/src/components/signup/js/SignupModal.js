@@ -9,10 +9,12 @@ import {
   setEmailValidation,
 } from '../../../redux/reducers/signupModal';
 import { emailValidationCheck } from '../../../util/api/signupForm';
+import FormInputError from '../../sign/js/FormInputError';
 
 export default function SignupModal() {
   const [number, setNumber] = useState(null);
   const [inputNumber, setInputNumber] = useState(null);
+  const [error, setError] = useState(false);
 
   const dispatch = useDispatch();
   const email = useSelector((state) => state.modal.email);
@@ -30,6 +32,10 @@ export default function SignupModal() {
     console.log(number);
   }, []);
 
+  const changeInputNumber = (e) => {
+    setInputNumber(e.target.value);
+    setError(false);
+  };
   const checkValidation = () => {
     console.log(number);
     console.log(inputNumber);
@@ -38,6 +44,7 @@ export default function SignupModal() {
       dispatch(setEmailValidation(true));
       dispatch(closeModal());
     } else {
+      setError(true);
       console.log('실패');
     }
   };
@@ -59,8 +66,12 @@ export default function SignupModal() {
               type="text"
               placeholder="인증번호 입력"
               value={inputNumber}
-              onChange={(e) => setInputNumber(e.target.value)}
+              onChange={changeInputNumber}
             />
+            {error && (
+              <FormInputError text="Please check the verification number" />
+            )}
+
             <FormButtonBlue
               formSubmit={checkValidation}
               btnContent="인증하기"

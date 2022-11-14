@@ -65,6 +65,7 @@ export default function Signup() {
       error = true;
     }
     if (!emailValidation) {
+      window.alert('이메일을 인증해주세요');
       error = true;
     }
     if (!error) {
