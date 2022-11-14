@@ -7,6 +7,7 @@ import video5 from '../../../assets/video/main6.webm';
 import mainImg1 from '../../../assets/img/mainImg1.png';
 import mainImg2 from '../../../assets/img/mainImg2.png';
 import mainImg3 from '../../../assets/img/mainImg3.jpg';
+import aiDog from '../../../assets/img/aiDog.svg';
 import MainImg from '../../../components/home/js/MainImg';
 import MainVideo from '../../../components/home/js/MainVideo';
 
@@ -14,7 +15,7 @@ export default function Home() {
   return (
     <>
       <div className="home">
-        <div className="mainWrap">
+        <div className="main1Wrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
               <MainVideo name={'video2'} src={video2} />
@@ -40,9 +41,25 @@ export default function Home() {
         <div className="main2Wrap">
           <h3>BEST PRODUCTS</h3>
           <div className="bestProducts">
-            <MainImg src={mainImg1} />
-            <MainImg src={mainImg2} />
-            <MainImg src={mainImg3} />
+            <MainImg src={mainImg1} idx={0} />
+            <MainImg src={mainImg2} idx={1} />
+            <MainImg src={mainImg3} idx={2} />
+          </div>
+        </div>
+        <div className="main3Wrap">
+          <div className="main3WrapParent">
+            <img className="aiDog" src={aiDog} alt="aiDog" />
+            <div className="aiText">
+              <div className="aiTextTop">
+                <p>세계 최초 도입</p>
+                <h1>AI를 이용한 맞춤 추천</h1>
+              </div>
+              <div className="aiTextBottom">
+                <h3>나이와 몸무게만 입력하면</h3>
+                <h3>우리 아이에게 맞는 사료 추천!</h3>
+              </div>
+              <button>AI 추천 바로가기</button>
+            </div>
           </div>
         </div>
       </div>
