@@ -57,6 +57,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         TokenDto tokenDto = tokenProvider.generateTokenDto(authUser);
 
+        String grantType = tokenDto.getGrantType();
+
         String refreshToken = tokenDto.getRefreshToken();
 
         ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
@@ -68,16 +70,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .build();
         response.setHeader("Set-Cookie", cookie.toString());
 
-        response.setHeader("Authorization", "Bearer " + tokenDto.getAccessToken());
+        response.setHeader("Authorization", grantType + tokenDto.getAccessToken());
 
         // response body에 member의 emial, username, ImageUrl을 담아서 보내준다.
-        response.getWriter().write(
-                "{" +
-                        "\"email\":\"" + user.getEmail() + "\","
-                        + "\"username\":\"" + user.getUserName() + "\","
-                        + "\"imageUrl\":\"" + user.getProfileImage() + "\"" +
-                        "}"
-        );
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
+                "\"name\":\"" + user.getUserName() + "\"," +
+                "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
 
 
         this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
