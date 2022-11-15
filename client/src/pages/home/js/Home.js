@@ -7,54 +7,86 @@ import video5 from '../../../assets/video/main6.webm';
 import mainImg1 from '../../../assets/img/mainImg1.png';
 import mainImg2 from '../../../assets/img/mainImg2.png';
 import mainImg3 from '../../../assets/img/mainImg3.jpg';
+import aiDog from '../../../assets/img/aiDog.svg';
+import reviewBar from '../../../assets/img/reviewBar.svg';
 import MainImg from '../../../components/home/js/MainImg';
 import MainVideo from '../../../components/home/js/MainVideo';
+import MainBox from '../../../components/home/js/MainBox';
+import MainReview from '../../../components/home/js/MainReview';
 
 export default function Home() {
   return (
     <>
       <div className="home">
-        <div className="mainWrap">
+        <div className="main1Wrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
               <MainVideo name={'video2'} src={video2} />
-              {/* <video className="video2" autoPlay={true} muted loop="true">
-                <source src={video2} type="video/webm" />
-              </video> */}
-              <video className="video4" autoPlay={true} muted loop="true">
-                <source src={video4} type="video/webm" />
-              </video>
+              <MainVideo name={'video4'} src={video4} />
             </div>
             <div className="videoCenterWrap">
-              <video className="video1" autoPlay={true} muted loop="true">
-                <source src={video1} type="video/webm" />
-              </video>
+              <MainVideo name={'video1'} src={video1} />
             </div>
             <div className="videoRightWrap">
-              <video className="video5" autoPlay={true} muted loop="true">
-                <source src={video5} type="video/webm" />
-              </video>
-              <video className="video3" autoPlay={true} muted loop="true">
-                <source src={video3} type="video/webm" />
-              </video>
+              <MainVideo name={'video5'} src={video5} />
+              <MainVideo name={'video3'} src={video3} />
             </div>
           </div>
           <div className="mainText">
             <div className="mainTextTop">
-              <h2>LUXURY, FRESH, ORGANIC ON!</h2>
+              <h2>유기농 고급재료로 신선하게!</h2>
             </div>
             <div className="mainTextBottom">
-              <h1>GO LOVE YOURDOG</h1>
+              <h1>DOG FOOD WITH LOVE</h1>
             </div>
           </div>
         </div>
         <div className="main2Wrap">
           <h3>BEST PRODUCTS</h3>
           <div className="bestProducts">
-            <MainImg src={mainImg1} />
-            <MainImg src={mainImg2} />
-            <MainImg src={mainImg3} />
+            <MainImg src={mainImg1} idx={0} />
+            <MainImg src={mainImg2} idx={1} />
+            <MainImg src={mainImg3} idx={2} />
           </div>
+        </div>
+        <div className="main3Wrap">
+          <div className="main3WrapParent">
+            <img className="aiDog" src={aiDog} alt="aiDog" />
+            <div className="aiText">
+              <div className="aiTextTop">
+                <p>세계 최초 도입</p>
+                <h1>AI를 이용한 맞춤 추천</h1>
+              </div>
+              <div className="aiTextBottom">
+                <h3>나이와 몸무게만 입력하면</h3>
+                <h3>우리 아이에게 맞는 사료 추천!</h3>
+              </div>
+              <button>AI 추천 바로가기</button>
+            </div>
+          </div>
+        </div>
+        <div className="main4Wrap">
+          <div className="mainBoxWrap">
+            <div className="boxLeft">
+              <div className="firstBox">
+                <MainBox name={'boxOne'} idx={0} />
+              </div>
+              <MainBox name={'boxTwo'} idx={1} />
+            </div>
+            <div className="boxRight">
+              <div className="firstBox">
+                <MainBox name={'boxThree'} idx={2} />
+              </div>
+              <MainBox name={'boxFour'} idx={3} />
+            </div>
+            <div className="mainBoxBack"></div>
+          </div>
+        </div>
+        <div className="main5Wrap">
+          <img src={reviewBar} alt="reviewBar" className="reviewBar" />
+          <div className="reviewWrap"></div>
+          <h3>REVIEW</h3>
+          <MainReview />
         </div>
       </div>
     </>
