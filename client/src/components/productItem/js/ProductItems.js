@@ -1,9 +1,9 @@
-import '../css/products.scss';
-import ProductItem from '../../../components/productItem/ProductItem';
+import '../css/productItems.scss';
+import ProductItem from './ProductItem';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 
-function Products() {
+function ProductItems() {
   const [data, setData] = useState();
 
   useEffect(() => {
@@ -23,4 +23,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default ProductItems;

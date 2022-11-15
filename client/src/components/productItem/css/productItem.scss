@@ -3,33 +3,45 @@
     cursor: pointer;
 
     div{
-
     text-align: center;
-    img{
-        width: 160px;
+
+        img{
+        width: 200px;
+        border-radius: 1vw;
+        transition: all 0.2s linear;
+        &:hover{
+            transform: scale(1.1);
+        }
+       }
+
     }
-    }
+    
     span{
-    font-size: 12px;
-    width: 150px;
+    font-size: 14px;
+    width: 190px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    padding: 10px 0px;
+
     }
     
     p{
     display: flex;
-    font-size: 12px;
+    font-size: 14px;
     font-weight: bold;
     color: var(--color-blue);
+    padding-top: 6px;
+
     }
 
     button{
         color: var(--color-white);
-        border-radius: 15px;
-        font-size: 10px;
+        border-radius: 1vw;
+        font-size: 12px;
         float: right;
+        margin: 2px;
     }
 
 }
