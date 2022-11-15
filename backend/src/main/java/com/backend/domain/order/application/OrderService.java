@@ -12,6 +12,7 @@ import com.backend.domain.point.application.PointService;
 import com.backend.domain.point.dao.PointRepository;
 import com.backend.domain.product.application.ProductService;
 import com.backend.domain.product.dao.ProductRepository;
+import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.AuthUser;
@@ -47,14 +48,20 @@ import static com.backend.domain.order.domain.OrderStatus.ORDER;
         private final OrderMapper orderMapper;
 
         private final UserRepository userRepository;
+        private final ProductRepository productRepository;
+
+
+
 
 
     @Transactional
         //주문생성저장
         public Order createOrder(Long userId, Order order){
 //        Order order = Order.createOrder(memberId, reqOrder.getOrderProducts(),reqOrder.getBuyerAddress());
-            order.getUser().setUserId(userId);
-            order.setTotalPrice();
+            //order.getUser().setUserId(userId);
+            User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+            order.setUser(user);
+            order.setTotalPrice(order.getTotalPrice());
             order.addOrderProducts(order.getOrderProducts());
 
             order.setOrderStatus(ORDER);

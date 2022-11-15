@@ -24,15 +24,18 @@ public enum ExceptionCode {
     TOKEN_UNSUPPORTED(400, "Token Unsupported"),
     TOKEN_ILLEGAL_ARGUMENT(400, "Token Illegal Argument"),
 
-    // Product
-    PRODUCT_NOT_FOUND(400, "Product Not Found"),
+
+    ANSWER_NOT_FOUND(404, "ANSWER_NOT_FOUND"),
+
+    POST_NOT_FOUND(404, "POST NOT FOUND"),
 
     //Order
-    ORDER_NOT_FOUND(400,"Order Not Found"),
+    ORDER_NOT_FOUND(404, "ORDER_NOT_FOUND"),
 
-    ANSWER_NOT_FOUND(404,"ANSWER_NOT_FOUND"),
+    // Product
+    PRODUCT_EXIST(409,"PRODUCT EXIST"),
+    PRODUCT_NOT_FOUND(404,"PRODUCT_NOT_FOUND");
 
-    POST_NOT_FOUND(404,"POST NOT FOUND");
     @Getter
     private int status;
     @Getter

@@ -11,16 +11,16 @@ public class OrderProductDto {
     private Long orderProductId;
     private Long productId;
     private String productName;
-    private Integer productQuantity;
-    private Integer productPrice;
+    private Integer quantity;
+    private Integer price;
 
     @QueryProjection
-    public OrderProductDto(Long orderProductId, Long productId,String productName, Integer productQuantity, Integer productPrice, String productSize, String productColor) {
+    public OrderProductDto(Long orderProductId, Long productId,String productName, Integer quantity, Integer price) {
         this.orderProductId = orderProductId;
         this.productId = productId;
         this.productName = productName;
-        this.productQuantity = productQuantity;
-        this.productPrice = productPrice;
+        this.quantity = quantity;
+        this.price = price;
     }
 }
 

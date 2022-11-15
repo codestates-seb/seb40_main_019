@@ -8,7 +8,6 @@ import java.util.List;
 @Getter @Setter
 @AllArgsConstructor
 @ToString
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class OrderRequestDto {
 
     private String receiverAddress;
@@ -17,7 +16,7 @@ public class OrderRequestDto {
     private String receiverPhone;
     private List<ProductInfo> products;
 
-    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+
     @Setter @Getter
     @AllArgsConstructor
     public static class ProductInfo {

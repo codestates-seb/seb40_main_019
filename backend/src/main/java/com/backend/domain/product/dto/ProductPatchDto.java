@@ -5,13 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductPostDto {
+public class ProductPatchDto {
 
     @NotNull
     private int price;

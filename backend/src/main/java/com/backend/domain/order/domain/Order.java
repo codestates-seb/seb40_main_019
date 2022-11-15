@@ -47,10 +47,12 @@ public class Order extends Auditable {
     @Column(nullable = false)
     private int totalPrice;
 
-    public void setTotalPrice() {
-        this.totalPrice = this.orderProducts
-                .stream().mapToInt(pd -> pd.getProduct().getPrice() * pd.getProductQuantity())
-                .sum();
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for (OrderProduct orderProduct : orderProducts) {
+            totalPrice += orderProduct.getTotalPrice();
+        }
+        return totalPrice;
     }
 
     public void addOrderProducts(List<OrderProduct> orderProducts) {

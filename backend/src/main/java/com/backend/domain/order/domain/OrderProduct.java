@@ -22,7 +22,7 @@ public class OrderProduct {
     @JsonIgnore
     private Order order;
 
-    //    private Long memberId;
+
 
 
     private Integer productQuantity;
@@ -37,6 +37,10 @@ public class OrderProduct {
 
     public void setOrder(Order order){
         this.order = order;
+    }
+
+    public int getTotalPrice(){
+        return product.getPrice()*productQuantity;
     }
 
 

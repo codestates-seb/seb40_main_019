@@ -2,7 +2,7 @@ package com.backend.domain.user.domain;
 
 
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.point.domain.Point;
+import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.dto.UserPatchDto;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.naming.Name;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "user")
 public class User {
 
     @Id
@@ -46,14 +44,14 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
-
+    // 상품 맵핑 추가
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private List<Address> addresses = new ArrayList<>();
-
-
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "user_id")
@@ -83,9 +81,5 @@ public class User {
 
     public void addAddress(Address address) {
         this.addresses.add(address);
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }
