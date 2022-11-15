@@ -1,4 +1,6 @@
+import Graph from '../../../components/seller/js/Graph';
 import '../css/Seller.scss';
+import graphData from '../../../components/seller/graphData.json';
 
 export default function Seller() {
   return (
@@ -51,7 +53,9 @@ export default function Seller() {
         </div>
         <div className="dashboardBox">
           <h2>주문 통계</h2>
-          <div className="graph"></div>
+          <div className="graph">
+            <Graph data={graphData} />
+          </div>
         </div>
         <div className="dashboardBottom">
           <div className="dashboardBox">
