@@ -1,31 +1,35 @@
 package com.backend.domain.order.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
-import java.util.List;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 @Getter @Setter
-@AllArgsConstructor
-@ToString
-public class OrderRequestDto {
+
+public class OrderDto {
 
     private String receiverAddress;
     private String receiverName;
     private String receiverZipcode;
     private String receiverPhone;
-    private List<ProductInfo> products;
 
 
-    @Setter @Getter
-    @AllArgsConstructor
-    public static class ProductInfo {
-        private Long productId;
-        private String productName;
-        private Integer quantity;
-        private Integer price;
+    @NotNull(message = "상품 아이디는 필수 입력 값입니다.")
+    private Long productId;
 
+    @Min(value = 1, message = "최소 주문 수량은 1개 입니다.")
+    @Max(value = 999, message = "최대 주문 수량은 999개 입니다.")
+    private int quantity;
+
+    public static OrderDto createOrderDto(Long productId, int quantity){
+        OrderDto orderDto = new OrderDto();
+        orderDto.setProductId(productId);
+        orderDto.setQuantity(quantity);
+        return orderDto;
     }
+
     //2차 완
 }
 

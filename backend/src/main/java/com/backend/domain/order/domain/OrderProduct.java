@@ -2,6 +2,7 @@ package com.backend.domain.order.domain;
 
 import com.backend.domain.order.dto.OrderProductDto;
 import com.backend.domain.product.domain.Product;
+import com.backend.global.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -10,8 +11,8 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
-@ToString
-public class OrderProduct {
+
+public class OrderProduct extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderProductId;
@@ -19,58 +20,35 @@ public class OrderProduct {
     //1
     @ManyToOne
     @JoinColumn(name = "order_id")
-    @JsonIgnore
     private Order order;
-
-
-
-
-    private Integer productQuantity;
-
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
+    private int price;
 
+    private int quantity;
+    public static OrderProduct createOrderProduct(Product product, int quantity){
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setProduct(product);
+        orderProduct.setQuantity(quantity);
+        orderProduct.setPrice(product.getPrice());
 
-
-    public void setOrder(Order order){
-        this.order = order;
+       // product.removeStock(quantity);
+        return orderProduct;
     }
 
     public int getTotalPrice(){
-        return product.getPrice()*productQuantity;
+        return price*quantity;
+    }
+
+    public void cancel() {
+        //this.getProduct().addStock(quantity);
+    }
     }
 
 
-    /*@Builder
-    public OrderProduct(Product product, int orderProductQuantity, Order order, int price){
-        this.product = product;
-        this.orderProductQuantity = orderProductQuantity;
-        this.order = order;
-        this.price = price;
-    }
 
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public static OrderProduct createOrderProduct(OrderProductDto orderProductDto, Product product, Order order) {
-        OrderProduct orderProduct = OrderProduct.builder()
-                .product(product)
-                .order(order)
-                .orderProductQuantity(orderProductDto.getOrderProductQuantity())
-                .price(orderProductDto.getPrice())
-                .build();
-        return orderProduct;
-
-    }
-
-    public int getTotalPrice() {
-        return price*orderProductQuantity;
-    }*/
-}
-    //상품정보
 
 
