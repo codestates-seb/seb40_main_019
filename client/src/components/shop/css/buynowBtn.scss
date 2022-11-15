@@ -1,0 +1,36 @@
+.buyContainer{
+    text-align: center;
+    .buyBtn{
+    border: 2px solid #FFB526;
+    background-color: #FFB526;
+    color: var(--color-white);
+    padding: 8px 80px;
+    margin: 6px 0px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    }
+    .buyBtn:hover{
+        background-color: var(--color-white);
+        color: #FFB526;
+    }
+
+    .addBtn{
+    border: 2px solid #1885AE;
+    background-color: var(--color-white);
+    color: #1885AE;
+    padding: 8px 78px;
+    margin: 6px 0px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    }
+    .addBtn:hover{
+        background-color: #1885AE;;
+        color: var(--color-white);
+    }
+}
