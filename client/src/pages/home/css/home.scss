@@ -31,19 +31,28 @@
 
     .mainTextTop {
       background-color: var(--color-yellow);
-      max-width: 40vw;
+      max-width: 38vw;
+      height: 2vw;
       position: relative;
       left: 50%;
       transform: translate(-50%, 0%);
       margin-bottom: 10px;
       h2 {
-        font-size: 2vw;
-        font-weight: 600;
+        position: relative;
+        top: 2px;
+        font-size: 1.5vw;
+        font-family: var(--font-notoSans);
+        letter-spacing: -1px;
+        font-weight: 500;
         color: var(--color-white);
-        transform: scaleY(0.7);
+        transform: scaleY(1);
         @media (max-width: 640px) {
-          font-size: 5vw;
+          font-size: 3vw;
         }
+      }
+      @media (max-width: 640px) {
+        bottom: 10px;
+        height: 4vw;
       }
     }
 
@@ -55,12 +64,12 @@
         white-space: nowrap;
         transform: scaleY(1.5);
         @media (max-width: 640px) {
-          font-size: 9vw;
+          font-size: 7vw;
         }
       }
     }
     @media (max-width: 640px) {
-      bottom: 40px;
+      bottom: 50px;
     }
   }
 }
@@ -76,12 +85,42 @@
   .bestProducts {
     display: flex;
     justify-content: center;
+    width: 100%;
     :nth-child(1) {
       margin-right: 40px;
     }
     :nth-child(2) {
       margin-right: 40px;
     }
+    .mainImgWrap {
+      @media (max-width: 980px) {
+        width: 25vw;
+      }
+      @media (max-width: 640px) {
+        margin-right: 0px;
+        width: 80%;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+    }
+    .mainImg {
+      @media (max-width: 980px) {
+        width: 25vw;
+        height: 30vw;
+      }
+      @media (max-width: 640px) {
+        margin-right: 0px;
+        width: 100%;
+        height: 90vw;
+      }
+    }
+    @media (max-width: 640px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  @media (max-width: 980px) {
+    margin-top: 80px;
   }
 }
 
@@ -156,19 +195,15 @@
       :nth-child(2) {
         margin-left: auto;
       }
-      :nth-child(1) {
-        margin-bottom: 30px;
-      }
     }
 
     .boxRight {
       flex-direction: column;
       position: relative;
       bottom: 50px;
-
-      :nth-child(1) {
-        margin-bottom: 30px;
-      }
+    }
+    .firstBox {
+      margin-bottom: 30px;
     }
   }
 

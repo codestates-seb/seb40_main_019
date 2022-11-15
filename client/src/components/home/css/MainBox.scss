@@ -1,21 +1,23 @@
 .mainbox {
   background-color: var(--color-yellow);
-  padding: 4vw 3px 0px 3vw;
+  padding: 3vw;
   border-radius: 15px;
   border-bottom: 5px solid var(--color-brown);
-  line-height: 15px;
   h1 {
     font-size: 5vw;
     font-family: var(--font-work);
     font-weight: 500;
   }
   p {
-    position: relative;
-    top: 0.8vw;
+    margin-top: 1vw;
     font-size: 1vw;
     float: left;
     font-family: var(--font-notoSans);
     font-weight: 400;
+    line-height: 12px;
+    @media (max-width: 640px) {
+      font-size: 0.5vw;
+    }
   }
 }
 

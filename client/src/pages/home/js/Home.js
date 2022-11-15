@@ -34,10 +34,10 @@ export default function Home() {
           </div>
           <div className="mainText">
             <div className="mainTextTop">
-              <h2>LUXURY, FRESH, ORGANIC ON!</h2>
+              <h2>유기농 고급재료로 신선하게!</h2>
             </div>
             <div className="mainTextBottom">
-              <h1>GO LOVE YOURDOG</h1>
+              <h1>DOG FOOD WITH LOVE</h1>
             </div>
           </div>
         </div>
@@ -68,11 +68,15 @@ export default function Home() {
         <div className="main4Wrap">
           <div className="mainBoxWrap">
             <div className="boxLeft">
-              <MainBox name={'boxOne'} idx={0} />
+              <div className="firstBox">
+                <MainBox name={'boxOne'} idx={0} />
+              </div>
               <MainBox name={'boxTwo'} idx={1} />
             </div>
             <div className="boxRight">
-              <MainBox name={'boxThree'} idx={2} />
+              <div className="firstBox">
+                <MainBox name={'boxThree'} idx={2} />
+              </div>
               <MainBox name={'boxFour'} idx={3} />
             </div>
             <div className="mainBoxBack"></div>
