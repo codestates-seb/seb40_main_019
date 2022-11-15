@@ -1,15 +1,17 @@
 .itemContainer {
     flex-wrap: wrap;
+    cursor: pointer;
+
     div{
 
     text-align: center;
     img{
-        width: 100px;
+        width: 160px;
     }
     }
     span{
     font-size: 12px;
-    width: 100px;
+    width: 150px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
