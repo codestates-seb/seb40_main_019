@@ -1,5 +1,5 @@
 import '../css/Graph.scss';
 
 export default function Seller() {
-  return <></>;
+  return <div>graph</div>;
 }
