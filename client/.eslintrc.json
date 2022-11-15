@@ -2,7 +2,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -19,17 +20,16 @@
     "sourceType": "module"
   },
   "rules": {
-    "react/prop-types": "off", //props 막아줌
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-react": 0,
-    "prettier/prettier":[
+    "prettier/prettier": [
       "error",
       {
         "useTabs": false,
         "endOfLine": "auto"
       }
-    ],
-    "react/prop-types": "off"
+    ]
   }
-  
 }
+ 
