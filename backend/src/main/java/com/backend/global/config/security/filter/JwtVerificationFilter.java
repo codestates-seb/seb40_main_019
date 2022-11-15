@@ -1,7 +1,7 @@
 package com.backend.global.config.security.filter;
 
-import com.backend.global.config.error.BusinessLogicException;
-import com.backend.global.config.error.ErrorResponse;
+import com.backend.global.error.BusinessLogicException;
+import com.backend.global.error.ErrorResponse;
 import com.backend.global.jwt.TokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

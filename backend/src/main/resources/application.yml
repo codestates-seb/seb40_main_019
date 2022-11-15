@@ -19,3 +19,6 @@ logging:
       springframework:
         orm:
           jpa: DEBUG
+naver:
+  id: ${/config/cloud-parameter-store/naver-id}
+  password: ${/config/cloud-parameter-store/naver-password}

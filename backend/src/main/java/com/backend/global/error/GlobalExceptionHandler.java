@@ -1,4 +1,4 @@
-package com.backend.global.config.error;
+package com.backend.global.error;
 
 import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;

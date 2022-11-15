@@ -1,7 +1,7 @@
 package com.backend.global.config.security.handler;
 
-import com.backend.global.config.error.ErrorResponse;
-import com.backend.global.config.error.ExceptionCode;
+import com.backend.global.error.ErrorResponse;
+import com.backend.global.error.ExceptionCode;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

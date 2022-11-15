@@ -2,8 +2,8 @@ package com.backend.global.jwt;
 
 import com.backend.domain.user.domain.AuthUser;
 import com.backend.domain.user.dto.TokenDto;
-import com.backend.global.config.error.ExceptionCode;
-import com.backend.global.config.security.exception.InvalidJwtTokenException;
+import com.backend.global.error.ExceptionCode;
+import com.backend.global.jwt.exception.InvalidJwtTokenException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
