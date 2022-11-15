@@ -140,7 +140,7 @@ public class AuthService {
         refreshTokenRepository.deleteByKey(Long.valueOf(tokenProvider.parseClaims(refreshToken).getSubject()));
     }
 
-    public TestUserResponseDto signupTestAccount() {
+    public TestUserResponseDto signupTestAccount(UserRole userRole) {
 
         String randomEmail = createTestAccountEmail();
         String randomUsername = createTestAccountUsername();
@@ -155,7 +155,7 @@ public class AuthService {
                 .userName(randomUsername)
                 .password(randomPassword)
                 .about("안녕하세요. 테스트 계정입니다.")
-                .userRole(UserRole.ROLE_TESTUSER)
+                .userRole(userRole)
                 .profileImage("https://i.ibb.co/7bQQYkX/kisspng-computer-icons-user-profile-avatar-5abcbc2a1f4f51-20180201102408184.png")
                 .build();
         testUser
