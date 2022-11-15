@@ -7,10 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends JpaRepository<Order, Long> {
-    @Query("select p from Order p where p.user.userId = :userId")
-    Page<Order> findByUser(@Param("userId") long userId, Pageable pageable);
+@Repository
+public interface OrderRepository extends JpaRepository<Order, Long> , OrderRepositoryCustom{
+   // @Query("select p from Order p where p.user.userId = :userId")
+    //Page<Order> findByUser(@Param("userId") long userId, Pageable pageable);
 
 
 }

@@ -4,11 +4,13 @@ import com.backend.domain.user.domain.User;
 import com.backend.global.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Setter
 @Entity
 @Getter
 @Table(name = "orders")
@@ -45,11 +47,23 @@ public class Order extends Auditable {
     @Column(nullable = false)
     private int totalPrice;
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setTotalPrice() {
+        this.totalPrice = this.orderProducts
+                .stream().mapToInt(pd -> pd.getProduct().getPrice() * pd.getProductQuantity())
+                .sum();
     }
 
-    public void setReceiverAddress(String receiverAddress) {
+    public void addOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
+        orderProducts.forEach(od -> {od.setOrder(this);});
+    }
+
+
+    public void cancelOrderProduct(OrderProduct orderProduct) {
+        this.orderProducts.remove(orderProduct);
+    }
+}
+   /* public void setReceiverAddress(String receiverAddress) {
         this.receiverAddress = receiverAddress;
     }
 

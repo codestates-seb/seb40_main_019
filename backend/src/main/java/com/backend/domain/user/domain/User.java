@@ -84,4 +84,8 @@ public class User {
     public void addAddress(Address address) {
         this.addresses.add(address);
     }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

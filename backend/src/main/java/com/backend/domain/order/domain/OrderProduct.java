@@ -1,45 +1,43 @@
 package com.backend.domain.order.domain;
 
-import com.backend.domain.order.dto.OrderPostDto;
 import com.backend.domain.order.dto.OrderProductDto;
 import com.backend.domain.product.domain.Product;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
-@NoArgsConstructor
-@Getter
 @Entity
+@Getter @Setter
+@NoArgsConstructor
+@ToString
 public class OrderProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderProductId;
 
-    @Column(nullable = false)
-    private int orderProductQuantity;//주문 당시의 수량
-
+    //1
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private Order order;//주문정보
+    @JsonIgnore
+    private Order order;
 
-    @Column(nullable = false)
-    private int price; // 주문개별가격
+    //    private Long memberId;
+
+
+    private Integer productQuantity;
+
 
     @ManyToOne
     @JoinColumn(name = "product_id")
-    private Product product;//상품정보
+    private Product product;
 
-    public int getTotalPrice() {
-        return price*orderProductQuantity;
-    }
+
+
 
     public void setOrder(Order order){
         this.order = order;
     }
-
 
 
     /*@Builder

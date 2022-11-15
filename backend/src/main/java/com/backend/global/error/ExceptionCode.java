@@ -1,4 +1,4 @@
-package com.backend.global.config.error;
+package com.backend.global.error;
 
 import lombok.Getter;
 
@@ -28,7 +28,7 @@ public enum ExceptionCode {
     PRODUCT_NOT_FOUND(400, "Product Not Found"),
 
     //Order
-    ORDER_NOT_FOUND(400,"Order Not Found");
+    ORDER_NOT_FOUND(400,"Order Not Found"),
 
     ANSWER_NOT_FOUND(404,"ANSWER_NOT_FOUND"),
 
