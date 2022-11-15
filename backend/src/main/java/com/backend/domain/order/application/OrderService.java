@@ -5,6 +5,7 @@ import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderStatus;
 import com.backend.domain.order.exception.OrderNotFound;
 import com.backend.domain.point.application.PointService;
+import com.backend.domain.point.dao.PointRepository;
 import com.backend.domain.product.application.ProductService;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.user.application.UserService;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
+import static com.backend.domain.order.domain.OrderStatus.COMP;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -32,6 +35,7 @@ public class OrderService {
     private final ProductService productService;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final PointRepository pointRepository;
 
     //주문 생성
     @Transactional
@@ -41,6 +45,7 @@ public class OrderService {
         order.setTotalPrice();
         order.addOrderProducts(order.getOrderProducts());
         order.setOrderStatus(OrderStatus.ORDER);
+        //order.getOrderProducts().forEach(pd -> productService.decreaseStock(pd.getOrderProductId(), pd.getOrderProductQuantity())); //프로덕트쪽에 재고관리서비스만들어야함
         return orderRepository.save(order);
     }
     //한번 물어보자,,
@@ -69,6 +74,20 @@ public class OrderService {
        Page<Order> orders = orderRepository.findByUser(userId, PageRequest.of(page,size, Sort.by("orderId").descending()));
        return orders;
     }
+    //포인트로만 결제
+    //@Transactional
+    /*public void payOnlyPoint(Order order) {
+        User user = order.getUser();
+        long point = user.getPoint().getCash();
+        int payPrice = order.getTotalPrice();
+
+        if(payPrice > point) {
+            throw new RuntimeException("포인트가 부족합니다");
+            //결제창으로 넘어가게 해야함
+        }
+        order.setOrderStatus(COMP);
+        orderRepository.save(order);*/
+    }
 
 
-}
+

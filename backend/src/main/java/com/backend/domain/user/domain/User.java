@@ -2,6 +2,7 @@ package com.backend.domain.user.domain;
 
 
 import com.backend.domain.order.domain.Order;
+import com.backend.domain.point.domain.Point;
 import com.backend.domain.user.dto.UserPatchDto;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.naming.Name;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "user")
 public class User {
 
     @Id
@@ -44,9 +47,13 @@ public class User {
     private List<Order> orders = new ArrayList<>();
 
 
+
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private List<Address> addresses = new ArrayList<>();
+
+
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "user_id")

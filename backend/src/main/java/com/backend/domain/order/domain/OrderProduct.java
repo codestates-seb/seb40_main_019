@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
 @Entity
 public class OrderProduct {
@@ -22,9 +22,10 @@ public class OrderProduct {
     private int orderProductQuantity;//주문 당시의 수량
 
     @ManyToOne
-    @JoinColumn(name = "oreder_id")
+    @JoinColumn(name = "order_id")
     private Order order;//주문정보
 
+    @Column(nullable = false)
     private int price; // 주문개별가격
 
     @ManyToOne

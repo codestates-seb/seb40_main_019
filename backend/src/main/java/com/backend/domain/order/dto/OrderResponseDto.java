@@ -2,13 +2,17 @@ package com.backend.domain.order.dto;
 
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderStatus;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderResponseDto {
     private Long orderId;
     private LocalDateTime createdAt;

@@ -37,7 +37,7 @@ public class SecurityConfig {
     @Value("${address.front-local}")
     private String FRONT_LOCAL;
 
-    @Value("${address.front-ec2}")
+    @Value("${address.front-s3}")
     private String FRONT_REMOTE;
 
     @Value("${address.domain}")

@@ -1,11 +1,7 @@
 package com.backend.domain.order.domain;
 
-import com.backend.domain.order.dto.OrderPatchDto;
-import com.backend.domain.order.dto.OrderPostDto;
 import com.backend.domain.user.domain.User;
 import com.backend.global.audit.Auditable;
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Table(name = "orders")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Order extends Auditable {
 
     @Id
@@ -44,6 +40,7 @@ public class Order extends Auditable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    @Column(nullable = false)
     private int totalPrice;
 
     public void setUser(User user) {
@@ -85,6 +82,11 @@ public class Order extends Auditable {
         this.orderProducts = orderProducts;
         orderProducts.forEach(od -> {od.setOrder(this);});
     }
+
+
+
+}
+
 
     /*public void addOrderProduct(OrderProduct orderProduct) {
                         orderProducts.add(orderProduct);
@@ -129,4 +131,4 @@ public class Order extends Auditable {
     }*/
     // todo : orderStatus 에 따라 주문 상태 변경 가능 유무
 
-}
+

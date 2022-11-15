@@ -28,8 +28,7 @@ import java.util.List;
 @Slf4j
 public class OrderController {
     private final OrderService orderService;
-    private final PointService pointService;
-    private final UserService userService;
+
     private final OrderMapper mapper;
 
     @PostMapping("/orders")
@@ -56,7 +55,7 @@ public class OrderController {
     @DeleteMapping("/order/{order-id}")
     public ResponseEntity delete(@CurrentMember AuthUser authUser, @PathVariable("order-id") Long orderId) {
         Long userId = authUser.getUserId();
-        userService.delete()
+        orderService.delete(userId, orderId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
@@ -83,6 +82,7 @@ public class OrderController {
                HttpStatus.OK);
 
     }
+
 
 
 }

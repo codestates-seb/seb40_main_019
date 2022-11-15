@@ -1,13 +1,11 @@
 package com.backend.domain.order.dto;
 
 import com.backend.domain.order.domain.OrderStatus;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderPatchDto {
     private long orderId;
 
@@ -24,14 +22,7 @@ public class OrderPatchDto {
         this.orderId = orderId;
     }
 
-    /* @Builder
-    private OrderPatchDto(long orderId, OrderStatus orderStatus, String receiverName, String receiverPhone, String receiverAddress){
-        this.orderId = orderId;
-        this.orderStatus = orderStatus;
-        this.receiverName = receiverName;
-        this.receiverPhone = receiverPhone;
-        this.receiverAddress = receiverAddress;
-    }*/
+
 }
 //1차완
 //orderId를 받아야하는게 맞나?
