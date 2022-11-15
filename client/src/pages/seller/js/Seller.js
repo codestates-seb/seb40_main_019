@@ -51,6 +51,7 @@ export default function Seller() {
         </div>
         <div className="dashboardBox">
           <h2>주문 통계</h2>
+          <div className="graph"></div>
         </div>
         <div className="dashboardBottom">
           <div className="dashboardBox">
@@ -64,19 +65,44 @@ export default function Seller() {
                 </div>
               </div>
               <div className="dashboardText">
-                <h3>11월 예상 판매금액</h3>
+                <h3>연간 판매금액</h3>
                 <div className="dashboardNum">
-                  <h4>1,250,870,000</h4>
-                  <h4 className="dashboardh4Text">원</h4>
+                  <h4>15,250,870,000</h4>
+                  <h4 className="dashboardNumText">원</h4>
                 </div>
               </div>
             </div>
           </div>
           <div className="dashboardBox">
             <h2>등록 상품</h2>
+            <div className="dashboardTexts">
+              <div className="dashboardText">
+                <h3>진열</h3>
+                <div className="dashboardNum">
+                  <h4>125</h4>
+                  <h4 className="dashboardNumText">개</h4>
+                </div>
+              </div>
+              <div className="dashboardText">
+                <h3>미진열</h3>
+                <div className="dashboardNum">
+                  <h4>0</h4>
+                  <h4 className="dashboardNumText">개</h4>
+                </div>
+              </div>
+            </div>
           </div>
           <div className="dashboardBox">
             <h2>리뷰</h2>
+            <div className="dashboardTexts">
+              <div className="dashboardText">
+                <h3>11월 리뷰 갯수</h3>
+                <div className="dashboardNum">
+                  <h4>1,249</h4>
+                  <h4 className="dashboardNumText">개</h4>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
