@@ -1,4 +1,4 @@
-package com.backend.global.config.error;
+package com.backend.global.error;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
