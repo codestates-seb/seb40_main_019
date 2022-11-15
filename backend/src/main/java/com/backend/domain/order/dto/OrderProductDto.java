@@ -12,11 +12,15 @@ public class OrderProductDto {
 
     private int orderProductQuantity;
 
-    @Builder
-    private OrderProductDto(long productId, int orderProductQuantity) {
+    private int price;
+
+
+   /* @Builder
+    private OrderProductDto(long productId, int orderProductQuantity, int price) {
         this.productId = productId;
         this.orderProductQuantity = orderProductQuantity;
-    }
+        this.price = price;
+    }*/
 
 }
 

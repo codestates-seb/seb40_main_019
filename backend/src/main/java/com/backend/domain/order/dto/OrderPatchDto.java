@@ -13,20 +13,25 @@ public class OrderPatchDto {
 
     private OrderStatus orderStatus;
 
+
     private String receiverName;
 
     private String receiverPhone;
 
     private String receiverAddress;
 
-    @Builder
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
+
+    /* @Builder
     private OrderPatchDto(long orderId, OrderStatus orderStatus, String receiverName, String receiverPhone, String receiverAddress){
         this.orderId = orderId;
         this.orderStatus = orderStatus;
         this.receiverName = receiverName;
         this.receiverPhone = receiverPhone;
         this.receiverAddress = receiverAddress;
-    }
+    }*/
 }
 //1차완
 //orderId를 받아야하는게 맞나?

@@ -1,5 +1,6 @@
 package com.backend.domain.order.domain;
 
+import com.backend.domain.order.dto.OrderPatchDto;
 import com.backend.domain.order.dto.OrderPostDto;
 import com.backend.domain.user.domain.User;
 import com.backend.global.audit.Auditable;
@@ -25,7 +26,7 @@ public class Order extends Auditable {
     @Column(nullable = false)
     private String zipCode;
 
-    private String orderAddress;
+    private String receiverAddress;
 
 
     private String receiverName;
@@ -43,12 +44,58 @@ public class Order extends Auditable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
-    @Builder
-    public Order(Long orderId, String zipCode, String orderAddress, String orderAddressDetail,
+    private int totalPrice;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
+
+    public void setTotalPrice() {
+        this.totalPrice = getTotalPrice();
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    //총주문금액
+    public int getTotalPrice() {
+        int totalPrice = 0;
+        for(OrderProduct orderProduct : orderProducts) {
+            totalPrice+= orderProduct.getTotalPrice();
+        }
+
+        return totalPrice;
+
+    }
+
+    public void addOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
+        orderProducts.forEach(od -> {od.setOrder(this);});
+    }
+
+    /*public void addOrderProduct(OrderProduct orderProduct) {
+                        orderProducts.add(orderProduct);
+                        orderProduct.setOrder(this);
+                    }*/
+    /*@Builder
+    public Order(Long orderId, String zipCode, String receiverAddress,
                  String receiverName, String receiverPhone,User user, OrderStatus orderStatus){
         this.orderId = orderId;
         this.zipCode = zipCode;
-        this.orderAddress = orderAddress;
+        this.receiverAddress = receiverAddress;
         this.receiverName = receiverName;
         this.receiverPhone = receiverPhone;
         this.user = user;
@@ -60,7 +107,7 @@ public class Order extends Auditable {
     public static Order createOrder(OrderPostDto orderPostDto, User user) {
         Order order = Order.builder()
                 .user(user)
-                .orderAddress(orderPostDto.getReceiverAddress())
+                .receiverAddress(orderPostDto.getReceiverAddress())
                 .receiverName(orderPostDto.getReceiverName())
                 .receiverPhone(orderPostDto.getReceiverPhone())
                 .build();
@@ -71,6 +118,15 @@ public class Order extends Auditable {
 
     }
 
+    public void patchOrder(OrderPatchDto orderPatchDto, User user) {
+        String updatedReceiverName = orderPatchDto.getReceiverName();
+        String updatedReceiverPhone = orderPatchDto.getReceiverPhone();
+        String updatedReceiverAddress = orderPatchDto.getReceiverAddress();
+
+        this.receiverName = updatedReceiverName == null? this.receiverName : updatedReceiverName;
+        this.receiverPhone = updatedReceiverPhone == null? this.receiverPhone : updatedReceiverPhone;
+        this.receiverAddress = updatedReceiverAddress == null? this.receiverAddress : updatedReceiverName;
+    }*/
     // todo : orderStatus 에 따라 주문 상태 변경 가능 유무
 
 }

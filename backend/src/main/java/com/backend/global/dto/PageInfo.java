@@ -7,7 +7,7 @@ import lombok.Getter;
 @Getter
 public class PageInfo {
     private int page;
-    private int size;
+    private int size=15;
     private long totalElements;
     private int totalPages;
 }
