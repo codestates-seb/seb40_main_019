@@ -26,12 +26,4 @@ public class ProductPostDto {
     private int stock;
 
 
-
-    @Builder
-    private ProductPostDto(int price, String productName, int stock,String seller) {
-        this.price = price;
-        this.productName = productName;
-        this.stock = stock;
-        this.seller = seller;
-    }
 }

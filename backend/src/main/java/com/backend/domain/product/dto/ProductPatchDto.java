@@ -24,11 +24,5 @@ public class ProductPatchDto {
     @NotNull
     private int stock;
 
-    @Builder
-    private ProductPatchDto(int price, String productName, String seller, int stock) {
-        this.price = price;
-        this.productName = productName;
-        this.seller = seller;
-        this.stock = stock;
-    }
+
 }

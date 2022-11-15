@@ -4,6 +4,7 @@ import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.product.dto.ProductPatchDto;
 import com.backend.domain.product.dto.ProductPostDto;
 import com.backend.domain.review.domain.Review;
+import com.backend.domain.user.domain.User;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @Getter
 @Entity
 public class Product {
@@ -40,6 +41,11 @@ public class Product {
     @Column(nullable = false)
     private int discountPrice;
 
+    // 유저 맵핑 추가
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
 
@@ -55,43 +61,32 @@ public class Product {
 //    @JoinColumn(name = "product_id")
 //    private List<Cart> carts = new ArrayList<>();
 
-    @Builder
-    public Product(Long productId, int price, String productName, int stock, int star, int discountPrice, List<Review> reviews,
-                   List<OrderProduct> orderProducts,String seller ) {
+    // 상품에 판매자 유저 정보 입력
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setProductId(Long productId) {
         this.productId = productId;
+    }
+
+    public void setPrice(int price) {
         this.price = price;
-        this.productName = productName;
-        this.stock = stock;
-        this.star = star;
-        this.discountPrice = discountPrice;
-        this.reviews = reviews;
-        this.orderProducts = orderProducts;
+    }
+
+    public void setSeller(String seller) {
         this.seller = seller;
     }
 
-    // 제품 신규 등록
-    public static Product createProduct(ProductPostDto productPostDto){
-        Product product = Product.builder()
-                .productName(productPostDto.getProductName())
-                .seller(productPostDto.getSeller())
-                .price(productPostDto.getPrice())
-                .stock(productPostDto.getStock())
-                .build();
-        return product;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    //  제품 변경
-    public void updateProduct(ProductPatchDto productPatchDto){
-        String changedProductName = productPatchDto.getProductName();
-        String changedSeller = productPatchDto.getSeller();
-        Integer changedStock = productPatchDto.getStock();
-        Integer changedPrice = productPatchDto.getPrice();
-
-        this.productName = changedProductName == null ? this.productName : changedProductName;
-        this.seller = changedSeller == null ? this.seller : changedSeller;
-        this.price = changedPrice == null ? this.price : changedPrice;
-        this.stock = changedStock == null ? this.stock : changedStock;
-
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 
+    public void setStar(int star) {
+        this.star = star;
+    }
 }

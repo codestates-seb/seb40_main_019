@@ -2,6 +2,7 @@ package com.backend.domain.user.domain;
 
 
 import com.backend.domain.order.domain.Order;
+import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.dto.UserPatchDto;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -42,6 +43,10 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
+
+    // 상품 맵핑 추가
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
