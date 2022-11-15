@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import '../css/signupModal.scss';
+import { useNavigate } from 'react-router-dom';
 import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/reducers/signupModalSlice';
-import { submitForm } from '../../../util/api/signupForm';
+import { submitForm, emailValidationCheck } from '../../../util/api/signupForm';
 import FormInputError from '../../sign/js/FormInputError';
 
 export default function SignupModal() {
@@ -15,21 +16,20 @@ export default function SignupModal() {
 
   const data = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     // 인증번호 받아옴
-    // let value = emailValidationCheck();
-
-    // setNumber(value);
-    setNumber(123456);
-    // console.log(value);
+    emailValidationCheck(data.email).then((data) => {
+      setNumber(data.data);
+    });
   }, []);
 
   const changeInputNumber = (e) => {
     setInputNumber(e.target.value);
     setError(false);
   };
-  const checkValidation = () => {
-    if (Number(number) === Number(inputNumber)) {
+  const checkValidation = async () => {
+    if (number === inputNumber) {
       console.log('성공');
 
       const dataTemp = {
@@ -37,15 +37,18 @@ export default function SignupModal() {
         email: data.email,
         password: data.password,
         address: data.address,
-        zipcode: data.postCode,
+        zipCode: data.postCode,
       };
-
-      console.log(dataTemp);
       // 폼 데이터 전송.
-      let submit = submitForm(dataTemp);
-      console.log(submit);
-
-      // dispatch(closeModal());
+      const submit = await submitForm(dataTemp);
+      if (submit.status !== 409) {
+        window.alert('회원가입 성공');
+        dispatch(closeModal());
+        navigate('/login');
+      } else {
+        window.alert(submit.message);
+        dispatch(closeModal());
+      }
     } else {
       setError(true);
       console.log('실패');

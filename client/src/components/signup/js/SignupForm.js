@@ -21,7 +21,6 @@ export default function Signup() {
   const [address, setAddress] = useState('');
   const [postCode, setPostCode] = useState('');
   const [data, setDate] = useState({});
-  // eslint-disable-next-line no-unused-vars
 
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
@@ -191,7 +190,7 @@ export default function Signup() {
           value={postCode}
         />
         {addressError && <FormInputError text="Please enter your address." />}
-        <FormButtonYellow formSubmit={formSubmit} btnContent="Signup" />
+        <FormButtonYellow formSubmit={formSubmit} btnContent="Sign up" />
       </form>
       <div className="loginLink">
         Already have an account?
