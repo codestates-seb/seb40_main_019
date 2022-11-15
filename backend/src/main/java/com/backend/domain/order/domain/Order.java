@@ -22,11 +22,13 @@ public class Order extends Auditable {
     @Column(nullable = false)
     private String zipCode;
 
+    @Column(nullable = false)
     private String receiverAddress;
 
-
+    @Column(nullable = false)
     private String receiverName;
 
+    @Column(nullable = false)
     private String receiverPhone;
 
 
