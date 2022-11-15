@@ -1,14 +1,15 @@
 .sidebarWrapper{
     box-sizing: border-box;
-    position: sticky;
-    top: 0px;
+    position: sticky !important;
+    top: 80px !important;
+    margin-right: 180px; //상품 리스트와 거리
     
     .logoBox{
         background: url("../../../assets/img/logo_side_blue.png");
         background-size: cover;
         display: flex;
-        width: 42px;
-        height: 45px;
+        width: 60px;
+        height: 65px;
         margin: 12px 12px;
         cursor: pointer;
         
@@ -25,9 +26,9 @@
      list-style: none;
      cursor: pointer;
         li{
-        padding: 6px;
+        padding: 10px;
         color: var(--color-blue);
-        font-size: 12px;
+        font-size: 16px;
         
         };
         :hover{
