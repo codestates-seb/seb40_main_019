@@ -1,17 +1,21 @@
-.sidebarWrapper {
+.sideMargin{
+  margin: 1vw 6vw;
+}
+
+.sidebarContainer {
   box-sizing: border-box;
   position: sticky !important;
   top: 80px !important;
-  //   margin-right: 180px; //상품 리스트와 거리
-  width: 200px;
-
+  width: 18vw;
+  
   .logoBox {
     background: url('../../../assets/img/logo_side_blue.png');
     background-size: cover;
     display: flex;
     width: 45px;
     height: 47px;
-    margin: 12px 12px;
+    margin: 10px;
+
     cursor: pointer;
   }
   .logoBox:hover {
@@ -22,12 +26,12 @@
   .tittleList {
     list-style: none;
     cursor: pointer;
-    li {
+    > li {
       padding: 10px;
       color: var(--color-blue);
-      font-size: 12px;
+      font-size: 14px;
     }
-    :hover {
+    > li:hover {
       color: var(--color-yellow);
     }
   }
