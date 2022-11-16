@@ -1,6 +1,6 @@
 import '../css/quantityBtn.scss';
 //수량 + - 버튼
-const QuantityBtn = () => {
+export default function QuantityBtn() {
   console.log();
   return (
     <div className="quantityContainer">
@@ -12,6 +12,4 @@ const QuantityBtn = () => {
       </div>
     </div>
   );
-};
-
-export default QuantityBtn;
+}

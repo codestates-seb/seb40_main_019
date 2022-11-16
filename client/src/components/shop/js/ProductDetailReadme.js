@@ -1,6 +1,6 @@
 import '../css/productDetailReadme.scss';
 
-const ProductDetailReadme = () => {
+export default function ProductDetailReadme() {
   return (
     <div className="readmeContainer">
       <div className="readmeTitle">READ ME</div>
@@ -15,6 +15,4 @@ const ProductDetailReadme = () => {
       </div>
     </div>
   );
-};
-
-export default ProductDetailReadme;
+}

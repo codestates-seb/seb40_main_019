@@ -1,5 +1,6 @@
 import '../css/productDetailReview.scss';
-const ProductDetailReview = () => {
+
+export default function ProductDetailReview() {
   return (
     <div className="reviewContainer">
       <div className="reviewText">REVIEW</div>
@@ -8,6 +9,4 @@ const ProductDetailReview = () => {
       </div>
     </div>
   );
-};
-
-export default ProductDetailReview;
+}

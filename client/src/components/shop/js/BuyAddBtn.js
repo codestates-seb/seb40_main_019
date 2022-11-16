@@ -1,12 +1,12 @@
-import '../css/buynowBtn.scss';
+import '../css/buyAddBtn.scss';
 
-const BuynowBtn = () => {
+const BuyAddBtn = () => {
   return (
-    <div className="buyContainer">
+    <div className="buttonContainer">
       <button className="buyBtn">BUY NOW</button>
       <button className="addBtn">ADD CART</button>
     </div>
   );
 };
 
-export default BuynowBtn;
+export default BuyAddBtn;

@@ -2,7 +2,7 @@ import '../css/productInfo.scss';
 import QuantityBtn from './../../../components/shop/js/QuantityBtn';
 import BuyAddBtn from './../../../components/shop/js/BuyAddBtn';
 
-function ProductInfo() {
+export default function ProductInfo() {
   return (
     <>
       <div>
@@ -43,5 +43,3 @@ function ProductInfo() {
     </>
   );
 }
-
-export default ProductInfo;
