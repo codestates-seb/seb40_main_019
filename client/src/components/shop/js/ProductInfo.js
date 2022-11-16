@@ -5,6 +5,9 @@ import BuyAddBtn from './../../../components/shop/js/BuyAddBtn';
 function ProductInfo() {
   return (
     <>
+      <div>
+        <div className="bigImgBox"></div>
+      </div>
       <div className="infoContainer">
         {/* header (item-header-box) */}
         <div className="itemHeaderBox">

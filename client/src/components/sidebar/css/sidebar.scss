@@ -2,7 +2,7 @@
     box-sizing: border-box;
     position: sticky !important;
     top: 80px !important;
-    margin-right: 180px; //상품 리스트와 거리
+    margin-right: 100px; //상품 리스트와 거리
     
     .logoBox{
         background: url("../../../assets/img/logo_side_blue.png");
@@ -33,8 +33,6 @@
         };
         :hover{
         color: var(--color-yellow);
+        };
     };
-    
-  }
-
 };

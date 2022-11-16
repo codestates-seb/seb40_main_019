@@ -1,0 +1,9 @@
+.detailDiv{
+    display: flex;
+    flex-direction: column;
+    
+    .detailUp{
+        display: flex;
+        // flex-wrap: wrap;
+    }
+}
