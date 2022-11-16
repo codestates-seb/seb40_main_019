@@ -12,6 +12,7 @@ import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
 import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
+import Seller from './pages/seller/js/Seller';
 
 function App() {
   //json-server 주소
@@ -48,6 +49,7 @@ function App() {
           <Route path="oauth/google" element={<OauthGoogle />} />
           <Route path="/products" element={<ShopProductList />} />
           <Route path="/productdetail" element={<ShopProductDetail />} />
+          <Route path="/seller" element={<Seller />} />
         </Route>
       </Routes>
     </>
