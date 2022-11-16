@@ -46,6 +46,7 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
 
     private Long guestId = 1L;
+    private Long adminId = 1L;
 
     // 회원가입
     @Transactional
@@ -145,21 +146,27 @@ public class AuthService {
     }
 
     // 테스트 유저 회원가입
+    @Transactional
     public TestUserResponseDto signupTestAccount(UserRole userRole) {
 
 //        String randomEmail = createTestAccountEmail();
 //        String randomUsername = createTestAccountUsername();
 
         String testRole = "";
+        String testUserId = "";
 
         if (userRole == ROLE_TESTUSER) {
             testRole = "guest";
+            testUserId = String.valueOf(guestId);
+            hitGuest();
         } else {
             testRole = "admin";
+            testUserId = String.valueOf(adminId);
+            hitAdmin();
         }
 
-        String guestEmail = testRole + guestId + "@test.com";
-        String guestUsername = testRole + guestId;
+        String guestEmail = testRole + testUserId + "@test.com";
+        String guestUsername = testRole + testUserId;
 
         String randomPassword = createTestAccountPassword();
         List<Address> testAddress = List.of(Address.builder()
@@ -256,4 +263,11 @@ public class AuthService {
 //        return key.toString() + "TEST";
 //    }
 
+    private void hitGuest() {
+        guestId++;
+    }
+
+    private void hitAdmin() {
+        adminId++;
+    }
 }
