@@ -11,6 +11,7 @@ import OauthGoogle from './pages/oauth/OauthGoogle';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
+import ShopProductList from './pages/shopProductList/js/ShopProductList';
 
 function App() {
   //json-server 주소
@@ -45,6 +46,7 @@ function App() {
           <Route path="/products" element={<Products />} />
           <Route path="oauth/kakao" element={<OauthKakao />} />
           <Route path="oauth/google" element={<OauthGoogle />} />
+          <Route path="/products" element={<ShopProductList />} />
         </Route>
       </Routes>
     </>

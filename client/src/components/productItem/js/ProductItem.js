@@ -1,4 +1,4 @@
-import '../productItem/productItem.scss';
+import '../css/productItem.scss';
 
 const ProductItem = ({ data }) => {
   //console.log(data);

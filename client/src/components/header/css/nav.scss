@@ -1,56 +1,69 @@
-nav{
-  display: flex;
-  width: 100%;
+.navbar {
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  z-index: 2;
+  height: 65px;
+  width: 100vw;
   background-color: var(--color-white);
-  height: 70px;
-  
-  button{
+  height: 65px;
+  box-shadow: 0px 5px 5px rgba(75, 73, 72, 0.3);
+  @media (max-width: 980px) {
+    height: 55px;
+  }
+}
+
+.maxNav {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 20px;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  max-width: 1318px; //헤더 최대길이
+  margin: auto;
+
+  button {
     margin-top: 20px;
-    color: #5C4B29;
+    color: #5c4b29;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
-    i{
-      color: #5C4B29;
+    i {
+      color: #5c4b29;
     }
     @media (max-width: 980px) {
       font-size: 12px;
     }
   }
-  button:hover{
-    color: #FFB526;
+  button:hover {
+    color: #ffb526;
   }
 
-  .navLeft{
-    position: absolute;
-    left: 160px;
-    button{
+  .navLeft {
+    .margin {
       margin-right: 50px;
     }
-    @media (max-width: 980px) {
-      left: 30px;
-    }
   }
 
-  .navRight{
-    position: absolute;
-    right: 160px;
-    button{
+  .navRight {
+    .margin {
       margin-left: 50px;
     }
-    i{
+
+    i {
       margin-right: 10px;
     }
-    i:hover{
-      color: #FFB526;
-    }
-    @media (max-width: 980px) {
-      right: 30px;
+    i:hover {
+      color: #ffb526;
     }
   }
 
-  .textLogo{
+  .textLogo {
     margin-top: 20px;
-    img{
+    img {
       height: 20px;
       position: absolute;
       left: 50%;
