@@ -1,24 +1,30 @@
-import '../css/sidebar.scss';
-import { Link } from 'react-router-dom';
-
-function Sidebar() {
+import { useState } from 'react';
+import '../css/Sidebar.scss';
+import SidebarMenu from './SidebarMenu';
+export default function Sidebar() {
+  const [click, setClick] = useState(false);
+  const handleClickMenu = () => {
+    setClick(!click);
+  };
   return (
-    <>
-      <div className="sidebarWrapper">
-        <Link to="/">
-          <div className="logoBox" />
-        </Link>
-        <ul className="tittleList">
-          <li>New</li>
-          <li>건식 사료</li>
-          <li>습식 사료</li>
-          <li>자연식</li>
-          <li>동결 사료</li>
-          <li>SALE</li>
-        </ul>
+    <div className="sidebar">
+      <button className="sidebarMenuBtn" onClick={handleClickMenu}>
+        {click ? (
+          <i className="fa-solid fa-x"></i>
+        ) : (
+          <i className="fa-solid fa-bars"></i>
+        )}
+      </button>
+      {click ? (
+        <div className="sidebarModal">
+          <SidebarMenu />
+        </div>
+      ) : (
+        <div className="sidebarNull"></div>
+      )}
+      <div className="sidebarDesktop">
+        <SidebarMenu />
       </div>
-    </>
+    </div>
   );
 }
-
-export default Sidebar;
