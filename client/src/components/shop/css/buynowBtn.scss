@@ -1,11 +1,11 @@
 .buyContainer{
-    text-align: center;
     .buyBtn{
+    display: block;
     border: 2px solid #FFB526;
     background-color: #FFB526;
     color: var(--color-white);
-    padding: 8px 80px;
-    margin: 6px 0px;
+    padding: 12px 120px;
+    margin-left: 30px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
@@ -18,11 +18,13 @@
     }
 
     .addBtn{
+    display: block;
+    margin-top: 6px;
+    margin-left: 30px;
     border: 2px solid #1885AE;
     background-color: var(--color-white);
     color: #1885AE;
-    padding: 8px 78px;
-    margin: 6px 0px;
+    padding: 12px 118px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;

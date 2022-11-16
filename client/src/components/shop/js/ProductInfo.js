@@ -23,7 +23,6 @@ function ProductInfo() {
             <QuantityBtn />
           </div>
         </div>
-
         <hr className="line" />
         {/* body (item-body-box) */}
         <div className="itemBodyBox">
@@ -34,7 +33,7 @@ function ProductInfo() {
           </div>
         </div>
         {/* footer (item-footer-box) */}
-        <div>
+        <div className="itemFooterBox">
           <BuyAddBtn />
         </div>
       </div>
