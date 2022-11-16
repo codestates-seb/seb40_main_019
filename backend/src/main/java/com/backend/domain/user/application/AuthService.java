@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import static com.backend.domain.user.domain.UserRole.ROLE_TESTUSER;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -42,6 +44,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
+
+    private Long guestId = 1L;
 
     // 회원가입
     @Transactional
@@ -140,10 +144,23 @@ public class AuthService {
         refreshTokenRepository.deleteByKey(Long.valueOf(tokenProvider.parseClaims(refreshToken).getSubject()));
     }
 
+    // 테스트 유저 회원가입
     public TestUserResponseDto signupTestAccount(UserRole userRole) {
 
-        String randomEmail = createTestAccountEmail();
-        String randomUsername = createTestAccountUsername();
+//        String randomEmail = createTestAccountEmail();
+//        String randomUsername = createTestAccountUsername();
+
+        String testRole = "";
+
+        if (userRole == ROLE_TESTUSER) {
+            testRole = "guest";
+        } else {
+            testRole = "admin";
+        }
+
+        String guestEmail = testRole + guestId + "@test.com";
+        String guestUsername = testRole + guestId;
+
         String randomPassword = createTestAccountPassword();
         List<Address> testAddress = List.of(Address.builder()
                 .address("서울특별시 강남구 테헤란로 427")
@@ -151,8 +168,8 @@ public class AuthService {
                 .build());
 
         User testUser = User.builder()
-                .email(randomEmail)
-                .userName(randomUsername)
+                .email(guestEmail)
+                .userName(guestUsername)
                 .password(randomPassword)
                 .about("안녕하세요. 테스트 계정입니다.")
                 .userRole(userRole)
@@ -165,32 +182,32 @@ public class AuthService {
         userRepository.save(testUser);
 
         return TestUserResponseDto.builder()
-                .email(randomEmail)
+                .email(testUser.getEmail())
                 .password(randomPassword)
                 .build();
     }
 
     // 테스트용 계정 생성
-    public String createTestAccountEmail() {
-        StringBuffer key = new StringBuffer();
-        Random rnd = new Random();
-
-        for (int i = 0; i < 14; i++) {
-            int index = rnd.nextInt(2); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
-
-            switch (index) {
-                case 0:
-                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
-                    // a~z (ex. 1+97=98 => (char)98 = 'b')
-                    break;
-                case 1:
-                    key.append((rnd.nextInt(10)));
-                    // 0~9
-                    break;
-            }
-        }
-        return key.toString() + "@test.com";
-    }
+//    public String createTestAccountEmail() {
+//        StringBuffer key = new StringBuffer();
+//        Random rnd = new Random();
+//
+//        for (int i = 0; i < 14; i++) {
+//            int index = rnd.nextInt(2); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
+//
+//            switch (index) {
+//                case 0:
+//                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
+//                    // a~z (ex. 1+97=98 => (char)98 = 'b')
+//                    break;
+//                case 1:
+//                    key.append((rnd.nextInt(10)));
+//                    // 0~9
+//                    break;
+//            }
+//        }
+//        return key.toString() + "@test.com";
+//    }
 
     // 테스트용 계정 비밀번호 생성
     public String createTestAccountPassword() {
@@ -218,25 +235,25 @@ public class AuthService {
         return key.toString();
     }
 
-    public String createTestAccountUsername() {
-        StringBuffer key = new StringBuffer();
-        Random rnd = new Random();
-
-        for (int i = 0; i < 14; i++) {
-            int index = rnd.nextInt(2); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
-
-            switch (index) {
-                case 0:
-                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
-                    // a~z (ex. 1+97=98 => (char)98 = 'b')
-                    break;
-                case 1:
-                    key.append((char) ((int) (rnd.nextInt(26)) + 65));
-                    // A~Z
-                    break;
-            }
-        }
-        return key.toString() + "TEST";
-    }
+//    public String createTestAccountUsername() {
+//        StringBuffer key = new StringBuffer();
+//        Random rnd = new Random();
+//
+//        for (int i = 0; i < 14; i++) {
+//            int index = rnd.nextInt(2); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
+//
+//            switch (index) {
+//                case 0:
+//                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
+//                    // a~z (ex. 1+97=98 => (char)98 = 'b')
+//                    break;
+//                case 1:
+//                    key.append((char) ((int) (rnd.nextInt(26)) + 65));
+//                    // A~Z
+//                    break;
+//            }
+//        }
+//        return key.toString() + "TEST";
+//    }
 
 }
