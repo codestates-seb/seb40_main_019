@@ -6,20 +6,22 @@ export default function Nav() {
     <>
       <div className="navbar">
         <nav>
-          <div className="navLeft" onScroll={scroll}>
-            <button>Shop</button>
-            <button>Point</button>
-            <button>Mypage</button>
-          </div>
-          <div className="textLogo">
-            <img src={textLogo} alt="textLogo" />
-          </div>
-          <div className="navRight">
-            <button>
-              <i className="fa-solid fa-cart-shopping"></i>
-              Cart
-            </button>
-            <button>Login</button>
+          <div className="maxNav">
+            <div className="navLeft" onScroll={scroll}>
+              <button className="margin">Shop</button>
+              <button className="margin">Point</button>
+              <button>Mypage</button>
+            </div>
+            <div className="textLogo">
+              <img src={textLogo} alt="textLogo" />
+            </div>
+            <div className="navRight">
+              <button>
+                <i className="fa-solid fa-cart-shopping"></i>
+                Cart
+              </button>
+              <button className="margin">Login</button>
+            </div>
           </div>
         </nav>
       </div>
