@@ -1,8 +1,8 @@
 .sidebar {
   position: sticky;
-  top: 0px;
+  top: 95px;
   left: 10px;
-  flex-direction: column;
+  height: 250px;
 }
 
 .sidebarMenuBtn {
@@ -30,8 +30,12 @@
 }
 
 .sidebarNull {
+  display: none;
   height: 192px;
   width: 200px;
+  @media (max-width: 640px) {
+    display: block;
+  }
 }
 
 .sidebarDesktop {

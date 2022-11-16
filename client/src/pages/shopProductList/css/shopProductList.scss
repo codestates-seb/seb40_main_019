@@ -1,7 +1,8 @@
 .productsPageContainer {
   display: flex;
-  // height: 1000px;
+  height: 1000px;
+  width: 100%;
   flex-direction: row;
-  align-items: center;
+  // align-items: center; 사이드바도 가운데옴
   margin-top: 30px;
 }

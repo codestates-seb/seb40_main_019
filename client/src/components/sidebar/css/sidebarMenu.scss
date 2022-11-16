@@ -5,19 +5,19 @@
   //   margin-right: 180px; //상품 리스트와 거리
   width: 200px;
 
-  // .logoBox {
-  //   background: url('../../../assets/img/logo_side_blue.png');
-  //   background-size: cover;
-  //   display: flex;
-  //   width: 45px;
-  //   height: 47px;
-  //   margin: 12px 12px;
-  //   cursor: pointer;
-  // }
-  // .logoBox:hover {
-  //   background: url('../../../assets/img/logo_side_yellow.png');
-  //   background-size: cover;
-  // }
+  .logoBox {
+    background: url('../../../assets/img/logo_side_blue.png');
+    background-size: cover;
+    display: flex;
+    width: 45px;
+    height: 47px;
+    margin: 12px 12px;
+    cursor: pointer;
+  }
+  .logoBox:hover {
+    background: url('../../../assets/img/logo_side_yellow.png');
+    background-size: cover;
+  }
 
   .tittleList {
     list-style: none;
