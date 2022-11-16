@@ -3,19 +3,24 @@
 }
 
 .sellerDashboard {
-  margin: 70px;
+  margin: 5vw;
   width: 100%;
 
   h2 {
     font-size: 18px;
     margin-bottom: 25px;
+    color: var(--color-brown);
   }
 
   .dashboardTop {
     display: flex;
+    @media (max-width: 980px) {
+      flex-direction: column;
+    }
   }
   .dashboardHalf {
-    width: 50%;
+    width: 100%;
+    margin-bottom: 20px;
   }
   .dashboardBox {
     width: 100%;
@@ -24,11 +29,20 @@
     border-radius: 15px;
   }
 
-  .gapline {
-    background-color: rgba(212, 212, 212, 1);
-  }
-
   .dashboardBottom {
     display: flex;
+    margin-top: 20px;
+
+    @media (max-width: 980px) {
+      flex-direction: column;
+    }
+  }
+  .gap {
+    margin-right: 20px;
+  }
+
+  .graph {
+    position: relative;
+    left: 30px;
   }
 }

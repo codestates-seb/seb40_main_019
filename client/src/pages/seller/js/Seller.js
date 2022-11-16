@@ -1,15 +1,14 @@
-// import Graph from '../../../components/seller/js/Graph';
 import DashboardBox from '../../../components/seller/js/DashboardBox';
 import '../css/Seller.scss';
-// import graphData from '../../../components/seller/graphData.json';
+import Graph from '../../../components/seller/js/Graph';
 
 export default function Seller() {
   return (
     <>
-      <div className="sellerSidebar">sidebar</div>
+      {/* <div className="sellerSidebar">sidebar</div> */}
       <div className="sellerDashboard">
         <div className="dashboardTop">
-          <div className="dashboardHalf">
+          <div className="dashboardHalf gap">
             <div className="dashboardBox">
               <h2>주문현황</h2>
               <DashboardBox title={'결제 대기'} num={'25'} unit={'건'} />
@@ -35,10 +34,12 @@ export default function Seller() {
         </div>
         <div className="dashboardBox">
           <h2>주문 통계</h2>
-          <div className="graph">{/* <Graph data={graphData} /> */}</div>
+          <div className="graph">
+            <Graph />
+          </div>
         </div>
         <div className="dashboardBottom">
-          <div className="dashboardHalf">
+          <div className="dashboardHalf gap">
             <div className="dashboardBox">
               <h2>총 판매 금액</h2>
               <DashboardBox

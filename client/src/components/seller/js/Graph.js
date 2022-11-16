@@ -1,9 +1,27 @@
 import '../css/Graph.scss';
 import { ResponsiveLine } from '@nivo/line';
+import graphData from '../graphData.json';
+import graphData2 from '../graphData2.json';
+import { useEffect, useState } from 'react';
 
-export default function Graph({ data }) {
+export default function Graph() {
+  const [data, setData] = useState(graphData);
+
+  const handleResize = () => {
+    if (window.innerWidth < 640) setData(graphData2);
+    else {
+      setData(graphData);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
-    <div style={{ width: '1000px', height: '400px', margin: '0' }}>
+    <div style={{ width: '82vw', height: '400px', margin: '0' }}>
       <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
@@ -44,10 +62,10 @@ export default function Graph({ data }) {
         useMesh={true}
         legends={[
           {
-            anchor: 'bottom-right',
-            direction: 'column',
+            anchor: 'bottom',
+            direction: 'row',
             justify: false,
-            translateX: 100,
+            translateX: 0,
             translateY: 0,
             itemsSpacing: 0,
             itemDirection: 'left-to-right',
