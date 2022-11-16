@@ -13,5 +13,13 @@ export const googleCallback = async (url) => {
     // const result = await axios.post(`${process.env.REACT_APP_SERVER_ADDR}/oauth/google`, { authorizationCode });
     // checkIsLogin(result);
     // window.location.replace('/');
+
+    // if (res.status === 200) {
+    //   let jwtToken = res.headers.get('authorization');
+    //   let userData = res.data;
+    //   window.sessionStorage.setItem('jwtToken', JSON.stringify(jwtToken));
+    //   window.sessionStorage.setItem('userData', JSON.stringify(userData));
+    //   // window.location.replace('/');
+    // }
   }
 };

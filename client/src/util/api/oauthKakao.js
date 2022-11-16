@@ -16,5 +16,13 @@ export const kakaoCallback = async (url) => {
     // console.log(result);
     // checkIsLogin(result);
     // window.location.replace('/');
+
+    // if (res.status === 200) {
+    //   let jwtToken = res.headers.get('authorization');
+    //   let userData = res.data;
+    //   window.sessionStorage.setItem('jwtToken', JSON.stringify(jwtToken));
+    //   window.sessionStorage.setItem('userData', JSON.stringify(userData));
+    //   // window.location.replace('/');
+    // }
   }
 };

@@ -7,7 +7,6 @@ const initialState = {
   password: '',
   address: '',
   postCode: '',
-  emailValidation: false,
 };
 
 export const modalSlice = createSlice({
