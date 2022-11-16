@@ -7,12 +7,20 @@ import kakaoIcon from '../../../assets/img/kakaoIcon.png';
 import googleIcon from '../../../assets/img/googleIcon.png';
 import { Link } from 'react-router-dom';
 import FormInputError from '../../sign/js/FormInputError';
+import { kakaoLogin } from '../../../util/api/oauthKakao';
+import { googleLogin } from '../../../util/api/oauthGoogle';
+import {
+  submitForm,
+  guestLogin,
+  sellerLogin,
+} from '../../../util/api/loginForm';
 
 export default function SigninForm() {
   const [data, setDate] = useState({});
 
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+
   const formSubmit = (e) => {
     e.preventDefault();
     let error = false;
@@ -27,6 +35,10 @@ export default function SigninForm() {
     }
     if (!error) {
       window.alert('제출');
+      submitForm({
+        email: data.Email,
+        password: data.Password,
+      });
     }
   };
 
@@ -41,6 +53,12 @@ export default function SigninForm() {
     }
   };
 
+  const handleOAuthKakao = () => {
+    kakaoLogin();
+  };
+  // const handleOAuthGoogle = () => {
+  //   googleLogin();
+  // };
   return (
     <>
       <h1>Log in</h1>
@@ -75,11 +93,15 @@ export default function SigninForm() {
           <Link to={'/signup'}>Sign in</Link>
         </div>
         <div className="flexBox">
-          <img src={kakaoIcon} alt="" />
-          <img src={googleIcon} alt="" />
+          <button onClick={handleOAuthKakao}>
+            <img src={kakaoIcon} alt="kakaoAuth" />
+          </button>
+          <button onClick={googleLogin}>
+            <img src={googleIcon} alt="googleAuth" />
+          </button>
         </div>
-        <FormButtonBlue btnContent="Guest" />
-        <FormButtonBlue btnContent="Seller" />
+        <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
+        <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
         {/* <FormButtonYellow formSubmit={formSubmit} btnContent="Signup" /> */}
       </form>
     </>
