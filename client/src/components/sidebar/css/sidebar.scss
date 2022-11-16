@@ -1,40 +1,45 @@
-.sidebarWrapper{
-    box-sizing: border-box;
-    position: sticky !important;
-    top: 80px !important;
-    margin-right: 180px; //상품 리스트와 거리
-    
-    .logoBox{
-        background: url("../../../assets/img/logo_side_blue.png");
-        background-size: cover;
-        display: flex;
-        width: 60px;
-        height: 65px;
-        margin: 12px 12px;
-        cursor: pointer;
-        
-    
-    };
-        .logoBox:hover{
-            background: url("../../../assets/img/logo_side_yellow.png");
-            background-size: cover;
-        };
-    
+.sidebar {
+  position: sticky;
+  top: 95px;
+  left: 10px;
+  height: 250px;
+}
 
-    .tittleList{
-
-     list-style: none;
-     cursor: pointer;
-        li{
-        padding: 10px;
-        color: var(--color-blue);
-        font-size: 16px;
-        
-        };
-        :hover{
-        color: var(--color-yellow);
-    };
-    
+.sidebarMenuBtn {
+  display: none;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  width: 35px;
+  height: 35px;
+  background-color: var(--color-blue);
+  border-radius: 50%;
+  i {
+    color: var(--color-white);
   }
 
-};
+  @media (max-width: 640px) {
+    display: block;
+  }
+}
+
+.sidebarModal {
+  display: none;
+  @media (max-width: 640px) {
+    display: block;
+  }
+}
+
+.sidebarNull {
+  display: none;
+  height: 192px;
+  width: 200px;
+  @media (max-width: 640px) {
+    display: block;
+  }
+}
+
+.sidebarDesktop {
+  @media (max-width: 640px) {
+    display: none;
+  }
+}

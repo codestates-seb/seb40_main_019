@@ -14,12 +14,14 @@ function ProductItems() {
   }, []);
   //console.log(data);
   return (
-    <div className="itemsContainer">
-      {data &&
-        data.map((data, i) => {
-          return <ProductItem data={data} key={i} />;
-        })}
-    </div>
+    <>
+      <div className="itemsContainer">
+        {data &&
+          data.map((data, i) => {
+            return <ProductItem data={data} key={i} />;
+          })}
+      </div>
+    </>
   );
 }
 
