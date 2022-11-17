@@ -1,6 +1,6 @@
-package com.backend.global.config.security.exception;
+package com.backend.global.jwt.exception;
 
-import com.backend.global.config.error.ExceptionCode;
+import com.backend.global.error.ExceptionCode;
 import io.jsonwebtoken.JwtException;
 import lombok.Getter;
 

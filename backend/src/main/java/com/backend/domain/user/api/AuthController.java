@@ -2,8 +2,10 @@ package com.backend.domain.user.api;
 
 
 import com.backend.domain.user.application.AuthService;
+import com.backend.domain.user.domain.UserRole;
 import com.backend.domain.user.dto.ReissueResponseDto;
 import com.backend.domain.user.dto.SignUpRequestDto;
+import com.backend.domain.user.dto.TestUserResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,5 +50,26 @@ public class AuthController {
                                        HttpServletResponse response) {
         authService.logout(refreshToken, request, response);
         return ResponseEntity.ok().build();
+    }
+
+    // test account 생성
+    @GetMapping("/test/user")
+    public ResponseEntity<TestUserResponseDto> createTestUser() {
+
+        UserRole userRole = UserRole.ROLE_TESTUSER;
+
+        TestUserResponseDto testUserResponseDto = authService.signupTestAccount(userRole);
+
+        return ResponseEntity.ok(testUserResponseDto);
+    }
+
+    @GetMapping("/test/admin")
+    public ResponseEntity<TestUserResponseDto> createTestAdmin() {
+
+        UserRole userRole = UserRole.ROLE_TESTADMIN;
+
+        TestUserResponseDto testUserResponseDto = authService.signupTestAccount(userRole);
+
+        return ResponseEntity.ok(testUserResponseDto);
     }
 }

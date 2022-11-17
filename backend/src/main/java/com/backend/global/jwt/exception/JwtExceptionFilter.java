@@ -1,4 +1,4 @@
-package com.backend.global.config.security.exception;
+package com.backend.global.jwt.exception;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
