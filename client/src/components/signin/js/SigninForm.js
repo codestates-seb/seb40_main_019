@@ -13,6 +13,7 @@ import {
   submitForm,
   guestLogin,
   sellerLogin,
+  userLogout,
 } from '../../../util/api/loginForm';
 
 export default function SigninForm() {
@@ -104,6 +105,7 @@ export default function SigninForm() {
         </div>
         <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
         <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
+        <FormButtonBlue btnContent="Logout" formSubmit={userLogout} />
         {/* <FormButtonYellow formSubmit={formSubmit} btnContent="Signup" /> */}
       </form>
     </>

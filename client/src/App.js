@@ -12,6 +12,7 @@ import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
 import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
+// import { tokenReissue } from './util/api/Reissue';
 import Seller from './pages/seller/js/Seller';
 
 function App() {
@@ -33,8 +34,9 @@ function App() {
       dispatch(setUser(userData));
       dispatch(login({ accessToken }));
     } else {
-      console.log('데이터 없음');
-      // 스토리지에서 받아온 데이터가 null 이면 리프레시 토큰 쿠키확인 후 있으면 재발급 요청
+      // 스토리지에서 받아온 데이터가 null 이면 재발급 요청
+      console.log('재발급 요청');
+      // tokenReissue();
     }
   }, []);
   return (
