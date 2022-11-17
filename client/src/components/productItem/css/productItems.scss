@@ -1,6 +1,5 @@
 .itemsContainer {
-    width: 100%;
-    display: flex; 
-    flex-wrap: wrap;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 3rem;
 }
