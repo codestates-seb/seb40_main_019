@@ -7,8 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
-public class ReviewPostDto {
-
+public class ReviewPatchDto {
     @NotBlank
     private String reviewContent;
 
