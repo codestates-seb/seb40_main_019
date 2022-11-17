@@ -1,16 +1,29 @@
+.imgContainer{
+
 .bigImgBox{
    width: 500px;
    height: 500px;
    border-radius: 15px;
    background-color: #F9F3E5;
-   margin-right: 30px;
+   margin-right: 2vw;
+
+   //Info박스가 일찍 밑으로 이동되어서 임시로 넣음
+    @media (max-width: 1365px) {
+        display: flex;
+        justify-content: center;
+        width: 35vw;
+        height: 35vw;
+        margin-right: 0px;
+    }
+}
 }
 
+//Info 박스
 .infoContainer{
     padding: 30px;
     position: sticky !important;
-    top: 200px !important;
-    
+    top: 30px !important;
+
     /* header (item-header-box) */
     .itemHeaderBox{
         display: flex;

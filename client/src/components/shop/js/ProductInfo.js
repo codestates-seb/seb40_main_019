@@ -5,7 +5,7 @@ import BuyAddBtn from './../../../components/shop/js/BuyAddBtn';
 export default function ProductInfo() {
   return (
     <>
-      <div>
+      <div className="imgContainer">
         <div className="bigImgBox"></div>
       </div>
       {/* 정보 : 이미지+별, new logo, 상품명, 갯수, 토탈, 버튼 */}
