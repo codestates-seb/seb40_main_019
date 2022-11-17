@@ -1,12 +1,18 @@
-.sideMargin{
-  margin: 1vw 6vw;
-}
 
 .sidebarContainer {
   box-sizing: border-box;
   position: sticky !important;
   top: 80px !important;
-  width: 18vw;
+  width: 15vw;
+  
+  border-radius: 15px;
+  padding: 10px;
+  z-index: 100;
+  
+  @media (max-width: 1280px) {
+    background-color: var(--color-white);
+    box-shadow: 5px 5px 5px rgba(75, 73, 72, 0.3);
+  }
   
   .logoBox {
     background: url('../../../assets/img/logo_side_blue.png');

@@ -14,6 +14,7 @@ import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
 // import { tokenReissue } from './util/api/Reissue';
 import Seller from './pages/seller/js/Seller';
+import TotalLayout from './components/layout/js/TotalLayout';
 
 function App() {
   //json-server 주소
@@ -51,7 +52,9 @@ function App() {
           <Route path="oauth/google" element={<OauthGoogle />} />
           <Route path="/products" element={<ShopProductList />} />
           <Route path="/productdetail" element={<ShopProductDetail />} />
-          <Route path="/seller" element={<Seller />} />
+          <Route path="/seller" element={<TotalLayout />}>
+            <Route path="/seller" element={<Seller />} />
+          </Route>
         </Route>
       </Routes>
     </>
