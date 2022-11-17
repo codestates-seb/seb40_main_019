@@ -1,19 +1,19 @@
 import '../css/TotalLayout.scss';
 import { Outlet } from 'react-router-dom';
-import SidebarSeller from '../../sidebar/js/SidebarSeller';
+import Sidebar from '../../sidebar/js/Sidebar';
 
-export default function TotalLayout() {
+export default function ShopLayout() {
   return (
     <>
       <div className="sidebar1280">
         <div className="sidebarAb">
-          <SidebarSeller />
+          <Sidebar />
         </div>
       </div>
       <div className="totalLayout">
         <div className="sidebarLayout">
           <div className="sidebar">
-            <SidebarSeller />
+            <Sidebar />
           </div>
         </div>
         <div className="contentLayout">
