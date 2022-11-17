@@ -120,7 +120,9 @@ export default function Signup() {
   };
   return (
     <>
-      <h1>Sign Up</h1>
+      <div className="signUpTitle">
+        <h1>Sign Up</h1>
+      </div>
       <form
         className="signupForm"
         action="#"

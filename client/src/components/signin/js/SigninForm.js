@@ -62,7 +62,9 @@ export default function SigninForm() {
   // };
   return (
     <>
-      <h1>Log in</h1>
+      <div className="signinTitle">
+        <h1>Log in</h1>
+      </div>
       <form
         className="signinForm"
         action="#"
