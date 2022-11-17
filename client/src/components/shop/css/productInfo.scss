@@ -1,7 +1,5 @@
 .imgContainer{
 
-
-}
 .bigImgBox{
    width: 500px;
    height: 500px;
@@ -18,11 +16,13 @@
         margin-right: 0px;
     }
 }
+}
 
+//Info 박스
 .infoContainer{
     padding: 30px;
     position: sticky !important;
-    top: 200px !important;
+    top: 30px !important;
 
     /* header (item-header-box) */
     .itemHeaderBox{
