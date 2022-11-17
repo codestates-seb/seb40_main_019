@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { logout } from '../../redux/reducers/loginSlice';
+import { clearUser } from '../../redux/reducers/userSlice';
+import { useDispatch } from 'react-redux';
 
 axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -20,7 +23,30 @@ export const submitForm = async (userInfo) => {
       // window.location.replace('/');
     }
   } catch (error) {
-    return error.response.data;
+    console.error(error);
+    return error;
+  }
+};
+export const userLogout = async () => {
+  console.log('로그아웃');
+  try {
+    const res = await axios.delete(`${REACT_APP_API_URL}users/logout`);
+    console.log(res);
+    if (res.status === 200) {
+      // 스토리지 데이터 삭제.
+      console.log('스토리지 데이터 삭제');
+      window.sessionStorage.removeItem('jwtToken');
+      window.sessionStorage.removeItem('userData');
+      // 리덕스 데이터 삭제
+      console.log('리덕스 데이터 삭제');
+      useDispatch(logout());
+      useDispatch(clearUser());
+
+      // window.location.replace('/');
+    }
+  } catch (error) {
+    console.error(error);
+    return error;
   }
 };
 

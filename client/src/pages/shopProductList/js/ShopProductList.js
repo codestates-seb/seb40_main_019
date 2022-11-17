@@ -1,12 +1,12 @@
 import '../css/shopProductList.scss';
 import ProductItems from '../../../components/productItem/js/ProductItems';
-import Sidebar from '../../../components/sidebar/js/Sidebar';
+// import Sidebar from '../../../components/sidebar/js/Sidebar';
 
 const shopProductList = () => {
   return (
     <>
       <div className="productsPageContainer">
-        <Sidebar />
+        {/* <Sidebar /> */}
         <ProductItems />
       </div>
     </>

@@ -1,9 +1,3 @@
-.sidebar {
-  position: sticky;
-  top: 95px;
-  left: 10px;
-  height: 250px;
-}
 
 .sidebarMenuBtn {
   display: none;
@@ -13,18 +7,19 @@
   height: 35px;
   background-color: var(--color-blue);
   border-radius: 50%;
+  box-shadow: 5px 5px 5px rgba(75, 73, 72, 0.3);
   i {
     color: var(--color-white);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 1280px) {
     display: block;
   }
 }
 
 .sidebarModal {
   display: none;
-  @media (max-width: 640px) {
+  @media (max-width: 1280px) {
     display: block;
   }
 }
@@ -33,13 +28,13 @@
   display: none;
   height: 192px;
   width: 200px;
-  @media (max-width: 640px) {
+  @media (max-width: 1280px) {
     display: block;
   }
 }
 
 .sidebarDesktop {
-  @media (max-width: 640px) {
+  @media (max-width: 1280px) {
     display: none;
   }
 }
