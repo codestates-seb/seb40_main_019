@@ -8,6 +8,7 @@ export default function ProductInfo() {
       <div>
         <div className="bigImgBox"></div>
       </div>
+      {/* 정보 : 이미지+별, new logo, 상품명, 갯수, 토탈, 버튼 */}
       <div className="infoContainer">
         {/* header (item-header-box) */}
         <div className="itemHeaderBox">
@@ -30,7 +31,7 @@ export default function ProductInfo() {
         {/* body (item-body-box) */}
         <div className="itemBodyBox">
           <span className="price"> 100,000 ₩</span>
-          <div className="totallBox">
+          <div className="totalBox">
             <span className="discountP">Total</span>
             <span>80,000 ₩</span>
           </div>
