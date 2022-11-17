@@ -1,14 +1,24 @@
 .itemContainer {
+    justify-content: center;
+    // text-align: center;
+    margin: auto;
     cursor: pointer;
     .imgBox{
     justify-content: center;
-        img{
+        > img{
         width: 320px;
         border-radius: 15px;
         transition: all 0.2s linear;
         &:hover{
             transform: scale(1.04);
         }
+        @media (max-width: 1350px) {
+        width: 380px;
+        }
+        @media (max-width: 980px) {
+        width: 440px;
+        }
+
        }
     }
     
