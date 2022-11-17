@@ -44,7 +44,7 @@ public class OrderProduct extends Auditable {
     }
 
     public void cancel() {
-        //this.getProduct().addStock(quantity);
+        //this.getProduct().addStock(quantity);//todo:재고추가로직만들기
     }
     }
 

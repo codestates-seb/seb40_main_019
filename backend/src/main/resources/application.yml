@@ -5,7 +5,7 @@ jwt:
 
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/querydsl1;NON_KEYWORDS=USER
+    url: jdbc:h2:tcp://localhost/~/test
     username: sa
     password:
     driver-class-name: org.h2.Driver

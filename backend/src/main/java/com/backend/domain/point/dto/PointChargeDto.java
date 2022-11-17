@@ -10,8 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PointChargeDto {
 
-    private long userId;
 
-    private int Price;//충전할금액
+    private int price;//충전할금액
 
 }

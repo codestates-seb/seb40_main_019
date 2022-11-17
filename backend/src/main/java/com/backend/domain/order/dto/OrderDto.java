@@ -23,10 +23,14 @@ public class OrderDto {
     @Max(value = 999, message = "최대 주문 수량은 999개 입니다.")
     private int quantity;
 
-    public static OrderDto createOrderDto(Long productId, int quantity){
+    public static OrderDto createOrderDto(Long productId, int quantity, String receiverAddress, String receiverName, String receiverZipcode, String receiverPhone){
         OrderDto orderDto = new OrderDto();
         orderDto.setProductId(productId);
         orderDto.setQuantity(quantity);
+        orderDto.setReceiverAddress(receiverAddress);
+        orderDto.setReceiverName(receiverName);
+        orderDto.setReceiverZipcode(receiverZipcode);
+        orderDto.setReceiverPhone(receiverPhone);
         return orderDto;
     }
 

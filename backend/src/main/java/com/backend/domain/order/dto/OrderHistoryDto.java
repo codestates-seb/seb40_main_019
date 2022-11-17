@@ -15,7 +15,7 @@ public class OrderHistoryDto {
 
     public OrderHistoryDto(Order order){
         this.orderId = order.getOrderId();
-        this.orderDate = order.getOrderDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.orderDate = order.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.orderStatus = order.getOrderStatus();
     }
 

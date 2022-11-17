@@ -7,9 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderPatchDto {
-    private long orderId;
 
-    private OrderStatus orderStatus;
 
 
     private String receiverName;
@@ -18,9 +16,6 @@ public class OrderPatchDto {
 
     private String receiverAddress;
 
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
-    }
 
 
 }

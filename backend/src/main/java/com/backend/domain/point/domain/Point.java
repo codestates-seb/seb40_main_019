@@ -1,17 +1,20 @@
 package com.backend.domain.point.domain;
 
+import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.user.domain.User;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 @Getter
 @Entity
 @SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@DynamicInsert
 public class Point {
 
     @Id
@@ -22,8 +25,8 @@ public class Point {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private Long cash; // 잔액
+    private int cash; // 잔액
 
 
+    }
 
-}

@@ -1,10 +1,12 @@
 package com.backend.domain.order.domain;
 
+import com.backend.domain.order.dto.OrderDto;
 import com.backend.domain.user.domain.User;
 import com.backend.global.audit.Auditable;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -38,7 +40,7 @@ public class Order extends Auditable {
     @Column(nullable = false)
     private String receiverPhone;
 
-    private LocalDateTime orderDate;
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderProduct> orderProducts = new ArrayList<>();
@@ -51,14 +53,20 @@ public class Order extends Auditable {
         orderProduct.setOrder(this);
     }
 
-    public static Order createOrder(User user, List<OrderProduct> orderProductList){
+    public static Order createOrder(User user, List<OrderProduct> orderProductList, OrderDto orderDto){
         Order order = new Order();
         order.setUser(user);
+        order.setReceiverAddress(orderDto.getReceiverAddress());
+        order.setReceiverName(orderDto.getReceiverName());
+        order.setReceiverPhone(orderDto.getReceiverPhone());
+        order.setZipCode(orderDto.getReceiverZipcode());
+
         for(OrderProduct orderProduct : orderProductList){
             order.addOrderProduct(orderProduct);
         }
         order.setOrderStatus(OrderStatus.ORDER);
-        order.setOrderDate(LocalDateTime.now());
+        order.setCreatedAt(LocalDateTime.now());
+        order.setOrderProducts(orderProductList);
         return order;
     }
 
