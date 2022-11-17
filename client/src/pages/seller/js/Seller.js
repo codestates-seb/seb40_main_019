@@ -5,7 +5,6 @@ import Graph from '../../../components/seller/js/Graph';
 export default function Seller() {
   return (
     <>
-      {/* <div className="sellerSidebar">sidebar</div> */}
       <div className="sellerDashboard">
         <div className="dashboardTop">
           <div className="dashboardHalf gap">
