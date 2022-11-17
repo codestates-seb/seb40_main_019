@@ -19,6 +19,7 @@ logging:
       springframework:
         orm:
           jpa: DEBUG
+# Send Mail
 naver:
   id: ${/config/cloud-parameter-store/naver-id}
   password: ${/config/cloud-parameter-store/naver-password}
