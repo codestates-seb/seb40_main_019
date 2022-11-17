@@ -5,7 +5,7 @@ import BuyAddBtn from './../../../components/shop/js/BuyAddBtn';
 function ProductInfo() {
   return (
     <>
-      <div>
+      <div className="imgContainer">
         <div className="bigImgBox"></div>
       </div>
       <div className="infoContainer">
