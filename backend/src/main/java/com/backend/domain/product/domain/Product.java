@@ -5,10 +5,12 @@ import com.backend.domain.product.dto.ProductPatchDto;
 import com.backend.domain.product.dto.ProductPostDto;
 import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.domain.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,16 +29,7 @@ public class Product {
     private int price;
 
     @Column(nullable = false)
-    private String seller;
-
-    @Column(nullable = false)
     private String productName;
-
-    @Column(nullable = false)
-    private int stock;
-
-    @Column(nullable = false)
-    private int star;
 
     @Column(nullable = false)
     private int discountPrice;
@@ -44,6 +37,7 @@ public class Product {
     // 유저 맵핑 추가
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -74,19 +68,8 @@ public class Product {
         this.price = price;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public void setStar(int star) {
-        this.star = star;
-    }
 }

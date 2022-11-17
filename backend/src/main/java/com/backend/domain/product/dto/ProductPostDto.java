@@ -10,7 +10,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductPostDto {
 
     @NotNull
@@ -19,11 +18,6 @@ public class ProductPostDto {
     @NotBlank
     private String productName;
 
-    @NotBlank
-    private String seller;
-
-    @NotNull
-    private int stock;
 
 
 }

@@ -31,7 +31,10 @@ public enum ExceptionCode {
 
     // Product
     PRODUCT_EXIST(409,"PRODUCT EXIST"),
-    PRODUCT_NOT_FOUND(404,"PRODUCT_NOT_FOUND");
+    PRODUCT_NOT_FOUND(404,"PRODUCT_NOT_FOUND"),
+
+    // Review
+    REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND");
 
     @Getter
     private int status;
