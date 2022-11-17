@@ -16,6 +16,8 @@ import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
 import Seller from './pages/seller/js/Seller';
 import SellerLayout from './components/layout/js/SellerLayout';
 import ShopLayout from './components/layout/js/ShopLayout';
+import Success from './pages/payment/js/Success';
+import Failed from './pages/payment/js/Failed';
 
 function App() {
   //json-server 주소
@@ -37,7 +39,7 @@ function App() {
       dispatch(login({ accessToken }));
     } else {
       // 스토리지에서 받아온 데이터가 null 이면 재발급 요청
-      console.log('재발급 요청');
+      // console.log('재발급 요청');
       // tokenReissue();
     }
   }, []);
@@ -49,8 +51,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {/* <Route path="/products" element={<Products />} /> */}
-          <Route path="oauth/kakao" element={<OauthKakao />} />
-          <Route path="oauth/google" element={<OauthGoogle />} />
+          <Route path="/oauth/kakao" element={<OauthKakao />} />
+          <Route path="/oauth/google" element={<OauthGoogle />} />
+          <Route path="/payment/success" element={<Success />} />
+          <Route path="/payment/failed" element={<Failed />} />
 
           <Route path="/" element={<ShopLayout />}>
             <Route path="/products" element={<ShopProductList />} />

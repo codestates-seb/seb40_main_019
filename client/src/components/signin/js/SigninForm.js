@@ -15,6 +15,7 @@ import {
   sellerLogin,
   userLogout,
 } from '../../../util/api/loginForm';
+import { tossPay } from '../../../util/api/payment';
 
 export default function SigninForm() {
   const [data, setDate] = useState({});
@@ -106,6 +107,7 @@ export default function SigninForm() {
         <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
         <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
         <FormButtonBlue btnContent="Logout" formSubmit={userLogout} />
+        <FormButtonBlue btnContent="payment" formSubmit={tossPay} />
         {/* <FormButtonYellow formSubmit={formSubmit} btnContent="Signup" /> */}
       </form>
     </>
