@@ -1,24 +1,21 @@
 package com.backend.domain.user.dto;
 
-
 import com.backend.domain.user.domain.Address;
-import lombok.AccessLevel;
-import lombok.Builder;
+import com.backend.domain.user.domain.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Email;
 import java.util.List;
 
-
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserPatchDto {
+    // todo : validation 추가
 
-    @NotBlank(message = "닉네임을 입력해주세요.")
     private String username;
 
-    @NotBlank(message = "비밀번호를 입력해주세요.")
+    @Email(message = "이메일 형식이 맞는 지 확인해주세요")
+    private String email;
+
     private String password;
 
     private String profileImage;
@@ -26,13 +23,7 @@ public class UserPatchDto {
     private String about;
 
     private List<Address> address;
+    //회원 탈퇴
+    private User.UserStatus userStatus;
 
-    @Builder
-    public UserPatchDto(String password, String username, String profileImage, String about, List<Address> address) {
-        this.password = password;
-        this.username = username;
-        this.profileImage = profileImage;
-        this.about = about;
-        this.address = address;
-    }
 }

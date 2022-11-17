@@ -3,10 +3,7 @@ package com.backend.domain.user.domain;
 
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.user.dto.UserPatchDto;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -14,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Setter
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -37,30 +35,26 @@ public class User {
     @Column(nullable = false)
     private String about;
 
+    @Column(nullable = true)
+    private String userRole;
+
+    @Column(nullable = false)
+    private String socialLogin;
+
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    @Column(nullable = false, name = "STATUS")
+    private UserStatus userStatus = UserStatus.USER_EXIST;
+
+    // ----------------------------------------------
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
-
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private List<Address> addresses = new ArrayList<>();
 
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "user_id")
-//    private List<Cart> carts = new ArrayList<>();
-
-    @Builder
-    public User(String email, String password, String userName, String profileImage, String about, UserRole userRole) {
-        this.email = email;
-        this.password = password;
-        this.userName = userName;
-        this.profileImage = profileImage;
-        this.about = about;
-        this.userRole = userRole;
-    }
+    // ----------------------------------------------
 
     public void patch(UserPatchDto userPatchDto, String password) {
         this.userName = userPatchDto.getUsername();
@@ -76,5 +70,17 @@ public class User {
 
     public void addAddress(Address address) {
         this.addresses.add(address);
+    }
+
+    public enum UserStatus {
+        USER_EXIST("존재하는 유저"),
+        USER_NOT_EXIST("존재하지 않는 유저");
+
+        @Getter
+        private String status;
+
+        UserStatus(String status) {
+            this.status = status;
+        }
     }
 }
