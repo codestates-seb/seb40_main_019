@@ -1,25 +1,25 @@
 package com.backend.domain.user.dto;
 
 import com.backend.domain.user.domain.User;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
-public class ReissueResponseDto {
-
+@Setter
+@NoArgsConstructor
+public class UserLoginResponseDto {
     private String email;
     private String username;
     private String imageUrl;
 
     @Builder
-    public ReissueResponseDto(String email, String imageUrl, String username) {
+    public UserLoginResponseDto(String email, String imageUrl, String username) {
         this.email = email;
         this.imageUrl = imageUrl;
         this.username = username;
     }
 
-    public static ReissueResponseDto toResponse(User user) {
-        return ReissueResponseDto.builder()
+    public static UserLoginResponseDto toResponse(User user) {
+        return UserLoginResponseDto.builder()
                 .email(user.getEmail())
                 .imageUrl(user.getProfileImage())
                 .username(user.getUsername())

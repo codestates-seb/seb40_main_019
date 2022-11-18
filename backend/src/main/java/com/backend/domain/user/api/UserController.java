@@ -2,8 +2,8 @@ package com.backend.domain.user.api;
 
 import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.domain.User;
-import com.backend.domain.user.dto.ReissueResponseDto;
 import com.backend.domain.user.dto.TestUserResponseDto;
+import com.backend.domain.user.dto.UserLoginResponseDto;
 import com.backend.domain.user.dto.UserPostDto;
 import com.backend.domain.user.mapper.UserMapper;
 import com.backend.global.annotation.CurrentUser;
@@ -43,9 +43,11 @@ public class UserController {
 
     // 토큰 재발급
     @GetMapping("/reissue")
-    public ResponseEntity<ReissueResponseDto> reissue(@CookieValue(value = "refreshToken", required = false) String refreshToken,
-                                                      HttpServletResponse response) {
+    public ResponseEntity<UserLoginResponseDto> reissue(@CookieValue(value = "refreshToken", required = false) String refreshToken,
+                                                        HttpServletResponse response) {
 
+        // todo 토큰 재발급 로직 수정
+        // userId 로 RTK 조회 후, RTK 만료시간 확인
         return ResponseEntity.ok(userService.createAccessToken(refreshToken, response));
     }
 

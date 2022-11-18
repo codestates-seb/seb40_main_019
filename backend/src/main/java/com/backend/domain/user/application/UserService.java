@@ -4,11 +4,8 @@ import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.Address;
 import com.backend.domain.user.domain.User;
-import com.backend.domain.user.dto.ReissueResponseDto;
 import com.backend.domain.user.dto.TestUserResponseDto;
-import com.backend.domain.user.dto.UserPatchDto;
-import com.backend.domain.user.exception.MemberNotFound;
-import com.backend.domain.user.exception.UserNameDuplication;
+import com.backend.domain.user.dto.UserLoginResponseDto;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
@@ -38,22 +35,6 @@ public class UserService {
 
     private Long guestId = 1L;
     private Long adminId = 1L;
-
-
-    public Long update(Long memberId, UserPatchDto userPatchDto) {
-
-        if (userRepository.existsByUsername((userPatchDto.getUsername()))) {
-            throw new UserNameDuplication();
-        }
-
-        String encryptedPassword = passwordEncoder.encode(userPatchDto.getPassword());
-
-        User user = userRepository.findById(memberId).orElseThrow(MemberNotFound::new);
-
-        user.patch(userPatchDto, encryptedPassword);
-
-        return memberId;
-    }
 
     public User getLoginUser() { //로그인된 유저가 옳바른 지 확인하고 정보 가져옴
         return findUser(getUserByToken());
@@ -131,9 +112,11 @@ public class UserService {
         return findUser;
     }
 
-    public ReissueResponseDto createAccessToken(String refreshToken, HttpServletResponse response) {
+    public UserLoginResponseDto createAccessToken(String refreshToken, HttpServletResponse response) {
         Map<String, Object> claims = null;
         User user = null;
+
+        // todo 액세스 토큰 발급 로직 수정
 
         user = getUser(refreshToken);
 
@@ -144,7 +127,7 @@ public class UserService {
 
         response.setHeader("Authorization", accessToken);
 
-        return ReissueResponseDto.toResponse(user);
+        return UserLoginResponseDto.toResponse(user);
     }
 
     @Transactional
@@ -231,28 +214,6 @@ public class UserService {
                 .build();
     }
 
-// 테스트용 계정 생성
-//    public String createTestAccountEmail() {
-//        StringBuffer key = new StringBuffer();
-//        Random rnd = new Random();
-//
-//        for (int i = 0; i < 14; i++) {
-//            int index = rnd.nextInt(2); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
-//
-//            switch (index) {
-//                case 0:
-//                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
-//                    // a~z (ex. 1+97=98 => (char)98 = 'b')
-//                    break;
-//                case 1:
-//                    key.append((rnd.nextInt(10)));
-//                    // 0~9
-//                    break;
-//            }
-//        }
-//        return key.toString() + "@test.com";
-//    }
-
         // 테스트용 계정 비밀번호 생성
         private String createTestAccountPassword() {
             StringBuffer key = new StringBuffer();
@@ -278,27 +239,6 @@ public class UserService {
             }
             return key.toString();
         }
-
-//    public String createTestAccountUsername() {
-//        StringBuffer key = new StringBuffer();
-//        Random rnd = new Random();
-//
-//        for (int i = 0; i < 14; i++) {
-//            int index = rnd.nextInt(2); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
-//
-//            switch (index) {
-//                case 0:
-//                    key.append((char) ((int) (rnd.nextInt(26)) + 97));
-//                    // a~z (ex. 1+97=98 => (char)98 = 'b')
-//                    break;
-//                case 1:
-//                    key.append((char) ((int) (rnd.nextInt(26)) + 65));
-//                    // A~Z
-//                    break;
-//            }
-//        }
-//        return key.toString() + "TEST";
-//    }
 
     private void hitGuest() {
         guestId++;
