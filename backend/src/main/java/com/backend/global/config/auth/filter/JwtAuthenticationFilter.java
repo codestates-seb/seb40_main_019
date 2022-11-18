@@ -81,7 +81,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         response.setHeader("Authorization", "Bearer " + accessToken);
 
-       Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMinutes() * 1000;
+       Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMillisecond();
 
         ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
                 .maxAge(refreshExp)
@@ -102,7 +102,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("userRole", user.getUserRole());
 
         String subject = user.getUserId().toString(); //Jwt 의 제목
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
 
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
 
@@ -120,7 +120,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("userRole", user.getUserRole());
 
         String subject = user.getUserId().toString(); //Jwt 의 제목
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMinutes());
+        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
 
         String refreshToken = jwtTokenizer.generateRefreshToken(claims, subject, expiration, base64EncodedSecretKey);

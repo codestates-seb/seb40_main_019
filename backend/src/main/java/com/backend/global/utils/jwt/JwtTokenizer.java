@@ -30,11 +30,11 @@ public class JwtTokenizer {
 
     @Getter
     @Value("${jwt.access-token-expiration-time}")
-    private int accessTokenExpirationMinutes;
+    private int accessTokenExpirationMillisecond;
 
     @Getter
     @Value("${jwt.refresh-token-expiration-time}")
-    private int refreshTokenExpirationMinutes;
+    private int refreshTokenExpirationMillisecond;
 
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -92,8 +92,9 @@ public class JwtTokenizer {
 
     public Date getTokenExpiration(int expirationMinutes) {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, expirationMinutes);
+        calendar.add(Calendar.MILLISECOND, expirationMinutes);
         Date expiration = calendar.getTime();
+        expiration = new Date(expiration.getTime() + 1000 * 60 * 60 * 24 * 7);
 
         return expiration;
     }
