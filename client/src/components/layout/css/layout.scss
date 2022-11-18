@@ -1,10 +1,10 @@
 .appLayout {
   box-sizing: border-box;
   width: 100vw;
-  height: 100vh;
+  // height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto 1fr auto;
+  // grid-template-rows: 120px 1fr 250px;
   grid-template-areas:
     'header'
     'main'
