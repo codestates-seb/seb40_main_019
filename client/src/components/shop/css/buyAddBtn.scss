@@ -4,8 +4,8 @@
     border: 2px solid var(--color-yellow);
     background-color: var(--color-yellow);
     color: var(--color-white);
-    padding: 12px 120px;
-    margin-left: 30px;
+    width: 350px; 
+    height: 50px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
@@ -20,11 +20,11 @@
     .addBtn{
     display: block;
     margin-top: 6px;
-    margin-left: 30px;
     border: 2px solid var(--color-blue);
     background-color: var(--color-white);
     color: var(--color-blue);
-    padding: 12px 118px;
+    width: 350px; 
+    height: 50px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
