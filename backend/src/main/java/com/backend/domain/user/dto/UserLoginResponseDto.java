@@ -1,7 +1,10 @@
 package com.backend.domain.user.dto;
 
 import com.backend.domain.user.domain.User;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
