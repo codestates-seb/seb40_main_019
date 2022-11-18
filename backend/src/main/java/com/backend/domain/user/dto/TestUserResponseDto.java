@@ -1,5 +1,6 @@
 package com.backend.domain.user.dto;
 
+import com.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 

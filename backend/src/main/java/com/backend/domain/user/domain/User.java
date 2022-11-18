@@ -3,6 +3,7 @@ package com.backend.domain.user.domain;
 
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.user.dto.UserPatchDto;
+import com.backend.global.audit.Auditable;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class User {
+public class User extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +49,6 @@ public class User {
     @Column(nullable = false, name = "STATUS")
     private UserStatus userStatus = UserStatus.USER_EXIST;
 
-    // ----------------------------------------------
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
@@ -56,8 +56,6 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private List<Address> addresses = new ArrayList<>();
-
-    // ----------------------------------------------
 
     @Builder
     public User(String email, String password, String username, String profileImage, String about, String userRole, String socialLogin) {
