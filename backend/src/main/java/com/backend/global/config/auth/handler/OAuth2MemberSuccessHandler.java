@@ -84,26 +84,26 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         queryParams.add("access_token", "Bearer "+accessToken);
         queryParams.add("refresh_token", refreshToken);
 
-//        return UriComponentsBuilder
-//                .newInstance()
-//                .scheme("http")
-//                .host("localhost")
-//                .port(3000)
-//                .path("/login/oauth")
-//                .queryParams(queryParams)
-//                .build()
-//                .toUri();
-
-        // todo 주소 변경
         return UriComponentsBuilder
                 .newInstance()
-                .scheme("https")
-                .host("withpet-two.vercel.app")
-                .port(443)
+                .scheme("http")
+                .host("localhost")
+                .port(3000)
                 .path("/login/oauth")
                 .queryParams(queryParams)
                 .build()
                 .toUri();
+
+        // todo 주소 변경
+//        return UriComponentsBuilder
+//                .newInstance()
+//                .scheme("https")
+//                .host("withpet-two.vercel.app")
+//                .port(443)
+//                .path("/login/oauth")
+//                .queryParams(queryParams)
+//                .build()
+//                .toUri();
     }
 
 
