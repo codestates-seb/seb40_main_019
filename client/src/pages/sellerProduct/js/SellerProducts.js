@@ -22,12 +22,14 @@ export default function SellerProducts() {
         </div>
         <div className="lineBold"></div>
         <div className="semiTitle">
-          <div className="checkbox">checkbox</div>
-          <div className="createdAt">등록일</div>
-          <div className="titleImg">대표 이미지</div>
-          <div className="title">상품명</div>
-          <div className="price">판매가</div>
-          <div className="edit">수정</div>
+          <div className="checkbox">
+            <i className="fa-solid fa-square-check"></i>
+          </div>
+          <h3 className="createdAt">등록일</h3>
+          <h3 className="titleImg">대표 이미지</h3>
+          <h3 className="title">상품명</h3>
+          <h3 className="price">판매가</h3>
+          <h3 className="edit">수정</h3>
         </div>
         <div className="lineLight"></div>
       </div>
