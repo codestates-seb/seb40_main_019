@@ -7,6 +7,9 @@
   position: relative;
   justify-content: flex-start;
   // border: 1px solid black;
+  @media screen and (max-width: 1364px) {
+    padding: 100px 20px 0px 20px;
+  }
   .sideBar{
     width: 150px;
     // border: 1px solid black;
