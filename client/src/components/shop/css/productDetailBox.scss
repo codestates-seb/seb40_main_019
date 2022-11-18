@@ -3,7 +3,7 @@
     width: 100%;
     // max-width: 150px;
     .titleImg{
-        width: 500px;
+        width: 100%;
         height: 500px;
         border-radius: 15px;
         background-color: #F9F3E5;
@@ -12,7 +12,7 @@
     .detailText{
         border-top: solid 2px var(--color-blue);
         border-bottom: solid 2px var(--color-blue);
-        width: 500px;
+        width: 100%;
         height: 50px;
         text-align: center;
         letter-spacing: 12px;
@@ -22,7 +22,7 @@
         color: var(--color-blue);
     }
     .detailImg{
-        width: 500px;
+        width: 100%;
         height: 1500px; //이미지 넣고 수정
         border-radius: 15px;
         background-color: #F9F3E5;

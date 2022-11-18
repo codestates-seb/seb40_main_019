@@ -28,17 +28,35 @@
 // }
 
 .detailInfoContainer{
-    display: flex;
-    // flex-direction: column;
+	display: flex;
+	width: 100%;
+	@media screen and (max-width: 1050px) {
+		align-items: center;
+		flex-direction: column;
+	}
+	.leftContainer{
+		// width: 50%;
+		flex-grow: 1;
+		width: 50%;
+		@media screen and (max-width: 1050px) {
+			width: 100%;
+			max-width: 700px;
+		}
+		@media screen and (max-width: 750px) {
+			width: 100%;
+			max-width: 500px;
+		}
+	}
 
-    .leftContainer{
-        flex: 1;
-    }
-
-    .rightContainer{
-        flex: 1;
-    }
-
+	.rightContainer{
+		width: 50%;
+		display: flex;
+		justify-content: center;
+		@media screen and (max-width: 1050px) {
+			// width: 100%;
+			display: none;
+		}
+	}
 }
 
 

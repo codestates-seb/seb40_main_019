@@ -1,15 +1,17 @@
 .productInfoContainer{
     width: 100%;
+    max-width: 470px;
     height: 100%;
     display: flex;
     justify-content: center;
     position: relative; 
-
 }
 .stickyContainer{
-    width:400px;
+    width:100%;
+    height: 440px;
+    border: 1px solid black;
     position: sticky !important;
-    top: 10px !important;
+    top: 150px !important;
     font-weight: bold;
 
 
@@ -20,7 +22,9 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin: 10px 0px 40px 0px;
+    
+    // margin: 10px 0px 40px 0px;
+    padding-top: 10px;
     .imgStarBox{
         // flex:1;
         .productImg{
