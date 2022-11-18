@@ -15,12 +15,10 @@ export default function Sidebar() {
           <i className="fa-solid fa-bars"></i>
         )}
       </button>
-      {click ? (
+      {click && (
         <div className="sidebarModal">
           <SidebarSellerMenu />
         </div>
-      ) : (
-        <div className="sidebarNull"></div>
       )}
       <div className="sidebarDesktop">
         <SidebarSellerMenu />

@@ -19,6 +19,7 @@ import ShopLayout from './components/layout/js/ShopLayout';
 import Success from './pages/payment/js/Success';
 import Failed from './pages/payment/js/Failed';
 import SellerProducts from './pages/sellerProduct/js/SellerProducts';
+import SellerAddProduct from './pages/sellerAddProduct/js/SellerAddProduct';
 
 function App() {
   //json-server 주소
@@ -64,6 +65,7 @@ function App() {
           <Route path="/" element={<SellerLayout />}>
             <Route path="/seller" element={<Seller />} />
             <Route path="/seller/product" element={<SellerProducts />} />
+            <Route path="/seller/add" element={<SellerAddProduct />} />
           </Route>
         </Route>
       </Routes>
