@@ -15,6 +15,12 @@ function ProductItems() {
   //console.log(data);
   return (
     <>
+      <div className="filterContainer">
+        <button>인기순</button>
+        <button>낮은 가격순</button>
+        <button>높은 가격순</button>
+        <button>최신순</button>
+      </div>
       <div className="itemsContainer">
         {data &&
           data.map((data, i) => {
