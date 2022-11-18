@@ -21,7 +21,14 @@ export default function Graph() {
     };
   }, []);
   return (
-    <div style={{ width: '82vw', height: '400px', margin: '0' }}>
+    <div
+      style={{
+        width: '80vw',
+        height: '400px',
+        margin: '0',
+        maxWidth: '1200px',
+      }}
+    >
       <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
