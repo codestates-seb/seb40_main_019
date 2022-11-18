@@ -13,4 +13,12 @@ public class TestUserResponseDto {
         this.email = email;
         this.password = password;
     }
+
+    public static TestUserResponseDto toResponse(User user) {
+        return TestUserResponseDto.builder()
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .build();
+    }
+
 }

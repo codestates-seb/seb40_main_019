@@ -6,6 +6,21 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import static com.backend.domain.user.dto.EmailDto.RequestSendMail;
+import com.backend.domain.user.application.AuthService;
+import com.backend.domain.user.application.RegisterMail;
+import com.backend.domain.user.dto.EmailDto;
+import com.backend.domain.user.dto.ReissueResponseDto;
+import com.backend.domain.user.dto.SignUpRequestDto;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
+
+import static com.backend.domain.user.dto.EmailDto.*;
 
 @RestController
 @RequiredArgsConstructor

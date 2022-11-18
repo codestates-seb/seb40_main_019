@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Entity
 public class ProductCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productCategoryId;
@@ -22,7 +23,7 @@ public class ProductCategory {
     @Column(nullable = false)
     private String categoryRefCode;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "product_category_id")
-    private List<Product> products = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
 }
