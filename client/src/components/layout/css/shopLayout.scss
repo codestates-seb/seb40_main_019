@@ -1,0 +1,47 @@
+.mainInner{
+  width: 100%;
+  max-width: 1364px;
+  // height: 700px;
+  padding-top: 100px;
+  display: flex;
+  position: relative;
+  justify-content: flex-start;
+  // border: 1px solid black;
+  .sideBar{
+    width: 150px;
+    // border: 1px solid black;
+    position: relative;
+    .sticky{
+      position: sticky;
+      top: 150px;
+    }
+    @media screen and (max-width: 1364px) {
+      position: fixed;
+      width: 0px;
+      height: 0px;
+      top: 200px;
+      left: 5px;
+    }
+  }
+  .container{
+    flex-grow: 1;
+    // height: 100%;
+    border: 1px solid black;
+    .test{
+      height: 1500px;
+    }
+  }
+}
+.sidebar1280{
+  display: none;
+  @media (max-width: 1280px) {
+    display: flex;
+    position: sticky;
+    top: 60px;
+  }
+  .sidebarAb{
+    position: absolute;
+    top: 60px;
+    left: -30px;
+  }
+}

@@ -1,19 +1,18 @@
 .itemsContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 3rem;
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 1rem;
 }
 
 .itemsContainer {
-    @media (max-width: 1620px) {
-    grid-template-columns: 1fr 1fr 1fr;
-}
-        @media (max-width: 1350px) {
-        grid-template-columns: 1fr 1fr;
-        //이미지 w 380
-        }
-            @media (max-width: 980px) {
-            grid-template-columns: 1fr;
-            //이미지 w 440
-            }
+	@media (max-width: 1050px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
+	@media (max-width: 800px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media (max-width: 500px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 }
