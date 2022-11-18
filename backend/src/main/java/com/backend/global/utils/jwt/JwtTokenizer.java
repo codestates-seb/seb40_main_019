@@ -17,24 +17,24 @@ import java.util.Date;
 import java.util.Map;
 
 @Component
-@Getter //(1)JwtTokenizer 클래스를 Spring Container(ApplicationContext)에 Bean으로 등록하기 위해 @Component 애너테이션을 추가합니다
+@Getter
 public class JwtTokenizer {
     @Getter
-    @Value("${jwt.key.access_secret}")
-    private String accessSecretKey;       // (2) 어세스 토큰 시크릿키
+    @Value("${jwt.secret}")
+    private String accessSecretKey;
 
     @Getter
-    @Value("${jwt.key.refresh_secret}")
-    private String refreshSecretKey;       // (2) 리프레시 토큰 시크릿키
+    @Value("${jwt.secret}")
+    private String refreshSecretKey;
 
 
     @Getter
-    @Value("${jwt.access-token-expiration-minutes}")
-    private int accessTokenExpirationMinutes;        // (3)  Access Token에 대한 만료 시간 정보
+    @Value("${jwt.access-token-expiration-time}")
+    private int accessTokenExpirationMinutes;
 
     @Getter
-    @Value("${jwt.refresh-token-expiration-minutes}")
-    private int refreshTokenExpirationMinutes;          // (4) Refresh Token에 대한 만료 시간 정보
+    @Value("${jwt.refresh-token-expiration-time}")
+    private int refreshTokenExpirationMinutes;
 
     public String encodeBase64SecretKey(String secretKey) {
         return Encoders.BASE64.encode(secretKey.getBytes(StandardCharsets.UTF_8));
@@ -89,7 +89,7 @@ public class JwtTokenizer {
                 .parseClaimsJws(jws);
     }
 
-    // (5)
+
     public Date getTokenExpiration(int expirationMinutes) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, expirationMinutes);

@@ -1,6 +1,6 @@
 package com.backend.global.config.auth.dto;
 
-import be.user.entity.User;
+import com.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -12,16 +12,16 @@ public class OAuthAttributes {
     private String nameAttributeKey;
     private String name;
     private String email;
-    private String picture;
+    private String profileImage;
     private String registrationId;
 
     @Builder
-    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String picture,String registrationId) {
+    public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey, String name, String email, String profileImage, String registrationId) {
         this.attributes = attributes;
         this.nameAttributeKey = nameAttributeKey;
         this.name = name;
         this.email = email;
-        this.picture = picture;
+        this.profileImage = profileImage;
         this.registrationId =registrationId;
     }
 
@@ -42,7 +42,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .picture((String) attributes.get("picture"))
+                .profileImage((String) attributes.get("picture"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .registrationId(registrationId)
@@ -56,7 +56,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) response.get("name"))
                 .email((String) response.get("email"))
-                .picture((String) response.get("profile_image"))
+                .profileImage((String) response.get("profile_image"))
                 .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .registrationId(registrationId)
@@ -72,7 +72,7 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .name((String) kakaoProfile.get("nickname"))
                 .email((String) kakaoAccount.get("email"))
-                .picture((String) kakaoProfile.get("profile_image_url"))
+                .profileImage((String) kakaoProfile.get("profile_image_url"))
                 .attributes(attributes)
                 .nameAttributeKey(userNameAttributeName)
                 .registrationId(registrationId)
@@ -82,9 +82,9 @@ public class OAuthAttributes {
     public User toEntity(){
         User user = new User();
         user.setUserRole("ROLE_USER");// 새로 가입하는 유저는 무조건 ROLE_USER권한 가짐
-        user.setImage(picture);
+        user.setProfileImage(profileImage);
         user.setEmail(email);
-        user.setNickname(name);
+        user.setUserName(name);
         user.setSocialLogin(registrationId);
 
         return user;

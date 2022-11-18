@@ -15,7 +15,7 @@ import java.util.Collection;
 @Setter
 @AllArgsConstructor
 @Slf4j
-public class MemberDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private User user;
 

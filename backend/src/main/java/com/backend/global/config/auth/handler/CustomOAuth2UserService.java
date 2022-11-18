@@ -1,8 +1,8 @@
 package com.backend.global.config.auth.handler;
 
-import be.config.auth.dto.OAuthAttributes;
-import be.user.entity.User;
-import be.user.repository.UserRepository;
+import com.backend.domain.user.dao.UserRepository;
+import com.backend.domain.user.domain.User;
+import com.backend.global.config.auth.dto.OAuthAttributes;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,15 +60,11 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 
     private User saveOrUpdate(OAuthAttributes attributes) {
-        User user = userRepository.findByEmailAndUserStatusAndSocialLogin(attributes.getEmail(),User.UserStatus.USER_EXIST,attributes.getRegistrationId())
+        User user = userRepository.findByEmailAndUserStatusAndSocialLogin(attributes.getEmail(), User.UserStatus.USER_EXIST,attributes.getRegistrationId())
                .orElse(attributes.toEntity());//새로 가입하는 유저라면 새로 가입
                                             //기존 해당 소셜 로그인으로 가입한 유저가 있다면 DB에 있는 것 return
 
         return userRepository.save(user);
     }
-
-
-
-
 
 }

@@ -1,7 +1,7 @@
 package com.backend.global.config.auth.userdetails;
 
-import be.user.entity.User;
-import be.user.repository.UserRepository;
+import com.backend.domain.user.dao.UserRepository;
+import com.backend.domain.user.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,15 +17,13 @@ import java.util.Optional;
 public class MemberDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-//    private final CustomAuthorityUtils authorityUtils;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         log.info("MemberDetailsService : 진입");
         Optional<User> userEntity  = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST,"original");
 
-
-        return new MemberDetails(userEntity.get());
+        return new CustomUserDetails(userEntity.get());
     }
 
 

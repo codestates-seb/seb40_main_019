@@ -1,9 +1,8 @@
 package com.backend.global.config.auth.handler;
 
-import be.user.entity.User;
-import be.user.repository.UserRepository;
-import be.user.service.UserService;
-import be.utils.jwt.JwtTokenizer;
+import com.backend.domain.user.dao.UserRepository;
+import com.backend.domain.user.domain.User;
+import com.backend.global.utils.jwt.JwtTokenizer;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -24,9 +23,9 @@ import java.util.Map;
 
 @AllArgsConstructor
 @Slf4j
-public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {   // (1)
+public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenizer jwtTokenizer;
-    private final UserService userService;
+//    private final UserService userService;
     private final UserRepository userRepository;
 
 
@@ -95,6 +94,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 //                .build()
 //                .toUri();
 
+        // todo 주소 변경
         return UriComponentsBuilder
                 .newInstance()
                 .scheme("https")
