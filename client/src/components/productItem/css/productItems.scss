@@ -1,3 +1,19 @@
+.filterContainer{
+	display: flex;
+	justify-content: flex-end;
+	// margin: auto;
+	
+	button{
+		padding: 10px;
+		font-size: 14px;
+		color: var(--color-blue);
+	}
+		:hover{
+		color: var(--color-yellow);
+		}	
+	
+}
+
 .itemsContainer {
 	width: 100%;
 	display: grid;
