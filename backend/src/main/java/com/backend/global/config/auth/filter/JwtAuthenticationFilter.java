@@ -1,5 +1,7 @@
 package com.backend.global.config.auth.filter;
 
+import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
+import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.UserLoginDto;
@@ -32,6 +34,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final AuthenticationManager authenticationManager;
     private final UserService userService;
     private final JwtTokenizer jwtTokenizer;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     //로그인 요청을 하면 로그인 시도를 위해서 실행되는 함수 /login
     @Override
@@ -43,8 +46,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         UserLoginDto userLoginDto = null;
 
         try {
-            userLoginDto = om.readValue(request.getInputStream(),UserLoginDto.class);
-        } catch (Exception e){
+            userLoginDto = om.readValue(request.getInputStream(), UserLoginDto.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -75,13 +78,15 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         CustomUserDetails customUserDetails = (CustomUserDetails) authResult.getPrincipal();
 
+        User user = customUserDetails.getUser();
+
         String accessToken = delegateAccessToken(customUserDetails);
         String refreshToken = delegateRefreshToken(customUserDetails);
 
 
         response.setHeader("Authorization", "Bearer " + accessToken);
 
-       Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMillisecond();
+        Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMillisecond();
 
         ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
                 .maxAge(refreshExp)
@@ -92,6 +97,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .build();
 
         response.setHeader("Set-Cookie", cookie.toString());
+
+        RefreshToken refreshTokenEntity = RefreshToken.builder()
+                .key(user.getUserId())
+                .value(refreshToken)
+                .build();
+        refreshTokenRepository.save(refreshTokenEntity);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
+                "\"name\":\"" + user.getUsername() + "\"," +
+                "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
     }
 
     private String delegateAccessToken(CustomUserDetails customUserDetails) {
