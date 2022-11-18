@@ -84,7 +84,7 @@ public class OAuthAttributes {
         user.setUserRole("ROLE_USER");// 새로 가입하는 유저는 무조건 ROLE_USER권한 가짐
         user.setProfileImage(profileImage);
         user.setEmail(email);
-        user.setUserName(name);
+        user.setUsername(name);
         user.setSocialLogin(registrationId);
 
         return user;

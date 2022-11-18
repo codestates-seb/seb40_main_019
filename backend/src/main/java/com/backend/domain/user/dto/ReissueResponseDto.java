@@ -22,7 +22,7 @@ public class ReissueResponseDto {
         return ReissueResponseDto.builder()
                 .email(user.getEmail())
                 .imageUrl(user.getProfileImage())
-                .username(user.getUserName())
+                .username(user.getUsername())
                 .build();
     }
 

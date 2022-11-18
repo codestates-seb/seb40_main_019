@@ -40,7 +40,7 @@ public class UserService {
 
     public Long update(Long memberId, UserPatchDto userPatchDto) {
 
-        if (userRepository.existsByUserName((userPatchDto.getUsername()))) {
+        if (userRepository.existsByUsername((userPatchDto.getUsername()))) {
             throw new UserNameDuplication();
         }
 
@@ -115,8 +115,8 @@ public class UserService {
         Optional.ofNullable(user.getProfileImage())//유저 프로필이미지 수정
                 .ifPresent(findUser::setProfileImage);
 
-        Optional.ofNullable(user.getUserName())//유저 닉네임 수정
-                .ifPresent(findUser::setUserName);
+        Optional.ofNullable(user.getUsername())//유저 닉네임 수정
+                .ifPresent(findUser::setUsername);
 
         Optional.ofNullable(user.getEmail())//유저 이메일 수정
                 .ifPresent(findUser::setEmail);
@@ -134,21 +134,7 @@ public class UserService {
         Map<String, Object> claims = null;
         User user = null;
 
-        try {
-            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
-            claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
-            // 여기서 기억해야 할 부분은 JWT에서 Claims를 파싱할 수 있다는 의미는 내부적으로 서명(Signature) 검증에 성공했다는 의미
-            System.out.println(claims);
-            Long userId = Long.parseLong(claims.get("userId").toString());
-            user = userRepository.findById(userId).get();
-        } catch (SignatureException se) {
-            throw new JwtException("사용자 인증 실패");
-        } catch (ExpiredJwtException ee) {
-            throw new JwtException("토큰 기한 만료");
-        } catch (Exception e) {
-            throw e;
-        }
-
+        user = getUser(refreshToken);
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
@@ -177,6 +163,14 @@ public class UserService {
         Map<String, Object> claims = null;
         User user = null;
 
+        user = getUser(refreshToken);
+
+        refreshTokenRepository.deleteByKey(user.getUserId());
+    }
+
+    private User getUser(String refreshToken) {
+        Map<String, Object> claims;
+        User user;
         try {
             String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
             claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
@@ -189,8 +183,7 @@ public class UserService {
         } catch (Exception e) {
             throw e;
         }
-
-        refreshTokenRepository.deleteByKey(user.getUserId());
+        return user;
     }
 
 }

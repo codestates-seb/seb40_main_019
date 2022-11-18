@@ -29,7 +29,7 @@ public class User {
     private String password;
 
     @Column(nullable = false, unique = true)
-    private String userName;
+    private String username;
 
     @Column(nullable = false)
     private String profileImage;
@@ -59,7 +59,7 @@ public class User {
     // ----------------------------------------------
 
     public void patch(UserPatchDto userPatchDto, String password) {
-        this.userName = userPatchDto.getUsername();
+        this.username = userPatchDto.getUsername();
         this.password = password;
         this.profileImage = userPatchDto.getProfileImage();
         this.about = userPatchDto.getAbout();

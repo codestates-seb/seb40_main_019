@@ -7,7 +7,7 @@ spring:
     url: ${/config/cloud-parameter-store/db-url}
   jpa:
     hibernate:
-      ddl-auto: update # create / update / validate / none
+      ddl-auto: validate # create / update / validate / none
 cloud:
   aws:
     credentials:

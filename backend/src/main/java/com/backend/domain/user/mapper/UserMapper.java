@@ -16,11 +16,13 @@ public interface UserMapper {
         User user = new User();
 
         user.setEmail(userPostDto.getEmail());
-        user.setUserName(userPostDto.getUsername());
+        user.setUsername(userPostDto.getUsername());
         user.setPassword(userPostDto.getPassword());
         user.setUserRole("ROLE_USER");
         user.setProfileImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
         user.setSocialLogin("original");
+        user.setUserStatus(User.UserStatus.USER_EXIST);
+        user.setAbout("안녕하세요");
 
         Address address = Address.builder()
                 .address(userPostDto.getAddress())
@@ -37,7 +39,7 @@ public interface UserMapper {
 
         userResponseDto.setUserId(user.getUserId());
         userResponseDto.setEmail(user.getEmail());
-        userResponseDto.setUsername(user.getUserName());
+        userResponseDto.setUsername(user.getUsername());
         userResponseDto.setProfileImage(user.getProfileImage());
         userResponseDto.setUserStatus(user.getUserStatus());
         userResponseDto.setUserRole(user.getUserRole());
@@ -53,7 +55,7 @@ public interface UserMapper {
         user.setUserId(userId);
         user.setEmail(userPatchDto.getEmail());
         user.setProfileImage(userPatchDto.getProfileImage());
-        user.setUserName(userPatchDto.getUsername());
+        user.setUsername(userPatchDto.getUsername());
         user.setUserStatus(userPatchDto.getUserStatus());
         user.setUserRole(userPatchDto.getUserRole());
 

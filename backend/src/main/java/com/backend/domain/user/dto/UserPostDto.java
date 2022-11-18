@@ -14,12 +14,12 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class UserPostDto {
 
+    @NotBlank(message = "닉네임을 입력해주세요")
+    private String username;
+
     @NotBlank(message = "이메일을 입력해주세요")
     @Email(message = "이메일 형식이 맞는 지 확인해주세요")
     private String email;
-
-    @NotBlank(message = "닉네임을 입력해주세요")
-    private String username;
 
     @NotBlank(message = "비밀번호를 입력해주세요")
     private String password;

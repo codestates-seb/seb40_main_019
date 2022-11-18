@@ -65,7 +65,7 @@ public class SecurityConfig {
                 .apply(new CustomFilterConfigurer())
                 .and()
                 .authorizeRequests(authroize -> authroize
-//                        todo uri 인증 권한 설정
+                        // todo uri 인증 권한 설정
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> {
                     oauth2.userInfoEndpoint().userService(customOAuth2UserService);
@@ -73,7 +73,6 @@ public class SecurityConfig {
                     oauth2.successHandler(new OAuth2MemberSuccessHandler(jwtTokenizer, userRepository));
                 })
                 .build();
-
 
     }
 
@@ -99,7 +98,7 @@ public class SecurityConfig {
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, userService, jwtTokenizer, userRepository);
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, userService, jwtTokenizer);
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
 //            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new UserAuthenticationSuccessHandler(refreshTokenRepository));
 //            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());

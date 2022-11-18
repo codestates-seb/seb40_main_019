@@ -14,13 +14,13 @@ import java.util.Optional;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class MemberDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        log.info("MemberDetailsService : 진입");
+        log.info("CustomUserDetailsService : 진입");
         Optional<User> userEntity  = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST,"original");
 
         return new CustomUserDetails(userEntity.get());
