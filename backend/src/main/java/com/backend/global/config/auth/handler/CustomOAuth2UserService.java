@@ -5,8 +5,8 @@ import com.backend.domain.user.domain.User;
 import com.backend.global.config.auth.dto.OAuthAttributes;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
@@ -19,12 +19,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 import java.util.Map;
 
-@Service
 @AllArgsConstructor
 @Slf4j
-public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
+@Service
+public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {
     private final UserRepository userRepository;
-    @Autowired
+    private final PasswordEncoder passwordEncoder;
     private HttpServletResponse response;
 
     @Override
@@ -33,21 +33,18 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
 
-        log.info("loader 에서의 oAuth2User"+oAuth2User);
+        log.info("loader 에서의 oAuth2User" + oAuth2User);
 
-        // OAuth2 서비스 id (구글, 카카오, 네이버)
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
 
         response.setHeader("registrationId", registrationId);
 
-        // OAuth2 로그인 진행 시 키가 되는 필드 값(PK)
         String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
 
         // OAuth2UserService
         Map<String, Object> attribute = oAuth2User.getAttributes();
         OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, attribute);
-        User user = saveOrUpdate(attributes); // 새로 소셜로그인 시도하는 유저면 회원가입 시켜주고
-                                                //기존 유저라면 그냥 DB에 저장된 값 반환
+        User user = saveOrUpdate(attributes);
 
         OAuth2User printUser = new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getUserRole())),
                 attributes.getAttributes(),
@@ -60,10 +57,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
 
 
     private User saveOrUpdate(OAuthAttributes attributes) {
-        User user = userRepository.findByEmailAndUserStatusAndSocialLogin(attributes.getEmail(), User.UserStatus.USER_EXIST,attributes.getRegistrationId())
-               .orElse(attributes.toEntity());//새로 가입하는 유저라면 새로 가입
-                                            //기존 해당 소셜 로그인으로 가입한 유저가 있다면 DB에 있는 것 return
+        User user = userRepository.findByEmailAndUserStatusAndSocialLogin(attributes.getEmail(), User.UserStatus.USER_EXIST, attributes.getRegistrationId())
+                .orElse(attributes.toEntity());
 
+        if (user.getPassword() == null) {
+            user.setPassword(passwordEncoder.encode(user.getUsername()));
+        }
+
+        user.encodePassword(passwordEncoder);
         return userRepository.save(user);
     }
 
