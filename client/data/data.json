@@ -109,5 +109,20 @@
             "new": true,
             "quantity": 1
         }
+    ],
+    "sellerproducts": [
+      {
+        "productsId": 1250,
+        "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+        "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+        "price": "16000",
+        "createdAt": "2022.11.11"
+      },{
+        "productsId": 1253,
+        "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+        "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+        "price": "16000",
+        "createdAt": "2022.11.11"
+      }
     ]
 }   
