@@ -1,5 +1,6 @@
 package com.backend.global.config;
 
+import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.global.config.auth.filter.JwtAuthenticationFilter;
@@ -34,6 +35,7 @@ public class SecurityConfig {
     private final UserRepository userRepository;
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Value("${address.front-local}")
     private String FRONT_LOCAL;
@@ -98,7 +100,7 @@ public class SecurityConfig {
         public void configure(HttpSecurity builder) throws Exception {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);
 
-            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, userService, jwtTokenizer);
+            JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, userService, jwtTokenizer, refreshTokenRepository);
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
 //            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new UserAuthenticationSuccessHandler(refreshTokenRepository));
 //            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());
