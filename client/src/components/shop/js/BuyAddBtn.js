@@ -1,12 +1,14 @@
-import '../css/buynowBtn.scss';
+import '../css/buyAddBtn.scss';
 
-const BuynowBtn = () => {
+//BUY NOW 클릭하면, 장바구니&결제 페이지로 이동
+//ADD CART 클릭하면, 장바구니 상품 갯수가 증가
+const BuyAddBtn = () => {
   return (
-    <div className="buyContainer">
+    <div className="buttonContainer">
       <button className="buyBtn">BUY NOW</button>
       <button className="addBtn">ADD CART</button>
     </div>
   );
 };
 
-export default BuynowBtn;
+export default BuyAddBtn;

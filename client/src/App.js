@@ -50,7 +50,6 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          {/* <Route path="/products" element={<Products />} /> */}
           <Route path="/oauth/kakao" element={<OauthKakao />} />
           <Route path="/oauth/google" element={<OauthGoogle />} />
           <Route path="/payment/success" element={<Success />} />

@@ -1,11 +1,11 @@
-.buyContainer{
+.buttonContainer{
     .buyBtn{
     display: block;
-    border: 2px solid #FFB526;
-    background-color: #FFB526;
+    border: 2px solid var(--color-yellow);
+    background-color: var(--color-yellow);
     color: var(--color-white);
-    padding: 12px 120px;
-    margin-left: 30px;
+    width: 350px; 
+    height: 50px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
@@ -14,17 +14,17 @@
     }
     .buyBtn:hover{
         background-color: var(--color-white);
-        color: #FFB526;
+        color: var(--color-yellow);
     }
 
     .addBtn{
     display: block;
     margin-top: 6px;
-    margin-left: 30px;
-    border: 2px solid #1885AE;
+    border: 2px solid var(--color-blue);
     background-color: var(--color-white);
-    color: #1885AE;
-    padding: 12px 118px;
+    color: var(--color-blue);
+    width: 350px; 
+    height: 50px;
     border-radius: 5px;
     text-align: center;
     font-size: 14px;
@@ -32,7 +32,7 @@
     transition: all 0.3s;
     }
     .addBtn:hover{
-        background-color: #1885AE;;
+        background-color: var(--color-blue);;
         color: var(--color-white);
     }
 }

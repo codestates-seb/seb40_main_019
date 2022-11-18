@@ -1,12 +1,11 @@
 import '../css/productDetailBox.scss';
 
-const ProductDetailBox = () => {
+export default function ProductDetailBox() {
   return (
     <div className="detailContainer">
+      <div className="titleImg"></div>
       <div className="detailText">DETAIL</div>
       <div className="detailImg"></div>
     </div>
   );
-};
-
-export default ProductDetailBox;
+}
