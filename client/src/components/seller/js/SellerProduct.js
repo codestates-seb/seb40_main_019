@@ -2,7 +2,9 @@ import '../css/SellerProduct.scss';
 export default function SellerProduct({ item }) {
   return (
     <div className="sellerproduct">
-      <div className="createdAt">{item.createdAt}</div>
+      <div className="createdAt">
+        <p>{item.createdAt}</p>
+      </div>
       <img className="titleImg" src={item.img} alt="productImg" />
       <div className="title">{item.productName}</div>
       <div className="price">{item.price} 원</div>

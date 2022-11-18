@@ -13,9 +13,6 @@
         color: var(--color-brown);
         font-size: 13px;
     }
-    .price{
-        font-weight: 600;
-    }
     .productBtn{
         display: flex;
         align-items: center;
@@ -26,6 +23,40 @@
         }
         .fa-trash-can{
             color: #BA4242;
+        }
+    }
+    @media (max-width: 750px){
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas:
+            'data data editDlt'
+            'Img title editDlt'
+            'Img Price editDlt';
+
+            .createAt{
+                grid-area: data;
+            }
+            .titleImg{
+                grid-area: Img;
+            }
+            .title{
+                grid-area: title;
+            }
+            .price{
+                grid-area: Price;
+            }
+
+
+        .productBtn{
+            grid-area: editDlt;
+            flex-direction: column;
+            i{
+                padding: 5px 0px;
+            }
+        }
+        p{
+            text-align: center;
+            color: #969696;
         }
     }
 }
