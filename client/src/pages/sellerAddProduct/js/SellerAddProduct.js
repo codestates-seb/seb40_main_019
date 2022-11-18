@@ -1,4 +1,6 @@
+import ImgUploader from '../../../components/seller/js/ImgUploader';
 import '../css/SellerAddProduct.scss';
+import { Link } from 'react-router-dom';
 
 export default function SellerAddProduct() {
   return (
@@ -25,16 +27,20 @@ export default function SellerAddProduct() {
           <h1>판매가</h1>
           <input></input>원
         </section>
-        <section className="titleImg">
+        <div className="titleImg">
           <h1>대표이미지</h1>
-        </section>
-        <section className="detailImg">
+          <ImgUploader />
+        </div>
+        <div className="detailImg">
           <h1>상세이미지</h1>
-        </section>
+          <ImgUploader />
+        </div>
       </div>
 
       <div className="addPageBtns">
-        <button className="close">닫기</button>
+        <Link to="/seller/product">
+          <button className="close">닫기</button>
+        </Link>
         <button>저장하기</button>
       </div>
     </div>

@@ -14,7 +14,7 @@
   section{
     display: flex;
     margin-bottom: 30px;
-    align-items: center;
+    align-items:center;
   }
 
   .categoryBtns{
@@ -54,7 +54,7 @@
 }
 
 .addPageBtns{
-  margin-left: 98px;
+  margin: 50px 0px 100px 98px;
   button{
     background-color: var(--color-blue);
     width: 100px;
@@ -69,3 +69,16 @@
     color: var(--color-blue);
   }
 }
+
+.titleImg{
+  display: flex;
+  margin-bottom: 30px;
+  align-items: flex-start;
+}
+
+.detailImg{
+  display: flex;
+  margin-bottom: 30px;
+  align-items: flex-start;
+}
+
