@@ -23,7 +23,7 @@ export default function ProductInfoBox() {
           <div className="itemFooterContainer">
             <div className="priceBox">
               <div className="totalbox">total</div>
-              <div>6000원</div>
+              <div>80,000원</div>
             </div>
             <div className="btnBox">
               <BuyAddBtn />
