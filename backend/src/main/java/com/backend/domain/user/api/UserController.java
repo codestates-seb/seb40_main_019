@@ -1,45 +1,79 @@
 package com.backend.domain.user.api;
 
 import com.backend.domain.user.application.UserService;
-import com.backend.domain.user.dto.UserPatchDto;
-import com.backend.global.annotation.CurrentMember;
-import com.backend.global.config.auth.userdetails.CustomUserDetails;
+import com.backend.domain.user.domain.User;
+import com.backend.domain.user.dto.ReissueResponseDto;
+import com.backend.domain.user.dto.UserPostDto;
+import com.backend.domain.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper mapper;
 
-    @PatchMapping
-    public ResponseEntity<?> update(
-            @CurrentMember CustomUserDetails authUser,
-            @RequestBody @Valid UserPatchDto userPatchDto) {
+    // 회원가입
+    @PostMapping()
+    public ResponseEntity<?> signup(@RequestBody UserPostDto userPostDto) {
 
-        Long result = userService.update(authUser.getUser().getUserId(), userPatchDto);
+        User user = mapper.userPostDtoToUser(userPostDto);
+        User createdUser = userService.createUser(user);
 
-        return ResponseEntity.ok(authUser.getUser().getUserId());
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/login")
+                .build()
+                .toUri();
+
+        return ResponseEntity.created(uri).build();
     }
 
-//    @GetMapping("/me")
-//    public ResponseEntity<UserResponseDto> getMyMemberInfo(@CurrentMember CustomUserDetails authUser) {
-//        Long memberId = authUser.getUser().getUserId();
-//        return ResponseEntity.ok(userService.getMyInfo(memberId));
+    // 토큰 재발급
+    @GetMapping("/reissue")
+    public ResponseEntity<ReissueResponseDto> reissue(@CookieValue(value = "refreshToken", required = false) String refreshToken,
+                                                      HttpServletResponse response) {
+
+        return ResponseEntity.ok(userService.createAccessToken(refreshToken, response));
+    }
+
+    // 로그아웃
+    @DeleteMapping("/logout")
+    public ResponseEntity<Void> logout(@CookieValue(value = "refreshToken", required = false) String refreshToken,
+                                       HttpServletResponse response) {
+        userService.logout(refreshToken, response);
+        return ResponseEntity.ok().build();
+    }
+
+    // test account 생성
+//    @GetMapping("/test/user")
+//    public ResponseEntity<TestUserResponseDto> createTestUser() {
+//
+//        UserRole userRole = UserRole.ROLE_TESTUSER;
+//
+//        TestUserResponseDto testUserResponseDto = userService.signupTestAccount(userRole);
+//
+//        return ResponseEntity.ok(testUserResponseDto);
 //    }
 //
-//    @GetMapping("/{email}")
-//    public ResponseEntity<UserResponseDto> getMemberInfo(@PathVariable String email) {
-//        return ResponseEntity.ok(userService.getMemberInfo(email));
+//    @GetMapping("/test/admin")
+//    public ResponseEntity<TestUserResponseDto> createTestAdmin() {
+//
+//        UserRole userRole = UserRole.ROLE_TESTADMIN;
+//
+//        TestUserResponseDto testUserResponseDto = userService.signupTestAccount(userRole);
+//
+//        return ResponseEntity.ok(testUserResponseDto);
 //    }
+
+
 }

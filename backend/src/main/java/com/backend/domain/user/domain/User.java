@@ -3,7 +3,9 @@ package com.backend.domain.user.domain;
 
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.user.dto.UserPatchDto;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;

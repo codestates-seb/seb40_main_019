@@ -1,7 +1,10 @@
 package com.backend.domain.user.application;
 
+import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
+import com.backend.domain.refreshToken.exception.TokenNotFound;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
+import com.backend.domain.user.dto.ReissueResponseDto;
 import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.domain.user.exception.MemberNotFound;
 import com.backend.domain.user.exception.UserNameDuplication;
@@ -13,11 +16,13 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -28,10 +33,9 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final JwtTokenizer jwtTokenizer;
+    private final RefreshTokenRepository refreshTokenRepository;
 
 
     public Long update(Long memberId, UserPatchDto userPatchDto) {
@@ -48,23 +52,6 @@ public class UserService {
 
         return memberId;
     }
-
-//    @Transactional(readOnly = true)
-//    public UserResponseDto getMemberInfo(String email) {
-//        User user = userRepository.findByEmail(email)
-//                .orElseThrow(MemberNotFound::new);
-//        return UserResponseDto.toResponse(user);
-//    }
-//
-//    // 현재 SecurityContext 에 있는 유저 정보 가져오기
-//
-//
-//    public UserResponseDto getMyInfo(Long memberId) {
-//        User user = userRepository.findById(memberId)
-//                .orElseThrow(MemberNotFound::new);
-//        return UserResponseDto.toResponse(user);
-//
-//    }
 
     public User getLoginUser() { //로그인된 유저가 옳바른 지 확인하고 정보 가져옴
         return findUser(getUserByToken());
@@ -86,7 +73,7 @@ public class UserService {
         return findUser;
     }
 
-    @javax.transaction.Transactional
+    @Transactional
     public User createUser(User user) {
         // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
         verifyExistsEmailByOriginal(user.getEmail());
@@ -143,9 +130,10 @@ public class UserService {
         return findUser;
     }
 
-    public String createAccessToken(String refreshToken) {
+    public ReissueResponseDto createAccessToken(String refreshToken, HttpServletResponse response) {
         Map<String, Object> claims = null;
         User user = null;
+
         try {
             String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
             claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
@@ -153,24 +141,56 @@ public class UserService {
             System.out.println(claims);
             Long userId = Long.parseLong(claims.get("userId").toString());
             user = userRepository.findById(userId).get();
-
-
         } catch (SignatureException se) {
             throw new JwtException("사용자 인증 실패");
-
         } catch (ExpiredJwtException ee) {
             throw new JwtException("토큰 기한 만료");
         } catch (Exception e) {
             throw e;
-        } //이걸 통과하면 리프레시 토큰이 DB의 리프레시 토큰과 같다면 어세스 토큰 갱신
+        }
 
 
-        String subject = user.getUserId().toString(); //Jwt 의 제목
+        String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
         String accessToken = "Bearer " + jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
 
-        return accessToken;
+        response.setHeader("Authorization", accessToken);
+
+        return ReissueResponseDto.toResponse(user);
+    }
+
+    @Transactional
+    public void logout(String refreshToken, HttpServletResponse response) {
+
+        refreshToken = Optional.ofNullable(refreshToken)
+                .orElseThrow(TokenNotFound::new);
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
+                .maxAge(0)
+                .path("/")
+                .secure(true)
+                .sameSite("None")
+                .httpOnly(true)
+                .build();
+        response.setHeader("Set-Cookie", cookie.toString());
+
+        Map<String, Object> claims = null;
+        User user = null;
+
+        try {
+            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
+            claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
+            Long userId = Long.parseLong(claims.get("userId").toString());
+            user = userRepository.findById(userId).get();
+        } catch (SignatureException se) {
+            throw new JwtException("사용자 인증 실패");
+        } catch (ExpiredJwtException ee) {
+            throw new JwtException("토큰 기한 만료");
+        } catch (Exception e) {
+            throw e;
+        }
+
+        refreshTokenRepository.deleteByKey(user.getUserId());
     }
 
 }

@@ -23,6 +23,9 @@ public class UserPatchDto {
     private String about;
 
     private List<Address> address;
+
+    private String userRole;
+
     //회원 탈퇴
     private User.UserStatus userStatus;
 

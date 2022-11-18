@@ -1,6 +1,7 @@
 package com.backend.domain.user.mapper;
 
 import com.backend.domain.user.application.UserService;
+import com.backend.domain.user.domain.Address;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.domain.user.dto.UserPostDto;
@@ -18,8 +19,14 @@ public interface UserMapper {
         user.setUserName(userPostDto.getUsername());
         user.setPassword(userPostDto.getPassword());
         user.setUserRole("ROLE_USER");
-        user.setProfileImage(userPostDto.getProfileImage());
+        user.setProfileImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
         user.setSocialLogin("original");
+
+        Address address = Address.builder()
+                .address(userPostDto.getAddress())
+                .zipCode(userPostDto.getZipCode())
+                .build();
+        user.addAddress(address);
 
         return user;
     }
@@ -46,7 +53,7 @@ public interface UserMapper {
         user.setUserId(userId);
         user.setEmail(userPatchDto.getEmail());
         user.setProfileImage(userPatchDto.getProfileImage());
-        user.setUserName(userPatchDto.getNickname());
+        user.setUserName(userPatchDto.getUsername());
         user.setUserStatus(userPatchDto.getUserStatus());
         user.setUserRole(userPatchDto.getUserRole());
 

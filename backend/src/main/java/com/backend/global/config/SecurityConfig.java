@@ -47,6 +47,8 @@ public class SecurityConfig {
     @Value("${address.local}")
     private String LOCAL;
 
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
