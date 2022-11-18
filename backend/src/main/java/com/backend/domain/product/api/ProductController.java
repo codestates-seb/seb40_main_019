@@ -6,10 +6,10 @@ import com.backend.domain.product.dto.ProResponseDto;
 import com.backend.domain.product.dto.ProductPatchDto;
 import com.backend.domain.product.dto.ProductPostDto;
 import com.backend.domain.product.mapper.ProductMapper;
-import com.backend.domain.user.domain.AuthUser;
-import com.backend.global.annotation.CurrentMember;
-import com.backend.global.dto.Response.MultiResponse;
-import com.backend.global.dto.Response.SingleResponseDto;
+import com.backend.global.annotation.CurrentUser;
+import com.backend.global.config.auth.userdetails.CustomUserDetails;
+import com.backend.global.dto.response.MultiResponse;
+import com.backend.global.dto.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,11 +27,11 @@ public class ProductController {
     private final ProductMapper productMapper;
 
     @PostMapping("/products")
-    public ResponseEntity create(@CurrentMember AuthUser authUser,
+    public ResponseEntity create(@CurrentUser CustomUserDetails authUser,
             @Valid @RequestBody ProductPostDto productPostDto){
         Product product = productMapper.productPostDtoToProduct(productPostDto);
 
-        Long userId = authUser.getUserId();
+        Long userId = authUser.getUser().getUserId();
 
         Product response = productService.create(userId, product);
 

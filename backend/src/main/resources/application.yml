@@ -13,12 +13,26 @@ spring:
         format_sql: true  # (3) SQL pretty print
   profiles:
     active: server # local / server
+    include: oauth
+  security:
+    oauth2:
+      client:
+        registration:
+            google:
+                client-id: ${/config/cloud-parameter-store/google-client-id}
+                client-secret: ${/config/cloud-parameter-store/google-client-secret}
+                scope: email, profile
+#            kakao:
+#                client-id: ${/config/cloud-parameter-store/kakao-client-id}
+#                client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
+#                scope: profile, account_email
 logging:
   level:
     org:
       springframework:
         orm:
           jpa: DEBUG
+# Send Mail
 naver:
   id: ${/config/cloud-parameter-store/naver-id}
   password: ${/config/cloud-parameter-store/naver-password}
