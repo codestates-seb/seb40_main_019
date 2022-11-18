@@ -3,6 +3,7 @@ package com.backend.domain.user.api;
 import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.ReissueResponseDto;
+import com.backend.domain.user.dto.TestUserResponseDto;
 import com.backend.domain.user.dto.UserPostDto;
 import com.backend.domain.user.mapper.UserMapper;
 import com.backend.global.annotation.CurrentUser;
@@ -58,25 +59,25 @@ public class UserController {
     }
 
     // test account 생성
-//    @GetMapping("/test/user")
-//    public ResponseEntity<TestUserResponseDto> createTestUser() {
-//
-//        UserRole userRole = UserRole.ROLE_TESTUSER;
-//
-//        TestUserResponseDto testUserResponseDto = userService.signupTestAccount(userRole);
-//
-//        return ResponseEntity.ok(testUserResponseDto);
-//    }
-//
-//    @GetMapping("/test/admin")
-//    public ResponseEntity<TestUserResponseDto> createTestAdmin() {
-//
-//        UserRole userRole = UserRole.ROLE_TESTADMIN;
-//
-//        TestUserResponseDto testUserResponseDto = userService.signupTestAccount(userRole);
-//
-//        return ResponseEntity.ok(testUserResponseDto);
-//    }
+    @GetMapping("/test/user")
+    public ResponseEntity<TestUserResponseDto> createTestUser() {
+
+       String testAccountRole = "ROLE_USER_TEST";
+
+        TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
+
+        return ResponseEntity.ok(testUserResponseDto);
+    }
+
+    @GetMapping("/test/admin")
+    public ResponseEntity<TestUserResponseDto> createTestAdmin() {
+
+        String testAccountRole = "ROLE_ADMIN_TEST";
+
+        TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
+
+        return ResponseEntity.ok(testUserResponseDto);
+    }
 
 
 }

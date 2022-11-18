@@ -3,6 +3,7 @@ package com.backend.domain.user.domain;
 
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.user.dto.UserPatchDto;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,6 +58,17 @@ public class User {
     private List<Address> addresses = new ArrayList<>();
 
     // ----------------------------------------------
+
+    @Builder
+    public User(String email, String password, String username, String profileImage, String about, String userRole, String socialLogin) {
+        this.email = email;
+        this.password = password;
+        this.username = username;
+        this.profileImage = profileImage;
+        this.about = about;
+        this.userRole = userRole;
+        this.socialLogin = socialLogin;
+    }
 
     public void patch(UserPatchDto userPatchDto, String password) {
         this.username = userPatchDto.getUsername();
