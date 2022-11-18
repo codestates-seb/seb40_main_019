@@ -5,6 +5,8 @@ import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.ReissueResponseDto;
 import com.backend.domain.user.dto.UserPostDto;
 import com.backend.domain.user.mapper.UserMapper;
+import com.backend.global.annotation.CurrentUser;
+import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -48,9 +50,10 @@ public class UserController {
 
     // 로그아웃
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(@CookieValue(value = "refreshToken", required = false) String refreshToken,
-                                       HttpServletResponse response) {
-        userService.logout(refreshToken, response);
+    public ResponseEntity<Void> logout(HttpServletResponse response,
+                                       @CurrentUser CustomUserDetails user) {
+        Long userId = user.getUser().getUserId();
+        userService.logout(response, userId);
         return ResponseEntity.ok().build();
     }
 

@@ -1,7 +1,6 @@
 package com.backend.domain.user.application;
 
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
-import com.backend.domain.refreshToken.exception.TokenNotFound;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.ReissueResponseDto;
@@ -147,11 +146,11 @@ public class UserService {
     }
 
     @Transactional
-    public void logout(String refreshToken, HttpServletResponse response) {
+    public void logout(HttpServletResponse response,
+                       Long userId) {
 
-        refreshToken = Optional.ofNullable(refreshToken)
-                .orElseThrow(TokenNotFound::new);
-        ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
+
+        ResponseCookie cookie = ResponseCookie.from("refreshToken", "")
                 .maxAge(0)
                 .path("/")
                 .secure(true)
@@ -160,12 +159,7 @@ public class UserService {
                 .build();
         response.setHeader("Set-Cookie", cookie.toString());
 
-        Map<String, Object> claims = null;
-        User user = null;
-
-        user = getUser(refreshToken);
-
-        refreshTokenRepository.deleteByKey(user.getUserId());
+        refreshTokenRepository.deleteByKey(userId);
     }
 
     private User getUser(String refreshToken) {
