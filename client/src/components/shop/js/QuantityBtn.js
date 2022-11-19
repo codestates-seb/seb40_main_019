@@ -7,7 +7,7 @@ export default function QuantityBtn() {
 
   return (
     <div className="quantityContainer">
-      <span>Quantity</span>
+      {/* <span>Quantity</span> */}
       <div className="controlBtn">
         <button onClick={() => setCount(count - 1)}>-</button>
         <span>{count}</span>
