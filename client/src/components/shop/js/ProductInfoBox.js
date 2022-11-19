@@ -1,7 +1,8 @@
 import '../css/productInfoBox.scss';
 import QuantityBtn from './QuantityBtn';
 import BuyAddBtn from './BuyAddBtn';
-export default function ProductInfoBox() {
+
+export default function ProductInfoBox({ product }) {
   return (
     <>
       <div className="productInfoContainer">
@@ -9,13 +10,14 @@ export default function ProductInfoBox() {
           {/* header = 사진+별 */}
           <div className="itemHeaderContainer">
             <div className="imgStarBox">
-              <div className="productImg"></div>
+              <img className="productImg" src={product.img} alt="productImg" />
               <div className="reviewStar">⭐⭐⭐⭐⭐</div>
             </div>
             {/* body = new, 제품명, quantity */}
             <div className="itemBodyContainer">
-              <button>NEW</button>
-              <div className="titleBox">title</div>
+              {product.new === true && <button>NEW</button>}
+
+              <div className="titleBox">{product.title}</div>
               <QuantityBtn />
             </div>
           </div>
@@ -23,7 +25,7 @@ export default function ProductInfoBox() {
           <div className="itemFooterContainer">
             <div className="priceBox">
               <div className="totalbox">total</div>
-              <div>80,000원</div>
+              <div>{product.price}원</div>
             </div>
             <div className="btnBox">
               <BuyAddBtn />
