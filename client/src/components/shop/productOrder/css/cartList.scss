@@ -1,0 +1,44 @@
+//h1. 장바구니
+.cart{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-blue);
+    
+    >h1{
+        color: var(--color-blue);
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
+}
+//Table-header
+.cartListTable{
+    border-collapse: collapse;
+    width: 100%;
+}
+.cartTitle{
+    border-bottom: 1px solid var(--color-blue);
+
+    >tr,th{
+        padding: 15px 0px;
+        color: var(--color-blue);
+    }
+}
+//Table-body
+.cartItemContent{
+    border-bottom: 1px solid var(--color-blue);
+
+    >tr,th{
+        padding: 15px 0px;
+    }
+}
+.productImgName{
+    display: flex;
+    margin: auto;
+
+}
+.fa-light fa-x{
+    display: flex;
+    justify-content: flex-end;
+}
