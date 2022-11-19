@@ -4,7 +4,7 @@ import OrderSummary from '../../../components/shop/productOrder/js/OrderSummary'
 
 export default function ShopProductOrder() {
   return (
-    <div>
+    <div className="productOrderContainer">
       <CartList />
       <OrderSummary />
     </div>
