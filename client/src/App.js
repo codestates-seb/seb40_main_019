@@ -12,6 +12,7 @@ import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
 import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
+import ShopProductOrder from './pages/shopProductOrder/js/ShopProductOrder';
 // import { tokenReissue } from './util/api/Reissue';
 import Seller from './pages/seller/js/Seller';
 import SellerLayout from './components/layout/js/SellerLayout';
@@ -58,7 +59,8 @@ function App() {
 
           <Route path="/" element={<ShopLayout />}>
             <Route path="/products" element={<ShopProductList />} />
-            <Route path="/productdetail" element={<ShopProductDetail />} />
+            <Route path="/product/detail" element={<ShopProductDetail />} />
+            <Route path="/product/order" element={<ShopProductOrder />} />
           </Route>
 
           <Route path="/" element={<SellerLayout />}>
