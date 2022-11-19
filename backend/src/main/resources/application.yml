@@ -18,14 +18,25 @@ spring:
     oauth2:
       client:
         registration:
-            google:
-                client-id: ${/config/cloud-parameter-store/google-client-id}
-                client-secret: ${/config/cloud-parameter-store/google-client-secret}
-                scope: email, profile
-#            kakao:
-#                client-id: ${/config/cloud-parameter-store/kakao-client-id}
-#                client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
-#                scope: profile, account_email
+          google:
+            client-id: ${/config/cloud-parameter-store/google-client-id}
+            client-secret: ${/config/cloud-parameter-store/google-client-secret}
+            scope: email, profile
+          kakao:
+            client-id: ${/config/cloud-parameter-store/kakao-client-id}
+            client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
+            scope: profile_nickname, profile_image, account_email
+            client-name: Kakao
+            authorization-grant-type: authorization_code
+            redirect-uri: ${/config/cloud-parameter-store/kakao-redirect-uri}
+            client-authentication-method: POST
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+
 logging:
   level:
     org:
