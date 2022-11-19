@@ -1,4 +1,3 @@
-import '../css/Graph.scss';
 import { ResponsiveLine } from '@nivo/line';
 import graphData from '../graphData.json';
 import graphData2 from '../graphData2.json';

@@ -23,15 +23,6 @@
   }
 }
 
-.sidebarNull {
-  display: none;
-  height: 192px;
-  width: 200px;
-  @media (max-width: 1364px) {
-    display: block;
-  }
-}
-
 .sidebarDesktop {
   @media (max-width: 1364px) {
     display: none;
