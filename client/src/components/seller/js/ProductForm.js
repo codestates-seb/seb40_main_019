@@ -83,7 +83,12 @@ export default function ProductForm({
         </section>
         <section className="price">
           <h1>판매가</h1>
-          <input onChange={handlePrice} defaultValue={price}></input>원
+          <input
+            onChange={handlePrice}
+            defaultValue={price}
+            type="number"
+          ></input>
+          원
         </section>
         <div className="titleImg">
           <h1>대표이미지</h1>

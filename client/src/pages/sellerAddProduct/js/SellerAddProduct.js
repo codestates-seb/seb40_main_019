@@ -20,16 +20,25 @@ export default function SellerAddProduct() {
   const data = { productName, price, titleImg, detailImg };
 
   const handleSubmit = () => {
-    //유효성검사 해야함
-    axios
-      .post(`${REACT_APP_API_URL}products/${categoryId}`, data)
-      .then((res) => {
-        console.log(res.data);
-        // navigate(`/seller/product`)
-      });
-    // .catch((error) => {
-    //   console.log(error.response);
-    // });
+    if (productName.length < 5 || productName.length >= 30) {
+      alert('상품명이 5~30자여야 합니다');
+    } else if (price < 100 || price > 1000000000) {
+      alert('판매가가 100원 ~ 1,000,000,000원 사이여야 합니다');
+    } else if (titleImg.length === 0) {
+      alert('대표이미지를 업로드하셔야 합니다');
+    } else if (detailImg.length === 0) {
+      alert('상세이미지를 업로드하셔야 합니다');
+    } else {
+      axios
+        .post(`${REACT_APP_API_URL}products/${categoryId}`, data)
+        .then((res) => {
+          console.log(res.data);
+          // navigate(`/seller/product`)
+        });
+      // .catch((error) => {
+      //   console.log(error.response);
+      // });
+    }
   };
 
   return (
