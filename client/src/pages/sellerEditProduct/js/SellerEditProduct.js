@@ -11,13 +11,26 @@ export default function SellerEditProduct() {
   useEffect(() => {
     axios.get(`${REACT_APP_API_URL}products/${'productId'}`).then((res) => {
       setDefaultData(res.data);
+      console.log(defaultData);
     });
   }, []);
-  const [categoryId, setCategoryId] = useState(defaultData.categoryId);
-  const [productName, setProductName] = useState(defaultData.productName);
-  const [price, setPrice] = useState(defaultData.price);
-  const [titleImg, setTitleImg] = useState(defaultData.titleImg); //배열로 해야 이미지 보임
-  const [detailImg, setDetailImg] = useState(defaultData.detailImg);
+  //진짜 state
+  // const [categoryId, setCategoryId] = useState(defaultData.categoryId);
+  // const [productName, setProductName] = useState(defaultData.productName);
+  // const [price, setPrice] = useState(defaultData.price);
+  // const [titleImg, setTitleImg] = useState(defaultData.titleImg); //배열로 해야 이미지 보임
+  // const [detailImg, setDetailImg] = useState(defaultData.detailImg);
+
+  //오류방지
+  const [categoryId, setCategoryId] = useState('1');
+  const [productName, setProductName] = useState('');
+  const [price, setPrice] = useState(0);
+  const [titleImg, setTitleImg] = useState([
+    'https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg',
+  ]); //배열로 해야 이미지 보임
+  const [detailImg, setDetailImg] = useState([
+    'https://cdn.discordapp.com/attachments/386786128939843606/1043406127515320390/A97-01-03_1.jpg',
+  ]);
 
   const data = { productName, price, titleImg, detailImg };
 
