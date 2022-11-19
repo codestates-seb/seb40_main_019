@@ -2,7 +2,8 @@ import '../css/shopProductDetail.scss';
 // import Sidebar from '../../../components/sidebar/js/Sidebar';
 import ProductDetailBox from '../../../components/shop/js/ProductDetailBox';
 import ProductDetailReadme from '../../../components/shop/js/ProductDetailReadme';
-import ProductDetailReview from './../../../components/shop/js/ProductDetailReview';
+import ProductDetailReview from '../../../components/shop/js/ProductDetailReview';
+
 import ProductInfoBox from '../../../components/shop/js/ProductInfoBox';
 //상품 디테일 데이터 1개만 담고 보여주게 했음
 import axios from 'axios';
