@@ -18,10 +18,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    /**
+     * 유저 정보를 가져오는 함수
+     *
+     * @param email 이메일
+     * @return 유저 정보
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         log.info("CustomUserDetailsService : 진입");
-        Optional<User> userEntity  = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST,"original");
+        Optional<User> userEntity = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
 
         return new CustomUserDetails(userEntity.get());
     }

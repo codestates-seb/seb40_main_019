@@ -9,6 +9,7 @@ import com.backend.global.config.auth.handler.CustomOAuth2UserService;
 import com.backend.global.config.auth.handler.OAuth2MemberSuccessHandler;
 import com.backend.global.utils.jwt.JwtTokenizer;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-//@AllArgsConstructor
+/**
+ * Spring Security 설정
+ */
 @Slf4j
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -50,9 +53,13 @@ public class SecurityConfig {
     private String LOCAL;
 
 
-
+    /**
+     * @param http HttpSecurity
+     * @return SecurityFilterChain
+     */
+    @SneakyThrows
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) {
 
         return http
                 .headers().frameOptions().sameOrigin()
@@ -66,8 +73,8 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .apply(new CustomFilterConfigurer())
                 .and()
-                .authorizeRequests(authroize -> authroize
-                        // todo uri 인증 권한 설정
+                .authorizeRequests(authorize -> authorize
+                        // todo : 테스트용 추후 수정
                         .anyRequest().permitAll())
                 .oauth2Login(oauth2 -> {
                     oauth2.userInfoEndpoint().userService(customOAuth2UserService);
@@ -78,6 +85,11 @@ public class SecurityConfig {
 
     }
 
+    /**
+     * CORS 설정
+     *
+     * @return CorsConfigurationSource
+     */
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -95,6 +107,9 @@ public class SecurityConfig {
         return source;
     }
 
+    /**
+     * 커스팀 필터 설정
+     */
     public class CustomFilterConfigurer extends AbstractHttpConfigurer<CustomFilterConfigurer, HttpSecurity> {
         @Override
         public void configure(HttpSecurity builder) throws Exception {
@@ -102,8 +117,6 @@ public class SecurityConfig {
 
             JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager, userService, jwtTokenizer, refreshTokenRepository);
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
-//            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new UserAuthenticationSuccessHandler(refreshTokenRepository));
-//            jwtAuthenticationFilter.setAuthenticationFailureHandler(new UserAuthenticationFailureHandler());
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, userRepository);
 
             builder

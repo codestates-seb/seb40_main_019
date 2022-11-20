@@ -7,6 +7,9 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+/**
+ * OAuth2 로그인 시 반환되는 사용자 정보
+ */
 @Getter
 public class OAuthAttributes {
     private final Map<String, Object> attributes;
@@ -26,6 +29,14 @@ public class OAuthAttributes {
         this.registrationId = registrationId;
     }
 
+    /**
+     * @param registrationId        OAuth2 로그인 진행 중인 서비스를 구분하는 코드
+     *                              ex) google, naver, kakao
+     * @param userNameAttributeName OAuth2 로그인 진행 시 키가 되는 필드값
+     * @param attributes            OAuth2UserService를 통해 가져온 OAuth2User의 attribute
+     *                              ex) name, email, picture
+     * @return OAuthAttributes
+     */
     public static OAuthAttributes of(String registrationId, String userNameAttributeName, Map<String, Object> attributes) {
 
         if ("naver".equals(registrationId)) {
@@ -85,7 +96,7 @@ public class OAuthAttributes {
         user.setUserRole("ROLE_USER");
         user.setProfileImage(profileImage);
         user.setEmail(email);
-        user.setUsername(name+"["+registrationId.toUpperCase()+"]");
+        user.setUsername(name + "[" + registrationId.toUpperCase() + "]");
         user.setSocialLogin(registrationId);
         user.setAbout("안녕하세요. " + name + "입니다.");
 
