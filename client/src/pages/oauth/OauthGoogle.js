@@ -16,7 +16,7 @@ export default function OauthKakao() {
 
   return (
     <>
-      <div>oauthKakao</div>
+      <div>oauthGoogle</div>
     </>
   );
 }

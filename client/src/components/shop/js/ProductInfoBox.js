@@ -18,7 +18,10 @@ export default function ProductInfoBox({ product }) {
               {product.new === true && <button>NEW</button>}
 
               <div className="titleBox">{product.title}</div>
-              <QuantityBtn />
+              <div className="QuantityBox">
+                <span>Quantity</span>
+                <QuantityBtn />
+              </div>
             </div>
           </div>
           {/* footer - total, buybtn+Nowbtn, addCartBtn */}

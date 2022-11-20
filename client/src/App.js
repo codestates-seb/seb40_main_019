@@ -26,6 +26,9 @@ import SellerOrder from './pages/sellerOrder/js/SellerOrder';
 import SellerDelivering from './pages/sellerDelivering/js/SellerDelivering';
 import SellerDeliveryCom from './pages/sellerDeliveryCom/js/SellerDeliveryCom';
 import SellerReview from './pages/sellerReview/js/SellerReview';
+import MypageUserPage from './pages/mypage/user/js/MypageUserPage';
+import MypageUserEditPage from './pages/mypage/userEdit/js/MypageUserEditPage';
+import MypagePointPage from './pages/mypage/point/js/MypagePointPage';
 
 function App() {
   //json-server 주소
@@ -78,6 +81,12 @@ function App() {
             <Route path="/seller/delivering" element={<SellerDelivering />} />
             <Route path="/seller/deliverycom" element={<SellerDeliveryCom />} />
             <Route path="/seller/review" element={<SellerReview />} />
+          </Route>
+
+          <Route path="/" element={<ShopLayout />}>
+            <Route path="/mypage/user" element={<MypageUserPage />} />
+            <Route path="/mypage/user/edit" element={<MypageUserEditPage />} />
+            <Route path="/mypage/point" element={<MypagePointPage />} />
           </Route>
         </Route>
       </Routes>

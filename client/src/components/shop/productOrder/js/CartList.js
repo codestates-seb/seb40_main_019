@@ -38,7 +38,9 @@ export default function CartList() {
               </th>
               <th>가격</th>
               <th>
-                <i className="fa-light fa-x"></i>
+                <button>
+                  <i className="fa-light fa-x"></i>
+                </button>
               </th>
             </tr>
           </tbody>
