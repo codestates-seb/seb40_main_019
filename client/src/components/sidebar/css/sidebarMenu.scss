@@ -31,12 +31,12 @@
   .tittleList {
     list-style: none;
     cursor: pointer;
-    > li {
+    li {
       padding: 10px;
       color: var(--color-blue);
       font-size: 14px;
     }
-    > li:hover {
+    li:hover {
       color: var(--color-yellow);
     }
   }
