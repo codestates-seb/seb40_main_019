@@ -1,0 +1,47 @@
+.orderInfo{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.delivery{
+  background-color: var(--color-blue);
+  padding: 5px 10px;
+  color: var(--color-white);
+  border-radius: 10px;
+}
+
+
+.order{
+  @media (max-width: 980px){
+  display: grid;
+  grid-gap: 10px;
+  grid-template-areas:
+      'data data orderCount delivery'
+      'Img title orderCount delivery'
+      'Img orderInfo orderCount delivery';
+
+      .createAt{
+          grid-area: data;
+      }
+      .titleImg{
+          grid-area: Img;
+      }
+      .title{
+          grid-area: title;
+      }
+      .orderInfo{
+          grid-area: orderInfo;
+      }
+      .orderCount{
+        grid-area: orderCount;
+      }
+      .productBtn{
+        grid-area: delivery;
+      }
+      p{
+        text-align: center;
+        color: #969696;
+    }
+  }
+}

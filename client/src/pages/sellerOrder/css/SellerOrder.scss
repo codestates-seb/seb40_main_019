@@ -1,0 +1,6 @@
+.lineTitle{
+  grid-template-columns: 1fr 3fr 3fr 0.5fr 1fr;
+  @media(max-width: 980px) {
+    display: none;
+}
+}

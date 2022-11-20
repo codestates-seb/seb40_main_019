@@ -2,7 +2,7 @@ import '../css/Order.scss';
 
 export default function Order({ item }) {
   return (
-    <div className="sellerproduct">
+    <div className="sellerproduct order">
       <div className="createdAt">
         <p>{item.orderDate}</p>
       </div>
@@ -14,10 +14,7 @@ export default function Order({ item }) {
       </div>
       <div className="orderCount">{item.orderCount} 개</div>
       <div className="productBtn">
-        <button className="delivery">
-          <i className="fa-solid fa-truck"></i>
-          발송처리
-        </button>
+        <button className="delivery">발송처리</button>
       </div>
     </div>
   );
