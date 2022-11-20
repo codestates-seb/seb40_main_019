@@ -22,6 +22,9 @@ import Failed from './pages/payment/js/Failed';
 import SellerProducts from './pages/sellerProduct/js/SellerProducts';
 import SellerAddProduct from './pages/sellerAddProduct/js/SellerAddProduct';
 import SellerEditProduct from './pages/sellerEditProduct/js/SellerEditProduct';
+import MypageUserPage from './pages/mypage/user/js/MypageUserPage';
+import MypageUserEditPage from './pages/mypage/userEdit/js/MypageUserEditPage';
+import MypagePointPage from './pages/mypage/point/js/MypagePointPage';
 
 function App() {
   //json-server 주소
@@ -70,6 +73,12 @@ function App() {
             <Route path="/seller/product" element={<SellerProducts />} />
             <Route path="/seller/add" element={<SellerAddProduct />} />
             <Route path="/seller/edit" element={<SellerEditProduct />} />
+          </Route>
+
+          <Route path="/" element={<ShopLayout />}>
+            <Route path="/mypage/user" element={<MypageUserPage />} />
+            <Route path="/mypage/user/edit" element={<MypageUserEditPage />} />
+            <Route path="/mypage/point" element={<MypagePointPage />} />
           </Route>
         </Route>
       </Routes>
