@@ -7,20 +7,49 @@ export default function UserInfo({
   name,
   value,
   placeholder,
+  p,
+  disabled,
 }) {
   return (
     <>
-      <div className="userInfoFlex">
-        <label htmlFor={inputId}>{labelName}</label>
-        <input
-          name={name}
-          id={inputId}
-          type={inputType}
-          disabled
-          value={value}
-          placeholder={placeholder}
-        />
-      </div>
+      {disabled ? (
+        <>
+          <div className="userInfoFlex">
+            <label htmlFor={inputId}>{labelName}</label>
+            <input
+              name={name}
+              id={inputId}
+              type={inputType}
+              disabled
+              value={value}
+              placeholder={placeholder}
+            />
+          </div>
+          {p ? (
+            <p className="explanation">{p}</p>
+          ) : (
+            <div className="blank"></div>
+          )}
+        </>
+      ) : (
+        <>
+          <div className="userInfoFlex">
+            <label htmlFor={inputId}>{labelName}</label>
+            <input
+              name={name}
+              id={inputId}
+              type={inputType}
+              value={value}
+              placeholder={placeholder}
+            />
+          </div>
+          {p ? (
+            <p className="explanation">{p}</p>
+          ) : (
+            <div className="blank"></div>
+          )}
+        </>
+      )}
     </>
   );
 }
