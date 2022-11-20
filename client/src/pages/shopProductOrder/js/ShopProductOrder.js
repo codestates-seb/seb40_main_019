@@ -5,8 +5,12 @@ import OrderSummary from '../../../components/shop/productOrder/js/OrderSummary'
 export default function ShopProductOrder() {
   return (
     <div className="productOrderContainer">
-      <CartList />
-      <OrderSummary />
+      <div style={{ width: '70%' }}>
+        <CartList />
+      </div>
+      <div style={{ width: '30%' }}>
+        <OrderSummary />
+      </div>
     </div>
   );
 }
