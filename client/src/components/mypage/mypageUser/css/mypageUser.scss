@@ -1,0 +1,27 @@
+.userInner{
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  height: 100%;
+  padding: 30px 0px;
+  h1{
+    margin: auto;
+    font-size: 30px;
+    margin-bottom: 35px;
+    color: #5C4B29;
+    font-weight: 700;
+  }
+  h2{
+    margin: 30px 0px 10px 10px;
+    color: var(--color-blue);
+    font-weight: 700;
+  }
+  .userInfoArea{
+    width: 420px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+  }
+}

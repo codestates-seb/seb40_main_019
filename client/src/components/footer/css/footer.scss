@@ -1,7 +1,26 @@
+// footer{
+//   // margin-top: 200px;
+//   img{
+//     width: 100%;
+//     z-index: 1;
+//     position: relative;
+//     top: 10px;
+//   }
+//   .footer{
+//     position: relative;
+//     background-color: var(--color-blue);
+//     height: 100px;
+//     width: 100%;
+    
+//   }
+// }
 footer{
   // margin-top: 200px;
+  height: 257px;
   img{
     width: 100%;
+    height: 157px;
+    object-fit: cover;
     z-index: 1;
     position: relative;
     top: 10px;
