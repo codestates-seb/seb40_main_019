@@ -27,6 +27,7 @@ spring:
             scope:
               - email
               - profile
+            redirect-uri: ${/config/cloud-parameter-store/google-redirect-uri} # 해당 라인없으면 로드밸런서 때문인가 https로 인식을 못한다..
           kakao:
             client-id: ${/config/cloud-parameter-store/kakao-client-id}
             client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
