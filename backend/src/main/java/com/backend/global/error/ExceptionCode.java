@@ -11,7 +11,7 @@ public enum ExceptionCode {
     // User
     EMAIL_DUPLICATION(409, "Email Is Duplication"),
     USER_NOT_FOUND(404, "USER NOT FOUND"),
-    USERNAME_DUPLICATION(409, "UserName Is Duplicated"),
+    NICKNAME_DUPLICATION(409, "Nickname Is Duplicated"),
     LOGIN_FAILED(400, "Login input is invalid"),
     NOT_LOGIN_MEMBER(400, "Not Login Member"),
 

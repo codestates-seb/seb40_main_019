@@ -6,7 +6,6 @@ import com.backend.global.utils.jwt.JwtTokenizer;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -63,28 +62,11 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         String accessToken = delegateAccessToken(user);
         String refreshToken = delegateRefreshToken(user);
         log.info("JWT 발급 완료");
-        String uri = createURI(accessToken, refreshToken).toString();
+        String uri = createURI(accessToken, refreshToken, registrationId).toString();
 
-
-        response.setHeader("Authorization", "Bearer " + accessToken);
-
-        Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMillisecond();
-
-        ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
-                .maxAge(refreshExp)
-                .path("/")
-                .secure(true)
-                .sameSite("None")
-                .httpOnly(true)
-                .build();
-
-        response.setHeader("Set-Cookie", cookie.toString());
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
-                "\"name\":\"" + user.getUsername() + "\"," +
-                "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
+        String email1 = user.getEmail();
+        String username = user.getNickname();
+        String profileImage = user.getProfileImage();
 
 
         getRedirectStrategy().sendRedirect(request, response, uri);
@@ -99,7 +81,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
      * @param refreshToken 리프레시 토큰
      * @return URI
      */
-    private URI createURI(String accessToken, String refreshToken) {
+    private URI createURI(String accessToken, String refreshToken, String registrationId) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("access_token", "Bearer " + accessToken);
         queryParams.add("refresh_token", refreshToken);
@@ -109,7 +91,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                 .scheme("http")
                 .host("localhost")
                 .port(3000)
-                .path("/login/oauth")
+                .path("/oauth" + registrationId)
                 .queryParams(queryParams)
                 .build()
                 .toUri();

@@ -31,7 +31,7 @@ public class ReviewService {
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
 
-        review.setReviewWriter(user.getUsername());
+        review.setReviewWriter(user.getNickname());
         review.setUser(user);
         review.setProduct(product);
         return reviewRepository.save(review);

@@ -82,7 +82,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
                 .orElse(attributes.toEntity());
 
         if (user.getPassword() == null) {
-            user.setPassword(passwordEncoder.encode(user.getUsername()));
+            user.setPassword(passwordEncoder.encode(user.getNickname()));
         }
 
         user.encodePassword(passwordEncoder);

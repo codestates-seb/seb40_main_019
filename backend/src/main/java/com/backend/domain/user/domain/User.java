@@ -31,7 +31,7 @@ public class User extends Auditable {
     private String password;
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String nickname;
 
     @Column(nullable = false)
     private String profileImage;
@@ -58,10 +58,10 @@ public class User extends Auditable {
     private List<Address> addresses = new ArrayList<>();
 
     @Builder
-    public User(String email, String password, String username, String profileImage, String about, String userRole, String socialLogin) {
+    public User(String email, String password, String nickname, String profileImage, String about, String userRole, String socialLogin) {
         this.email = email;
         this.password = password;
-        this.username = username;
+        this.nickname = nickname;
         this.profileImage = profileImage;
         this.about = about;
         this.userRole = userRole;
@@ -69,7 +69,7 @@ public class User extends Auditable {
     }
 
     public void patch(UserPatchDto userPatchDto, String password) {
-        this.username = userPatchDto.getUsername();
+        this.nickname = userPatchDto.getNickname();
         this.password = password;
         this.profileImage = userPatchDto.getProfileImage();
         this.about = userPatchDto.getAbout();

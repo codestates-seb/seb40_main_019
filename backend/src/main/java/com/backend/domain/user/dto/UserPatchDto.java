@@ -11,7 +11,7 @@ import java.util.List;
 public class UserPatchDto {
     // todo : validation 추가
 
-    private String username;
+    private String nickname;
 
     @Email(message = "이메일 형식이 맞는 지 확인해주세요")
     private String email;

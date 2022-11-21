@@ -4,7 +4,6 @@ import com.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
@@ -96,7 +95,7 @@ public class OAuthAttributes {
         user.setUserRole("ROLE_USER");
         user.setProfileImage(profileImage);
         user.setEmail(email);
-        user.setUsername(name + "[" + registrationId.toUpperCase() + "]");
+        user.setNickname(name + "[" + registrationId.toUpperCase() + "]");
         user.setSocialLogin(registrationId);
         user.setAbout("안녕하세요. " + name + "입니다.");
 

@@ -11,21 +11,21 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserLoginResponseDto {
     private String email;
-    private String username;
+    private String nickname;
     private String imageUrl;
 
     @Builder
-    public UserLoginResponseDto(String email, String imageUrl, String username) {
+    public UserLoginResponseDto(String email, String imageUrl, String nickname) {
         this.email = email;
         this.imageUrl = imageUrl;
-        this.username = username;
+        this.nickname = nickname;
     }
 
     public static UserLoginResponseDto toResponse(User user) {
         return UserLoginResponseDto.builder()
                 .email(user.getEmail())
                 .imageUrl(user.getProfileImage())
-                .username(user.getUsername())
+                .nickname(user.getNickname())
                 .build();
     }
 

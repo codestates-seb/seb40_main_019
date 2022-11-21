@@ -97,8 +97,8 @@ public class UserService {
         Optional.ofNullable(user.getProfileImage())//유저 프로필이미지 수정
                 .ifPresent(findUser::setProfileImage);
 
-        Optional.ofNullable(user.getUsername())//유저 닉네임 수정
-                .ifPresent(findUser::setUsername);
+        Optional.ofNullable(user.getNickname())//유저 닉네임 수정
+                .ifPresent(findUser::setNickname);
 
         Optional.ofNullable(user.getEmail())//유저 이메일 수정
                 .ifPresent(findUser::setEmail);
@@ -185,7 +185,7 @@ public class UserService {
         }
 
         String guestEmail = testRole + testUserId + "@test.com";
-        String guestUsername = testRole + testUserId;
+        String guestNickname = testRole + testUserId;
 
         String randomPassword = createTestAccountPassword();
         List<Address> testAddress = List.of(Address.builder()
@@ -195,7 +195,7 @@ public class UserService {
 
         User testUser = User.builder()
                 .email(guestEmail)
-                .username(guestUsername)
+                .nickname(guestNickname)
                 .password(randomPassword)
                 .about("안녕하세요. 테스트 계정입니다.")
                 .userRole(userRole)
