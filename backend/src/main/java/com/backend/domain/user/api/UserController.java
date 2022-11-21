@@ -31,7 +31,7 @@ public class UserController {
     public ResponseEntity<?> signup(@RequestBody UserPostDto userPostDto) {
 
         User user = mapper.userPostDtoToUser(userPostDto);
-        User createdUser = userService.createUser(user);
+        userService.createUser(user);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/login")
