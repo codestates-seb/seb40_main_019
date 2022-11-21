@@ -6,14 +6,17 @@ import '../css/ReviewAdd.scss';
 export default function ReviewAdd() {
   const [reviewImg, setReviewImg] = useState();
   const [reviewContent, setReviewContent] = useState('');
+  const [clickStar, setClickStar] = useState(0);
 
-  const data = { reviewImg, reviewContent };
+  const data = { reviewImg, reviewContent, clickStar };
   console.log(data);
 
   return (
     <div className="reviewAdd">
       <h1>리뷰 작성</h1>
-      <ReviewStar />
+      <div className="reviewStarSize">
+        <ReviewStar clickStar={clickStar} setClickStar={setClickStar} />
+      </div>
       <ReviewForm
         reviewImg={reviewImg}
         setReviewImg={setReviewImg}
