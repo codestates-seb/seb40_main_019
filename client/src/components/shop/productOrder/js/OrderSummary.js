@@ -23,19 +23,15 @@ export default function OrderSummary() {
             <div className="orderTextAlign">결제</div>
             <div className="totalPointBox">
               <div>총포인트</div>
-              <input type="text"></input>
-            </div>
-            <div className="pointBox">
-              <div>포인트사용</div>
-              <div>20,000원</div>
+              <div>100,000원</div>
             </div>
             <div className="productPriceBox">
-              <div>소계</div>
-              <div>23,000원</div>
+              <div>제품 금액</div>
+              <div>32,000원</div>
             </div>
             <div className="deliveryFeeBox">
               <div>배송비</div>
-              <div>3000원</div>
+              <div>3,000원</div>
             </div>
           </div>
 
@@ -43,13 +39,19 @@ export default function OrderSummary() {
           <div>
             <div className="totalPriceBox">
               <div>총금액</div>
-              <div>23,000원</div>
+              <div>35,000원</div>
             </div>
           </div>
 
           {/* order버튼 -> 결제창 띄우가 */}
           <div className="orderBtnBox">
-            <button>ORDER</button>
+            <button>포인트 결제</button>
+          </div>
+
+          {/* 반응형 - 총금액/포인트 결제 버튼 */}
+          <div className="mediaBtnBox">
+            <div>35,000원</div>
+            <button>포인트 결제</button>
           </div>
         </div>
       </div>
