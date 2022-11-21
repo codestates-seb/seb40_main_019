@@ -98,7 +98,8 @@
         "quantity": 1
       }
     ],
-    "orders": [{
+    "orders": [
+      {
       "productsId": 1250,
       "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
       "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
@@ -116,7 +117,8 @@
       "orderName": "김먕먕",
       "orderAdress": "세종시청 금강수변공원쪽 시드니하트 건물 306호",
       "orderCount": 1
-    }],
+    }
+    ],
 
     "productdetail": [
         {
