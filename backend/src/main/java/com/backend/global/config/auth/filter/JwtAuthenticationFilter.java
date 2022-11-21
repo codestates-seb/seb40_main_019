@@ -149,6 +149,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
+        claims.put("nickname", user.getNickname());
+        claims.put("imageUrl", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
@@ -173,6 +175,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
+        claims.put("nickname", user.getNickname());
+        claims.put("imageUrl", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());

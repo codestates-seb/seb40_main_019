@@ -87,9 +87,9 @@ public class UserController {
     public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
 
         String refreshToken = request.getHeader("refreshToken");
-
+        log.info("refreshToken: {}", refreshToken);
         String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
-
+        log.info("responseLoginUserInfo: {}", responseLoginUserInfo);
         return ResponseEntity.ok(responseLoginUserInfo);
     }
 

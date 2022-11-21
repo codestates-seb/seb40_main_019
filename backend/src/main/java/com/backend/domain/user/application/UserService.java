@@ -259,7 +259,7 @@ public class UserService {
 
         jsonObject.addProperty("email", claims.get("email").toString());
         jsonObject.addProperty("nickname", claims.get("nickname").toString());
-        jsonObject.addProperty("imageUrl", claims.get("profileImage").toString());
+        jsonObject.addProperty("imageUrl", claims.get("imageUrl").toString());
 
         return jsonObject.toString();
     }
