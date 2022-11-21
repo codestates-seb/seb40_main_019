@@ -2,9 +2,8 @@
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
     position: relative; 
-    padding: 0 30px;
+    padding: 0 30px;    
 }
 
 .orderSticky{
@@ -14,8 +13,20 @@
     top: 150px !important;
     // font-weight: 400;
     // border: 1px solid black; //for 레이아웃 
-
 }
+
+.orderSummaryBox{
+    text-align: center;
+    margin-bottom: 25px;
+    
+    >h1{
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--color-blue);
+        width: max-content;
+    }
+}
+
 //배송지 정보
 .orderAddressContainer{
     border-top: 2px solid var(--color-blue);
@@ -26,7 +37,7 @@
     .AddressPadding{
         text-align: center;
         padding-bottom: 20px;
-
+        color: var(--color-brown)
     }
     .AddressFlexBox{
         width: 100%;
@@ -52,46 +63,36 @@
 .orderTextAlign{
     text-align: center;
     padding-bottom: 20px;
-
+    color: var(--color-brown);
 }
 
 .totalPointBox{
     display: flex;
     justify-content: space-between;
-    >input{
-        width: 7vw;
-    }
-}
-
-.orderSummaryBox{
-    text-align: center;
-    margin-bottom: 25px;
-    >h1{
-        font-size: 18px;
-        font-weight: 600;
-        color: var(--color-blue);
-    }
-}
-
-.pointBox{
-    display: flex;
-    justify-content: space-between;
+    font-weight: 500;
+    padding: 12px 0;
 }
 
 .productPriceBox{
     display: flex;
     justify-content: space-between;
+    padding: 6px 0;
+
 }
+
 .deliveryFeeBox{
     display: flex;
     justify-content: space-between;
+    padding: 6px 0;
+
+
 }
 
 //총 금액 정보
 .totalPriceBox{
     display: flex;
     justify-content: space-between;
-    padding: 30px 20px;
+    padding: 40px 20px;
     font-weight: bold;
     border-top: 2px solid var(--color-blue);
 }
@@ -100,22 +101,58 @@
 .orderBtnBox{
     display: flex;
     justify-content: center;
-
     >button{
-    display: block;
-    border: 2px solid var(--color-yellow);
-    background-color: var(--color-yellow);
-    color: var(--color-white);
-    width: 350px; 
-    height: 50px;
-    border-radius: 5px;
-    text-align: center;
-    font-size: 14px;
-    letter-spacing: 2px;
-    transition: all 0.3s;
+        display: block;
+        border: 2px solid var(--color-yellow);
+        background-color: var(--color-yellow);
+        color: var(--color-white);
+        width: 350px; 
+        height: 50px;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        transition: all 0.3s;
     }
     >button:hover{
         background-color: var(--color-white);
         color: var(--color-yellow);
+    }
+    
+    @media(max-width: 980px) {
+    display: none;
+    }
+}
+//반응형 버튼
+.mediaBtnBox{
+    display: none;
+
+     @media(max-width: 980px) {
+        display: flex;
+        width: 100%;
+        font-weight: bold;
+
+    }
+
+    >div{
+        width: 30%;
+        height: 50px;
+        line-height: 50px;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        border: 2px solid var(--color-yellow);
+        background-color: var(--color-yellow);
+
+    }
+
+    >button{
+        width: 70%;
+        height: 50px;
+        color: var(--color-white);
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        border: 2px solid var(--color-blue);
+        background-color: var(--color-blue);
     }
 }
