@@ -1,20 +1,37 @@
-// import React from 'react';
+import { useState, useEffect } from 'react';
 import '../css/mypageUser.scss';
 import UserInfo from '../../js/UserInfo';
 import FormButtonYellow from '../../../sign/js/FormButtonYellow';
 import FormButtonBlue from '../../../sign/js/FormButtonBlue';
 import { Link } from 'react-router-dom';
-import { deleteUserAccount } from '../../../../util/api/mypageUser';
+import {
+  deleteUserAccount,
+  getUserInfo,
+} from '../../../../util/api/mypageUser';
 export default function MypageUser() {
+  const [data, setData] = useState({
+    Email: '',
+    nickname: '',
+    phone: '',
+    name: '',
+    Address: '',
+    PostCode: '',
+  });
+
   // useEffect 사용해서 데이터 받아올 예정.
-  let data = {
-    Email: 'shinker1002@naver.com',
-    nickname: 'shinker1002',
-    phone: '010-1234-5678',
-    name: '최민수',
-    Address: '서울 관악구 관악로 1 (신림동, 서울대학교)',
-    PostCode: '08826',
-  };
+  useEffect(() => {
+    // 상세 정보 받아와 data에 저장
+    getUserInfo();
+
+    setData({
+      Email: 'shinker1002@naver.com',
+      nickname: 'shinker1002',
+      phone: '010-1234-5678',
+      name: '최민수',
+      Address: '서울 관악구 관악로 1 (신림동, 서울대학교)',
+      PostCode: '08826',
+    });
+  }, []);
 
   return (
     <>
@@ -94,7 +111,6 @@ export default function MypageUser() {
             <FormButtonBlue btnContent="정보수정" />
           </Link>
           <FormButtonYellow
-            // 리덕스에서 유저 아이디 가져와서 전달인자로 전송
             formSubmit={deleteUserAccount}
             btnContent="회원탈퇴"
           />

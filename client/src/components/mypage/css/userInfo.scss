@@ -14,6 +14,28 @@
   }
   input{
     border: none;
+    outline: none;
+    margin-left: 75px;
+    background-color: rgb(230, 232, 245);
+  }
+}
+.userInfoDisabledFlex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 55px;
+  border-radius: 30px;
+  background-color: rgb(230, 232, 245);
+  label{
+    position: absolute;
+    left: 20px;
+    color: rgb(109, 109, 109);
+  }
+  input{
+    border: none;
+    outline: none;
     margin-left: 75px;
     background-color: rgb(230, 232, 245);
   }
@@ -21,7 +43,7 @@
 .explanation{
   font-size: 11px;
   margin: 10px auto 19px;
-  color: #aeaeba;
+  color: #8a8a93;
 }
 .blank{
   margin-bottom: 30px;
