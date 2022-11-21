@@ -10,6 +10,7 @@ import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
 import com.backend.global.utils.jwt.JwtTokenizer;
+import com.google.gson.JsonObject;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -214,31 +215,31 @@ public class UserService {
                 .build();
     }
 
-        // 테스트용 계정 비밀번호 생성
-        private String createTestAccountPassword() {
-            StringBuffer key = new StringBuffer();
-            Random rnd = new Random();
+    // 테스트용 계정 비밀번호 생성
+    private String createTestAccountPassword() {
+        StringBuffer key = new StringBuffer();
+        Random rnd = new Random();
 
-            for (int i = 0; i < 8; i++) {
-                int index = rnd.nextInt(3); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
+        for (int i = 0; i < 8; i++) {
+            int index = rnd.nextInt(3); // 0~2 까지 랜덤, rnd 값에 따라서 아래 switch 문이 실행됨
 
-                switch (index) {
-                    case 0:
-                        key.append((char) (rnd.nextInt(26)) + 97);
-                        // a~z (ex. 1+97=98 => (char)98 = 'b')
-                        break;
-                    case 1:
-                        key.append((char) (rnd.nextInt(26)) + 65);
-                        // A~Z
-                        break;
-                    case 2:
-                        key.append((rnd.nextInt(10)));
-                        // 0~9
-                        break;
-                }
+            switch (index) {
+                case 0:
+                    key.append((char) (rnd.nextInt(26)) + 97);
+                    // a~z (ex. 1+97=98 => (char)98 = 'b')
+                    break;
+                case 1:
+                    key.append((char) (rnd.nextInt(26)) + 65);
+                    // A~Z
+                    break;
+                case 2:
+                    key.append((rnd.nextInt(10)));
+                    // 0~9
+                    break;
             }
-            return key.toString();
         }
+        return key.toString();
+    }
 
     private void hitGuest() {
         guestId++;
@@ -246,5 +247,30 @@ public class UserService {
 
     private void hitAdmin() {
         adminId++;
+    }
+
+    // refresh Token parsing
+    public String headerTokenGetClaimTest(String refreshToken) {
+        JsonObject jsonObject = new JsonObject();
+
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
+
+        Map<String, Object> claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
+
+        jsonObject.addProperty("email", claims.get("email").toString());
+        jsonObject.addProperty("nickname", claims.get("nickname").toString());
+        jsonObject.addProperty("imageUrl", claims.get("profileImage").toString());
+
+        return jsonObject.toString();
+    }
+
+    public String atkUserInfo(User user) {
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("email", user.getEmail());
+        jsonObject.addProperty("nickname", user.getNickname());
+        jsonObject.addProperty("imageUrl", user.getProfileImage());
+
+        return jsonObject.toString();
     }
 }

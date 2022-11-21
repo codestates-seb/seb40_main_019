@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
@@ -64,7 +65,7 @@ public class UserController {
     @GetMapping("/test/user")
     public ResponseEntity<TestUserResponseDto> createTestUser() {
 
-       String testAccountRole = "ROLE_USER_TEST";
+        String testAccountRole = "ROLE_USER_TEST";
 
         TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
 
@@ -81,5 +82,26 @@ public class UserController {
         return ResponseEntity.ok(testUserResponseDto);
     }
 
+    // RefreshToken 헤더 값 받아서 유저 정보 반환
+    @GetMapping("/test/refresh-token")
+    public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
+
+        String refreshToken = request.getHeader("refreshToken");
+
+        String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
+
+        return ResponseEntity.ok(responseLoginUserInfo);
+    }
+
+    @GetMapping("/test/access-token")
+    public ResponseEntity<String> testAccessToken(HttpServletRequest request,
+                                                  @CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+
+        String responseLoginUserInfo = userService.atkUserInfo(user);
+
+        return ResponseEntity.ok(responseLoginUserInfo);
+    }
 
 }

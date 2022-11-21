@@ -119,6 +119,8 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
+        claims.put("nickname", user.getNickname());
+        claims.put("profileImage", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
@@ -141,6 +143,8 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
+        claims.put("nickname", user.getNickname());
+        claims.put("profileImage", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());
