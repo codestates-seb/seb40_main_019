@@ -1,23 +1,27 @@
 import { useState } from 'react';
-import ImgUploader from '../../../components/seller/js/ImgUploader';
+import ReviewForm from '../../../components/review/js/ReviewForm';
+import ReviewStar from '../../../components/review/js/ReviewStar';
 import '../css/ReviewAdd.scss';
 
 export default function ReviewAdd() {
   const [reviewImg, setReviewImg] = useState();
-  // const [reviewCont ent, setReviewContent] = useState('');
+  const [reviewContent, setReviewContent] = useState('');
+
+  const data = { reviewImg, reviewContent };
+  console.log(data);
 
   return (
     <div className="reviewAdd">
       <h1>리뷰 작성</h1>
-      <div className="reviewForm">
-        <div>
-          <ImgUploader pictures={reviewImg} setPictures={setReviewImg} />
-        </div>
-        <div className="reviewContent">
-          <div className="userInfo"></div>
-          <input type="text"></input>
-          <button>리뷰 작성</button>
-        </div>
+      <ReviewStar />
+      <ReviewForm
+        reviewImg={reviewImg}
+        setReviewImg={setReviewImg}
+        setReviewContent={setReviewContent}
+      />
+      <div className="reviewAddBtn">
+        <button className="close">닫기</button>
+        <button>리뷰 작성</button>
       </div>
     </div>
   );
