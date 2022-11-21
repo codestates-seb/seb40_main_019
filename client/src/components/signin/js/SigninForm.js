@@ -7,8 +7,8 @@ import kakaoIcon from '../../../assets/img/kakaoIcon.png';
 import googleIcon from '../../../assets/img/googleIcon.png';
 import { Link } from 'react-router-dom';
 import FormInputError from '../../sign/js/FormInputError';
-import { kakaoLogin } from '../../../util/api/oauthKakao';
-import { googleLogin } from '../../../util/api/oauthGoogle';
+// import { kakaoLogin } from '../../../util/api/oauthKakao';
+// import { googleLogin } from '../../../util/api/oauthGoogle';
 import {
   submitForm,
   guestLogin,
@@ -55,9 +55,9 @@ export default function SigninForm() {
     }
   };
 
-  const handleOAuthKakao = () => {
-    kakaoLogin();
-  };
+  // const handleOAuthKakao = () => {
+  //   kakaoLogin();
+  // };
   // const handleOAuthGoogle = () => {
   //   googleLogin();
   // };
@@ -97,12 +97,12 @@ export default function SigninForm() {
           <Link to={'/signup'}>Sign in</Link>
         </div>
         <div className="flexBox">
-          <button onClick={handleOAuthKakao}>
+          <a href="https://api.taekgil.xyz/oauth2/authorization/kakao">
             <img src={kakaoIcon} alt="kakaoAuth" />
-          </button>
-          <button onClick={googleLogin}>
+          </a>
+          <a href="https://api.taekgil.xyz/oauth2/authorization/google">
             <img src={googleIcon} alt="googleAuth" />
-          </button>
+          </a>
         </div>
         <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
         <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
