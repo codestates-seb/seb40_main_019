@@ -1,51 +1,44 @@
 import '../css/cartList.scss';
-import QuantityBtn from '../../js/QuantityBtn';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+
+import CartListItem from './CartListItem';
 
 export default function CartList() {
+  const [items, setItems] = useState();
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/orders/').then((res) => {
+      setItems(res.data);
+      // console.log(res.data);
+    });
+  }, []);
+
   return (
-    <div>
-      <div className="cart">
+    <div className="CartListContatner">
+      <div className="productTitle">
         <h1>장바구니</h1>
       </div>
-      <div>
-        {/* Table-header */}
-        <table className="cartListTable">
-          <thead className="cartTitle">
-            <tr>
-              <th>
-                <input type="checkbox"></input>
-              </th>
-              <th>상품</th>
-              <th>수량</th>
-              <th>가격</th>
-              <th>X</th>
-            </tr>
-          </thead>
-          {/* Table-body */}
-          <tbody className="cartItemContent">
-            <tr>
-              <th>
-                <input type="checkbox"></input>
-              </th>
-              <th>
-                <div className="productImgName">
-                  <div>이미지</div>
-                  <div>제품명</div>
-                </div>
-              </th>
-              <th>
-                <QuantityBtn />
-              </th>
-              <th>가격</th>
-              <th>
-                <button>
-                  <i className="fa-light fa-x"></i>
-                </button>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+
+      <div className="lineBold"></div>
+      <ul className="lineTitle">
+        <li>
+          <input type="checkbox"></input>
+        </li>
+        <li>상품</li>
+        <li>수량</li>
+        <li>가격</li>
+        <li>X</li>
+      </ul>
+
+      {items &&
+        items.map((item) => {
+          return (
+            <div key={item.productsId}>
+              <CartListItem item={item} />
+            </div>
+          );
+        })}
     </div>
   );
 }
