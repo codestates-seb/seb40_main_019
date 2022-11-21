@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
@@ -82,26 +81,27 @@ public class UserController {
         return ResponseEntity.ok(testUserResponseDto);
     }
 
-    // RefreshToken 헤더 값 받아서 유저 정보 반환
-    @GetMapping("/test/refresh-token")
-    public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
-
-        String refreshToken = request.getHeader("refreshToken");
-        log.info("refreshToken: {}", refreshToken);
-        String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
-        log.info("responseLoginUserInfo: {}", responseLoginUserInfo);
-        return ResponseEntity.ok(responseLoginUserInfo);
-    }
-
-    @GetMapping("/test/access-token")
-    public ResponseEntity<String> testAccessToken(HttpServletRequest request,
-                                                  @CurrentUser CustomUserDetails authUser) {
-
-        User user = authUser.getUser();
-
-        String responseLoginUserInfo = userService.atkUserInfo(user);
-
-        return ResponseEntity.ok(responseLoginUserInfo);
-    }
+//    -------------- 테스트 --------------
+//    // RefreshToken 헤더 값 받아서 유저 정보 반환
+//    @GetMapping("/test/refresh-token")
+//    public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
+//
+//        String refreshToken = request.getHeader("refreshToken");
+//        log.info("refreshToken: {}", refreshToken);
+//        String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
+//        log.info("responseLoginUserInfo: {}", responseLoginUserInfo);
+//        return ResponseEntity.ok(responseLoginUserInfo);
+//    }
+//
+//    @GetMapping("/test/access-token")
+//    public ResponseEntity<String> testAccessToken(HttpServletRequest request,
+//                                                  @CurrentUser CustomUserDetails authUser) {
+//
+//        User user = authUser.getUser();
+//
+//        String responseLoginUserInfo = userService.atkUserInfo(user);
+//
+//        return ResponseEntity.ok(responseLoginUserInfo);
+//    }
 
 }

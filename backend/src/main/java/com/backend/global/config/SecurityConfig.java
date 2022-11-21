@@ -6,7 +6,7 @@ import com.backend.domain.user.dao.UserRepository;
 import com.backend.global.config.auth.filter.JwtAuthenticationFilter;
 import com.backend.global.config.auth.filter.JwtVerificationFilter;
 import com.backend.global.config.auth.handler.CustomOAuth2UserService;
-import com.backend.global.config.auth.handler.OAuth2MemberSuccessHandler;
+import com.backend.global.config.auth.handler.OAuth2userSuccessHandler;
 import com.backend.global.utils.jwt.JwtTokenizer;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
@@ -79,7 +79,7 @@ public class SecurityConfig {
                 .oauth2Login(oauth2 -> {
                     oauth2.userInfoEndpoint().userService(customOAuth2UserService);
                     log.info("customOAuth2UserService 완료하고 다시 filterChain 진입");
-                    oauth2.successHandler(new OAuth2MemberSuccessHandler(jwtTokenizer, userRepository));
+                    oauth2.successHandler(new OAuth2userSuccessHandler(jwtTokenizer, userRepository, refreshTokenRepository));
                 })
                 .build();
 

@@ -1,5 +1,7 @@
 package com.backend.global.config.auth.handler;
 
+import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
+import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.global.utils.jwt.JwtTokenizer;
@@ -25,9 +27,10 @@ import java.util.Map;
  */
 @AllArgsConstructor
 @Slf4j
-public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenizer jwtTokenizer;
     private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     /**
      * @param request        요청
@@ -40,7 +43,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                                         HttpServletResponse response,
                                         Authentication authentication) {
 
-        log.info("OAuth2MemberSuccessHandler 실행");
+        log.info("OAuth2userSuccessHandler 실행");
 
         var oAuth2User = (OAuth2User) authentication.getPrincipal();
         String registrationId = response.getHeader("registrationId");
@@ -62,23 +65,34 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         String accessToken = delegateAccessToken(user);
         String refreshToken = delegateRefreshToken(user);
         log.info("JWT 발급 완료");
-        String uri = createURI(accessToken, refreshToken, registrationId).toString();
 
-        String email1 = user.getEmail();
-        String username = user.getNickname();
-        String profileImage = user.getProfileImage();
+        saveRefreshToken(refreshToken, user);
+        log.info("RefreshToken 저장 완료");
+
+        String uri = createURI(accessToken, refreshToken, registrationId).toString();
 
 
         getRedirectStrategy().sendRedirect(request, response, uri);
 
-        log.info("OAuth2MemberSuccessHandler 종료");
+        log.info("OAuth2userSuccessHandler 종료");
+    }
+
+    private void saveRefreshToken(String refreshToken, User user) {
+        Long userId = user.getUserId();
+        RefreshToken refreshTokenEntity = RefreshToken.builder()
+                .key(userId)
+                .value(refreshToken)
+                .build();
+
+        refreshTokenRepository.save(refreshTokenEntity);
     }
 
     /**
      * URI 생성
      *
-     * @param accessToken  액세스 토큰
-     * @param refreshToken 리프레시 토큰
+     * @param accessToken    액세스 토큰
+     * @param refreshToken   리프레시 토큰
+     * @param registrationId 소셜 로그인 구분
      * @return URI
      */
     private URI createURI(String accessToken, String refreshToken, String registrationId) {
