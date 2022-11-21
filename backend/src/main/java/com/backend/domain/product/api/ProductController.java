@@ -1,5 +1,6 @@
 package com.backend.domain.product.api;
 
+import com.backend.domain.product.application.ImageUploadService;
 import com.backend.domain.product.application.ProductService;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.dto.ProResponseDto;
@@ -26,24 +27,28 @@ public class ProductController {
     private final ProductService productService;
     private final ProductMapper productMapper;
 
-    @PostMapping("/products")
+    private final ImageUploadService awsS3Service;
+
+
+    @PostMapping("/products/{categoryId}")
     public ResponseEntity create(@CurrentMember AuthUser authUser,
-            @Valid @RequestBody ProductPostDto productPostDto){
+            @Valid @RequestBody ProductPostDto productPostDto,
+                                 @PathVariable Long categoryId){
         Product product = productMapper.productPostDtoToProduct(productPostDto);
 
         Long userId = authUser.getUserId();
 
-        Product response = productService.create(userId, product);
+        Product response = productService.create(userId, product,categoryId);
 
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/products/{productsId}")
+    @PatchMapping("/products/{productsId}/{categoryId}")
     public ResponseEntity update(@PathVariable Long productsId,
-                                       @Valid @RequestBody ProductPatchDto productPatchDto){
+                                       @Valid @RequestBody ProductPatchDto productPatchDto,@PathVariable Long categoryId){
         Product product = productMapper.productPatchDtoToProduct(productPatchDto);
 
-        Product response = productService.update(productsId, product);
+        Product response = productService.update(productsId, product,categoryId);
 
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.OK);
     }
@@ -67,10 +72,18 @@ public class ProductController {
     @GetMapping("/products/{productsId}")
     public ResponseEntity getListReview(@PathVariable Long productsId){
         Product product = productService.getList(productsId);
-        long average = productService.calculateReviewAverage(productsId);
+        String average = productService.calculateReviewAverage(productsId);
         ProResponseDto proResponseDto = productMapper.productToProResponseDto(product);
         proResponseDto.setAverage(average);
         return new ResponseEntity(new SingleResponseDto<>(proResponseDto),HttpStatus.OK);
+    }
+    // 카테고리 별 출력
+    @GetMapping("/products/category/{categoryId}")
+    public ResponseEntity getListCategory(@PathVariable Long categoryId,@RequestParam int page){
+        int size= 15;
+        Page<Product> pageProduct = productService.getCategory(categoryId, page, size);
+        List<Product> content = pageProduct.getContent();
 
+        return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(content),pageProduct), HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.backend.domain.product.dto;
 
+import com.backend.domain.category.domain.Category;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

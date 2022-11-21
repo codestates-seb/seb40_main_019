@@ -1,5 +1,6 @@
 package com.backend.domain.product.domain;
 
+import com.backend.domain.category.domain.Category;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.product.dto.ProductPatchDto;
 import com.backend.domain.product.dto.ProductPostDto;
@@ -47,8 +48,10 @@ public class Product {
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     // 카테고리 맵핑 수정
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<ProductCategory> productCategories = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
 
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -72,4 +75,7 @@ public class Product {
         this.productName = productName;
     }
 
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 }

@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class ProductResponseDto {
+
+    private int productId;
     @NotNull
     private int price;
 

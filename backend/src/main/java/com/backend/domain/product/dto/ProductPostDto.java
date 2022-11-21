@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
@@ -17,6 +18,12 @@ public class ProductPostDto {
 
     @NotBlank
     private String productName;
+
+    private MultipartFile img;
+
+    public ProductPostDto(MultipartFile img) {
+        this.img = img;
+    }
 
 
 

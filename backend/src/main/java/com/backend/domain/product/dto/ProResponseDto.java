@@ -18,5 +18,5 @@ public class ProResponseDto {
     private String productName;
 
     @NotNull
-    private Long average;
+    private String average;
 }
