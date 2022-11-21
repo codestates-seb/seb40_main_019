@@ -9,12 +9,13 @@ export default function UserInfo({
   placeholder,
   p,
   disabled,
+  onChange,
 }) {
   return (
     <>
       {disabled ? (
         <>
-          <div className="userInfoFlex">
+          <div className="userInfoDisabledFlex">
             <label htmlFor={inputId}>{labelName}</label>
             <input
               name={name}
@@ -41,6 +42,7 @@ export default function UserInfo({
               type={inputType}
               value={value}
               placeholder={placeholder}
+              onChange={onChange}
             />
           </div>
           {p ? (

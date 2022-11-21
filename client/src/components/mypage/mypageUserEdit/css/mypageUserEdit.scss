@@ -1,0 +1,41 @@
+.userEditInner{
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  // justify-content: center;
+  height: 100%;
+  padding: 30px 0px;
+  h1{
+    margin: auto;
+    font-size: 30px;
+    margin-bottom: 35px;
+    color: #5C4B29;
+    font-weight: 700;
+  }
+  h2{
+    margin: 30px 0px 10px 10px;
+    color: var(--color-blue);
+    font-weight: 700;
+  }
+  .passwordBtn{
+    width: 120px;
+    height: 30px;
+    color: var(--color-blue);
+    font-weight: 700;
+    border: 1px solid rgb(208, 208, 208);
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .adressBtn{
+    padding: 0;
+    border: 0;
+    outline: 0;
+  }
+  .userEditInfoArea{
+    width: 420px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // align-items: center;
+  }
+}
