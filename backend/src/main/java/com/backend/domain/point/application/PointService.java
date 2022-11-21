@@ -21,7 +21,9 @@ import java.util.Optional;
 public class PointService {
     private final PointRepository pointRepository;
 
-    public Point addCash(User user, PointChargeDto pointChargeDto) {
+    private final UserRepository userRepository;
+
+  /*  public Point addCash(User user, PointChargeDto pointChargeDto) {
     int chargePrice = pointChargeDto.getPrice();
     Point point = pointRepository.findByUser(user.getUserId());
     int restCash = point.getCash();
@@ -34,8 +36,31 @@ public class PointService {
     public Point findCash(Long userId) {
        Point point =  pointRepository.findByUser(userId);
        return point;
+    }*/
+
+    public Integer addCash(User user, int price) {
+        Point point = addCash2(user, price);
+        int newRestCash = user.getRestCash() + price;
+        user.setRestCash(newRestCash);
+        userRepository.save(user);
+//컨트롤러에서 price로 변환
+        return newRestCash;
     }
 
+    public Point addCash2(User user, int price) {
+        Point point= Point.builder()
+                .user(user)
+                .cash(price)
+                .build();
+
+        pointRepository.save(point);
+
+        return point;
+    }
+
+    public int getRestCash(User user) {
+        return user.getRestCash();
+    }
 
     }
 

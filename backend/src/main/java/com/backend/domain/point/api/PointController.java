@@ -30,21 +30,22 @@ public class PointController {
     private final PointMapper mapper;
 
     @PostMapping
-    public ResponseEntity charge(@CurrentMember AuthUser authUser, @RequestBody PointChargeDto pointChargeDto){
+    public ResponseEntity<Integer> charge(@CurrentMember AuthUser authUser, @RequestBody PointChargeDto pointChargeDto){
         Long userId =authUser.getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
-        Point point = pointService.addCash(user, pointChargeDto);
+        int price = pointChargeDto.getPrice();
+        int newRestCash = pointService.addCash(user, price);
 
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.toResponseDto(point)), HttpStatus.OK);
+        return new ResponseEntity<Integer>(newRestCash, HttpStatus.OK);
     }
 
     @GetMapping
-    public ResponseEntity find(@CurrentMember AuthUser authUser, @RequestBody PointChargeDto pointChargeDto) {
+    public ResponseEntity find(@CurrentMember AuthUser authUser) {
         User user = userRepository.findById(authUser.getUserId()).orElseThrow(MemberNotFound::new);
-        Point point = pointService.findCash(authUser.getUserId());
+        int restCash = pointService.getRestCash(user);
 
-        return new ResponseEntity<>(new SingleResponseDto<>(mapper.toResponseDto(point)), HttpStatus.OK);
+        return new ResponseEntity<>(restCash, HttpStatus.OK);
     }
 
 

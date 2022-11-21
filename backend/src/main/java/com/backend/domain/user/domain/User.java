@@ -49,8 +49,7 @@ public class User {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Point point;
+    private int restCash;
 
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -62,13 +61,14 @@ public class User {
 //    private List<Cart> carts = new ArrayList<>();
 
     @Builder
-    public User(String email, String password, String userName, String profileImage, String about, UserRole userRole) {
+    public User(String email, String password, String userName, String profileImage, String about, UserRole userRole, int restCash) {
         this.email = email;
         this.password = password;
         this.userName = userName;
         this.profileImage = profileImage;
         this.about = about;
         this.userRole = userRole;
+        this.restCash = restCash;
     }
 
     public void patch(UserPatchDto userPatchDto, String password) {
@@ -85,5 +85,10 @@ public class User {
 
     public void addAddress(Address address) {
         this.addresses.add(address);
+    }
+
+
+    public void setRestCash(int restCash) {
+    this.restCash = restCash;
     }
 }

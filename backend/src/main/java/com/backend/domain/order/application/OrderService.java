@@ -101,6 +101,8 @@ import java.util.Optional;
         orderRepository.delete(order);
     }
 
+    //todo: 판매자가 수동적으로 주문상태변경가능케하기
+
    /* public Long orders(List<OrderDto> orderDtoList, String email){
 
         Optional<User> optionalUser = userRepository.findByEmail(email);

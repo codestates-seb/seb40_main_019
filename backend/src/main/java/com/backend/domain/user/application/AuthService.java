@@ -1,6 +1,9 @@
 package com.backend.domain.user.application;
 
 
+import com.backend.domain.point.application.PointService;
+import com.backend.domain.point.domain.Point;
+import com.backend.domain.point.dto.PointChargeDto;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.refreshToken.exception.TokenInvalid;
@@ -39,6 +42,7 @@ public class AuthService {
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    private final PointService pointService;
     // 회원가입
     @Transactional
     public void signup(SignUpRequestDto signUpRequestDto) {
@@ -57,6 +61,7 @@ public class AuthService {
         user.addAddress(address);
 
         userRepository.save(user);
+        pointService.addCash(user, 5000);
     }
 
     private void verifyExistsEmail(String email) {
@@ -135,5 +140,7 @@ public class AuthService {
 
         refreshTokenRepository.deleteByKey(Long.valueOf(tokenProvider.parseClaims(refreshToken).getSubject()));
     }
+
+
 
 }

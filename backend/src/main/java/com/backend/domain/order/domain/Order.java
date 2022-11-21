@@ -64,7 +64,7 @@ public class Order extends Auditable {
         for(OrderProduct orderProduct : orderProductList){
             order.addOrderProduct(orderProduct);
         }
-        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderStatus(OrderStatus.PROCESS);
         order.setCreatedAt(LocalDateTime.now());
         order.setOrderProducts(orderProductList);
         return order;
