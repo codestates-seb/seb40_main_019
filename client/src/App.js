@@ -43,7 +43,11 @@ function App() {
 
   useEffect(() => {
     const userData = JSON.parse(window.sessionStorage.getItem('userData'));
-    const accessToken = JSON.parse(window.sessionStorage.getItem('jwtToken'));
+    const accessToken = JSON.parse(
+      window.sessionStorage.getItem('accessToken')
+    );
+    // console.log(userData);
+    // console.log(accessToken);
     // 스토리지에서 받아온 데이터가 null 이 아니면 리덕스에 데이터 저장.
     if (userData && accessToken) {
       console.log('리덕스에 저장');

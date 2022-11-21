@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { logout } from '../../redux/reducers/loginSlice';
-import { clearUser } from '../../redux/reducers/userSlice';
-import { useDispatch } from 'react-redux';
+import { setCookie } from '../cookie/cookie';
 
 axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -16,9 +14,20 @@ export const submitForm = async (userInfo) => {
     const res = await axios.post(`${REACT_APP_API_URL}users/login`, userInfo);
     console.log(res);
     if (res.status === 200) {
-      let jwtToken = res.headers.get('authorization');
+      // 엑세스 토큰 세션 스토리지에 저장
+      let accessToken = res.headers.get('authorization');
+      window.sessionStorage.setItem('accessToken', JSON.stringify(accessToken));
+      // 리프레시 토큰 쿠키에 저장
+      let refreshToken = res.headers.get('refreshToken');
+      setCookie('refreshToken', refreshToken, {
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+        expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
+      });
       let userData = res.data;
-      window.sessionStorage.setItem('jwtToken', JSON.stringify(jwtToken));
+
+      window.sessionStorage.setItem('accessToken', JSON.stringify(accessToken));
       window.sessionStorage.setItem('userData', JSON.stringify(userData));
       // window.location.replace('/');
     }
@@ -29,20 +38,23 @@ export const submitForm = async (userInfo) => {
 };
 export const userLogout = async () => {
   console.log('로그아웃');
+
   try {
     const res = await axios.delete(`${REACT_APP_API_URL}users/logout`);
     console.log(res);
     if (res.status === 200) {
       // 스토리지 데이터 삭제.
       console.log('스토리지 데이터 삭제');
-      window.sessionStorage.removeItem('jwtToken');
+      window.sessionStorage.removeItem('accessToken');
       window.sessionStorage.removeItem('userData');
-      // 리덕스 데이터 삭제
-      console.log('리덕스 데이터 삭제');
-      useDispatch(logout());
-      useDispatch(clearUser());
-
-      // window.location.replace('/');
+      // 리프레시 토큰 삭제
+      setCookie('refreshToken', '', {
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+        expires: new Date(Date.now() - 1),
+      });
+      window.location.replace('/');
     }
   } catch (error) {
     console.error(error);
