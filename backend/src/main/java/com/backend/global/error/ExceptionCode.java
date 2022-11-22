@@ -33,6 +33,12 @@ public enum ExceptionCode {
     PRODUCT_EXIST(409,"PRODUCT EXIST"),
     PRODUCT_NOT_FOUND(404,"PRODUCT_NOT_FOUND"),
 
+    CATEGORY_NOT_FOUND(404,"CATEGORY_NOT_FOUND"),
+
+    // image
+    No_Image(404,"Image Empty"),
+    Upload_Failed(404,"Upload Failed"),
+
     // Review
     REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND");
 

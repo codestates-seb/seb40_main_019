@@ -27,13 +27,14 @@ public class ReviewService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public Review create(Long userId, Review review,Long productId) {
+    public Review create(Long userId,Long productId,Review review) {
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
 
         review.setReviewWriter(user.getUsername());
         review.setUser(user);
         review.setProduct(product);
+
         return reviewRepository.save(review);
     }
     @Transactional
@@ -63,5 +64,10 @@ public class ReviewService {
 
     public Page<Review> getListProduct(Long productId, int page, int size) {
         return reviewRepository.findByProduct(productId,PageRequest.of(page,size,Sort.by("reviewId").descending()));
+    }
+
+    public Review getRead(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
+        return review;
     }
 }

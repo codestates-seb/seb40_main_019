@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -6,7 +7,7 @@ spring:
     url: ${/config/cloud-parameter-store/db-url}
   jpa:
     hibernate:
-      ddl-auto: validate # create / update / validate / none
+      ddl-auto: update # create / update / validate / none
 cloud:
   aws:
     credentials:

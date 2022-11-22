@@ -7,10 +7,14 @@ jwt:
 spring:
   jpa:
     defer-datasource-initialization: true
-    show-sql: true      # SQL 쿼리 출력
+    show-sql: true      # (2) SQL 쿼리 출력
     properties:
       hibernate:
-        format_sql: true  # SQL pretty print
+        format_sql: true # (3) SQL pretty print
+        use_sql_comments: true
+  sql:
+    init:
+      mode: always
   profiles:
     active: server # local / server
     include: oauth

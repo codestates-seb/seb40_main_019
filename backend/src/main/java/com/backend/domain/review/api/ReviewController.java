@@ -35,7 +35,7 @@ public class ReviewController {
 
         Long userId = authUser.getUser().getUserId();
 
-        Review saveReview = reviewService.create(userId, review,productId);
+        Review saveReview = reviewService.create(userId,productId, review);
 
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(saveReview)), HttpStatus.CREATED);
     }
@@ -54,6 +54,11 @@ public class ReviewController {
     public ResponseEntity<Long> delete(@PathVariable Long reviewId){
         reviewService.delete(reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/review/read/{reviewId}")
+    public ResponseEntity getRead(@PathVariable Long reviewId){
+        Review read = reviewService.getRead(reviewId);
+        return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(read)),HttpStatus.OK);
     }
 
     @GetMapping("/user/review")

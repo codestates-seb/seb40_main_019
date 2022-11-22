@@ -4,7 +4,6 @@ import com.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 /**
