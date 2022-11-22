@@ -114,5 +114,8 @@ section.yellowBoxRow{
 
 // item 3가지 추천 창
 .recommendBox{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 260px);
+    grid-gap: 1rem;
+    padding: 1rem 4rem;
 }

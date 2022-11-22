@@ -4,11 +4,11 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 function ProductItems() {
-  const [data, setData] = useState();
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:3001/products/').then((res) => {
-      setData(res.data);
+      setProducts(res.data);
       // console.log(res.data);
     });
   }, []);
@@ -22,9 +22,9 @@ function ProductItems() {
         <button>최신순</button>
       </div>
       <div className="itemsContainer">
-        {data &&
-          data.map((data, i) => {
-            return <ProductItem data={data} key={i} />;
+        {products &&
+          products.map((product) => {
+            return <ProductItem data={product} key={product.productsId} />;
           })}
       </div>
     </>
