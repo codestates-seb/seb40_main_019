@@ -40,7 +40,11 @@ export const userLogout = async () => {
   console.log('로그아웃');
 
   try {
-    const res = await axios.delete(`${REACT_APP_API_URL}users/logout`);
+    const res = await axios.delete(`${REACT_APP_API_URL}users/logout`, {
+      headers: {
+        Authorization: JSON.parse(window.sessionStorage.getItem('accessToken')),
+      },
+    });
     console.log(res);
     if (res.status === 200) {
       // 스토리지 데이터 삭제.
