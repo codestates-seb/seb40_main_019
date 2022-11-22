@@ -1,18 +1,18 @@
 import '../css/aiProducts.scss';
+import axios from 'axios';
 import { useState } from 'react';
-//import ProductItem from './ProductItem';
-// import axios from 'axios';
-// import { useState } from 'react';
+import ProductItem from './ProductItem';
 
 export default function AIproducts() {
-  const [isInput] = useState(false);
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/products/').then((res) => {
-  //     setData(res.data);
-  //     // console.log(res.data);
-  //   });
-  // }, []);
-  // //console.log(data);
+  const [randomItems, setRandomItems] = useState([]);
+
+  function handleClick() {
+    console.log('functionName');
+    axios.get('http://localhost:3001/randomproducts/').then((res) => {
+      setRandomItems(res.data);
+      console.log(res.data);
+    });
+  }
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function AIproducts() {
             <div className="whiteBox">
               {/* input박스 */}
 
-              {!isInput ? (
+              {randomItems.length === 0 ? (
                 <div className="formBox">
                   <div className="ageBox">
                     <div>나이</div>
@@ -36,13 +36,20 @@ export default function AIproducts() {
                     <input type="text"></input>
                   </div>
                   <div className="submitBox">
-                    <button>입력</button>
+                    <button onClick={handleClick}>입력</button>
                   </div>
                 </div>
               ) : (
-                <>
-                  <div className="recommendBox">아이템 3개 추천</div>
-                </>
+                <div className="recommendBox">
+                  {randomItems.map((randomItem) => {
+                    return (
+                      <ProductItem
+                        data={randomItem}
+                        key={randomItem.productsId}
+                      />
+                    );
+                  })}
+                </div>
               )}
             </div>
           </div>
