@@ -1,11 +1,10 @@
 package com.backend.domain.review.domain;
+
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
 

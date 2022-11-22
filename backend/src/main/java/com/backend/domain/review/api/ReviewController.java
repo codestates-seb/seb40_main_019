@@ -1,16 +1,14 @@
 package com.backend.domain.review.api;
 
-import com.backend.domain.product.application.ImageUploadService;
 import com.backend.domain.review.Mapper.ReviewMapper;
 import com.backend.domain.review.application.ReviewService;
 import com.backend.domain.review.domain.Review;
-import com.backend.domain.review.dto.ReviewImg;
 import com.backend.domain.review.dto.ReviewPatchDto;
 import com.backend.domain.review.dto.ReviewPostDto;
-import com.backend.domain.user.domain.AuthUser;
-import com.backend.global.annotation.CurrentMember;
-import com.backend.global.dto.Response.MultiResponse;
-import com.backend.global.dto.Response.SingleResponseDto;
+import com.backend.global.annotation.CurrentUser;
+import com.backend.global.config.auth.userdetails.CustomUserDetails;
+import com.backend.global.dto.response.MultiResponse;
+import com.backend.global.dto.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -27,26 +25,20 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewMapper reviewMapper;
-    private final ImageUploadService awsS3Service;
-
-    @PostMapping("/review/image")
-    public String reviewImg(ReviewImg reviewImg){
-        return awsS3Service.StoreImage(reviewImg.getReviewImg());
-    }
-
 
     @PostMapping("/review/{productId}")
-    public ResponseEntity create(@CurrentMember AuthUser authUser,
+    public ResponseEntity create(@CurrentUser CustomUserDetails authUser,
                                  @PathVariable Long productId,
                                  @Valid @RequestBody ReviewPostDto reviewPostDto){
 
-        Long userId = authUser.getUserId();
         Review review = reviewMapper.reviewPostDtoToReview(reviewPostDto);
-        Review saveReview = reviewService.create(userId,productId,review);
+
+        Long userId = authUser.getUser().getUserId();
+
+        Review saveReview = reviewService.create(userId,productId, review);
 
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(saveReview)), HttpStatus.CREATED);
     }
-
 
     @PatchMapping("/review/{reviewId}")
     public ResponseEntity update(@PathVariable Long reviewId,
@@ -70,12 +62,12 @@ public class ReviewController {
     }
 
     @GetMapping("/user/review")
-    public ResponseEntity getLest(@CurrentMember AuthUser authUser, @RequestParam int page){
+    public ResponseEntity getLest(@CurrentUser CustomUserDetails authUser, @RequestParam int page){
         int size =15;
         if (Objects.isNull(authUser)) {
             return ResponseEntity.ok().build();
         }
-        Long userId = authUser.getUserId();
+        Long userId = authUser.getUser().getUserId();
         Page<Review> reviewPage = reviewService.getList(userId, page, size);
         List<Review> content = reviewPage.getContent();
         return new ResponseEntity(new MultiResponse<>(reviewMapper.reviewsToReviewResponseDto(content),reviewPage),HttpStatus.OK);

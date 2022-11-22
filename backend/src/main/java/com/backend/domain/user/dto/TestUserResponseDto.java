@@ -6,7 +6,6 @@ import lombok.Getter;
 
 @Getter
 public class TestUserResponseDto {
-
     private String email;
     private String password;
 

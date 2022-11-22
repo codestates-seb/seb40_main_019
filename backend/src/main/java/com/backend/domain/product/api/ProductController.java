@@ -1,26 +1,22 @@
 package com.backend.domain.product.api;
 
-import com.backend.domain.product.application.AwsS3Service;
 import com.backend.domain.product.application.ImageUploadService;
 import com.backend.domain.product.application.ProductService;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.dto.DetailImg;
 import com.backend.domain.product.dto.ProResponseDto;
-import com.backend.domain.product.dto.ProductPatchDto;
 import com.backend.domain.product.dto.TitleImg;
 import com.backend.domain.product.mapper.ProductMapper;
-import com.backend.domain.user.domain.AuthUser;
-import com.backend.global.annotation.CurrentMember;
-import com.backend.global.dto.Response.MultiResponse;
-import com.backend.global.dto.Response.SingleResponseDto;
+import com.backend.global.annotation.CurrentUser;
+import com.backend.global.config.auth.userdetails.CustomUserDetails;
+import com.backend.global.dto.response.MultiResponse;
+import com.backend.global.dto.response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,13 +37,13 @@ public class ProductController {
 //        return new ResponseEntity(response,HttpStatus.OK);
 //    }
     @PostMapping("/products/{categoryId}")
-    public ResponseEntity create(@CurrentMember AuthUser authUser, @PathVariable Long categoryId,
+    public ResponseEntity create(@CurrentUser CustomUserDetails authUser, @PathVariable Long categoryId,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
-                                 TitleImg titleImg,DetailImg detailImg){
+                                 TitleImg titleImg, DetailImg detailImg){
 
         String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());
         String detailUrl = awsS3Service.StoreImage(detailImg.getDetailImg());
-        Long userId = authUser.getUserId();
+        Long userId = authUser.getUser().getUserId();
         Product response = productService.create(userId,price,productName,titleUrl,detailUrl,categoryId);
 
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.CREATED);

@@ -17,12 +17,46 @@ spring:
       mode: always
   profiles:
     active: server # local / server
+    include: oauth
+  security:
+    # 해당 파일을 읽어 OAuth2ClientProperties 생성
+    # OAuth2ClientPropertiesRegistrationAdapter를 통해 OAuth2ClientProperties에서 각 OAuth2 server마다 ClientRegistration 생성
+    # ClientRegistration 리스트를 InMemoryClientRegistrationRepository에 저장
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${/config/cloud-parameter-store/google-client-id}
+            client-secret: ${/config/cloud-parameter-store/google-client-secret}
+            scope:
+              - email
+              - profile
+            redirect-uri: ${/config/cloud-parameter-store/google-redirect-uri} # 해당 라인없으면 로드밸런서 때문인가 https로 인식을 못한다..
+          kakao:
+            client-id: ${/config/cloud-parameter-store/kakao-client-id}
+            client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
+            scope: # scope는 필요한 권한을 적어준다.
+              - profile_nickname
+              - profile_image
+              - account_email
+            client-name: Kakao
+            authorization-grant-type: authorization_code
+            redirect-uri: ${/config/cloud-parameter-store/kakao-redirect-uri} # {baseUrl}/login/oauth2/code/{registrationId}
+            client-authentication-method: POST
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize # 인증 요청
+            token-uri: https://kauth.kakao.com/oauth/token # 토큰 요청
+            user-info-uri: https://kapi.kakao.com/v2/user/me # 사용자 정보 요청
+            user-name-attribute: id # 사용자 정보에서 사용자 이름을 가져올 때 사용할 필드
+
 logging:
   level:
     org:
       springframework:
         orm:
           jpa: DEBUG
+# Send Mail
 naver:
   id: ${/config/cloud-parameter-store/naver-id}
   password: ${/config/cloud-parameter-store/naver-password}

@@ -1,17 +1,12 @@
 package com.backend.domain.product.domain;
 
-import com.backend.domain.category.domain.Category;
 import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.product.dto.ProductPatchDto;
-import com.backend.domain.product.dto.ProductPostDto;
 import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
+import com.backend.domain.category.domain.Category;
 
 import javax.persistence.*;
 import java.util.ArrayList;

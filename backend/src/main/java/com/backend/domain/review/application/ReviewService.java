@@ -12,7 +12,6 @@ import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +31,7 @@ public class ReviewService {
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
 
-        review.setReviewWriter(user.getUserName());
+        review.setReviewWriter(user.getUsername());
         review.setUser(user);
         review.setProduct(product);
 
