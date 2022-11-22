@@ -2,11 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   open: false,
-  name: '',
+  nickname: '',
   email: '',
   password: '',
   address: '',
-  postCode: '',
+  zipCode: '',
 };
 
 export const modalSlice = createSlice({
@@ -22,11 +22,11 @@ export const modalSlice = createSlice({
     setFormData: (state, { payload }) => {
       return {
         ...state,
-        name: payload.name,
+        nickname: payload.nickname,
         email: payload.email,
         password: payload.password,
         address: payload.address,
-        postCode: payload.postCode,
+        zipCode: payload.zipCode,
       };
     },
   },
