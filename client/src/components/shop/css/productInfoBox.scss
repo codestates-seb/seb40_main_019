@@ -25,11 +25,10 @@
     // margin: 10px 0px 40px 0px;
     .imgStarBox{
         // flex:1;
-        .productImg{
+        img{
             width: 160px;
-            text-align: center;
             height: 200px;
-            background-color: #F9F3E5;
+            object-fit: cover;
             border-radius: 15px;
         }
         .reviewStar{

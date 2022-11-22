@@ -13,7 +13,7 @@ export default function ProductInfoBox({ product }) {
           {/* header = 사진+별 */}
           <div className="itemHeaderContainer">
             <div className="imgStarBox">
-              <img className="productImg" src={product.img} alt="productImg" />
+              <img src={product.titleImg} alt="productImg" />
               <div className="reviewStar">
                 <ReviewStar clickStar={product.average} type={'small'} />
               </div>

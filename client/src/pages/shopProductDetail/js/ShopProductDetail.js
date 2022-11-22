@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const shopProductDetail = () => {
-  const [products, setProducts] = useState();
+  const [product, setProducts] = useState();
   useEffect(() => {
     axios.get('http://localhost:3001/productdetail/').then((res) => {
       setProducts(res.data);
@@ -21,12 +21,12 @@ const shopProductDetail = () => {
     <>
       <div className="detailInfoContainer">
         <div className="leftContainer">
-          <ProductDetailBox />
+          <ProductDetailBox product={product} />
           <ProductDetailReadme />
           <ProductDetailReview />
         </div>
         <div className="rightContainer">
-          {products && <ProductInfoBox product={products} />}
+          {product && <ProductInfoBox product={product} />}
         </div>
       </div>
     </>

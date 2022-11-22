@@ -1,11 +1,19 @@
 import '../css/productDetailBox.scss';
 
-export default function ProductDetailBox() {
+export default function ProductDetailBox({ product }) {
   return (
     <div className="detailContainer">
-      <div className="titleImg"></div>
-      <div className="detailText">DETAIL</div>
-      <div className="detailImg"></div>
+      {product && (
+        <>
+          <div className="titleImg">
+            <img src={product.titleImg} alt="titleImg" />
+          </div>
+          <div className="detailText">DETAIL</div>
+          <div className="detailImg">
+            <img src={product.detailImg} alt="datailImg" />
+          </div>
+        </>
+      )}
     </div>
   );
 }
