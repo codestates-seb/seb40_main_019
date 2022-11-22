@@ -12,6 +12,7 @@ function ProductItems() {
       // console.log(res.data);
     });
   }, []);
+
   //console.log(data);
   return (
     <>

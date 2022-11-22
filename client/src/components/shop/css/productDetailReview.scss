@@ -1,29 +1,38 @@
-.reviewContainer{
-    display: block;
+.reviewContainer {
+  display: block;
+  width: 100%;
+  // max-width: 150px;
+
+  .reviewText {
+    border-top: solid 2px var(--color-blue);
+    border-bottom: solid 2px var(--color-blue);
+    color: var(--color-blue);
     width: 100%;
-    // max-width: 150px;
+    height: 50px;
+    text-align: center;
+    letter-spacing: 12px;
+    margin: 30px 0;
+    padding-top: 12px;
+    font-weight: bold;
+  }
+  //   .reviewTextContainer {
+  //     width: 100%;
 
-    .reviewText{
-        border-top: solid 2px var(--color-blue);
-        border-bottom: solid 2px var(--color-blue);
-        color: var(--color-blue);
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        letter-spacing: 12px;
-        margin: 30px 0;
-        padding-top: 12px;
-        font-weight: bold;
-    }
-    .reviewTextContainer{
-        width: 100%;
+  //     div {
+  //       width: 100%;
+  //       height: 240px;
+  //       border-radius: 15px;
+  //       background-color: #f9f3e5;
+  //       padding: 12px;
+  //     }
+  //   }
 
-        div{
-            width: 100%;
-            height: 240px;
-            border-radius: 15px;
-            background-color: #F9F3E5;
-            padding: 12px;
-        }
-    }
+  .reviewBtn {
+    background-color: var(--color-white);
+    color: var(--color-blue);
+  }
+  .detailBtn {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+  }
 }

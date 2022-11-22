@@ -1,17 +1,26 @@
 import '../css/quantityBtn.scss';
-import { useState } from 'react';
 
 //수량 + - 버튼
-export default function QuantityBtn() {
-  const [count, setCount] = useState(0);
-
+export default function QuantityBtn({ count, setCount }) {
   return (
     <div className="quantityContainer">
       {/* <span>Quantity</span> */}
       <div className="controlBtn">
-        <button onClick={() => setCount(count - 1)}>-</button>
+        <button
+          onClick={() => {
+            if (count > 1) setCount(count - 1);
+          }}
+        >
+          <i className="fa-solid fa-minus"></i>
+        </button>
         <span>{count}</span>
-        <button onClick={() => setCount(count + 1)}>+</button>
+        <button
+          onClick={() => {
+            if (count < 100) setCount(count + 1);
+          }}
+        >
+          <i className="fa-solid fa-plus"></i>
+        </button>
       </div>
     </div>
   );

@@ -13,8 +13,6 @@
     position: sticky !important;
     top: 150px !important;
     font-weight: bold;
-
-
 }
 
 // header = 사진+별
@@ -25,19 +23,21 @@
     padding-bottom: 30px;
     
     // margin: 10px 0px 40px 0px;
-    padding-top: 10px;
     .imgStarBox{
         // flex:1;
-        .productImg{
+        img{
             width: 160px;
-            text-align: center;
             height: 200px;
-            background-color: #F9F3E5;
+            object-fit: cover;
             border-radius: 15px;
         }
         .reviewStar{
             text-align: center;
-            padding: 10px;
+            // padding: 10px;
+            margin-top: 20px;
+            button{
+                padding: 0px 3px;
+            }
         }
     }
 
@@ -49,6 +49,7 @@
         > button{
             display: block;
             background-color: var(--color-blue);
+            padding: 3px 6px;
             color: var(--color-white);
             border-radius: 15px;
             font-size: 12px;
@@ -64,6 +65,7 @@
         .QuantityBox{
             display: flex;
             justify-content: space-around;
+            align-items: center;
         }
 
     }
