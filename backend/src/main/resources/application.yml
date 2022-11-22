@@ -1,9 +1,3 @@
-awsParameterStorePropertySource:
-  enabled: true
-jwt:
-  access-token-expiration-time: ${/config/cloud-parameter-store/atk-exp}
-  refresh-token-expiration-time: ${/config/cloud-parameter-store/rtk-exp}
-  secret: ${/config/cloud-parameter-store/jwt-secret}
 spring:
   jpa:
     defer-datasource-initialization: true
@@ -49,14 +43,39 @@ spring:
             token-uri: https://kauth.kakao.com/oauth/token # 토큰 요청
             user-info-uri: https://kapi.kakao.com/v2/user/me # 사용자 정보 요청
             user-name-attribute: id # 사용자 정보에서 사용자 이름을 가져올 때 사용할 필드
-
+### loging ###
 logging:
   level:
     org:
       springframework:
         orm:
           jpa: DEBUG
-# Send Mail
+### Mail ###
 naver:
   id: ${/config/cloud-parameter-store/naver-id}
   password: ${/config/cloud-parameter-store/naver-password}
+### AWS ###
+awsParameterStorePropertySource:
+  enabled: true
+cloud:
+  aws:
+    credentials:
+      access-key: ${/config/cloud-parameter-store/aws-access-key}
+      secret-key: ${/config/cloud-parameter-store/aws-secret-key}
+    region:
+      static: ${/config/cloud-parameter-store/aws-region}
+    s3:
+      bucket: ${/config/cloud-parameter-store/aws-s3-bucket}
+    stack:
+      auto: false
+### Address ###
+address:
+  local: ${/config/cloud-parameter-store/local-address}
+  domain: ${/config/cloud-parameter-store/domain-address}
+  front-local: ${/config/cloud-parameter-store/front-local}
+  front-s3: ${/config/cloud-parameter-store/front-s3}
+### JWT ###
+jwt:
+  access-token-expiration-time: ${/config/cloud-parameter-store/atk-exp}
+  refresh-token-expiration-time: ${/config/cloud-parameter-store/rtk-exp}
+  secret: ${/config/cloud-parameter-store/jwt-secret}

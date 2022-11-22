@@ -11,11 +11,16 @@ import lombok.Setter;
 public class UserResponseDto {
 
     private Long userId;
-    private String username;
     private String email;
+    private String nickname;
     private String profileImage;
-    private User.UserStatus userStatus;
+    private String about;
     private String userRole;
     private String socialLogin;
+    private User.UserStatus userStatus;
+    private String address;
+    private String zipCode;
+    private String phone;
+    private String username;
 
 }

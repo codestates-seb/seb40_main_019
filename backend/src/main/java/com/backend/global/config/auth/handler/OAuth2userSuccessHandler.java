@@ -1,12 +1,13 @@
 package com.backend.global.config.auth.handler;
 
+import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
+import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.global.utils.jwt.JwtTokenizer;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
@@ -26,9 +27,10 @@ import java.util.Map;
  */
 @AllArgsConstructor
 @Slf4j
-public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenizer jwtTokenizer;
     private final UserRepository userRepository;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     /**
      * @param request        요청
@@ -41,7 +43,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                                         HttpServletResponse response,
                                         Authentication authentication) {
 
-        log.info("OAuth2MemberSuccessHandler 실행");
+        log.info("OAuth2userSuccessHandler 실행");
 
         var oAuth2User = (OAuth2User) authentication.getPrincipal();
         String registrationId = response.getHeader("registrationId");
@@ -63,43 +65,37 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         String accessToken = delegateAccessToken(user);
         String refreshToken = delegateRefreshToken(user);
         log.info("JWT 발급 완료");
-        String uri = createURI(accessToken, refreshToken).toString();
 
+        saveRefreshToken(refreshToken, user);
+        log.info("RefreshToken 저장 완료");
 
-        response.setHeader("Authorization", "Bearer " + accessToken);
-
-        Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMillisecond();
-
-        ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
-                .maxAge(refreshExp)
-                .path("/")
-                .secure(true)
-                .sameSite("None")
-                .httpOnly(true)
-                .build();
-
-        response.setHeader("Set-Cookie", cookie.toString());
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
-                "\"name\":\"" + user.getUsername() + "\"," +
-                "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
+        String uri = createURI(accessToken, refreshToken, registrationId).toString();
 
 
         getRedirectStrategy().sendRedirect(request, response, uri);
 
-        log.info("OAuth2MemberSuccessHandler 종료");
+        log.info("OAuth2userSuccessHandler 종료");
+    }
+
+    private void saveRefreshToken(String refreshToken, User user) {
+        Long userId = user.getUserId();
+        RefreshToken refreshTokenEntity = RefreshToken.builder()
+                .key(userId)
+                .value(refreshToken)
+                .build();
+
+        refreshTokenRepository.save(refreshTokenEntity);
     }
 
     /**
      * URI 생성
      *
-     * @param accessToken  액세스 토큰
-     * @param refreshToken 리프레시 토큰
+     * @param accessToken    액세스 토큰
+     * @param refreshToken   리프레시 토큰
+     * @param registrationId 소셜 로그인 구분
      * @return URI
      */
-    private URI createURI(String accessToken, String refreshToken) {
+    private URI createURI(String accessToken, String refreshToken, String registrationId) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("access_token", "Bearer " + accessToken);
         queryParams.add("refresh_token", refreshToken);
@@ -109,7 +105,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
                 .scheme("http")
                 .host("localhost")
                 .port(3000)
-                .path("/login/oauth")
+                .path("/oauth/" + registrationId)
                 .queryParams(queryParams)
                 .build()
                 .toUri();
@@ -120,12 +116,13 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
 //                .scheme("https")
 //                .host("app")
 //                .port(443)
-//                .path("/login/oauth")
+//                .path("/oauth/" + registrationId)
 //                .queryParams(queryParams)
 //                .build()
 //                .toUri();
     }
 
+    // todo 토큰 발급 중복 메소드 통합 (JwtAuthenticationFilter, OAuth2userSuccessHandler)
     /**
      * 액세스 토큰 발급
      *
@@ -137,6 +134,8 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
+        claims.put("nickname", user.getNickname());
+        claims.put("imageUrl", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
@@ -159,6 +158,8 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
+        claims.put("nickname", user.getNickname());
+        claims.put("imageUrl", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());

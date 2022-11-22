@@ -1,7 +1,6 @@
 package com.backend.domain.user.mapper;
 
 import com.backend.domain.user.application.UserService;
-import com.backend.domain.user.domain.Address;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.domain.user.dto.UserPostDto;
@@ -16,19 +15,15 @@ public interface UserMapper {
         User user = new User();
 
         user.setEmail(userPostDto.getEmail());
-        user.setUsername(userPostDto.getUsername());
+        user.setNickname(userPostDto.getNickname());
         user.setPassword(userPostDto.getPassword());
         user.setUserRole("ROLE_USER");
         user.setProfileImage("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png");
         user.setSocialLogin("original");
         user.setUserStatus(User.UserStatus.USER_EXIST);
         user.setAbout("안녕하세요");
-
-        Address address = Address.builder()
-                .address(userPostDto.getAddress())
-                .zipCode(userPostDto.getZipCode())
-                .build();
-        user.addAddress(address);
+        user.setAddress(userPostDto.getAddress());
+        user.setZipCode(userPostDto.getZipCode());
 
         return user;
     }
@@ -39,25 +34,33 @@ public interface UserMapper {
 
         userResponseDto.setUserId(user.getUserId());
         userResponseDto.setEmail(user.getEmail());
-        userResponseDto.setUsername(user.getUsername());
+        userResponseDto.setNickname(user.getNickname());
         userResponseDto.setProfileImage(user.getProfileImage());
-        userResponseDto.setUserStatus(user.getUserStatus());
+        userResponseDto.setAbout(user.getAbout());
         userResponseDto.setUserRole(user.getUserRole());
         userResponseDto.setSocialLogin(user.getSocialLogin());
+        userResponseDto.setUserStatus(user.getUserStatus());
+        userResponseDto.setAddress(user.getAddress());
+        userResponseDto.setZipCode(user.getZipCode());
+        userResponseDto.setPhone(user.getPhone());
+        userResponseDto.setUsername(user.getUsername());
 
         return userResponseDto;
     }
 
-    default User userPatchDtoToUser(UserService userService, UserPatchDto userPatchDto){
+    default User userPatchDtoToUser(UserService userService, UserPatchDto userPatchDto) {
 
         long userId = userService.getLoginUser().getUserId();// 토큰에 해당하는 userId 값 가져오기
         User user = new User();
         user.setUserId(userId);
-        user.setEmail(userPatchDto.getEmail());
+        user.setNickname(userPatchDto.getNickname());
+        user.setPassword(userPatchDto.getPassword());
         user.setProfileImage(userPatchDto.getProfileImage());
+        user.setAbout(userPatchDto.getAbout());
+        user.setAddress(userPatchDto.getAddress());
+        user.setZipCode(userPatchDto.getZipCode());
+        user.setPhone(userPatchDto.getPhone());
         user.setUsername(userPatchDto.getUsername());
-        user.setUserStatus(userPatchDto.getUserStatus());
-        user.setUserRole(userPatchDto.getUserRole());
 
         return user;
     }

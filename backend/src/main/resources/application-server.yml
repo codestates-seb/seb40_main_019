@@ -8,6 +8,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # create / update / validate / none
+      # 아직 개발중이라 변동사항이 많아서 update로 설정 추후 none or validate로 변경
 cloud:
   aws:
     credentials:
