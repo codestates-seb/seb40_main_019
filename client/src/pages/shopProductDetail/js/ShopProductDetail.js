@@ -26,15 +26,7 @@ const shopProductDetail = () => {
           <ProductDetailReview />
         </div>
         <div className="rightContainer">
-          {/* <ProductInfoBox /> */}
-          {products &&
-            products.map((product) => {
-              return (
-                <div key={product.productId}>
-                  <ProductInfoBox product={product} />;
-                </div>
-              );
-            })}
+          {products && <ProductInfoBox product={products} />}
         </div>
       </div>
     </>

@@ -1,8 +1,11 @@
 import '../css/productInfoBox.scss';
 import QuantityBtn from './QuantityBtn';
 import BuyAddBtn from './BuyAddBtn';
+import { useState } from 'react';
+import ReviewStar from '../../review/js/ReviewStar';
 
 export default function ProductInfoBox({ product }) {
+  const [count, setCount] = useState(1);
   return (
     <>
       <div className="productInfoContainer">
@@ -11,7 +14,9 @@ export default function ProductInfoBox({ product }) {
           <div className="itemHeaderContainer">
             <div className="imgStarBox">
               <img className="productImg" src={product.img} alt="productImg" />
-              <div className="reviewStar">⭐⭐⭐⭐⭐</div>
+              <div className="reviewStar">
+                <ReviewStar clickStar={product.average} type={'small'} />
+              </div>
             </div>
             {/* body = new, 제품명, quantity */}
             <div className="itemBodyContainer">
@@ -20,7 +25,7 @@ export default function ProductInfoBox({ product }) {
               <div className="titleBox">{product.title}</div>
               <div className="QuantityBox">
                 <span>Quantity</span>
-                <QuantityBtn />
+                <QuantityBtn count={count} setCount={setCount} />
               </div>
             </div>
           </div>
@@ -28,7 +33,7 @@ export default function ProductInfoBox({ product }) {
           <div className="itemFooterContainer">
             <div className="priceBox">
               <div className="totalbox">total</div>
-              <div>{product.price}원</div>
+              <div>{product.price * count}원</div>
             </div>
             <div className="btnBox">
               <BuyAddBtn />
