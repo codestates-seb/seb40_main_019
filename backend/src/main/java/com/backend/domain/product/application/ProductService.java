@@ -1,5 +1,8 @@
 package com.backend.domain.product.application;
 
+import com.backend.domain.category.dao.CategoryRepository;
+import com.backend.domain.category.domain.Category;
+import com.backend.domain.category.excption.CategoryNotFound;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.exception.ProductExist;
@@ -16,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,34 +30,46 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
+    private final CategoryRepository categoryRepository;
 
     // 제품 생성
     @Transactional
-    public Product create(Long userId,Product product){
+    public Product create(Long userId, int price, String productName,String titleUrl,String detailUrl,Long categoryId){
+
+        Product product = new Product();
+        product.setPrice(price);
+        product.setProductName(productName);
+        product.setTitleImg(titleUrl);
+        product.setDetailImg(detailUrl);
 
         // 상품 이름 중복 검사
         existSameName(product.getProductName());
         // 유저 정보 검사
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
-
+        Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
+        product.setCategory(category);
         product.setUser(user);
         return productRepository.save(product);
     }
 
-
-
     // 상품 수정
     @Transactional
-    public Product update(Long productsId, Product product) {
-        Product findProduct = productRepository.findById(productsId).orElseThrow(ProductNotFound::new);
+    public Product update(Long productId, Long categoryId,int price ,String productName, String titleUrl, String detailImg) {
+        Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
 
-        Optional.ofNullable(product.getProductId())
+        Optional.ofNullable(category)
+                        .ifPresent(findProduct::setCategory);
+        Optional.ofNullable(productId)
                 .ifPresent(findProduct::setProductId);
-        Optional.ofNullable(product.getProductName())
+        Optional.ofNullable(productName)
                 .ifPresent(findProduct::setProductName);
-        Optional.ofNullable(product.getPrice())
+        Optional.ofNullable(price)
                 .ifPresent(findProduct::setPrice);
-
+        Optional.ofNullable(titleUrl)
+                .ifPresent(findProduct::setTitleImg);
+        Optional.ofNullable(detailImg)
+                .ifPresent(findProduct::setDetailImg);
         return productRepository.save(findProduct);
     }
 
@@ -84,18 +100,24 @@ public class ProductService {
         return productRepository.findById(productId).orElseThrow(ProductNotFound::new);
     }
 
-    public long calculateReviewAverage(Long productId){
+    public String calculateReviewAverage(Long productId){
 
         List<Review> reviews = reviewRepository.findByProductId(productId);
         if (reviews.isEmpty()){
-            return 0;
+            return "0";
         }else {
             int totalScore = reviews.stream()
                     .mapToInt(Review::getStar)
                     .sum();
             int totalUsers = reviews.size();
+            double result = ((double) totalScore / (double) totalUsers);
+            DecimalFormat form = new DecimalFormat("#.##");
 
-            return totalScore / totalUsers;
+            return form.format(result);
         }
+    }
+
+    public Page<Product> getCategory(Long categoryId,int page, int size) {
+        return productRepository.findByCategory(categoryId,PageRequest.of(page,size,Sort.by("productId").descending()));
     }
 }
