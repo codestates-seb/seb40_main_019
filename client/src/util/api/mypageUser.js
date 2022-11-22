@@ -8,7 +8,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 // 한글 이름만
 let reg_name1 = /^[가-힣]+$/;
 // 문자와 특수문자 조합의 6~24 자리
-// let reg_pw2 = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{6,24}/;
+let reg_pw2 = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,16}/;
 // 휴대폰 번호
 let reg_mobile = /^\d{3}-\d{3,4}-\d{4}$/;
 
@@ -39,11 +39,19 @@ export const editUserInfo = async (data) => {
       // 비밀번호 요청 API 필요
       return;
     }
+
     // 새 비밀번호 입력
     if (data.newPassword === '') {
       window.alert('새로운 비밀번호를 입력해주세요');
       return;
     }
+    if (data.newPassword !== undefined && !reg_pw2.test(data.newPassword)) {
+      window.alert(
+        '영문 대소문자/숫자/특수문자를 포함한 8자~16자 사이의 비밀번호를 입력해주세요'
+      );
+      return;
+    }
+
     // 새 비밀번호 확인
     if (data.newPasswordConfirm === '') {
       window.alert('새 비밀번호 확인을 입력해주세요');
@@ -59,6 +67,7 @@ export const editUserInfo = async (data) => {
       window.alert('올바른 이름을 입력해주세요');
       return;
     }
+
     // 휴대폰 번호 유효성 확인
     if (!reg_mobile.test(data.phone)) {
       window.alert(
