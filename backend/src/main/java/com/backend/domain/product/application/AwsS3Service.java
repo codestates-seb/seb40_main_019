@@ -44,6 +44,8 @@ public class AwsS3Service implements ImageUploadService{
         return amazonS3.getUrl(bucketName, storeFileName).toString();
     }
 
+
+
     private void validateFileExists(MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
             throw new NoImage();

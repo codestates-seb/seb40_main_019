@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Getter
+@NoArgsConstructor
 public class ProductPostDto {
 
     @NotNull
@@ -18,12 +19,6 @@ public class ProductPostDto {
 
     @NotBlank
     private String productName;
-
-    private MultipartFile img;
-
-    public ProductPostDto(MultipartFile img) {
-        this.img = img;
-    }
 
 
 

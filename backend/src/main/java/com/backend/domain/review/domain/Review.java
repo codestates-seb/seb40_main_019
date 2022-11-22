@@ -35,6 +35,12 @@ public class Review {
 
     private int star;
 
+    private String reviewImg;
+
+    public void setReviewImg(String reviewImg) {
+        this.reviewImg = reviewImg;
+    }
+
     public void setStar(int star) {
         this.star = star;
     }

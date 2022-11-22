@@ -1,8 +1,10 @@
 package com.backend.domain.review.api;
 
+import com.backend.domain.product.application.ImageUploadService;
 import com.backend.domain.review.Mapper.ReviewMapper;
 import com.backend.domain.review.application.ReviewService;
 import com.backend.domain.review.domain.Review;
+import com.backend.domain.review.dto.ReviewImg;
 import com.backend.domain.review.dto.ReviewPatchDto;
 import com.backend.domain.review.dto.ReviewPostDto;
 import com.backend.domain.user.domain.AuthUser;
@@ -25,20 +27,26 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewMapper reviewMapper;
+    private final ImageUploadService awsS3Service;
+
+    @PostMapping("/review/image")
+    public String reviewImg(ReviewImg reviewImg){
+        return awsS3Service.StoreImage(reviewImg.getReviewImg());
+    }
+
 
     @PostMapping("/review/{productId}")
     public ResponseEntity create(@CurrentMember AuthUser authUser,
                                  @PathVariable Long productId,
                                  @Valid @RequestBody ReviewPostDto reviewPostDto){
 
-        Review review = reviewMapper.reviewPostDtoToReview(reviewPostDto);
-
         Long userId = authUser.getUserId();
-
-        Review saveReview = reviewService.create(userId, review,productId);
+        Review review = reviewMapper.reviewPostDtoToReview(reviewPostDto);
+        Review saveReview = reviewService.create(userId,productId,review);
 
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(saveReview)), HttpStatus.CREATED);
     }
+
 
     @PatchMapping("/review/{reviewId}")
     public ResponseEntity update(@PathVariable Long reviewId,
@@ -54,6 +62,11 @@ public class ReviewController {
     public ResponseEntity<Long> delete(@PathVariable Long reviewId){
         reviewService.delete(reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/review/read/{reviewId}")
+    public ResponseEntity getRead(@PathVariable Long reviewId){
+        Review read = reviewService.getRead(reviewId);
+        return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(read)),HttpStatus.OK);
     }
 
     @GetMapping("/user/review")

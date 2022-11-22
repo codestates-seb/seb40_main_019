@@ -18,4 +18,5 @@ public class ReviewResponseDto {
     @NotNull
     private int star;
 
+
 }

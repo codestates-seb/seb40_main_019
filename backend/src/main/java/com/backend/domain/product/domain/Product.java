@@ -35,6 +35,10 @@ public class Product {
     @Column(nullable = false)
     private int discountPrice;
 
+    private String titleImg;
+
+    private String detailImg;
+
     // 유저 맵핑 추가
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -59,6 +63,16 @@ public class Product {
 //    private List<Cart> carts = new ArrayList<>();
 
     // 상품에 판매자 유저 정보 입력
+
+
+    public void setTitleImg(String titleImg) {
+        this.titleImg = titleImg;
+    }
+
+    public void setDetailImg(String detailImg) {
+        this.detailImg = detailImg;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -78,4 +92,6 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+
 }

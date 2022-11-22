@@ -34,7 +34,13 @@ public class ProductService {
 
     // 제품 생성
     @Transactional
-    public Product create(Long userId,Product product,long categoryId){
+    public Product create(Long userId, int price, String productName,String titleUrl,String detailUrl,Long categoryId){
+
+        Product product = new Product();
+        product.setPrice(price);
+        product.setProductName(productName);
+        product.setTitleImg(titleUrl);
+        product.setDetailImg(detailUrl);
 
         // 상품 이름 중복 검사
         existSameName(product.getProductName());
@@ -46,23 +52,24 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-
-
     // 상품 수정
     @Transactional
-    public Product update(Long productsId, Product product, Long categoryId) {
-        Product findProduct = productRepository.findById(productsId).orElseThrow(ProductNotFound::new);
+    public Product update(Long productId, Long categoryId,int price ,String productName, String titleUrl, String detailImg) {
+        Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
 
         Optional.ofNullable(category)
                         .ifPresent(findProduct::setCategory);
-        Optional.ofNullable(product.getProductId())
+        Optional.ofNullable(productId)
                 .ifPresent(findProduct::setProductId);
-        Optional.ofNullable(product.getProductName())
+        Optional.ofNullable(productName)
                 .ifPresent(findProduct::setProductName);
-        Optional.ofNullable(product.getPrice())
+        Optional.ofNullable(price)
                 .ifPresent(findProduct::setPrice);
-
+        Optional.ofNullable(titleUrl)
+                .ifPresent(findProduct::setTitleImg);
+        Optional.ofNullable(detailImg)
+                .ifPresent(findProduct::setDetailImg);
         return productRepository.save(findProduct);
     }
 

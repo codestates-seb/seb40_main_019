@@ -19,4 +19,8 @@ public class ProResponseDto {
 
     @NotNull
     private String average;
+
+    private String titleImg;
+
+    private String detailImg;
 }

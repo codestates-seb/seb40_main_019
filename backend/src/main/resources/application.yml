@@ -12,6 +12,9 @@ spring:
       hibernate:
         format_sql: true # (3) SQL pretty print
         use_sql_comments: true
+  sql:
+    init:
+      mode: always
   profiles:
     active: server # local / server
 logging:
