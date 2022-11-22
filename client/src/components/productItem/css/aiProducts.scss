@@ -18,7 +18,7 @@ section.yellowBoxRow{
 
     .yellowBox{
         position: absolute;
-        right: -95px;
+        right: -100px;
         width: 1300px;
         height: 400px;
         background-color: var(--color-yellow);
@@ -113,3 +113,6 @@ section.yellowBoxRow{
 }
 
 // item 3가지 추천 창
+.recommendBox{
+    display: flex;
+}
