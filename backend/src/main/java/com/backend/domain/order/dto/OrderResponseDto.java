@@ -1,5 +1,6 @@
 package com.backend.domain.order.dto;
 
+import com.backend.domain.order.domain.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,4 +14,5 @@ public class OrderResponseDto {
 
     private String receiverAddress;
 
+    private OrderStatus orderStatus;
 }

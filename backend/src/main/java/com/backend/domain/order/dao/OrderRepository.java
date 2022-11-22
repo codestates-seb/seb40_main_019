@@ -1,6 +1,8 @@
 package com.backend.domain.order.dao;
 
+import com.backend.domain.order.application.OrderService;
 import com.backend.domain.order.domain.Order;
+import com.backend.domain.order.domain.OrderStatus;
 import com.backend.domain.user.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,4 +26,12 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     )
     Long countOrder(@Param("userId") Long userId);
 
+    @Query("select o from Order o " +
+            "where o.orderStatus =  'shipping' " +
+            "order by o.createdAt desc"
+    )
+
+    List<Order> findByStatus();
+
+    List<Order> findAll();
 }

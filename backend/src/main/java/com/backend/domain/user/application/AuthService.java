@@ -61,7 +61,7 @@ public class AuthService {
         user.addAddress(address);
 
         userRepository.save(user);
-        pointService.addCash(user, 5000);
+        pointService.addCash(user, 100000); // 회원가입시 10만포인트지급
     }
 
     private void verifyExistsEmail(String email) {

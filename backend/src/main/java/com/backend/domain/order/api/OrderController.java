@@ -32,7 +32,6 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/orders")
 public class OrderController {
     private final OrderService orderService;
     private final OrderMapper mapper;
@@ -40,7 +39,7 @@ public class OrderController {
     private final OrderRepository orderRepository;
 
     //주문
-    @PostMapping
+    @PostMapping("/orders")
     public ResponseEntity order(@CurrentMember AuthUser authuser, @RequestBody @Valid OrderDto orderDto) {
         Long userId = authuser.getUserId();
         Long orderId;
@@ -50,7 +49,7 @@ public class OrderController {
 
 
     //주문지 수정
-    @PatchMapping("{orderId}")
+    @PatchMapping("/orders/{orderId}")
     public ResponseEntity update(@PathVariable Long orderId,
                                  @Valid @RequestBody OrderPatchDto orderPatchDto) {
         Order order = mapper.orderPatchDtoToOrder(orderPatchDto);
@@ -61,15 +60,15 @@ public class OrderController {
 
 
     //주문 취소
-    @DeleteMapping("/{order-id}")
-    public ResponseEntity cancelOrder(@PathVariable("order-id") @Positive long orderId) {
+    @DeleteMapping("orders/{order-id}")
+    public ResponseEntity cancel(@PathVariable("order-id") @Positive long orderId) {
         orderService.cancelOrder(orderId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
-    @GetMapping({"/{page}"})
-    public ResponseEntity<MultiResponseDto> getOrders(@PathVariable("page") Optional<Integer> page, @CurrentMember AuthUser authUser) {
+    @GetMapping(value = {"/orders", "/orders/{page}"})
+    public ResponseEntity<MultiResponseDto> getList(@PathVariable("page") Optional<Integer> page, @CurrentMember AuthUser authUser) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
 
         Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getOrderList(authUser.getUserId(), pageable);
@@ -78,19 +77,15 @@ public class OrderController {
 
         return new ResponseEntity<>(new MultiResponseDto<>(content, ordersHistoryDtoList), HttpStatus.OK);
     }
+
+//판매자 전용기능 필요?없음. 버튼누르면 그냥  order상태변경해서 저장하기만 하면됌. 응답으로는 patch리스폰스랑 같이
+    @PatchMapping("/orders/status/{order-id}")
+    public ResponseEntity updateStatus(@PathVariable("order-id") long orderId) {
+        Order response = orderService.updateStatus(orderId);
+        return ResponseEntity.ok(new SingleResponseDto<>(mapper.orderToResponseDto(response)));
+
+    }
+
+
 }
-/* @GetMapping("/{user-id}")
-     public ResponseEntity getUserOrders(@PathVariable("user-id") long userId,
-                                       @RequestParam int page,
-                                       @RequestParam int size, @CurrentMember AuthUser authuser){
-         userId = authuser.getUserId();
-         Page<Order> userOrders = orderService.findUserOrders(userId, page - 1, size);
-         List<Order> content = userOrders.getContent();
 
-
-         return new ResponseEntity<>(new MultiResponseDto<>(mapper.toDtos(content),userOrders), HttpStatus.OK);
-     }*/
-
-
-
-    //주문생성
