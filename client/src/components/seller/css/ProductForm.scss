@@ -55,17 +55,17 @@
       outline: none;
     }
   }
+  .titleImg{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    align-items: flex-start;
+  }
+
+  .detailImg{
+    display: flex;
+    margin-bottom: 30px;
+    align-items: flex-start;
+  }
 }
 
-.titleImg{
-  display: flex;
-  margin-top: 10px;
-  margin-bottom: 30px;
-  align-items: flex-start;
-}
-
-.detailImg{
-  display: flex;
-  margin-bottom: 30px;
-  align-items: flex-start;
-}

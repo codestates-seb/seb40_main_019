@@ -1,18 +1,28 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReviewForm from '../../../components/review/js/ReviewForm';
 import ReviewStar from '../../../components/review/js/ReviewStar';
-import '../css/ReviewAdd.scss';
+import '../../reviewAdd/css/ReviewAdd.scss';
 
-export default function ReviewAdd() {
+export default function ReviewEdit() {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
+  const [pastData, setPastData] = useState();
+  useEffect(() => {
+    axios.get('http://localhost:3001/sellerproducts/').then((res) => {
+      setPastData(res.data);
+    });
+  }, []);
+  // const [reviewImg, setReviewImg] = useState(pastData.img);
+  // const [reviewContent, setReviewContent] = useState(pastData.reviewContent);
+  // const [clickStar, setClickStar] = useState(pastData.star);
+
+  //오류방지 임시 state
   const [reviewImg, setReviewImg] = useState([]);
   const [reviewContent, setReviewContent] = useState('');
   const [clickStar, setClickStar] = useState(0);
-
   const data = { reviewImg, reviewContent, clickStar };
-  console.log(data);
+  console.log(pastData);
 
   const handleSubmit = () => {
     if (reviewContent.length < 10 || reviewContent.length >= 200) {
@@ -20,7 +30,7 @@ export default function ReviewAdd() {
     } else if (clickStar === 0) {
       alert('리뷰평점을 선택해셔야 합니다');
     } else {
-      axios.post(`${REACT_APP_API_URL}review/{productId}`, data).then((res) => {
+      axios.patch(`${REACT_APP_API_URL}review/{reviewId}`, data).then((res) => {
         console.log(res.data);
         // navigate(`/seller/product`)
       });
@@ -32,7 +42,7 @@ export default function ReviewAdd() {
 
   return (
     <div className="reviewAdd">
-      <h1>리뷰 작성</h1>
+      <h1>리뷰 수정</h1>
       <div className="reviewStarSize">
         <ReviewStar clickStar={clickStar} setClickStar={setClickStar} />
       </div>
@@ -43,7 +53,7 @@ export default function ReviewAdd() {
       />
       <div className="reviewAddBtn">
         <button className="close">닫기</button>
-        <button onClick={handleSubmit}>리뷰 작성</button>
+        <button onClick={handleSubmit}>리뷰 수정</button>
       </div>
     </div>
   );

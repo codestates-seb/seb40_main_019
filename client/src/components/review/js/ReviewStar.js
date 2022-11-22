@@ -1,6 +1,6 @@
 import '../css/ReviewStar.scss';
 
-export default function ReviewStar({ clickStar, setClickStar }) {
+export default function ReviewStar({ clickStar, setClickStar, type }) {
   let arr = [1, 2, 3, 4, 5];
   return (
     <div className="reviewStar">
@@ -14,7 +14,11 @@ export default function ReviewStar({ clickStar, setClickStar }) {
               }}
             >
               <i
-                className="fa-solid fa-star fa-2x"
+                className={
+                  type === 'small'
+                    ? 'fa-solid fa-star'
+                    : 'fa-solid fa-star fa-2x'
+                }
                 style={{ color: '#FFB526' }}
               ></i>
             </button>
@@ -27,7 +31,13 @@ export default function ReviewStar({ clickStar, setClickStar }) {
                 setClickStar(el);
               }}
             >
-              <i className="fa-solid fa-star fa-2x"></i>
+              <i
+                className={
+                  type === 'small'
+                    ? 'fa-solid fa-star'
+                    : 'fa-solid fa-star fa-2x'
+                }
+              ></i>
             </button>
           );
         }
