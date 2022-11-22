@@ -19,7 +19,7 @@ section.yellowBoxRow{
     .yellowBox{
         position: absolute;
         right: -95px;
-        width: 1150px;
+        width: 1300px;
         height: 400px;
         background-color: var(--color-yellow);
         border-radius: 200px 0 0 200px;
@@ -32,7 +32,7 @@ section.yellowBoxRow{
             margin-right: 100px;
             display: flex;
             background-color: var(--color-white);
-            width: 880px;
+            width: 950px;
             height: 350px;
             border-radius: 30px;
         }
@@ -56,16 +56,21 @@ section.yellowBoxRow{
 }
 
 .ageBox{
-    padding: 10px;
+    // padding: 10px;
     >div{
         letter-spacing: 2px;
         padding: 10px;
+        color: var(--color-brown);
     }
     >input{
+        outline: none;
         border-radius: 10px;
         padding-left: 10px;
         width: 220px; 
         height: 40px;
+        &:focus{
+            outline: 3px solid var(--color-yellow);
+        }
     }
 }
 
@@ -74,12 +79,18 @@ section.yellowBoxRow{
     >div{
         letter-spacing: 2px;
         padding: 10px;
+        color: var(--color-brown);
+
     }
     >input{
+        outline: none;
         border-radius: 10px;
         padding-left: 10px;
         width: 220px; 
         height: 40px;
+        &:focus{
+            outline: 3px solid var(--color-yellow);
+        }
     }
 }
 

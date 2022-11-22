@@ -15,11 +15,11 @@ export default function AIproducts() {
               <div className="formBox">
                 <div className="ageBox">
                   <div>나이</div>
-                  <input></input>
+                  <input type="text"></input>
                 </div>
                 <div className="weightBox">
                   <div>몸무게</div>
-                  <input></input>
+                  <input type="text"></input>
                 </div>
                 <div className="submitBox">
                   <button>입력</button>
