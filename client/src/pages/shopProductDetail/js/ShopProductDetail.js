@@ -8,6 +8,7 @@ import ProductInfoBox from '../../../components/shop/js/ProductInfoBox';
 //상품 디테일 데이터 1개만 담고 보여주게 했음
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import QuantityBtn from '../../../components/shop/js/QuantityBtn';
 
 const shopProductDetail = () => {
   const [product, setProducts] = useState();
@@ -16,8 +17,11 @@ const shopProductDetail = () => {
       setProducts(res.data);
     });
   }, []);
-
+  //상세페이지 detail & review선택
   const [clickBtn, setClickBtn] = useState('detail');
+
+  //quantity
+  const [count, setCount] = useState(1);
 
   return (
     <>
@@ -34,7 +38,25 @@ const shopProductDetail = () => {
           <ProductDetailReadme />
         </div>
         <div className="rightContainer">
-          {product && <ProductInfoBox product={product} />}
+          {product && (
+            <ProductInfoBox
+              product={product}
+              count={count}
+              setCount={setCount}
+            />
+          )}
+        </div>
+        <div className="bottomContainer">
+          {product && (
+            <>
+              <div>
+                <div>{product.price} 원</div>
+                <QuantityBtn count={count} setCount={setCount} />
+              </div>
+              <button>CART</button>
+              <button>ORDER</button>
+            </>
+          )}
         </div>
       </div>
     </>

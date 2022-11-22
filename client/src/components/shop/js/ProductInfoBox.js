@@ -1,11 +1,9 @@
 import '../css/productInfoBox.scss';
 import QuantityBtn from './QuantityBtn';
 import BuyAddBtn from './BuyAddBtn';
-import { useState } from 'react';
 import ReviewStar from '../../review/js/ReviewStar';
 
-export default function ProductInfoBox({ product }) {
-  const [count, setCount] = useState(1);
+export default function ProductInfoBox({ product, count, setCount }) {
   return (
     <>
       <div className="productInfoContainer">
