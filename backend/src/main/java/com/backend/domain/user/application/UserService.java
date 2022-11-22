@@ -15,6 +15,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -112,28 +114,40 @@ public class UserService {
         return findUser;
     }
 
+    /**
+     * Refresh Token으로 Access Token 재발급
+     *
+     * @param refreshToken 재발급 요청한 유저의 Refresh Token
+     * @param response     재발급한 Access Token을 Response Header에 담기 위한 HttpServletResponse
+     * @return 재발급 받은 User 정보
+     */
     public UserLoginResponseDto createAccessToken(String refreshToken, HttpServletResponse response) {
-        Map<String, Object> claims = null;
-        User user = null;
-
-        // todo 액세스 토큰 발급 로직 수정
-
-        user = getUser(refreshToken);
+        User user = getUser(refreshToken);
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
+
+        Map<String, Object> claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
+
         String accessToken = "Bearer " + jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+        log.info("재발급 : accessToken 생성완료 {}", accessToken);
+        log.info("accessToken : {}", accessToken);
 
         response.setHeader("Authorization", accessToken);
 
         return UserLoginResponseDto.toResponse(user);
     }
 
+    /**
+     * UserId로 유저, RefreshToken 조회 후 토큰 삭제
+     *
+     * @param userId 유저 ID
+     */
     @Transactional
-    public void logout(HttpServletResponse response,
-                       Long userId) {
+    public void logout(Long userId) {
         findVerifiedUser(userId);
+        log.info("로그아웃: {}", userId);
         findVerifiedRefreshToken(userId);
         refreshTokenRepository.deleteByKey(userId);
     }

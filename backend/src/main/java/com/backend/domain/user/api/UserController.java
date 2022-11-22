@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
@@ -41,22 +42,33 @@ public class UserController {
         return ResponseEntity.created(uri).build();
     }
 
-    // 토큰 재발급
+    /**
+     * Refresh Token을 이용하여 Access Token을 재발급 받는다.
+     *
+     * @param request  Refresh Token을 담고 있는 HttpServletRequest
+     * @param response Access Token을 담아 반환할 HttpServletResponse
+     * @return 재발급 받은 User 정보
+     */
     @GetMapping("/reissue")
-    public ResponseEntity<UserLoginResponseDto> reissue(@CookieValue(value = "refreshToken", required = false) String refreshToken,
+    public ResponseEntity<UserLoginResponseDto> reissue(HttpServletRequest request,
                                                         HttpServletResponse response) {
+        String refreshToken = request.getHeader("refreshToken");
 
-        // todo 토큰 재발급 로직 수정
-        // userId 로 RTK 조회 후, RTK 만료시간 확인
         return ResponseEntity.ok(userService.createAccessToken(refreshToken, response));
     }
 
-    // 로그아웃
+    /**
+     * 로그아웃 시 토큰 삭제
+     *
+     * @param user 현재 유저
+     */
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(HttpServletResponse response,
-                                       @CurrentUser CustomUserDetails user) {
+    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails user) {
         Long userId = user.getUser().getUserId();
-        userService.logout(response, userId);
+        log.info("userId : {}", userId);
+
+        userService.logout(userId);
+        log.info("로그아웃 성공");
         return ResponseEntity.ok().build();
     }
 
