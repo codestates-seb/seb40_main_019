@@ -91,13 +91,16 @@ public class OAuthAttributes {
     }
 
     public User toEntity() {
-        User user = new User();
-        user.setUserRole("ROLE_USER");
-        user.setProfileImage(profileImage);
-        user.setEmail(email);
-        user.setNickname(name + "[" + registrationId.toUpperCase() + "]");
-        user.setSocialLogin(registrationId);
-        user.setAbout("안녕하세요. " + name + "입니다.");
+        User user = User.builder()
+                .userRole("ROLE_USER")
+                .profileImage(profileImage)
+                .nickname(name + "[" + registrationId.toUpperCase() + "]")
+                .email(email)
+                .socialLogin(registrationId)
+                .about("안녕하세요. " + name + "입니다.")
+                .zipCode("")
+                .address("")
+                .build();
 
         return user;
 
