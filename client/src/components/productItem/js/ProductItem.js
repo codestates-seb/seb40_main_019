@@ -1,7 +1,6 @@
 import '../css/productItem.scss';
 
 const ProductItem = ({ data }) => {
-  //console.log(data);
   return (
     <div className="itemContainer">
       <div className="imgBox">

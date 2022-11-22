@@ -10,6 +10,7 @@ import OauthGoogle from './pages/oauth/OauthGoogle';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
+import { getCookie } from './util/cookie/cookie';
 import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
 import ShopProductOrder from './pages/shopProductOrder/js/ShopProductOrder';
@@ -44,20 +45,24 @@ function App() {
 
   useEffect(() => {
     const userData = JSON.parse(window.sessionStorage.getItem('userData'));
-    const accessToken = JSON.parse(
-      window.sessionStorage.getItem('accessToken')
+    const accesstoken = JSON.parse(
+      window.sessionStorage.getItem('accesstoken')
     );
     // console.log(userData);
     // console.log(accessToken);
     // 스토리지에서 받아온 데이터가 null 이 아니면 리덕스에 데이터 저장.
-    if (userData && accessToken) {
+    if (userData && accesstoken) {
       console.log('리덕스에 저장');
       dispatch(setUser(userData));
-      dispatch(login({ accessToken }));
+      dispatch(login({ accesstoken }));
     } else {
-      // 스토리지에서 받아온 데이터가 null 이면 재발급 요청
-      // console.log('재발급 요청');
-      // tokenReissue();
+      console.log(getCookie('refreshtoken'));
+      if (getCookie('refreshtoken')) {
+        console.log('재발급 요청');
+        // tokenReissue(getCookie('refreshtoken'));
+      } else {
+        console.log('리프레시 토큰 없음');
+      }
     }
   }, []);
   return (

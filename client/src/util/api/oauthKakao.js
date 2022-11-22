@@ -8,10 +8,10 @@ export const kakaoLogin = () => {
   window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${process.env.REACT_APP_KAKAO_REDIRECT_URI}&response_type=code&state=kakao`;
 };
 
-export const kakaoCallback = async (accessToken, refreshToken) => {
-  if (accessToken && refreshToken) {
-    window.sessionStorage.setItem('accessToken', JSON.stringify(accessToken));
-    setCookie('refreshToken', refreshToken, {
+export const kakaoCallback = async (accesstoken, refreshtoken) => {
+  if (accesstoken && refreshtoken) {
+    window.sessionStorage.setItem('accesstoken', JSON.stringify(accesstoken));
+    setCookie('refreshToken', refreshtoken, {
       path: '/',
       secure: true,
       sameSite: 'none',
@@ -23,7 +23,7 @@ export const kakaoCallback = async (accessToken, refreshToken) => {
       {
         headers: {
           Authorization: JSON.parse(
-            window.sessionStorage.getItem('accessToken')
+            window.sessionStorage.getItem('accesstoken')
           ),
         },
       }
