@@ -19,7 +19,7 @@ let passwordExptext = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/;
 
 export default function Signup() {
   const [address, setAddress] = useState('');
-  const [postCode, setPostCode] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [data, setDate] = useState({});
 
   const [nameError, setNameError] = useState(false);
@@ -36,7 +36,7 @@ export default function Signup() {
     e.preventDefault();
     let error = false;
 
-    if (!data.Name) {
+    if (!data.nickname) {
       setNameError(true);
       error = true;
     }
@@ -56,7 +56,7 @@ export default function Signup() {
       setAddressError(true);
       error = true;
     }
-    if (!postCode) {
+    if (!zipCode) {
       setAddressError(true);
       error = true;
     }
@@ -96,7 +96,7 @@ export default function Signup() {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
     setAddress(fullAddress);
-    setPostCode(data.zonecode);
+    setZipCode(data.zonecode);
     setAddressError(false);
   };
 
@@ -108,11 +108,11 @@ export default function Signup() {
   const openModalControl = (e) => {
     e.preventDefault();
     let temp = {
-      name: data.Name,
+      nickname: data.nickname,
       email: data.Email,
       password: data.Password,
       address: address,
-      postCode: postCode,
+      zipCode: zipCode,
     };
     // console.log(temp);
     dispatch(setFormData(temp));
@@ -129,12 +129,12 @@ export default function Signup() {
         onSubmit={(e) => e.preventDefault()}
       >
         <FormInput
-          labelName="Name"
+          labelName="Nickname"
           inputId="Text"
           inputType="text"
-          name="Name"
+          name="nickname"
           onChangeInput={onChangeInput}
-          placeholder="Please enter your name"
+          placeholder="Please enter your nickname"
         />
         {nameError && <FormInputError text="Please enter your nickname." />}
         <div className="addressFlexBox">
@@ -185,11 +185,11 @@ export default function Signup() {
         </div>
         {addressError && <FormInputError text="Please enter your address." />}
         <FormDisabledInput
-          labelName="PostCode"
-          inputId="PostCode"
+          labelName="ZipCode"
+          inputId="ZipCode"
           inputType="text"
-          name="PostCode"
-          value={postCode}
+          name="ZipCode"
+          value={zipCode}
         />
         {addressError && <FormInputError text="Please enter your address." />}
         <FormButtonYellow formSubmit={formSubmit} btnContent="Sign up" />

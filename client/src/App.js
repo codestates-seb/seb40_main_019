@@ -45,21 +45,21 @@ function App() {
 
   useEffect(() => {
     const userData = JSON.parse(window.sessionStorage.getItem('userData'));
-    const accessToken = JSON.parse(
-      window.sessionStorage.getItem('accessToken')
+    const accesstoken = JSON.parse(
+      window.sessionStorage.getItem('accesstoken')
     );
     // console.log(userData);
     // console.log(accessToken);
     // 스토리지에서 받아온 데이터가 null 이 아니면 리덕스에 데이터 저장.
-    if (userData && accessToken) {
+    if (userData && accesstoken) {
       console.log('리덕스에 저장');
       dispatch(setUser(userData));
-      dispatch(login({ accessToken }));
+      dispatch(login({ accesstoken }));
     } else {
-      console.log(getCookie('refreshToken'));
-      if (getCookie('refreshToken')) {
+      console.log(getCookie('refreshtoken'));
+      if (getCookie('refreshtoken')) {
         console.log('재발급 요청');
-        // tokenReissue(getCookie('refreshToken'));
+        // tokenReissue(getCookie('refreshtoken'));
       } else {
         console.log('리프레시 토큰 없음');
       }

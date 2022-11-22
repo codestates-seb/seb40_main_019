@@ -33,11 +33,11 @@ export default function SignupModal() {
       console.log('성공');
 
       const dataTemp = {
-        username: data.name,
+        nickname: data.nickname,
         email: data.email,
         password: data.password,
         address: data.address,
-        zipCode: data.postCode,
+        zipCode: data.zipCode,
       };
       // 폼 데이터 전송.
       const submit = await submitForm(dataTemp);

@@ -15,11 +15,11 @@ export const submitForm = async (userInfo) => {
     console.log(res);
     if (res.status === 200) {
       // 엑세스 토큰 세션 스토리지에 저장
-      let accessToken = res.headers.get('authorization');
-      window.sessionStorage.setItem('accessToken', JSON.stringify(accessToken));
+      let accesstoken = res.headers.get('authorization');
+      window.sessionStorage.setItem('accesstoken', JSON.stringify(accesstoken));
       // 리프레시 토큰 쿠키에 저장
-      let refreshToken = res.headers.get('refreshToken');
-      setCookie('refreshToken', refreshToken, {
+      let refreshtoken = res.headers.get('refreshtoken');
+      setCookie('refreshtoken', refreshtoken, {
         path: '/',
         secure: true,
         sameSite: 'none',
@@ -27,7 +27,7 @@ export const submitForm = async (userInfo) => {
       });
       let userData = res.data;
 
-      window.sessionStorage.setItem('accessToken', JSON.stringify(accessToken));
+      window.sessionStorage.setItem('accesstoken', JSON.stringify(accesstoken));
       window.sessionStorage.setItem('userData', JSON.stringify(userData));
       // window.location.replace('/');
     }
@@ -42,17 +42,17 @@ export const userLogout = async () => {
   try {
     const res = await axios.delete(`${REACT_APP_API_URL}users/logout`, {
       headers: {
-        Authorization: JSON.parse(window.sessionStorage.getItem('accessToken')),
+        Authorization: JSON.parse(window.sessionStorage.getItem('accesstoken')),
       },
     });
     console.log(res);
     if (res.status === 200) {
       // 스토리지 데이터 삭제.
       console.log('스토리지 데이터 삭제');
-      window.sessionStorage.removeItem('accessToken');
+      window.sessionStorage.removeItem('accesstoken');
       window.sessionStorage.removeItem('userData');
       // 리프레시 토큰 삭제
-      setCookie('refreshToken', '', {
+      setCookie('refreshtoken', '', {
         path: '/',
         secure: true,
         sameSite: 'none',
