@@ -2,10 +2,7 @@ package com.backend.domain.user.api;
 
 import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.domain.User;
-import com.backend.domain.user.dto.TestUserResponseDto;
-import com.backend.domain.user.dto.UserLoginResponseDto;
-import com.backend.domain.user.dto.UserPatchDto;
-import com.backend.domain.user.dto.UserPostDto;
+import com.backend.domain.user.dto.*;
 import com.backend.domain.user.mapper.UserMapper;
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
@@ -62,12 +59,17 @@ public class UserController {
     }
 
     @PatchMapping
-    public ResponseEntity<?> update(@CurrentUser CustomUserDetails customUserDetails,
-                                    @RequestBody UserPatchDto userPatchDto) {
+    public ResponseEntity<?> update(@RequestBody UserPatchDto userPatchDto) {
         User user = mapper.userPatchDtoToUser(userService, userPatchDto);
         userService.updateUser(user);
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<UserResponseDto> getUser() {
+        User user = userService.getLoginUser();
+        return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
 
     /**

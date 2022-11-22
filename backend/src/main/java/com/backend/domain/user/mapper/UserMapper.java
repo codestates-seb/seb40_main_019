@@ -36,12 +36,14 @@ public interface UserMapper {
         userResponseDto.setEmail(user.getEmail());
         userResponseDto.setNickname(user.getNickname());
         userResponseDto.setProfileImage(user.getProfileImage());
-        userResponseDto.setUserStatus(user.getUserStatus());
+        userResponseDto.setAbout(user.getAbout());
         userResponseDto.setUserRole(user.getUserRole());
         userResponseDto.setSocialLogin(user.getSocialLogin());
-        userResponseDto.setAbout(user.getAbout());
-        userResponseDto.setZipCode(user.getZipCode());
+        userResponseDto.setUserStatus(user.getUserStatus());
         userResponseDto.setAddress(user.getAddress());
+        userResponseDto.setZipCode(user.getZipCode());
+        userResponseDto.setPhone(user.getPhone());
+        userResponseDto.setUsername(user.getUsername());
 
         return userResponseDto;
     }
