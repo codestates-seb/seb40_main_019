@@ -1,14 +1,21 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB # 업로드 시 하나의 파일 최대 크기
+      max-request-size: 100MB # 업로드 요청 시 모든 파일크기의 합 제한
   jpa:
     defer-datasource-initialization: true
-    show-sql: true      # (2) SQL 쿼리 출력
+    show-sql: true # SQL 로그 출력
     properties:
       hibernate:
-        format_sql: true # (3) SQL pretty print
+        format_sql: true # pretty print SQL
         use_sql_comments: true
+        default_batch_fetch_size: 500 #일대다 컬렉션 조회 시 성능 최적화 -> 100 ~ 1000 권장 (default: 1)
+    open-in-view: false # JPA 엔티티를 영속성 컨텍스트에서 분리하여 성능 최적화 -> false (default: true)
+    # 상대적으로 트래픽이 적은 관리자 페이지의 경우 true로 설정해도 무방
   sql:
     init:
-      mode: always
+      mode: always # DB 초기화 모드 -> always, never, embedded
   profiles:
     active: server # local / server
     include: oauth
@@ -29,7 +36,7 @@ spring:
           kakao:
             client-id: ${/config/cloud-parameter-store/kakao-client-id}
             client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
-            scope: # scope는 필요한 권한을 적어준다.
+            scope:
               - profile_nickname
               - profile_image
               - account_email
@@ -49,14 +56,14 @@ logging:
     org:
       springframework:
         orm:
-          jpa: DEBUG
+          jpa: DEBUG # JPA 로그 출력
 ### Mail ###
 naver:
   id: ${/config/cloud-parameter-store/naver-id}
   password: ${/config/cloud-parameter-store/naver-password}
 ### AWS ###
 awsParameterStorePropertySource:
-  enabled: true
+  enabled: true # AWS 파라미터 스토어 사용 여부
 cloud:
   aws:
     credentials:
