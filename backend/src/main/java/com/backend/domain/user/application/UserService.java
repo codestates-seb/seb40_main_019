@@ -3,7 +3,6 @@ package com.backend.domain.user.application;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
-import com.backend.domain.user.domain.Address;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.TestUserResponseDto;
 import com.backend.domain.user.dto.UserLoginResponseDto;
@@ -93,23 +92,37 @@ public class UserService {
     @Transactional
     public User updateUser(User user) {
         User findUser = findVerifiedUser(user.getUserId());
-//        Optional.ofNullable(user.getUpdatedAt())//업데이트 날짜 수정
-//                .ifPresent(userUpdatedAt ->findUser.setUpdatedAt(userUpdatedAt));
 
-        Optional.ofNullable(user.getProfileImage())//유저 프로필이미지 수정
-                .ifPresent(findUser::setProfileImage);
+        Optional.ofNullable(user.getModifiedAt())
+                .ifPresent(findUser::setModifiedAt);
 
-        Optional.ofNullable(user.getNickname())//유저 닉네임 수정
+        Optional.ofNullable(user.getNickname())
                 .ifPresent(findUser::setNickname);
 
-        Optional.ofNullable(user.getEmail())//유저 이메일 수정
-                .ifPresent(findUser::setEmail);
+        Optional.ofNullable(user.getProfileImage())
+                .ifPresent(findUser::setProfileImage);
 
-        Optional.ofNullable(user.getUserStatus())//유저 탈퇴
+        Optional.ofNullable(user.getAbout())
+                .ifPresent(findUser::setAbout);
+
+        Optional.ofNullable(user.getUserStatus())
                 .ifPresent(findUser::setUserStatus);
 
-        Optional.ofNullable(user.getUserRole())//유저 권한 수정
-                .ifPresent(findUser::setUserRole);
+        Optional.ofNullable(user.getZipCode())
+                .ifPresent(findUser::setZipCode);
+
+        Optional.ofNullable(user.getAddress())
+                .ifPresent(findUser::setAddress);
+
+        Optional.ofNullable(user.getPhone())
+                .ifPresent(findUser::setPhone);
+
+        Optional.ofNullable(user.getUsername())
+                .ifPresent(findUser::setUsername);
+
+        Optional.ofNullable(user.getPassword())
+                .ifPresent(password -> findUser.setPassword(passwordEncoder.encode(password)));
+
 
         return findUser;
     }
@@ -201,10 +214,8 @@ public class UserService {
         String guestNickname = testRole + testUserId;
 
         String randomPassword = createTestAccountPassword();
-        List<Address> testAddress = List.of(Address.builder()
-                .address("서울특별시 강남구 테헤란로 427")
-                .zipCode("16164")
-                .build());
+        String testAddress = "서울특별시 강남구 테헤란로 427";
+        String zipCode = "16164";
 
         User testUser = User.builder()
                 .email(guestEmail)
@@ -214,10 +225,11 @@ public class UserService {
                 .userRole(userRole)
                 .profileImage("https://i.ibb.co/7bQQYkX/kisspng-computer-icons-user-profile-avatar-5abcbc2a1f4f51-20180201102408184.png")
                 .socialLogin("original")
+                .address(testAddress)
+                .zipCode(zipCode)
                 .build();
 
         testUser.encodePassword(passwordEncoder);
-        testUser.addAddress(testAddress.get(0));
 
         userRepository.save(testUser);
 

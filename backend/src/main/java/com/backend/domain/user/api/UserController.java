@@ -4,6 +4,7 @@ import com.backend.domain.user.application.UserService;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.TestUserResponseDto;
 import com.backend.domain.user.dto.UserLoginResponseDto;
+import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.domain.user.dto.UserPostDto;
 import com.backend.domain.user.mapper.UserMapper;
 import com.backend.global.annotation.CurrentUser;
@@ -27,7 +28,10 @@ public class UserController {
     private final UserService userService;
     private final UserMapper mapper;
 
-    // 회원가입
+    /**
+     * 회원가입
+     * @param userPostDto 회원가입 정보
+     */
     @PostMapping()
     public ResponseEntity<?> signup(@RequestBody UserPostDto userPostDto) {
 
@@ -57,6 +61,15 @@ public class UserController {
         return ResponseEntity.ok(userService.createAccessToken(refreshToken, response));
     }
 
+    @PatchMapping
+    public ResponseEntity<?> update(@CurrentUser CustomUserDetails customUserDetails,
+                                    @RequestBody UserPatchDto userPatchDto) {
+        User user = mapper.userPatchDtoToUser(userService, userPatchDto);
+        userService.updateUser(user);
+
+        return ResponseEntity.ok().build();
+    }
+
     /**
      * 로그아웃 시 토큰 삭제
      *
@@ -72,7 +85,10 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    // test account 생성
+    /**
+     * 테스트 회원 생성
+     * @return 생성된 회원 정보
+     */
     @GetMapping("/test/user")
     public ResponseEntity<TestUserResponseDto> createTestUser() {
 
@@ -83,6 +99,10 @@ public class UserController {
         return ResponseEntity.ok(testUserResponseDto);
     }
 
+    /**
+     * 테스트 관리자 생성
+     * @return 생성된 관리자 정보
+     */
     @GetMapping("/test/admin")
     public ResponseEntity<TestUserResponseDto> createTestAdmin() {
 

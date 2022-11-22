@@ -1,7 +1,6 @@
 package com.backend.domain.user.mapper;
 
 import com.backend.domain.user.application.UserService;
-import com.backend.domain.user.domain.Address;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.domain.user.dto.UserPostDto;
@@ -23,12 +22,8 @@ public interface UserMapper {
         user.setSocialLogin("original");
         user.setUserStatus(User.UserStatus.USER_EXIST);
         user.setAbout("안녕하세요");
-
-        Address address = Address.builder()
-                .address(userPostDto.getAddress())
-                .zipCode(userPostDto.getZipCode())
-                .build();
-        user.addAddress(address);
+        user.setAddress(userPostDto.getAddress());
+        user.setZipCode(userPostDto.getZipCode());
 
         return user;
     }
@@ -44,20 +39,26 @@ public interface UserMapper {
         userResponseDto.setUserStatus(user.getUserStatus());
         userResponseDto.setUserRole(user.getUserRole());
         userResponseDto.setSocialLogin(user.getSocialLogin());
+        userResponseDto.setAbout(user.getAbout());
+        userResponseDto.setZipCode(user.getZipCode());
+        userResponseDto.setAddress(user.getAddress());
 
         return userResponseDto;
     }
 
-    default User userPatchDtoToUser(UserService userService, UserPatchDto userPatchDto){
+    default User userPatchDtoToUser(UserService userService, UserPatchDto userPatchDto) {
 
         long userId = userService.getLoginUser().getUserId();// 토큰에 해당하는 userId 값 가져오기
         User user = new User();
         user.setUserId(userId);
-        user.setEmail(userPatchDto.getEmail());
-        user.setProfileImage(userPatchDto.getProfileImage());
         user.setNickname(userPatchDto.getNickname());
-        user.setUserStatus(userPatchDto.getUserStatus());
-        user.setUserRole(userPatchDto.getUserRole());
+        user.setPassword(userPatchDto.getPassword());
+        user.setProfileImage(userPatchDto.getProfileImage());
+        user.setAbout(userPatchDto.getAbout());
+        user.setAddress(userPatchDto.getAddress());
+        user.setZipCode(userPatchDto.getZipCode());
+        user.setPhone(userPatchDto.getPhone());
+        user.setUsername(userPatchDto.getUsername());
 
         return user;
     }

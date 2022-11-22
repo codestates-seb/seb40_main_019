@@ -17,5 +17,8 @@ public class UserResponseDto {
     private User.UserStatus userStatus;
     private String userRole;
     private String socialLogin;
+    private String about;
+    private String zipCode;
+    private String address;
 
 }
