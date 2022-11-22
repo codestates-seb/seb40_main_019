@@ -1,0 +1,33 @@
+.infoSmallContainer {
+  box-shadow: 5px 5px 5px 5px gray;
+}
+
+.infoSmallTitle {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--color-white);
+  align-items: center;
+  padding: 12px 50px;
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-blue);
+  }
+}
+
+.infoSmallBottom {
+  height: 70px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  button {
+    width: 100%;
+    background-color: var(--color-blue);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-white);
+  }
+  .cart {
+    background-color: var(--color-yellow);
+    color: var(--color-brown);
+  }
+}

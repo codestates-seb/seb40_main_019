@@ -8,7 +8,7 @@ import ProductInfoBox from '../../../components/shop/js/ProductInfoBox';
 //상품 디테일 데이터 1개만 담고 보여주게 했음
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import QuantityBtn from '../../../components/shop/js/QuantityBtn';
+import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 
 const shopProductDetail = () => {
   const [product, setProducts] = useState();
@@ -48,14 +48,11 @@ const shopProductDetail = () => {
         </div>
         <div className="bottomContainer">
           {product && (
-            <>
-              <div>
-                <div>{product.price} 원</div>
-                <QuantityBtn count={count} setCount={setCount} />
-              </div>
-              <button>CART</button>
-              <button>ORDER</button>
-            </>
+            <ProductInfoSmall
+              product={product}
+              count={count}
+              setCount={setCount}
+            />
           )}
         </div>
       </div>
