@@ -1,0 +1,12 @@
+.sellerReview{
+  .lineTitle{
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    li{
+        color: var(--color-blue);
+        font-size: 14px;
+    }
+    @media(max-width: 750px) {
+        display: none;
+    }
+  }
+}
