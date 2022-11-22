@@ -18,7 +18,7 @@ public class RefreshToken {
     // member id 값이 들어감
     private Long key;
 
-    @Column(name = "rt_value")
+    @Column(name = "rt_value", length = 500)
     // refresh token (String)
     private String value;
 
@@ -27,5 +27,4 @@ public class RefreshToken {
         this.key = key;
         this.value = value;
     }
-
 }

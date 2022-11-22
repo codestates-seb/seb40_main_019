@@ -49,10 +49,10 @@ public class User extends Auditable {
     @Column(nullable = false, name = "STATUS")
     private UserStatus userStatus = UserStatus.USER_EXIST;
 
-    @Column(nullable = false)
+    @Column
     private String zipCode;
 
-    @Column(nullable = false)
+    @Column
     private String address;
 
     @Column
