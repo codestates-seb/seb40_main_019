@@ -30,6 +30,7 @@ import MypageUserPage from './pages/mypage/user/js/MypageUserPage';
 import MypageUserEditPage from './pages/mypage/userEdit/js/MypageUserEditPage';
 import MypagePointPage from './pages/mypage/point/js/MypagePointPage';
 import ReviewAdd from './pages/reviewAdd/js/ReviewAdd';
+import ReviewEdit from './pages/reviewEdit/js/ReviewEdit';
 
 function App() {
   //json-server 주소
@@ -93,6 +94,7 @@ function App() {
             <Route path="/mypage/user/edit" element={<MypageUserEditPage />} />
             <Route path="/mypage/point" element={<MypagePointPage />} />
             <Route path="/mypage/reviewadd" element={<ReviewAdd />} />
+            <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
           </Route>
         </Route>
       </Routes>
