@@ -32,7 +32,27 @@ export const editUserInfo = async (data) => {
       window.alert('2자~16자 사이의 닉네임을 입력해주세요');
       return;
     }
-    // 비밀번호 유효성 확인
+
+    // 현재 비밀번호 확인
+    if (data.curPassword === '') {
+      window.alert('현재 비밀번호를 입력해주세요');
+      // 비밀번호 요청 API 필요
+      return;
+    }
+    // 새 비밀번호 입력
+    if (data.newPassword === '') {
+      window.alert('새로운 비밀번호를 입력해주세요');
+      return;
+    }
+    // 새 비밀번호 확인
+    if (data.newPasswordConfirm === '') {
+      window.alert('새 비밀번호 확인을 입력해주세요');
+      return;
+    }
+    if (data.newPassword !== data.newPasswordConfirm) {
+      window.alert('새 비밀번호 확인이 새 비밀번호와 일치하지 않습니다.');
+      return;
+    }
 
     // 이름 유효성 확인
     if (!reg_name1.test(data.name)) {
@@ -41,7 +61,9 @@ export const editUserInfo = async (data) => {
     }
     // 휴대폰 번호 유효성 확인
     if (!reg_mobile.test(data.phone)) {
-      window.alert('-를 포함하여 휴대폰 번호 11자리를 입력해주세요.');
+      window.alert(
+        '-를 포함하여 휴대폰 번호 11자리를 입력해주세요. \n EX ) 010-1234-5678'
+      );
       return;
     }
     try {

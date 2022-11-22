@@ -10,6 +10,7 @@ import OauthGoogle from './pages/oauth/OauthGoogle';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
+import { getCookie } from './util/cookie/cookie';
 import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
 import ShopProductOrder from './pages/shopProductOrder/js/ShopProductOrder';
@@ -55,9 +56,13 @@ function App() {
       dispatch(setUser(userData));
       dispatch(login({ accessToken }));
     } else {
-      // 스토리지에서 받아온 데이터가 null 이면 재발급 요청
-      // console.log('재발급 요청');
-      // tokenReissue();
+      console.log(getCookie('refreshToken'));
+      if (getCookie('refreshToken')) {
+        console.log('재발급 요청');
+        // tokenReissue(getCookie('refreshToken'));
+      } else {
+        console.log('리프레시 토큰 없음');
+      }
     }
   }, []);
   return (
