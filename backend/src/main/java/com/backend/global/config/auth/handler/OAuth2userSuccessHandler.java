@@ -116,12 +116,13 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 //                .scheme("https")
 //                .host("app")
 //                .port(443)
-//                .path("/login/oauth")
+//                .path("/oauth/" + registrationId)
 //                .queryParams(queryParams)
 //                .build()
 //                .toUri();
     }
 
+    // todo 토큰 발급 중복 메소드 통합 (JwtAuthenticationFilter, OAuth2userSuccessHandler)
     /**
      * 액세스 토큰 발급
      *
