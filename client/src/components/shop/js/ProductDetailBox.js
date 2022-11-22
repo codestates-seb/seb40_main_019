@@ -5,9 +5,13 @@ export default function ProductDetailBox({ product }) {
     <div className="detailContainer">
       {product && (
         <>
-          <div className="titleImg">
+          {/* <div className="titleImg">
             <img src={product.titleImg} alt="titleImg" />
-          </div>
+          </div> */}
+          {/* <div className="detailProductBtn">
+            <button className="detailBtn">DETAIL</button>
+            <button className="reviewBtn">REVIEW</button>
+          </div> */}
           <div className="detailText">DETAIL</div>
           <div className="detailImg">
             <img src={product.detailImg} alt="datailImg" />

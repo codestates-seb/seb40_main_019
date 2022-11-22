@@ -21,6 +21,9 @@ const shopProductDetail = () => {
     <>
       <div className="detailInfoContainer">
         <div className="leftContainer">
+          <div className="titleImg">
+            {product && <img src={product.titleImg} alt="titleImg" />}
+          </div>
           <ProductDetailBox product={product} />
           <ProductDetailReadme />
           <ProductDetailReview />

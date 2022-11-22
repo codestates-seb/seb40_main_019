@@ -1,19 +1,6 @@
 .detailContainer{
     display: block;
     width: 100%;
-    // max-width: 150px;
-    .titleImg{
-        width: 100%;
-        height: 500px;
-        border-radius: 15px;
-        background-color: #F9F3E5;
-        img{
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-    }
 
     .detailText{
         border-top: solid 2px var(--color-blue);
@@ -39,5 +26,15 @@
             object-fit: cover;
             border-radius: 15px;
         }
+    }
+}
+
+.detailProductBtn{
+    display: flex;
+    justify-content: space-around;
+    font-weight: bold;
+    color: var(--color-blue);
+    button{
+        letter-spacing: 12px;
     }
 }
