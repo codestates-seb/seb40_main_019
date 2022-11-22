@@ -1,6 +1,7 @@
 package com.backend.domain.user.application;
 
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
+import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.Address;
 import com.backend.domain.user.domain.User;
@@ -14,7 +15,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -133,19 +133,18 @@ public class UserService {
     @Transactional
     public void logout(HttpServletResponse response,
                        Long userId) {
-
-
-        ResponseCookie cookie = ResponseCookie.from("refreshToken", "")
-                .maxAge(0)
-                .path("/")
-                .secure(true)
-                .sameSite("None")
-                .httpOnly(true)
-                .build();
-        response.setHeader("Set-Cookie", cookie.toString());
-
+        findVerifiedUser(userId);
+        findVerifiedRefreshToken(userId);
         refreshTokenRepository.deleteByKey(userId);
     }
+
+    private void findVerifiedRefreshToken(Long userId) {
+        Optional<RefreshToken> optionalRefreshToken = refreshTokenRepository.findById(userId);
+
+        RefreshToken findUser = optionalRefreshToken.orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.ALRREADY_LOGOUT));
+    }
+
 
     private User getUser(String refreshToken) {
         Map<String, Object> claims;

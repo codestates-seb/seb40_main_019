@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -103,25 +102,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         User user = customUserDetails.getUser();
 
-        String accessToken = delegateAccessToken(customUserDetails);
+        String accessToken = delegateAccessToken(user);
         log.info("JwtAuthenticationFilter: accessToken 생성완료");
-        String refreshToken = delegateRefreshToken(customUserDetails);
+        String refreshToken = delegateRefreshToken(user);
         log.info("JwtAuthenticationFilter: refreshToken 생성완료");
 
 
         response.setHeader("Authorization", "Bearer " + accessToken);
-
-        Long refreshExp = (long) jwtTokenizer.getRefreshTokenExpirationMillisecond();
-
-        ResponseCookie cookie = ResponseCookie.from("refreshToken", refreshToken)
-                .maxAge(refreshExp)
-                .path("/")
-                .secure(true)
-                .sameSite("None")
-                .httpOnly(true)
-                .build();
-
-        response.setHeader("Set-Cookie", cookie.toString());
+        response.setHeader("refreshToken", refreshToken);
 
         RefreshToken refreshTokenEntity = RefreshToken.builder()
                 .key(user.getUserId())
@@ -140,12 +128,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /**
      * accessToken 생성
      *
-     * @param customUserDetails
-     * @return
+     * @param user 유저
+     * @return accessToken
      */
-    private String delegateAccessToken(CustomUserDetails customUserDetails) {
+    private String delegateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        User user = customUserDetails.getUser();
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
@@ -165,13 +152,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     /**
      * refreshToken 생성
      *
-     * @param customUserDetails
-     * @return
+     * @param user 유저
+     * @return refreshToken
      */
-    private String delegateRefreshToken(CustomUserDetails customUserDetails) {
+    private String delegateRefreshToken(User user) {
 
         Map<String, Object> claims = new HashMap<>();
-        User user = customUserDetails.getUser();
         claims.put("userId", user.getUserId());
         claims.put("email", user.getEmail());
         claims.put("userRole", user.getUserRole());
