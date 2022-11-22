@@ -1,0 +1,118 @@
+//AI 맞춤 추천 사료 제목
+.aiTitle{
+    padding: 10px;
+    margin: auto;
+    >h1{
+        font-size: 35px;
+        font-weight: bold;
+        color: var(--color-yellow);
+        text-align: right;
+    }
+}
+
+section.yellowBoxRow{
+    position: relative;
+    height: 420px;
+    display: flex;
+    justify-content: flex-end;
+
+    .yellowBox{
+        position: absolute;
+        right: -100px;
+        width: 1300px;
+        height: 400px;
+        background-color: var(--color-yellow);
+        border-radius: 200px 0 0 200px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        
+
+        .whiteBox{
+            margin-right: 100px;
+            display: flex;
+            background-color: var(--color-white);
+            width: 950px;
+            height: 350px;
+            border-radius: 30px;
+        }
+    }
+}
+
+// 입력 창
+.formBox{
+    width: 400px;
+    height: 300px;
+    flex-direction: column;
+    text-align: center;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: 10px;
+    font-weight: bold;
+
+    .centerBox{
+    text-align: center;
+    }
+}
+
+.ageBox{
+    // padding: 10px;
+    >div{
+        letter-spacing: 2px;
+        padding: 10px;
+        color: var(--color-brown);
+    }
+    >input{
+        outline: none;
+        border-radius: 10px;
+        padding-left: 10px;
+        width: 220px; 
+        height: 40px;
+        &:focus{
+            outline: 3px solid var(--color-yellow);
+        }
+    }
+}
+
+.weightBox{
+    padding: 10px;
+    >div{
+        letter-spacing: 2px;
+        padding: 10px;
+        color: var(--color-brown);
+
+    }
+    >input{
+        outline: none;
+        border-radius: 10px;
+        padding-left: 10px;
+        width: 220px; 
+        height: 40px;
+        &:focus{
+            outline: 3px solid var(--color-yellow);
+        }
+    }
+}
+
+.submitBox{
+    padding: 35px;
+    >button{
+        border: 2px solid var(--color-yellow);
+        background-color: var(--color-yellow);
+        color: var(--color-white);
+        border-radius: 15px;
+        width: 220px; 
+        height: 50px;
+        letter-spacing: 2px;
+        transition: all 0.4s;
+        &:hover{
+        background-color: var(--color-white);
+        color: var(--color-yellow); 
+        }
+    }
+}
+
+// item 3가지 추천 창
+.recommendBox{
+    display: flex;
+}
