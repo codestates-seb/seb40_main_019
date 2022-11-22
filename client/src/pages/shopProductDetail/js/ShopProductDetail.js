@@ -17,6 +17,8 @@ const shopProductDetail = () => {
     });
   }, []);
 
+  const [clickBtn, setClickBtn] = useState('detail');
+
   return (
     <>
       <div className="detailInfoContainer">
@@ -24,9 +26,12 @@ const shopProductDetail = () => {
           <div className="titleImg">
             {product && <img src={product.titleImg} alt="titleImg" />}
           </div>
-          <ProductDetailBox product={product} />
+          {clickBtn === 'detail' ? (
+            <ProductDetailBox product={product} setClickBtn={setClickBtn} />
+          ) : (
+            <ProductDetailReview setClickBtn={setClickBtn} />
+          )}
           <ProductDetailReadme />
-          <ProductDetailReview />
         </div>
         <div className="rightContainer">
           {product && <ProductInfoBox product={product} />}
