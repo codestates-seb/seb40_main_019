@@ -1,0 +1,93 @@
+.pointBtnArea{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+    height: auto;
+  }
+  .pointBtnFlex{
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    // border: 1px solid black;
+    @media screen and (max-width: 600px) {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .pointBtn{
+      width: 120px;
+      // border: 1px solid black;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      @media screen and (max-width: 800px) {
+        width: 90px;
+      }
+      p{
+        color: #5C4B29;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        @media screen and (max-width: 800px) {
+          font-size: 15px;
+        }
+      }
+      .pointCircle{
+        width: 90px;
+        height: 90px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        @media screen and (max-width: 800px) {
+          width: 80px;
+          height: 80px;
+        }
+        @media screen and (max-width: 600px) {
+          width: 90px;
+          height: 90px;
+        }
+        .pointIcon{
+          color: rgb(255, 255, 255);
+          font-size: 40px;
+          @media screen and (max-width: 800px) {
+            font-size: 25px;
+          }
+          @media screen and (max-width: 600px) {
+            font-size: 40px;
+          }
+        }
+      }
+      .colorBlue{
+        background-color: var(--color-blue);
+      }
+      .colorYellow{
+        background-color: var(--color-yellow);
+      }
+    }
+    .point{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      width: 200px;
+      height: 100%;
+      // border: 1px solid black;
+      @media screen and (max-width: 800px) {
+        width: 170px;
+        font-size: 25px;
+      }
+      @media screen and (max-width: 600px) {
+        flex-grow: 1;
+        max-width: 250px;
+        font-size: 30px;
+      }
+    }
+  }
+}
