@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 import ProductForm from '../../../components/seller/js/ProductForm';
 import { useState } from 'react';
 import axios from 'axios';
-import ModalOk from '../../../components/alert/js/ModalOk';
+import ModalOk from '../../../components/modal/js/ModalOk';
 // import { useSelector } from 'react-redux';
 
 export default function SellerAddProduct() {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
   // const loginData = useSelector((state) => state.login);
+  const [modalOn, setModalOn] = useState(false);
 
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState('');
@@ -24,7 +25,7 @@ export default function SellerAddProduct() {
 
   axios.defaults['withCredentials'] = true;
   // axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-  const [modalOn, setModalOn] = useState(false);
+
   const handleSubmit = () => {
     if (productName.length < 5 || productName.length >= 30) {
       // alert('상품명이 5~30자여야 합니다');
@@ -89,9 +90,7 @@ export default function SellerAddProduct() {
         </Link>
         <button onClick={handleSubmit}>저장하기</button>
       </div>
-      <div className="modal">
-        {modalOn ? <ModalOk setClick={setModalOn} /> : null}
-      </div>
+      <ModalOk setClick={setModalOn} modalOn={modalOn} />
     </div>
   );
 }
