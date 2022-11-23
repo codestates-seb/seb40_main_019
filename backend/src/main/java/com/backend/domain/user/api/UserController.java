@@ -134,12 +134,9 @@ public class UserController {
     }
 
     @PostMapping("/password/confirm")
-    public ResponseEntity<Boolean> confirmUserPassword(@CurrentUser CustomUserDetails authUser,
+    public ResponseEntity<Boolean> comparePassword(@CurrentUser CustomUserDetails authUser,
                                                        @RequestBody PasswordDto password) {
-        User user = authUser.getUser();
-        boolean isCurrentPassword = userService.confirmUserPassword(user, password);
-
-        return ResponseEntity.ok(isCurrentPassword);
+        return ResponseEntity.ok(userService.comparePassword(authUser.getUser(), password));
     }
 
 }

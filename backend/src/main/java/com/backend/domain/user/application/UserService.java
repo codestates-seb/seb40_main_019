@@ -307,7 +307,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean confirmUserPassword(User user, PasswordDto password) {
-        return passwordEncoder.matches(password.getPassword(), user.getPassword());
+    public boolean comparePassword(User user, PasswordDto password) {
+        return user.comparePassword(passwordEncoder, password.getPassword());
     }
 }
