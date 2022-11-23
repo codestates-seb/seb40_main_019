@@ -4,6 +4,7 @@ import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
+import com.backend.domain.user.dto.PasswordDto;
 import com.backend.domain.user.dto.TestUserResponseDto;
 import com.backend.domain.user.dto.UserLoginResponseDto;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
@@ -298,5 +299,9 @@ public class UserService {
         user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
         refreshTokenRepository.deleteByKey(user.getUserId());
         userRepository.save(user);
+    }
+
+    public boolean confirmUserPassword(User user, PasswordDto password) {
+        return passwordEncoder.matches(password.getPassword(), user.getPassword());
     }
 }
