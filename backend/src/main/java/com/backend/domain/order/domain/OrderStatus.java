@@ -7,7 +7,7 @@ public enum OrderStatus {
     PROCESS(1,"상품 준비중"),
     SHIPPING(2, "배송중"),
     SHIPPED(3, "배송 완료"),
-    CANCEL(4,"상품 취소");
+    CANCEL(4,"주문 취소");
 
 
     @Getter

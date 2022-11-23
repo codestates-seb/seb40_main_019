@@ -80,6 +80,21 @@ import static com.backend.domain.order.domain.QOrder.order;
         return findOrder;
     }
 
+    public Page<OrderHistoryDto> getAllList(Pageable pageable) {
+        List<Order> orders = orderRepository.findAll();
+        Long totalQuantity = orderRepository.countAllOrder();
+        List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
+        for (Order order : orders) {
+            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
+            List<OrderProduct> orderProducts = order.getOrderProducts();
+            for (OrderProduct orderProduct : orderProducts) {
+                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
+                orderHistoryDto.addOrderProductDto(orderProductDto);
+            }
+            orderHistoryDtos.add(orderHistoryDto);
+        }
+        return new PageImpl<OrderHistoryDto>(orderHistoryDtos, pageable, totalQuantity);
+    }
 
 
     public Page<OrderHistoryDto> getOrderList(Long userId, Pageable pageable) {

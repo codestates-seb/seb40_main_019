@@ -78,6 +78,18 @@ public class OrderController {
         return new ResponseEntity<>(new MultiResponseDto<>(content, ordersHistoryDtoList), HttpStatus.OK);
     }
 
+    @GetMapping(value = {"/orders/all", "/orders/all/{page}"})
+    public ResponseEntity<MultiResponseDto> getAllList(@PathVariable("page") Optional<Integer> page) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
+
+        Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getAllList(pageable);
+        List<OrderHistoryDto> content = ordersHistoryDtoList.getContent();
+
+
+        return new ResponseEntity<>(new MultiResponseDto<>(content, ordersHistoryDtoList), HttpStatus.OK);
+    }
+
+
 //판매자 전용기능 필요?없음. 버튼누르면 그냥  order상태변경해서 저장하기만 하면됌. 응답으로는 patch리스폰스랑 같이
     @PatchMapping("/orders/status/{order-id}")
     public ResponseEntity updateStatus(@PathVariable("order-id") long orderId) {

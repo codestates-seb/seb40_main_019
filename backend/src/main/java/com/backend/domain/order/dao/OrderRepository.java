@@ -26,6 +26,10 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     )
     Long countOrder(@Param("userId") Long userId);
 
+    @Query("select count(o) from Order o "
+    )
+    Long countAllOrder();
+
     @Query("select o from Order o " +
             "where o.orderStatus =  'shipping' " +
             "order by o.createdAt desc"
