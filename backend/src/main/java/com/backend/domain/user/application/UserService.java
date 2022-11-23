@@ -10,6 +10,7 @@ import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
 import com.backend.global.utils.jwt.JwtTokenizer;
+import com.google.gson.JsonObject;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -273,30 +274,13 @@ public class UserService {
         adminId++;
     }
 
+    public String getLoginUserInfo(User user) {
+        JsonObject jsonObject = new JsonObject();
 
-//    -------------- 테스트 --------------
-//    // refresh Token parsing
-//    public String headerTokenGetClaimTest(String refreshToken) {
-//        JsonObject jsonObject = new JsonObject();
-//
-//        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
-//
-//        Map<String, Object> claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
-//
-//        jsonObject.addProperty("email", claims.get("email").toString());
-//        jsonObject.addProperty("nickname", claims.get("nickname").toString());
-//        jsonObject.addProperty("imageUrl", claims.get("imageUrl").toString());
-//
-//        return jsonObject.toString();
-//    }
-//
-//    public String atkUserInfo(User user) {
-//        JsonObject jsonObject = new JsonObject();
-//
-//        jsonObject.addProperty("email", user.getEmail());
-//        jsonObject.addProperty("nickname", user.getNickname());
-//        jsonObject.addProperty("imageUrl", user.getProfileImage());
-//
-//        return jsonObject.toString();
-//    }
+        jsonObject.addProperty("email", user.getEmail());
+        jsonObject.addProperty("nickname", user.getNickname());
+        jsonObject.addProperty("imageUrl", user.getProfileImage());
+
+        return jsonObject.toString();
+    }
 }

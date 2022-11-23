@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getUser() {
+    public ResponseEntity<UserResponseDto> getUserDeatils() {
         User user = userService.getLoginUser();
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
@@ -115,27 +115,15 @@ public class UserController {
         return ResponseEntity.ok(testUserResponseDto);
     }
 
-//    -------------- 테스트 --------------
-//    // RefreshToken 헤더 값 받아서 유저 정보 반환
-//    @GetMapping("/test/refresh-token")
-//    public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
-//
-//        String refreshToken = request.getHeader("refreshToken");
-//        log.info("refreshToken: {}", refreshToken);
-//        String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
-//        log.info("responseLoginUserInfo: {}", responseLoginUserInfo);
-//        return ResponseEntity.ok(responseLoginUserInfo);
-//    }
-//
-//    @GetMapping("/test/access-token")
-//    public ResponseEntity<String> testAccessToken(HttpServletRequest request,
-//                                                  @CurrentUser CustomUserDetails authUser) {
-//
-//        User user = authUser.getUser();
-//
-//        String responseLoginUserInfo = userService.atkUserInfo(user);
-//
-//        return ResponseEntity.ok(responseLoginUserInfo);
-//    }
+
+    @GetMapping("/social-user")
+    public ResponseEntity<String> loginUserInfo(@CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+
+        String responseLoginUserInfo = userService.getLoginUserInfo(user);
+
+        return ResponseEntity.ok(responseLoginUserInfo);
+    }
 
 }
