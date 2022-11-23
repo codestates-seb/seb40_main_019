@@ -246,6 +246,8 @@ public class UserService {
 
         testUser.encodePassword(passwordEncoder);
 
+        testUser.addCash(1000000);
+
         userRepository.save(testUser);
 
         return TestUserResponseDto.builder()

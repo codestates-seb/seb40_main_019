@@ -116,4 +116,8 @@ public class User extends Auditable {
             this.status = status;
         }
     }
+
+    public void addCash(int cash){
+        this.restCash += cash;
+    }
 }

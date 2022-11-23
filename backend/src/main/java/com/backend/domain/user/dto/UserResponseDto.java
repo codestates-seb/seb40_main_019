@@ -22,5 +22,6 @@ public class UserResponseDto {
     private String zipCode;
     private String phone;
     private String username;
+    private int restCash;
 
 }

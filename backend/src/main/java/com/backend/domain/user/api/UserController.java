@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getDeatils(@CurrentUser CustomUserDetails authUser) {
+    public ResponseEntity<UserResponseDto> getDetails(@CurrentUser CustomUserDetails authUser) {
         User user = authUser.getUser();
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }

@@ -42,6 +42,7 @@ public interface UserMapper {
         userResponseDto.setZipCode(user.getZipCode());
         userResponseDto.setPhone(user.getPhone());
         userResponseDto.setUsername(user.getUsername());
+        userResponseDto.setRestCash(user.getRestCash());
 
         return userResponseDto;
     }
