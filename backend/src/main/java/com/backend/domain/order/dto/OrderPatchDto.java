@@ -1,12 +1,14 @@
 package com.backend.domain.order.dto;
 
 import com.backend.domain.order.domain.OrderStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
-@Setter
-public class OrderResponseDto {
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderPatchDto {
+
+
 
     private String receiverName;
 
@@ -14,5 +16,8 @@ public class OrderResponseDto {
 
     private String receiverAddress;
 
-    private OrderStatus orderStatus;
+
+
 }
+//1차완
+//orderId를 받아야하는게 맞나?

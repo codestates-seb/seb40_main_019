@@ -1,5 +1,6 @@
 package com.backend.domain.user.application;
 
+import com.backend.domain.point.application.PointService;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
@@ -34,6 +35,8 @@ public class UserService {
     private final JwtTokenizer jwtTokenizer;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    private final PointService pointService;
+
     private Long guestId = 1L;
     private Long adminId = 1L;
 
@@ -63,6 +66,8 @@ public class UserService {
         verifyExistsEmailByOriginal(user.getEmail());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        pointService.addCash(user, 1000000);
+
 
         return userRepository.save(user);
 

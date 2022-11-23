@@ -61,6 +61,8 @@ public class User extends Auditable {
     @Column
     private String username;
 
+    @Column
+    private int restCash;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
@@ -74,7 +76,8 @@ public class User extends Auditable {
                 String userRole,
                 String socialLogin,
                 String zipCode,
-                String address) {
+                String address,
+                int restCash) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;
@@ -84,6 +87,7 @@ public class User extends Auditable {
         this.socialLogin = socialLogin;
         this.zipCode = zipCode;
         this.address = address;
+        this.restCash = restCash;
     }
 
     public void patch(UserPatchDto userPatchDto, String password) {
