@@ -98,8 +98,6 @@ public class OAuthAttributes {
                 .email(email)
                 .socialLogin(registrationId)
                 .about("안녕하세요. " + name + "입니다.")
-                .zipCode("")
-                .address("")
                 .build();
 
         return user;

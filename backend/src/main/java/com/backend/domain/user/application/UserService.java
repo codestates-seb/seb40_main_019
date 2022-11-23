@@ -62,6 +62,7 @@ public class UserService {
     public User createUser(User user) {
         // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
         verifyExistsEmailByOriginal(user.getEmail());
+        verifyExistsNicknameByOriginal(user.getNickname());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -72,9 +73,17 @@ public class UserService {
     private void verifyExistsEmailByOriginal(String email) { // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
         if (user.isPresent()) {
-            throw new BusinessLogicException(ExceptionCode.USER_NOT_FOUND);
+            throw new BusinessLogicException(ExceptionCode.EMAIL_DUPLICATION);
         }
     }
+
+    private void verifyExistsNicknameByOriginal(String nickname) { //중복닉네임인지 확인
+        Optional<User> user = userRepository.findByNicknameAndUserStatusAndSocialLogin(nickname, User.UserStatus.USER_EXIST, "original");
+        if (user.isPresent()) {
+            throw new BusinessLogicException(ExceptionCode.NICKNAME_DUPLICATION);
+        }
+    }
+
 
     public void verifyExistUserByEmailAndOriginal(String email) { //현재 활동중인 일반 회원가입으로 가입한 유저중 email 파라미터로 조회
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
