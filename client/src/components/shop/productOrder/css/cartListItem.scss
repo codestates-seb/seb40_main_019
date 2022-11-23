@@ -15,6 +15,11 @@
         font-size: 13px;
     }
 
+    .price{
+        font-weight: bold;
+
+    }
+
     .delete{
         margin-bottom: 100px;
     }
@@ -40,6 +45,8 @@
             }
             .price{
                 grid-area: price;
+                font-weight: bold;
+
             }
             .quantity{
                 grid-area: quantity

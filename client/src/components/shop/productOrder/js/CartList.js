@@ -14,6 +14,9 @@ export default function CartList() {
     });
   }, []);
 
+  //quantity
+  const [count, setCount] = useState(1);
+
   return (
     <div className="CartListContatner">
       <div className="productTitle">
@@ -35,7 +38,7 @@ export default function CartList() {
         items.map((item) => {
           return (
             <div key={item.productsId}>
-              <CartListItem item={item} />
+              <CartListItem item={item} count={count} setCount={setCount} />
             </div>
           );
         })}

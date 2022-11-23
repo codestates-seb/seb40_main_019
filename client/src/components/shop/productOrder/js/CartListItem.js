@@ -1,7 +1,7 @@
 import '../css/cartListItem.scss';
 import QuantityBtn from '../../js/QuantityBtn';
 
-const CartListItem = ({ item }) => {
+const CartListItem = ({ item, count, setCount }) => {
   return (
     <div className="cartListContainer">
       <div className="checkbox">
@@ -10,10 +10,10 @@ const CartListItem = ({ item }) => {
       <img className="titleImg" src={item.img} alt="productImg" />
       <div className="title">{item.productName}</div>
       <div className="quantity">
-        <QuantityBtn />
+        <QuantityBtn count={count} setCount={setCount} />
       </div>
       <div className="price">
-        <div>{item.price}원</div>
+        <div>{item.price * count}원</div>
       </div>
       <div className="delete">
         <button>
