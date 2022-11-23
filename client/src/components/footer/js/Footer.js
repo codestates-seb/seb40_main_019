@@ -28,25 +28,25 @@ export default function Footer() {
                   <i className="fa-brands fa-github" />
                   손현지
                 </a>
-                <a href="https://github.com/Liieonking">
+                <a href="https://github.com/shinker1002">
                   <i className="fa-brands fa-github" />
                   최민수
                 </a>
-                <a href="https://github.com/Liieonking">
+                <a href="https://github.com/GitHubJIYEON">
                   <i className="fa-brands fa-github" />
                   이지연
                 </a>
               </div>
               <div className="backMember">
-                <a href="https://github.com/Liieonking">
+                <a href="https://github.com/hyojoonm">
                   <i className="fa-brands fa-github" />
                   김효준
                 </a>
-                <a href="https://github.com/Liieonking">
+                <a href="https://github.com/Taekgil99">
                   <i className="fa-brands fa-github" />
                   박재원
                 </a>
-                <a href="https://github.com/Liieonking">
+                <a href="https://github.com/junohheo">
                   <i className="fa-brands fa-github" />
                   허준오
                 </a>
