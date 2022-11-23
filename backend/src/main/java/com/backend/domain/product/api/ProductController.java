@@ -49,7 +49,7 @@ public class ProductController {
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/products/{productsId}/{categoryId}")
+    @PatchMapping("/products/{categoryId}/{productsId}")
     public ResponseEntity update(@PathVariable Long productsId,@CurrentUser CustomUserDetails authUser,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
                                  TitleImg titleImg,DetailImg detailImg,@PathVariable Long categoryId){
