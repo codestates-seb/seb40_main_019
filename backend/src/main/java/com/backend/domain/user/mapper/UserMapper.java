@@ -22,8 +22,6 @@ public interface UserMapper {
         user.setSocialLogin("original");
         user.setUserStatus(User.UserStatus.USER_EXIST);
         user.setAbout("안녕하세요");
-        user.setAddress(userPostDto.getAddress());
-        user.setZipCode(userPostDto.getZipCode());
 
         return user;
     }

@@ -53,6 +53,7 @@ public class UserController {
     @GetMapping("/reissue")
     public ResponseEntity<UserLoginResponseDto> reissue(HttpServletRequest request,
                                                         HttpServletResponse response) {
+
         String refreshToken = request.getHeader("refreshToken");
 
         return ResponseEntity.ok(userService.createAccessToken(refreshToken, response));
@@ -60,6 +61,7 @@ public class UserController {
 
     @PatchMapping
     public ResponseEntity<?> update(@RequestBody UserPatchDto userPatchDto) {
+
         User user = mapper.userPatchDtoToUser(userService, userPatchDto);
         userService.updateUser(user);
 
@@ -67,23 +69,27 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getUser() {
-        User user = userService.getLoginUser();
+    public ResponseEntity<UserResponseDto> getUserDeatils(@CurrentUser CustomUserDetails authUser) {
+
+//        User user = userService.getLoginUser();
+        User user = authUser.getUser();
+
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
 
     /**
      * 로그아웃 시 토큰 삭제
      *
-     * @param user 현재 유저
+     * @param authUser 현재 유저
      */
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails user) {
-        Long userId = user.getUser().getUserId();
-        log.info("userId : {}", userId);
+    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails authUser) {
 
+        Long userId = authUser.getUser().getUserId();
+        log.info("userId : {}", userId);
         userService.logout(userId);
         log.info("로그아웃 성공");
+
         return ResponseEntity.ok().build();
     }
 
@@ -95,7 +101,6 @@ public class UserController {
     public ResponseEntity<TestUserResponseDto> createTestUser() {
 
         String testAccountRole = "ROLE_USER_TEST";
-
         TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
 
         return ResponseEntity.ok(testUserResponseDto);
@@ -109,33 +114,37 @@ public class UserController {
     public ResponseEntity<TestUserResponseDto> createTestAdmin() {
 
         String testAccountRole = "ROLE_ADMIN_TEST";
-
         TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
 
         return ResponseEntity.ok(testUserResponseDto);
     }
 
-//    -------------- 테스트 --------------
-//    // RefreshToken 헤더 값 받아서 유저 정보 반환
-//    @GetMapping("/test/refresh-token")
-//    public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
-//
-//        String refreshToken = request.getHeader("refreshToken");
-//        log.info("refreshToken: {}", refreshToken);
-//        String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
-//        log.info("responseLoginUserInfo: {}", responseLoginUserInfo);
-//        return ResponseEntity.ok(responseLoginUserInfo);
-//    }
-//
-//    @GetMapping("/test/access-token")
-//    public ResponseEntity<String> testAccessToken(HttpServletRequest request,
-//                                                  @CurrentUser CustomUserDetails authUser) {
-//
-//        User user = authUser.getUser();
-//
-//        String responseLoginUserInfo = userService.atkUserInfo(user);
-//
-//        return ResponseEntity.ok(responseLoginUserInfo);
-//    }
+
+    @GetMapping("/social-user")
+    public ResponseEntity<String> loginUserInfo(@CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+        String responseLoginUserInfo = userService.getLoginUserInfo(user);
+
+        return ResponseEntity.ok(responseLoginUserInfo);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser(@CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+        userService.deleteUser(user);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/password/confirm")
+    public ResponseEntity<Boolean> confirmUserPassword(@CurrentUser CustomUserDetails authUser,
+                                                       @RequestBody PasswordDto password) {
+        User user = authUser.getUser();
+        boolean isCurrentPassword = userService.confirmUserPassword(user, password);
+
+        return ResponseEntity.ok(isCurrentPassword);
+    }
 
 }

@@ -5,12 +5,14 @@ import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
+import com.backend.domain.user.dto.PasswordDto;
 import com.backend.domain.user.dto.TestUserResponseDto;
 import com.backend.domain.user.dto.UserLoginResponseDto;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
 import com.backend.global.utils.jwt.JwtTokenizer;
+import com.google.gson.JsonObject;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -64,6 +66,7 @@ public class UserService {
     public User createUser(User user) {
         // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
         verifyExistsEmailByOriginal(user.getEmail());
+        verifyExistsNicknameByOriginal(user.getNickname());
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         pointService.addCash(user, 1000000);
@@ -76,9 +79,17 @@ public class UserService {
     private void verifyExistsEmailByOriginal(String email) { // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
         if (user.isPresent()) {
-            throw new BusinessLogicException(ExceptionCode.USER_NOT_FOUND);
+            throw new BusinessLogicException(ExceptionCode.EMAIL_DUPLICATION);
         }
     }
+
+    private void verifyExistsNicknameByOriginal(String nickname) { //중복닉네임인지 확인
+        Optional<User> user = userRepository.findByNicknameAndUserStatusAndSocialLogin(nickname, User.UserStatus.USER_EXIST, "original");
+        if (user.isPresent()) {
+            throw new BusinessLogicException(ExceptionCode.NICKNAME_DUPLICATION);
+        }
+    }
+
 
     public void verifyExistUserByEmailAndOriginal(String email) { //현재 활동중인 일반 회원가입으로 가입한 유저중 email 파라미터로 조회
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
@@ -278,30 +289,24 @@ public class UserService {
         adminId++;
     }
 
+    public String getLoginUserInfo(User user) {
+        JsonObject jsonObject = new JsonObject();
 
-//    -------------- 테스트 --------------
-//    // refresh Token parsing
-//    public String headerTokenGetClaimTest(String refreshToken) {
-//        JsonObject jsonObject = new JsonObject();
-//
-//        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
-//
-//        Map<String, Object> claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
-//
-//        jsonObject.addProperty("email", claims.get("email").toString());
-//        jsonObject.addProperty("nickname", claims.get("nickname").toString());
-//        jsonObject.addProperty("imageUrl", claims.get("imageUrl").toString());
-//
-//        return jsonObject.toString();
-//    }
-//
-//    public String atkUserInfo(User user) {
-//        JsonObject jsonObject = new JsonObject();
-//
-//        jsonObject.addProperty("email", user.getEmail());
-//        jsonObject.addProperty("nickname", user.getNickname());
-//        jsonObject.addProperty("imageUrl", user.getProfileImage());
-//
-//        return jsonObject.toString();
-//    }
+        jsonObject.addProperty("email", user.getEmail());
+        jsonObject.addProperty("nickname", user.getNickname());
+        jsonObject.addProperty("imageUrl", user.getProfileImage());
+        jsonObject.addProperty("userRole", user.getUserRole());
+
+        return jsonObject.toString();
+    }
+
+    public void deleteUser(User user) {
+        user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
+        refreshTokenRepository.deleteByKey(user.getUserId());
+        userRepository.save(user);
+    }
+
+    public boolean confirmUserPassword(User user, PasswordDto password) {
+        return passwordEncoder.matches(password.getPassword(), user.getPassword());
+    }
 }

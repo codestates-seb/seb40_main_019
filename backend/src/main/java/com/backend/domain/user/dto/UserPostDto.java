@@ -24,10 +24,4 @@ public class UserPostDto {
     @NotBlank(message = "비밀번호를 입력해주세요")
     private String password;
 
-    @NotBlank(message = "주소를 입력해주세요.")
-    private String address;
-    //    private String detailAddress;
-    @NotBlank(message = "우편번호를 입력해주세요.")
-    private String zipCode;
-
 }
