@@ -36,3 +36,20 @@ out/
 ### VS Code ###
 .vscode/
 **/src/main/java/com/backend/**/*.yml
+
+### Java template
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
