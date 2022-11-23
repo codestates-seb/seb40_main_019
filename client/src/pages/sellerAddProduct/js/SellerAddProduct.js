@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import ProductForm from '../../../components/seller/js/ProductForm';
 import { useState } from 'react';
 import axios from 'axios';
+import ModalOk from '../../../components/alert/js/ModalOk';
 // import { useSelector } from 'react-redux';
 
 export default function SellerAddProduct() {
@@ -23,10 +24,11 @@ export default function SellerAddProduct() {
 
   axios.defaults['withCredentials'] = true;
   // axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
-
+  const [modalOn, setModalOn] = useState(false);
   const handleSubmit = () => {
     if (productName.length < 5 || productName.length >= 30) {
-      alert('상품명이 5~30자여야 합니다');
+      // alert('상품명이 5~30자여야 합니다');
+      setModalOn(true);
     } else if (price < 100 || price > 1000000000) {
       alert('판매가가 100원 ~ 1,000,000,000원 사이여야 합니다');
     } else if (titleImg.length === 0) {
@@ -86,6 +88,9 @@ export default function SellerAddProduct() {
           <button className="close">닫기</button>
         </Link>
         <button onClick={handleSubmit}>저장하기</button>
+      </div>
+      <div className="modal">
+        {modalOn ? <ModalOk setClick={setModalOn} /> : null}
       </div>
     </div>
   );
