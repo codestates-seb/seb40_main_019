@@ -1,12 +1,12 @@
 package com.backend.domain.product.domain;
 
+import com.backend.domain.category.domain.Category;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import com.backend.domain.category.domain.Category;
 
 import javax.persistence.*;
 import java.util.ArrayList;

@@ -1,21 +1,32 @@
 package com.backend.domain.point.domain;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.backend.domain.order.domain.OrderProduct;
+import com.backend.domain.user.domain.User;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Setter
 @Getter
 @Entity
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
+@DynamicInsert
 public class Point {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long pointId;
 
-}
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    private int cash; // 잔액
+
+
+    }
+

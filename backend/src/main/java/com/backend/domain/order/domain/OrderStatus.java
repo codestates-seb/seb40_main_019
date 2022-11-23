@@ -1,6 +1,23 @@
 package com.backend.domain.order.domain;
 
+import lombok.Getter;
+
 public enum OrderStatus {
-    //ORDER(결제중), COMP(결제완료), CANCEL(결제취소), FAIL(결제오류), DELIVERY(배송중)
-    ORDER, COMP, CANCEL, FAIL, DELIVERY
+
+    PROCESS(1,"상품 준비중"),
+    SHIPPING(2, "배송중"),
+    SHIPPED(3, "배송 완료"),
+    CANCEL(4,"주문 취소");
+
+
+    @Getter
+    private int statusNumber;
+
+    @Getter
+    private String statusName;
+
+    OrderStatus(int statusNumber, String statusName) {
+        this.statusNumber = statusNumber;
+        this.statusName = statusName;
+    }
 }

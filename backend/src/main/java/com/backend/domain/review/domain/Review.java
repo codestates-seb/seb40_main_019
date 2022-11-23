@@ -3,6 +3,7 @@ package com.backend.domain.review.domain;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.domain.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +36,16 @@ public class Review {
     private int star;
 
     private String reviewImg;
+    @Builder
+    public Review(Long reviewId, String reviewWriter, String reviewContent, Product product, User user, int star, String reviewImg) {
+        this.reviewId = reviewId;
+        this.reviewWriter = reviewWriter;
+        this.reviewContent = reviewContent;
+        this.product = product;
+        this.user = user;
+        this.star = star;
+        this.reviewImg = reviewImg;
+    }
 
     public void setReviewImg(String reviewImg) {
         this.reviewImg = reviewImg;

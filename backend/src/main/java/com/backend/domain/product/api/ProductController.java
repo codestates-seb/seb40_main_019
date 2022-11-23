@@ -9,8 +9,8 @@ import com.backend.domain.product.dto.TitleImg;
 import com.backend.domain.product.mapper.ProductMapper;
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
-import com.backend.global.dto.response.MultiResponse;
-import com.backend.global.dto.response.SingleResponseDto;
+import com.backend.global.dto.Response.MultiResponse;
+import com.backend.global.dto.Response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -49,8 +49,8 @@ public class ProductController {
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.CREATED);
     }
 
-    @PatchMapping("/products/{productsId}/{categoryId}")
-    public ResponseEntity update(@PathVariable Long productsId,
+    @PatchMapping("/products/{categoryId}/{productsId}")
+    public ResponseEntity update(@PathVariable Long productsId,@CurrentUser CustomUserDetails authUser,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
                                  TitleImg titleImg,DetailImg detailImg,@PathVariable Long categoryId){
         String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());

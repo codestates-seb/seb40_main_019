@@ -41,7 +41,9 @@ public enum ExceptionCode {
     Upload_Failed(404,"Upload Failed"),
 
     // Review
-    REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND");
+    REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND"),
+    //Order
+    ORDER_NOT_FOUND(404, "ORDER_NOT_FOUND");
 
     @Getter
     private int status;

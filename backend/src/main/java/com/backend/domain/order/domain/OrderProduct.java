@@ -1,29 +1,54 @@
 package com.backend.domain.order.domain;
 
+import com.backend.domain.order.dto.OrderProductDto;
 import com.backend.domain.product.domain.Product;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.backend.global.audit.Auditable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
 @Entity
-public class OrderProduct {
+@Getter @Setter
+@NoArgsConstructor
+
+public class OrderProduct extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderProductId;
 
-    @Column(nullable = false)
-    private int orderProductQuantity;
-
+    //1
     @ManyToOne
-    @JoinColumn(name = "oreder_id")
+    @JoinColumn(name = "order_id")
     private Order order;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
 
-}
+    private int price;
+
+    private int quantity;
+    public static OrderProduct createOrderProduct(Product product, int quantity){
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setProduct(product);
+        orderProduct.setQuantity(quantity);
+        orderProduct.setPrice(product.getPrice());
+
+       // product.removeStock(quantity);
+        return orderProduct;
+    }
+
+    public int getTotalPrice(){
+        return price*quantity;
+    }
+
+    public void cancel() {
+        //this.getProduct().addStock(quantity);//todo:재고추가로직만들기
+    }
+    }
+
+
+
+
+
