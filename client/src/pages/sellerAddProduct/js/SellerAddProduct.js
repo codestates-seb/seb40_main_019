@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import ProductForm from '../../../components/seller/js/ProductForm';
 import { useState } from 'react';
 import axios from 'axios';
+// import { useSelector } from 'react-redux';
 
 export default function SellerAddProduct() {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  // const loginData = useSelector((state) => state.login);
 
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState('');
@@ -17,7 +19,10 @@ export default function SellerAddProduct() {
     'https://cdn.discordapp.com/attachments/386786128939843606/1043406127515320390/A97-01-03_1.jpg',
   ]);
 
-  const data = { productName, price, titleImg, detailImg };
+  // const data = { productName, price, titleImg, detailImg };
+
+  axios.defaults['withCredentials'] = true;
+  // axios.defaults.headers.common['Content-Type'] = 'multipart/form-data';
 
   const handleSubmit = () => {
     if (productName.length < 5 || productName.length >= 30) {
@@ -29,15 +34,33 @@ export default function SellerAddProduct() {
     } else if (detailImg.length === 0) {
       alert('상세이미지를 업로드하셔야 합니다');
     } else {
+      //formdata에 data입력
+      const formData = new FormData();
+      formData.append('titleImg', titleImg);
+      formData.append('detailImg', detailImg);
+      formData.append('productName', productName);
+      formData.append('price', price);
+      for (const value of formData.value()) {
+        console.log(value);
+      }
+
       axios
-        .post(`${REACT_APP_API_URL}products/${categoryId}`, data)
+        .post(`${REACT_APP_API_URL}products/${categoryId}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            processData: false,
+            Authorization: JSON.parse(
+              window.sessionStorage.getItem('accesstoken')
+            ),
+          },
+        })
         .then((res) => {
           console.log(res.data);
           // navigate(`/seller/product`)
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      // .catch((error) => {
-      //   console.log(error.response);
-      // });
     }
   };
 
