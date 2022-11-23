@@ -14,8 +14,8 @@ export default function ImgUploader({ pictures, setPictures }) {
 
   //     return false;
   // }
-  const onDrop = (_, pictureURL) => {
-    setPictures(pictureURL); //formdata로 변환
+  const onDrop = (picture) => {
+    setPictures(picture);
   };
   return (
     <ImageUploader

@@ -1,13 +1,16 @@
 .header {
   height: 120px;
   width: 100%;
-  background-color: #1885AE;
+  background-color: #1885ae;
   display: flex;
   justify-content: center;
 
-  img{
+  img {
     width: 125px;
     position: relative;
     right: 8px;
   }
+}
+.sellerHeader {
+  background-color: var(--color-yellow);
 }

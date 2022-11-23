@@ -5,6 +5,7 @@ axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+console.log(REACT_APP_API_URL);
 
 // 서버에 로그인 입력 데이터 전송
 export const submitForm = async (userInfo) => {
