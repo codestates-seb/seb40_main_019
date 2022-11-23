@@ -1,9 +1,11 @@
 import axios from 'axios';
+import { setCookie } from '../cookie/cookie';
 
 axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common['Authorization'] =
-  window.sessionStorage.getItem('accesstoken');
+axios.defaults.headers.common['Authorization'] = JSON.parse(
+  window.sessionStorage.getItem('accesstoken')
+);
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -16,12 +18,10 @@ let reg_mobile = /^\d{3}-\d{3,4}-\d{4}$/;
 
 // 유저 정보 상세 조회
 export const getUserInfo = async () => {
-  console.log(window.sessionStorage.getItem('accesstoken'));
   try {
     console.log('유저 정보 상세조회 내부');
     const res = await axios.get(`${REACT_APP_API_URL}users`);
-    console.log(res);
-    return res;
+    return res.data;
   } catch (error) {
     return error.response.data;
   }
@@ -42,7 +42,15 @@ export const editUserInfo = async (data) => {
       // 비밀번호 요청 API 필요
       return;
     }
-
+    // 현재 비밀번호 일치 확인
+    if (data.curPassword !== undefined) {
+      // 유저 비밀번호 확인
+      let check = await checkCurPassword(data.curPassword);
+      if (!check.data) {
+        window.alert('현재 비밀번호가 일치하지 않습니다.');
+        return;
+      }
+    }
     // 새 비밀번호 입력
     if (data.newPassword === '') {
       window.alert('새로운 비밀번호를 입력해주세요');
@@ -66,7 +74,7 @@ export const editUserInfo = async (data) => {
     }
 
     // 이름 유효성 확인
-    if (!reg_name1.test(data.name)) {
+    if (!reg_name1.test(data.username)) {
       window.alert('올바른 이름을 입력해주세요');
       return;
     }
@@ -82,8 +90,20 @@ export const editUserInfo = async (data) => {
       console.log('유저 정보 수정 내부');
       console.log(data);
       console.log(REACT_APP_API_URL);
-      // const res = await axios.patch(`${REACT_APP_API_URL}users`, data);
-      // console.log(res);
+      let temp = {
+        nickname: data.nickname,
+        password: data.newPassword,
+        profileImage: data.profileImage,
+        address: data.address,
+        zipCode: data.zipCode,
+        phone: data.phone,
+        username: data.username,
+      };
+      const res = await axios.patch(`${REACT_APP_API_URL}users`, temp);
+      console.log(res);
+      if (res.status === 200) {
+        window.location.replace('/mypage/user');
+      }
       // return res;
       window.alert('회원 정보 수정 완료.');
     } catch (error) {
@@ -97,12 +117,37 @@ export const deleteUserAccount = async () => {
   if (check) {
     try {
       console.log('유저 정보 삭제 내부');
-      // const res = await axios.delete(`${REACT_APP_API_URL}users`);
-      // console.log(res);
+      const res = await axios.delete(`${REACT_APP_API_URL}users`);
+      console.log(res);
+      if (res.status === 200) {
+        window.sessionStorage.removeItem('accesstoken');
+        window.sessionStorage.removeItem('userData');
+        // 리프레시 토큰 삭제
+        setCookie('refreshtoken', '', {
+          path: '/',
+          secure: true,
+          sameSite: 'none',
+          expires: new Date(Date.now() - 1),
+        });
+        window.location.replace('/');
+        window.alert('회원 탈퇴 완료.');
+      }
       // return res;
-      window.alert('회원 탈퇴 완료.');
     } catch (error) {
       return error.response.data;
     }
+  }
+};
+// 비밀번호 일치 확인
+export const checkCurPassword = async (password) => {
+  try {
+    console.log('비밀번호 확인요청');
+    const res = await axios.post(`${REACT_APP_API_URL}users/password/confirm`, {
+      password,
+    });
+    console.log(res);
+    return res;
+  } catch (error) {
+    return error.response.data;
   }
 };
