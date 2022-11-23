@@ -1,10 +1,10 @@
 package com.backend.domain.review.api;
 
+import com.backend.domain.product.application.ImageUploadService;
 import com.backend.domain.review.Mapper.ReviewMapper;
 import com.backend.domain.review.application.ReviewService;
 import com.backend.domain.review.domain.Review;
-import com.backend.domain.review.dto.ReviewPatchDto;
-import com.backend.domain.review.dto.ReviewPostDto;
+import com.backend.domain.review.dto.ReviewImg;
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.dto.Response.MultiResponse;
@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,27 +24,51 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewMapper reviewMapper;
+    private final ImageUploadService awsS3Service;
 
+    @PostMapping("/test")
+    public String test(ReviewImg reviewImg){
+        if (reviewImg.getReviewImg().isEmpty()){
+            return "이미지 없다";
+        }else {
+            return awsS3Service.StoreImage(reviewImg.getReviewImg());
+        }
+
+    }
     @PostMapping("/review/{productId}")
     public ResponseEntity create(@CurrentUser CustomUserDetails authUser,
                                  @PathVariable Long productId,
-                                 @Valid @RequestBody ReviewPostDto reviewPostDto){
-
-        Review review = reviewMapper.reviewPostDtoToReview(reviewPostDto);
-
+                                 @RequestParam("reviewContent")String reviewContent,@RequestParam("star")int star,
+                                  ReviewImg reviewImg){
+        String reviewUrl;
+        if(reviewImg.getReviewImg().isEmpty()){
+            reviewUrl = null;
+        }
+        else {
+             reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
+        }
         Long userId = authUser.getUser().getUserId();
 
-        Review saveReview = reviewService.create(userId,productId, review);
+        Review saveReview = reviewService.create(userId,productId,reviewContent,star,reviewUrl);
 
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(saveReview)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/review/{reviewId}")
     public ResponseEntity update(@PathVariable Long reviewId,
-                                 @Valid @RequestBody ReviewPatchDto reviewPatchDto){
-        Review review = reviewMapper.reviewPatchDtoToReview(reviewPatchDto);
+                                 @CurrentUser CustomUserDetails authUser,
+                                 @RequestParam("reviewContent")String reviewContent,@RequestParam("star")int star,
+                                 ReviewImg reviewImg){
+        String reviewUrl;
+        if(reviewImg.getReviewImg().isEmpty()){
+            reviewUrl = null;
+        }
+        else {
+            reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
+        }
+        Long userId = authUser.getUser().getUserId();
 
-        Review response = reviewService.update(reviewId, review);
+        Review response = reviewService.update(reviewId,userId,reviewContent,star,reviewUrl);
 
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(response)),HttpStatus.OK);
     }
