@@ -18,7 +18,7 @@ export const googleCallback = async (accesstoken, refreshtoken) => {
     });
 
     const res = await axios.get(
-      `${process.env.REACT_APP_API_URL}oauth2/authorization/google`,
+      `${process.env.REACT_APP_API_URL}users/social-user`,
       {
         headers: {
           Authorization: JSON.parse(
