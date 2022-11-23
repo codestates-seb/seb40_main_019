@@ -5,10 +5,10 @@ export default function OauthKakao() {
     const url = new URL(window.location.href);
     const tokenArr = url.search.split('&');
     // console.log(tokenArr);
-    const accessToken = tokenArr[0].split('=')[1].replace('%20', ' ');
+    const accesstoken = tokenArr[0].split('=')[1].replace('%20', ' ');
     const refreshToken = tokenArr[1].split('=')[1];
 
-    googleCallback(accessToken, refreshToken);
+    googleCallback(accesstoken, refreshToken);
   }, []);
 
   return (

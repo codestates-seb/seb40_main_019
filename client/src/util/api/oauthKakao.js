@@ -11,7 +11,7 @@ export const kakaoLogin = () => {
 export const kakaoCallback = async (accesstoken, refreshtoken) => {
   if (accesstoken && refreshtoken) {
     window.sessionStorage.setItem('accesstoken', JSON.stringify(accesstoken));
-    setCookie('refreshToken', refreshtoken, {
+    setCookie('refreshtoken', refreshtoken, {
       path: '/',
       secure: true,
       sameSite: 'none',
@@ -19,7 +19,7 @@ export const kakaoCallback = async (accesstoken, refreshtoken) => {
     });
 
     const res = await axios.get(
-      `${process.env.REACT_APP_API_URL}users/test/access-token`,
+      `${process.env.REACT_APP_API_URL}users/social-user`,
       {
         headers: {
           Authorization: JSON.parse(
@@ -33,7 +33,7 @@ export const kakaoCallback = async (accesstoken, refreshtoken) => {
     if (res.status === 200) {
       let userData = res.data;
       window.sessionStorage.setItem('userData', JSON.stringify(userData));
-      // window.location.replace('/');
+      window.location.replace('/');
     }
   }
 };
