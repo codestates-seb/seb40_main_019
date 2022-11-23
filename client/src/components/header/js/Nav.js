@@ -3,11 +3,12 @@ import textLogo from '../../../assets/img/LUXMEAL.svg';
 import textLogoYellow from '../../../assets/img/LUXMEALy.svg';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { userLogout } from '../../../util/api/loginForm';
 
 export default function Nav() {
   const location = useLocation();
-  const user = useSelector((state) => state.user);
-  console.log(user);
+  // const user = useSelector((state) => state.user);
+  const loginData = useSelector((state) => state.login);
   return (
     <>
       <div className="navbar">
@@ -41,9 +42,15 @@ export default function Nav() {
                   Cart
                 </button>
               </Link>
-              <Link to="/login">
-                <button className="margin">Login</button>
-              </Link>
+              {loginData.isLogin ? (
+                <button className="margin" onClick={userLogout}>
+                  Logout
+                </button>
+              ) : (
+                <Link to="/login">
+                  <button className="margin">Login</button>
+                </Link>
+              )}
             </div>
           </div>
         </nav>
