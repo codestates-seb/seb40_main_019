@@ -7,7 +7,7 @@ import Login from './pages/login/js/Login';
 import Signup from './pages/signup/js/Signup';
 import OauthKakao from './pages/oauth/OauthKakao';
 import OauthGoogle from './pages/oauth/OauthGoogle';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
 import { getCookie } from './util/cookie/cookie';
@@ -38,11 +38,11 @@ function App() {
   //json-server 주소
   //json-server --watch data.json --port 3001
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const loginData = useSelector((state) => state.login);
+  // const user = useSelector((state) => state.user);
+  // const loginData = useSelector((state) => state.login);
 
-  console.log(user);
-  console.log(loginData);
+  // console.log(user);
+  // console.log(loginData);
 
   useEffect(() => {
     const userData = JSON.parse(window.sessionStorage.getItem('userData'));
@@ -53,16 +53,16 @@ function App() {
     // console.log(accessToken);
     // 스토리지에서 받아온 데이터가 null 이 아니면 리덕스에 데이터 저장.
     if (userData && accesstoken) {
-      console.log('리덕스에 저장');
+      // console.log('리덕스에 저장');
       dispatch(setUser(userData));
       dispatch(login({ accesstoken }));
     } else {
-      console.log(getCookie('refreshtoken'));
+      // console.log(getCookie('refreshtoken'));
       if (getCookie('refreshtoken')) {
-        console.log('재발급 요청');
+        // console.log('재발급 요청');
         // tokenReissue(getCookie('refreshtoken'));
       } else {
-        console.log('리프레시 토큰 없음');
+        // console.log('리프레시 토큰 없음');
       }
     }
   }, []);
