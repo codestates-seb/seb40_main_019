@@ -1,7 +1,7 @@
 HELP.md
 .gradle
 build/
-!gradle/wrapper/gradle-wrapper.jar
+!backend/gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
@@ -35,7 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
-**/src/main/java/com/backend/**/*.yml
 
 ### Java template
 # Compiled class file
