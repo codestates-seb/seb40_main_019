@@ -127,4 +127,14 @@ public class UserController {
         return ResponseEntity.ok(responseLoginUserInfo);
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser(@CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+
+        userService.deleteUser(user);
+
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -293,4 +293,9 @@ public class UserService {
 
         return jsonObject.toString();
     }
+
+    public void deleteUser(User user) {
+        user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
+        userRepository.save(user);
+    }
 }
