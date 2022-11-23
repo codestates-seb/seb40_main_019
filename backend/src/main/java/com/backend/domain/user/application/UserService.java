@@ -64,35 +64,64 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
-        // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
-        verifyExistsEmailByOriginal(user.getEmail());
-        verifyExistsNicknameByOriginal(user.getNickname());
+        Optional<User> notExistUser = null;
+        log.info("회원가입 시작");
+        if (!isNotExistsEmailByOriginal(user.getEmail())) {
+            log.info("신규 유저");
+            verifyExistsEmailByOriginal(user.getEmail());
+        } else {
+            log.info("탈퇴했던 유저");
+            user.setUserStatus(User.UserStatus.USER_EXIST);
+            log.info("탈퇴했던 유저의 상태를 USER_EXIST로 변경");
+            notExistUser = userRepository.findByEmail(user.getEmail());
+            user.setUserId(notExistUser.get().getUserId());
+            if (!Objects.equals(notExistUser.get().getNickname(), user.getNickname())) {
+                verifyExistsNicknameByOriginal(user.getNickname());
+            }
+        }
+
+        if (notExistUser == null) {
+            verifyExistsNicknameByOriginal(user.getNickname());
+        }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info("비밀번호 암호화");
         pointService.addCash(user, 1000000);
-
+        log.info("회원가입 포인트 지급");
 
         return userRepository.save(user);
 
     }
 
+    private boolean isNotExistsEmailByOriginal(String email) {
+        log.info("탈퇴 여부 확인 : " + email);
+        Optional<User> notExistUser = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_NOT_EXIST, "original");
+        return notExistUser.isPresent();
+    }
+
     private void verifyExistsEmailByOriginal(String email) { // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
-        Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
-        if (user.isPresent()) {
+        log.info("이메일 중복 확인 : " + email);
+        Optional<User> existUser = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
+        if (existUser.isPresent()) {
+            log.info("이미 등록된 이메일");
             throw new BusinessLogicException(ExceptionCode.EMAIL_DUPLICATION);
         }
+        log.info("사용 가능한 이메일");
     }
 
     private void verifyExistsNicknameByOriginal(String nickname) { //중복닉네임인지 확인
+        log.info("닉네임 중복 확인 : " + nickname);
         Optional<User> user = userRepository.findByNicknameAndUserStatusAndSocialLogin(nickname, User.UserStatus.USER_EXIST, "original");
         if (user.isPresent()) {
+            log.info("이미 등록된 닉네임");
             throw new BusinessLogicException(ExceptionCode.NICKNAME_DUPLICATION);
         }
+        log.info("사용 가능한 닉네임");
     }
 
     public void verifyExistUserByEmailAndOriginal(String email) { //현재 활동중인 일반 회원가입으로 가입한 유저중 email 파라미터로 조회
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
-        if (user.isEmpty()) {//DB에 없는 유저거나 이전에 탈퇴한 유저면 예외처리함
+        if (user.isEmpty()) { //DB에 없는 유저거나 이전에 탈퇴한 유저면 예외처리함
             throw new BusinessLogicException(ExceptionCode.USER_NOT_FOUND);
         }
     }
@@ -106,6 +135,8 @@ public class UserService {
 
     @Transactional
     public User updateUser(User user) {
+        verifyExistsNicknameByOriginal(user.getNickname());
+
         User findUser = findVerifiedUser(user.getUserId());
 
         Optional.ofNullable(user.getModifiedAt())
@@ -302,9 +333,11 @@ public class UserService {
     }
 
     public void deleteUser(User user) {
+        log.info("유저 삭제 : {}", user.getEmail());
         user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
         refreshTokenRepository.deleteByKey(user.getUserId());
         userRepository.save(user);
+        log.info("유저 삭제 완료 : {}", user.getEmail());
     }
 
     public boolean comparePassword(User user, PasswordDto password) {
