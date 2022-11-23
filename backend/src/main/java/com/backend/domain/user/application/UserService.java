@@ -296,6 +296,7 @@ public class UserService {
 
     public void deleteUser(User user) {
         user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
+        refreshTokenRepository.deleteByKey(user.getUserId());
         userRepository.save(user);
     }
 }
