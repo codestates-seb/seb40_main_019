@@ -67,19 +67,20 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getUserDeatils() {
-        User user = userService.getLoginUser();
+    public ResponseEntity<UserResponseDto> getUserDeatils(@CurrentUser CustomUserDetails authUser) {
+//        User user = userService.getLoginUser();
+        User user = authUser.getUser();
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
 
     /**
      * 로그아웃 시 토큰 삭제
      *
-     * @param user 현재 유저
+     * @param authUser 현재 유저
      */
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails user) {
-        Long userId = user.getUser().getUserId();
+    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails authUser) {
+        Long userId = authUser.getUser().getUserId();
         log.info("userId : {}", userId);
 
         userService.logout(userId);
