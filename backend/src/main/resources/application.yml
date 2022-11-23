@@ -17,7 +17,7 @@ spring:
     init:
       mode: always # DB 초기화 모드 -> always, never, embedded
   profiles:
-    active: local # local / server
+    active: server # local / server
     include: oauth
   security:
     # 해당 파일을 읽어 OAuth2ClientProperties 생성
