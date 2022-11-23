@@ -5,8 +5,6 @@ const initialState = {
   nickname: '',
   email: '',
   password: '',
-  address: '',
-  zipCode: '',
 };
 
 export const modalSlice = createSlice({
@@ -25,8 +23,6 @@ export const modalSlice = createSlice({
         nickname: payload.nickname,
         email: payload.email,
         password: payload.password,
-        address: payload.address,
-        zipCode: payload.zipCode,
       };
     },
   },

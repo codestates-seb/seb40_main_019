@@ -36,8 +36,6 @@ export default function SignupModal() {
         nickname: data.nickname,
         email: data.email,
         password: data.password,
-        address: data.address,
-        zipCode: data.zipCode,
       };
       // 폼 데이터 전송.
       const submit = await submitForm(dataTemp);

@@ -29,7 +29,7 @@ export const submitForm = async (userInfo) => {
 
       window.sessionStorage.setItem('accesstoken', JSON.stringify(accesstoken));
       window.sessionStorage.setItem('userData', JSON.stringify(userData));
-      // window.location.replace('/');
+      window.location.replace('/');
     }
   } catch (error) {
     console.error(error);
