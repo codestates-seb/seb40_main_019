@@ -14,7 +14,7 @@ export default function MypagePointButton() {
               <FontAwesomeIcon className="pointIcon" icon={faCoins} />
             </div>
           </div>
-          <div className="point"></div>
+          <div className="point">111,123,000</div>
         </div>
         <div className="pointBtnFlex">
           <div className="pointBtn">
