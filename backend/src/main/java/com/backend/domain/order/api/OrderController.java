@@ -10,9 +10,12 @@ import com.backend.domain.order.dto.OrderPatchDto;
 import com.backend.domain.order.mapper.OrderMapper;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.dto.ProductPatchDto;
-import com.backend.domain.user.domain.AuthUser;
-import com.backend.global.annotation.CurrentMember;
-import com.backend.global.dto.MultiResponseDto;
+
+
+import com.backend.global.annotation.CurrentUser;
+import com.backend.global.config.auth.userdetails.CustomUserDetails;
+
+import com.backend.global.dto.Response.MultiResponse;
 import com.backend.global.dto.Response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,8 +43,8 @@ public class OrderController {
 
     //주문
     @PostMapping("/orders")
-    public ResponseEntity order(@CurrentMember AuthUser authuser, @RequestBody @Valid OrderDto orderDto) {
-        Long userId = authuser.getUserId();
+    public ResponseEntity order(@CurrentUser CustomUserDetails authUser, @RequestBody @Valid OrderDto orderDto) {
+        Long userId = authUser.getUser().getUserId();
         Long orderId;
         orderId = orderService.order(orderDto, userId);
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);
@@ -68,25 +71,25 @@ public class OrderController {
 
 
     @GetMapping(value = {"/orders", "/orders/{page}"})
-    public ResponseEntity<MultiResponseDto> getList(@PathVariable("page") Optional<Integer> page, @CurrentMember AuthUser authUser) {
+    public ResponseEntity<MultiResponse> getList(@PathVariable("page") Optional<Integer> page, @CurrentUser CustomUserDetails authUser) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
 
-        Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getOrderList(authUser.getUserId(), pageable);
+        Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getOrderList(authUser.getUser().getUserId(), pageable);
         List<OrderHistoryDto> content = ordersHistoryDtoList.getContent();
 
 
-        return new ResponseEntity<>(new MultiResponseDto<>(content, ordersHistoryDtoList), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponse<>(content, ordersHistoryDtoList), HttpStatus.OK);
     }
 
     @GetMapping(value = {"/orders/all", "/orders/all/{page}"})
-    public ResponseEntity<MultiResponseDto> getAllList(@PathVariable("page") Optional<Integer> page) {
+    public ResponseEntity<MultiResponse> getAllList(@PathVariable("page") Optional<Integer> page) {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
 
         Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getAllList(pageable);
         List<OrderHistoryDto> content = ordersHistoryDtoList.getContent();
 
 
-        return new ResponseEntity<>(new MultiResponseDto<>(content, ordersHistoryDtoList), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponse<>(content, ordersHistoryDtoList), HttpStatus.OK);
     }
 
 

@@ -11,7 +11,8 @@ public enum ExceptionCode {
     // User
     EMAIL_DUPLICATION(409, "Email Is Duplication"),
     USER_NOT_FOUND(404, "USER NOT FOUND"),
-    USERNAME_DUPLICATION(409, "UserName Is Duplicated"),
+    ALRREADY_LOGOUT(400, "ALREADY LOGOUT"),
+    NICKNAME_DUPLICATION(409, "Nickname Is Duplicated"),
     LOGIN_FAILED(400, "Login input is invalid"),
     NOT_LOGIN_MEMBER(400, "Not Login Member"),
 
@@ -29,12 +30,20 @@ public enum ExceptionCode {
 
     POST_NOT_FOUND(404, "POST NOT FOUND"),
 
-    //Order
-    ORDER_NOT_FOUND(404, "ORDER_NOT_FOUND"),
-
     // Product
     PRODUCT_EXIST(409,"PRODUCT EXIST"),
-    PRODUCT_NOT_FOUND(404,"PRODUCT_NOT_FOUND");
+    PRODUCT_NOT_FOUND(404,"PRODUCT_NOT_FOUND"),
+
+    CATEGORY_NOT_FOUND(404,"CATEGORY_NOT_FOUND"),
+
+    // image
+    No_Image(404,"Image Empty"),
+    Upload_Failed(404,"Upload Failed"),
+
+    // Review
+    REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND"),
+    //Order
+    ORDER_NOT_FOUND(404, "ORDER_NOT_FOUND");
 
     @Getter
     private int status;

@@ -1,5 +1,6 @@
 package com.backend.domain.product.exception;
 
+
 import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
 

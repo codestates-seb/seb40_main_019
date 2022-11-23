@@ -8,11 +8,12 @@ import com.backend.domain.point.dto.PointChargeDto;
 import com.backend.domain.point.dto.PointResponseDto;
 import com.backend.domain.point.mapper.PointMapper;
 import com.backend.domain.user.dao.UserRepository;
-import com.backend.domain.user.domain.AuthUser;
+
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
-import com.backend.global.annotation.CurrentMember;
-import com.backend.global.dto.SingleResponseDto;
+
+import com.backend.global.annotation.CurrentUser;
+import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,8 +31,8 @@ public class PointController {
     private final PointMapper mapper;
 
     @PostMapping
-    public ResponseEntity<Integer> charge(@CurrentMember AuthUser authUser, @RequestBody PointChargeDto pointChargeDto){
-        Long userId =authUser.getUserId();
+    public ResponseEntity<Integer> charge(@CurrentUser CustomUserDetails authUser, @RequestBody PointChargeDto pointChargeDto){
+        Long userId =authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         int price = pointChargeDto.getPrice();
         int newRestCash = pointService.addCash(user, price);
@@ -41,8 +42,8 @@ public class PointController {
     }
 
     @GetMapping
-    public ResponseEntity find(@CurrentMember AuthUser authUser) {
-        User user = userRepository.findById(authUser.getUserId()).orElseThrow(MemberNotFound::new);
+    public ResponseEntity find(@CurrentUser CustomUserDetails authUser) {
+        User user = userRepository.findById(authUser.getUser().getUserId()).orElseThrow(MemberNotFound::new);
         int restCash = pointService.getRestCash(user);
 
         return new ResponseEntity<>(restCash, HttpStatus.OK);

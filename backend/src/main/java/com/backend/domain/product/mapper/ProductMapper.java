@@ -1,6 +1,7 @@
 package com.backend.domain.product.mapper;
 
 import com.backend.domain.product.domain.Product;
+import com.backend.domain.product.dto.ProResponseDto;
 import com.backend.domain.product.dto.ProductPatchDto;
 import com.backend.domain.product.dto.ProductPostDto;
 import com.backend.domain.product.dto.ProductResponseDto;
@@ -15,7 +16,9 @@ public interface ProductMapper {
 
     Product productPatchDtoToProduct(ProductPatchDto productPatchDto);
 
-    ProductResponseDto ProductToProductResponseDto(Product product);
+    ProductResponseDto productToProductResponseDto(Product product);
 
-    List<ProductResponseDto> productsToProductResponseDto (List<Product> products);
+    List<ProductResponseDto> productsToProductResponseDto(List<Product> products);
+
+    ProResponseDto productToProResponseDto(Product product);
 }

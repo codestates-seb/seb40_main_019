@@ -1,14 +1,12 @@
 package com.backend.domain.product.domain;
 
 import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.product.dto.ProductPatchDto;
-import com.backend.domain.product.dto.ProductPostDto;
 import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.domain.User;
-import lombok.AccessLevel;
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import com.backend.domain.category.domain.Category;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -27,23 +25,19 @@ public class Product {
     private int price;
 
     @Column(nullable = false)
-    private String seller;
-
-    @Column(nullable = false)
     private String productName;
-
-    @Column(nullable = false)
-    private int stock;
-
-    @Column(nullable = false)
-    private int star;
 
     @Column(nullable = false)
     private int discountPrice;
 
+    private String titleImg;
+
+    private String detailImg;
+
     // 유저 맵핑 추가
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -53,8 +47,10 @@ public class Product {
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     // 카테고리 맵핑 수정
-    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<ProductCategory> productCategories = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    @JsonIgnore
+    private Category category;
 
 
 //    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
@@ -62,6 +58,16 @@ public class Product {
 //    private List<Cart> carts = new ArrayList<>();
 
     // 상품에 판매자 유저 정보 입력
+
+
+    public void setTitleImg(String titleImg) {
+        this.titleImg = titleImg;
+    }
+
+    public void setDetailImg(String detailImg) {
+        this.detailImg = detailImg;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -74,19 +80,13 @@ public class Product {
         this.price = price;
     }
 
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
-
     public void setProductName(String productName) {
         this.productName = productName;
     }
 
-    public void setStock(int stock) {
-        this.stock = stock;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
-    public void setStar(int star) {
-        this.star = star;
-    }
+
 }
