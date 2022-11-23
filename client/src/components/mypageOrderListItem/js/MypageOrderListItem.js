@@ -12,7 +12,7 @@ export default function MypageOrderListItem({ item }) {
         <div className="title">{item.productName}</div>
       </div>
       <div className="priceAndCount">
-        <div className="price">{item.price} 원</div>
+        <div className="price">{item.price}원</div>
         <div className="orderCount">{item.orderCount}개</div>
       </div>
       <div className="reviewBtn">
