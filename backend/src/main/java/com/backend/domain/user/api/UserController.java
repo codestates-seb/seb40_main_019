@@ -133,7 +133,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/password/confirm")
+    @PostMapping("/password/confirm")
     public ResponseEntity<Boolean> confirmUserPassword(@CurrentUser CustomUserDetails authUser,
                                                        @RequestBody PasswordDto password) {
         User user = authUser.getUser();
