@@ -289,6 +289,7 @@ public class UserService {
         jsonObject.addProperty("email", user.getEmail());
         jsonObject.addProperty("nickname", user.getNickname());
         jsonObject.addProperty("imageUrl", user.getProfileImage());
+        jsonObject.addProperty("userRole", user.getUserRole());
 
         return jsonObject.toString();
     }

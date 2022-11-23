@@ -122,6 +122,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
                 "\"nickname\":\"" + user.getNickname() + "\"," +
+                "\"userRole\":\"" + user.getUserRole() + "\"," +
                 "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
     }
 
@@ -134,10 +135,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private String delegateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
-        claims.put("email", user.getEmail());
-        claims.put("userRole", user.getUserRole());
-        claims.put("nickname", user.getNickname());
-        claims.put("imageUrl", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
@@ -159,10 +156,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
-        claims.put("email", user.getEmail());
-        claims.put("userRole", user.getUserRole());
-        claims.put("nickname", user.getNickname());
-        claims.put("imageUrl", user.getProfileImage());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());
