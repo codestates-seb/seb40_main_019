@@ -1,0 +1,22 @@
+.mobileButtonContainer{
+  box-shadow: 5px 5px 5px 5px gray;
+}
+
+.buttonBox{
+    height: 70px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  >button {
+    width: 100%;
+    background-color: var(--color-blue);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-left: -20px;
+  }
+
+  .priceBtn{
+    background-color: var(--color-yellow);
+    color: var(--color-brown);
+  }
+}

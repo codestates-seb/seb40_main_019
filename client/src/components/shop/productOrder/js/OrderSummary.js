@@ -47,12 +47,6 @@ export default function OrderSummary() {
           <div className="orderBtnBox">
             <button>포인트 결제</button>
           </div>
-
-          {/* 반응형 - 총금액/포인트 결제 버튼 */}
-          <div className="mediaBtnBox">
-            <div>35,000원</div>
-            <button>포인트 결제</button>
-          </div>
         </div>
       </div>
     </>
