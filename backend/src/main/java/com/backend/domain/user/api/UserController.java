@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getDeatils(@CurrentUser CustomUserDetails authUser) {
+    public ResponseEntity<UserResponseDto> getDetails(@CurrentUser CustomUserDetails authUser) {
         User user = authUser.getUser();
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
@@ -133,13 +133,10 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/password/confirm")
-    public ResponseEntity<Boolean> confirmUserPassword(@CurrentUser CustomUserDetails authUser,
+    @PostMapping("/password/confirm")
+    public ResponseEntity<Boolean> comparePassword(@CurrentUser CustomUserDetails authUser,
                                                        @RequestBody PasswordDto password) {
-        User user = authUser.getUser();
-        boolean isCurrentPassword = userService.confirmUserPassword(user, password);
-
-        return ResponseEntity.ok(isCurrentPassword);
+        return ResponseEntity.ok(userService.comparePassword(authUser.getUser(), password));
     }
 
 }
