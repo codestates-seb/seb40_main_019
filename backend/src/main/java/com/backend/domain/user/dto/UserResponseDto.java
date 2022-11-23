@@ -14,7 +14,7 @@ public class UserResponseDto {
     private String email;
     private String nickname;
     private String profileImage;
-    private String about;
+//    private String about;
     private String userRole;
     private String socialLogin;
     private User.UserStatus userStatus;

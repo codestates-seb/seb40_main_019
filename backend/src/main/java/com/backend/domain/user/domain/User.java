@@ -36,8 +36,8 @@ public class User extends Auditable {
     @Column(nullable = false)
     private String profileImage;
 
-    @Column(nullable = false)
-    private String about;
+//    @Column(nullable = false)
+//    private String about;
 
     @Column(nullable = true)
     private String userRole;
@@ -72,7 +72,7 @@ public class User extends Auditable {
                 String password,
                 String nickname,
                 String profileImage,
-                String about,
+//                String about,
                 String userRole,
                 String socialLogin,
                 String zipCode,
@@ -82,7 +82,7 @@ public class User extends Auditable {
         this.password = password;
         this.nickname = nickname;
         this.profileImage = profileImage;
-        this.about = about;
+//        this.about = about;
         this.userRole = userRole;
         this.socialLogin = socialLogin;
         this.zipCode = zipCode;
@@ -94,7 +94,7 @@ public class User extends Auditable {
         this.nickname = userPatchDto.getNickname();
         this.password = password;
         this.profileImage = userPatchDto.getProfileImage();
-        this.about = userPatchDto.getAbout();
+//        this.about = userPatchDto.getAbout();
         this.address = userPatchDto.getAddress();
         this.zipCode = userPatchDto.getZipCode();
         this.phone = userPatchDto.getPhone();

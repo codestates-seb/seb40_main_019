@@ -97,7 +97,7 @@ public class OAuthAttributes {
                 .nickname(name + "[" + registrationId.toUpperCase() + "]")
                 .email(email)
                 .socialLogin(registrationId)
-                .about("안녕하세요. " + name + "입니다.")
+//                .about("안녕하세요. " + name + "입니다.")
                 .build();
         user.addCash(1000000);
 

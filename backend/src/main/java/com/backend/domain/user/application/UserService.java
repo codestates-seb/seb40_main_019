@@ -117,8 +117,8 @@ public class UserService {
         Optional.ofNullable(user.getProfileImage())
                 .ifPresent(findUser::setProfileImage);
 
-        Optional.ofNullable(user.getAbout())
-                .ifPresent(findUser::setAbout);
+//        Optional.ofNullable(user.getAbout())
+//                .ifPresent(findUser::setAbout);
 
         Optional.ofNullable(user.getUserStatus())
                 .ifPresent(findUser::setUserStatus);
@@ -236,7 +236,7 @@ public class UserService {
                 .email(guestEmail)
                 .nickname(guestNickname)
                 .password(randomPassword)
-                .about("안녕하세요. 테스트 계정입니다.")
+//                .about("안녕하세요. 테스트 계정입니다.")
                 .userRole(userRole)
                 .profileImage("https://i.ibb.co/7bQQYkX/kisspng-computer-icons-user-profile-avatar-5abcbc2a1f4f51-20180201102408184.png")
                 .socialLogin("original")
