@@ -20,7 +20,6 @@ export default function Nav() {
       alert('구매자로 로그인 시 이용 가능합니다');
       e.preventDefault();
     }
-    console.log(user.userRole);
   };
 
   //seller페이지 판매자 로그인시 페이지 사용가능
@@ -33,7 +32,13 @@ export default function Nav() {
       alert('판매자로 로그인 시 이용 가능합니다');
       e.preventDefault();
     }
-    console.log(user.userRole);
+  };
+
+  const handleCart = (e) => {
+    if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
+      alert('판매자는 이용 할 수 없습니다');
+      e.preventDefault();
+    }
   };
 
   return (
@@ -63,7 +68,7 @@ export default function Nav() {
               </div>
             </Link>
             <div className="navRight">
-              <Link to="/product/order">
+              <Link to="/product/order" onClick={handleCart}>
                 <button>
                   <i className="fa-solid fa-cart-shopping"></i>
                   Cart
