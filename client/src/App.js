@@ -7,7 +7,7 @@ import Login from './pages/login/js/Login';
 import Signup from './pages/signup/js/Signup';
 import OauthKakao from './pages/oauth/OauthKakao';
 import OauthGoogle from './pages/oauth/OauthGoogle';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
 import { getCookie } from './util/cookie/cookie';
@@ -38,11 +38,11 @@ function App() {
   //json-server 주소
   //json-server --watch data.json --port 3001
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
-  // const loginData = useSelector((state) => state.login);
+  const user = useSelector((state) => state.user);
+  const loginData = useSelector((state) => state.login);
 
-  // console.log(user);
-  // console.log(loginData);
+  console.log(user);
+  console.log(loginData);
 
   useEffect(() => {
     const userData = JSON.parse(window.sessionStorage.getItem('userData'));

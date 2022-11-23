@@ -4,33 +4,47 @@ import UserInfo from '../../js/UserInfo';
 import FormButtonYellow from '../../../sign/js/FormButtonYellow';
 import FormButtonBlue from '../../../sign/js/FormButtonBlue';
 import { Link } from 'react-router-dom';
-import { editUserInfo } from '../../../../util/api/mypageUser';
+import { getUserInfo, editUserInfo } from '../../../../util/api/mypageUser';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { useSelector } from 'react-redux';
 
 export default function MypageUserEdit() {
   const [passwordOn, setPasswordOn] = useState(false);
   const [data, setData] = useState({
-    Email: '',
+    email: '',
     nickname: '',
     phone: '',
-    name: '',
+    username: '',
   });
   const [address, setAddress] = useState('');
-  const [postCode, setPostCode] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [socialLogin, setSocialLogin] = useState('');
 
+  const user = useSelector((state) => state.user);
   const onChangeInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
     console.log(data);
   };
   useEffect(() => {
-    setData({
-      Email: 'shinker1002@naver.com',
-      nickname: 'shinker1002',
-      phone: '01012345678',
-      name: '최민수',
+    let userData = getUserInfo();
+    userData.then((res) => {
+      // null 값 처리 나중에 서버에서 빈문자열로 변경
+      Object.keys(res).forEach(function (el) {
+        if (res[el] === null) {
+          res[el] = '';
+        }
+      });
+      console.log(res);
+      setData({
+        email: res.email,
+        nickname: res.nickname,
+        phone: res.phone,
+        username: res.username,
+      });
+      setAddress(res.address);
+      setZipCode(res.zipCode);
+      setSocialLogin(res.socialLogin);
     });
-    setAddress('서울 관악구 관악로 1 (신림동, 서울대학교)');
-    setPostCode('08826');
   }, []);
   // 비밀번호 Open시 빈문자열 데이터 생성
   // 비밀번호 Close시 빈문자열 데이터 삭제
@@ -69,7 +83,7 @@ export default function MypageUserEdit() {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
     setAddress(fullAddress);
-    setPostCode(data.zonecode);
+    setZipCode(data.zonecode);
   };
 
   const postCodeHandler = (e) => {
@@ -85,10 +99,10 @@ export default function MypageUserEdit() {
           <h2>기본정보</h2>
           <UserInfo
             labelName="Email"
-            inputId="Email"
+            inputId="email"
             inputType="email"
-            name="Email"
-            value={data.Email}
+            name="email"
+            value={data.email}
             placeholder="정보를 추가해주세요"
             disabled={true}
           />
@@ -101,33 +115,26 @@ export default function MypageUserEdit() {
             placeholder="정보를 추가해주세요"
             onChange={onChangeInput}
           />
-          <button className="adressBtn" onClick={postCodeHandler}>
-            <UserInfo
-              labelName="Address"
-              inputId="Address"
-              inputType="text"
-              name="Address"
-              value={address}
-              placeholder="정보를 추가해주세요"
-              p="정확한 배송을 위해 올바른 거주지를 입력해주세요."
-              disabled={true}
-            />
-          </button>
-          <button className="adressBtn" onClick={postCodeHandler}>
-            <UserInfo
-              labelName="PostCode"
-              inputId="PostCode"
-              inputType="text"
-              name="PostCode"
-              value={postCode}
-              placeholder="정보를 추가해주세요"
-              p="정확한 배송을 위해 올바른 우편번호를 입력해주세요."
-              disabled={true}
-            />
-          </button>
-          <button onClick={passwordToggleControl} className="passwordBtn">
-            비밀번호 설정
-          </button>
+          {socialLogin === 'original' ? (
+            <>
+              <button onClick={passwordToggleControl} className="passwordBtn">
+                비밀번호 설정
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => {
+                  window.alert(
+                    '소셜 로그인 계정은 비밀번호를 변경할 수 없습니다.'
+                  );
+                }}
+                className="passwordBtn"
+              >
+                비밀번호 설정
+              </button>
+            </>
+          )}
           {passwordOn && (
             <>
               <UserInfo
@@ -157,10 +164,10 @@ export default function MypageUserEdit() {
           <h2>추가정보</h2>
           <UserInfo
             labelName="이름"
-            inputId="name"
+            inputId="username"
             inputType="text"
-            name="name"
-            value={data.name}
+            name="username"
+            value={data.username}
             placeholder="정보를 추가해주세요"
             p="실명으로 기입하지 않는 경우 배송 및 현장수령 시 문제가 발생할 수 있습니다."
             onChange={onChangeInput}
@@ -175,18 +182,38 @@ export default function MypageUserEdit() {
             p="정확한 번호가 아닐 경우 배송 및 현장수령 시 문제가 발생할 수 있습니다."
             onChange={onChangeInput}
           />
-          {/* <UserInfo
-            labelName="생일"
-            inputId="name"
-            inputType="text"
-            name="name"
-            value={data.birth}
-            placeholder="Please enter your email"
-          /> */}
+          <button className="adressBtn" onClick={postCodeHandler}>
+            <UserInfo
+              labelName="Address"
+              inputId="address"
+              inputType="text"
+              name="address"
+              value={address}
+              placeholder="정보를 추가해주세요"
+              p="정확한 배송을 위해 올바른 거주지를 입력해주세요."
+              disabled={true}
+            />
+          </button>
+          <button className="adressBtn" onClick={postCodeHandler}>
+            <UserInfo
+              labelName="ZipCode"
+              inputId="zipCode"
+              inputType="text"
+              name="zipCode"
+              value={zipCode}
+              placeholder="정보를 추가해주세요"
+              p="정확한 배송을 위해 올바른 우편번호를 입력해주세요."
+              disabled={true}
+            />
+          </button>
           <FormButtonBlue
-            // 리덕스에서 유저 아이디 가져와서 전달인자로 전송
             formSubmit={() =>
-              editUserInfo({ ...data, Address: address, PostCode: postCode })
+              editUserInfo({
+                ...data,
+                address: address,
+                zipCode: zipCode,
+                profileImage: user.imageUrl,
+              })
             }
             btnContent="OK"
           />
