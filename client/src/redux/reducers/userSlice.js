@@ -4,6 +4,7 @@ const initialState = {
   nickname: '',
   email: '',
   imageUrl: '',
+  userRole: '',
 };
 
 export const userSlice = createSlice({
@@ -16,6 +17,7 @@ export const userSlice = createSlice({
         nickname: payload.nickname,
         email: payload.email,
         imageUrl: payload.imageUrl,
+        userRole: payload.userRole,
       };
     },
     clearUser: (state) => {
@@ -24,6 +26,7 @@ export const userSlice = createSlice({
         nickname: '',
         email: '',
         imageUrl: '',
+        userRole: '',
       };
     },
   },
