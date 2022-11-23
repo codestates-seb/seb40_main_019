@@ -10,7 +10,7 @@ spring:
     init:
       mode: always
   profiles:
-    active: server # local / server
+    active: local # local / server
     include: oauth
   security:
     # 해당 파일을 읽어 OAuth2ClientProperties 생성

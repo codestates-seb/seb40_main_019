@@ -9,12 +9,14 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class ReviewResponseDto {
+    private Long reviewId;
     @NotBlank
     private String reviewWriter;
     @NotBlank
     private String reviewContent;
     @NotNull
     private int star;
+    private String reviewImg;
 
 
 }

@@ -27,26 +27,34 @@ public class ReviewService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public Review create(Long userId,Long productId,Review review) {
+    public Review create(Long userId,Long productId,String reviewContent,int star,String reviewUrl) {
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
 
-        review.setReviewWriter(user.getNickname());
-        review.setUser(user);
-        review.setProduct(product);
+        Review review = Review.builder()
+                .reviewImg(reviewUrl)
+                .reviewWriter(user.getNickname())
+                .reviewContent(reviewContent)
+                .star(star)
+                .user(user)
+                .product(product)
+                .build();
 
         return reviewRepository.save(review);
     }
     @Transactional
-    public Review update(Long reviewId, Review review) {
+    public Review update(Long reviewId,Long userId,String reviewContent,int star,String reviewUrl) {
         Review findReview = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
-
-        Optional.ofNullable(review.getReviewId())
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        Optional.ofNullable(reviewId)
                 .ifPresent(findReview::setReviewId);
-        Optional.ofNullable(review.getReviewContent())
+        Optional.ofNullable(reviewContent)
                 .ifPresent(findReview::setReviewContent);
-        Optional.ofNullable(review.getStar())
+        Optional.ofNullable(star)
                 .ifPresent(findReview::setStar);
+        Optional.ofNullable(reviewUrl)
+                .ifPresent(findReview::setReviewImg);
+
         return reviewRepository.save(findReview);
     }
 
