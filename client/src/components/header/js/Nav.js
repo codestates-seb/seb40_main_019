@@ -1,8 +1,13 @@
 import '../css/nav.scss';
-import textLogo from '../../../assets/img/LUXMEAL.png';
-import { Link } from 'react-router-dom';
+import textLogo from '../../../assets/img/LUXMEAL.svg';
+import textLogoYellow from '../../../assets/img/LUXMEALy.svg';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 export default function Nav() {
+  const location = useLocation();
+  const user = useSelector((state) => state.user);
+  console.log(user);
   return (
     <>
       <div className="navbar">
@@ -21,7 +26,12 @@ export default function Nav() {
             </div>
             <Link to="/">
               <div className="textLogo">
-                <img src={textLogo} alt="textLogo" />
+                <img
+                  src={
+                    location.pathname === '/seller' ? textLogoYellow : textLogo
+                  }
+                  alt="textLogo"
+                />
               </div>
             </Link>
             <div className="navRight">
