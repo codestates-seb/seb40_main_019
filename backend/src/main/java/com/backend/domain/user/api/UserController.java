@@ -53,7 +53,6 @@ public class UserController {
     @GetMapping("/reissue")
     public ResponseEntity<UserLoginResponseDto> reissue(HttpServletRequest request,
                                                         HttpServletResponse response) {
-
         String refreshToken = request.getHeader("refreshToken");
 
         return ResponseEntity.ok(userService.createAccessToken(refreshToken, response));
@@ -61,7 +60,6 @@ public class UserController {
 
     @PatchMapping
     public ResponseEntity<?> update(@RequestBody UserPatchDto userPatchDto) {
-
         User user = mapper.userPatchDtoToUser(userService, userPatchDto);
         userService.updateUser(user);
 
@@ -69,11 +67,8 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getUserDeatils(@CurrentUser CustomUserDetails authUser) {
-
-//        User user = userService.getLoginUser();
+    public ResponseEntity<UserResponseDto> getDeatils(@CurrentUser CustomUserDetails authUser) {
         User user = authUser.getUser();
-
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
 
@@ -84,12 +79,11 @@ public class UserController {
      */
     @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails authUser) {
-
         Long userId = authUser.getUser().getUserId();
         log.info("userId : {}", userId);
+
         userService.logout(userId);
         log.info("로그아웃 성공");
-
         return ResponseEntity.ok().build();
     }
 
@@ -101,6 +95,7 @@ public class UserController {
     public ResponseEntity<TestUserResponseDto> createTestUser() {
 
         String testAccountRole = "ROLE_USER_TEST";
+
         TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
 
         return ResponseEntity.ok(testUserResponseDto);
@@ -114,11 +109,11 @@ public class UserController {
     public ResponseEntity<TestUserResponseDto> createTestAdmin() {
 
         String testAccountRole = "ROLE_ADMIN_TEST";
+
         TestUserResponseDto testUserResponseDto = userService.signupTestAccount(testAccountRole);
 
         return ResponseEntity.ok(testUserResponseDto);
     }
-
 
     @GetMapping("/social-user")
     public ResponseEntity<String> loginUserInfo(@CurrentUser CustomUserDetails authUser) {
