@@ -1,0 +1,27 @@
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    url: jdbc:h2:tcp://localhost/~/test
+  jpa:
+    hibernate:
+      ddl-auto: create # create / update / validate / none
+      # 아직 개발중이라 변동사항이 많아서 update로 설정 추후 none or validate로 변경
+cloud:
+  aws:
+    credentials:
+      access-key: ${/config/cloud-parameter-store/aws-access-key}
+      secret-key: ${/config/cloud-parameter-store/aws-secret-key}
+    region:
+      static: ${/config/cloud-parameter-store/aws-region}
+    s3:
+      bucket: ${/config/cloud-parameter-store/aws-s3-bucket}
+    stack:
+      auto: false
+address:
+  local: ${/config/cloud-parameter-store/local-address}
+  domain: ${/config/cloud-parameter-store/domain-address}
+  front-local: ${/config/cloud-parameter-store/front-local}
+  front-s3: ${/config/cloud-parameter-store/front-s3}
