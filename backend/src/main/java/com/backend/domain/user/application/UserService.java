@@ -90,7 +90,6 @@ public class UserService {
         }
     }
 
-
     public void verifyExistUserByEmailAndOriginal(String email) { //현재 활동중인 일반 회원가입으로 가입한 유저중 email 파라미터로 조회
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
         if (user.isEmpty()) {//DB에 없는 유저거나 이전에 탈퇴한 유저면 예외처리함
