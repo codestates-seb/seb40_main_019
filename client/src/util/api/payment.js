@@ -1,3 +1,4 @@
+// 포인트를 충전
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import axios from 'axios';
 

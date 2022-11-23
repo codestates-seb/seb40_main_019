@@ -2,6 +2,8 @@ import axios from 'axios';
 
 axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Authorization'] =
+  window.sessionStorage.getItem('accesstoken');
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
@@ -14,11 +16,12 @@ let reg_mobile = /^\d{3}-\d{3,4}-\d{4}$/;
 
 // 유저 정보 상세 조회
 export const getUserInfo = async () => {
+  console.log(window.sessionStorage.getItem('accesstoken'));
   try {
     console.log('유저 정보 상세조회 내부');
-    // const res = await axios.get(`${REACT_APP_API_URL}users`);
-    // console.log(res);
-    // return res;
+    const res = await axios.get(`${REACT_APP_API_URL}users`);
+    console.log(res);
+    return res;
   } catch (error) {
     return error.response.data;
   }
