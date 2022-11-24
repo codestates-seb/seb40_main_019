@@ -23,4 +23,6 @@ public class ProductResponseDto {
 
     private String detailImg;
 
+    private Long categoryId;
+
 }
