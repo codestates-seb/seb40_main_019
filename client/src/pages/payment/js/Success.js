@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { submitPaymentData } from '../../../util/api/payment';
+import { addPoint } from '../../../util/api/payment';
 export default function Success() {
   useEffect(() => {
     const orderId = new URL(window.location.href).searchParams.get('orderId');
@@ -7,7 +7,6 @@ export default function Success() {
       'paymentKey'
     );
     const amount = new URL(window.location.href).searchParams.get('amount');
-    const point = JSON.parse(window.sessionStorage.getItem('point'));
     // console.log(orderId);
     // console.log(paymentKey);
     // console.log(amount);
@@ -16,9 +15,8 @@ export default function Success() {
       orderId: orderId,
       paymentKey: paymentKey,
       amount: amount,
-      point: point,
     };
-    submitPaymentData(data);
+    addPoint(data);
   }, []);
 
   return (
