@@ -95,20 +95,6 @@ import static com.backend.domain.order.domain.QOrder.order;
         List<Order> orders = orderRepository.findOrders(userId, pageable);
         Long totalQuantity = orderRepository.countOrder(userId);
 
-       /*List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
-
-        for (Order order : orders) {
-            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
-            List<OrderProduct> orderProducts = order.getOrderProducts();
-            for (OrderProduct orderProduct : orderProducts) {
-                // ProductImg productImg = productImgRepository.findByItemIdAndRepimgYn(orderProductt.getIte().getId(), "Y");
-                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
-                orderHistoryDto.addOrderProductDto(orderProductDto);
-            }
-
-            orderHistoryDtos.add(orderHistoryDto);
-        }*/
-
         return new PageImpl<OrderHistoryDto>(OrderHistoryDto.from(orders), pageable, totalQuantity);
     }
 
@@ -120,19 +106,7 @@ import static com.backend.domain.order.domain.QOrder.order;
         orderRepository.delete(order);
     }
 
-  /*  //매일7시마다 배송완료로 변경. 쿼리문 못작성시 이거 사용/ 성능 구림
-    public void autoUpdate() {
-        List<Order> orders = orderRepository.findAll();
-        for (Order order : orders) {
-            if (order.getOrderStatus() == SHIPPING) {
-                order.setOrderStatus(SHIPPED);
-                orderRepository.save(order);
-            }
-
-        }
-    }*/
-
-    //db에서 데이터뽑아내는것만 가능하면 사용가능
+    //자동 호출
     @Transactional
     public void autoUpdate() {
         List<Order> orders = orderRepository.findByOrderStatus(SHIPPING);
@@ -144,6 +118,8 @@ import static com.backend.domain.order.domain.QOrder.order;
 
 
     }
+
+    public long
 }
 
 
