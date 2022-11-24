@@ -13,14 +13,14 @@ export default function SellerAddProduct() {
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState('');
   const [price, setPrice] = useState(0);
-  const [titleImg, setTitleImg] = useState(['adf']); //배열로 해야 이미지 보임
+  const [titleImg, setTitleImg] = useState(['adf']);
   const [detailImg, setDetailImg] = useState(['asdf']);
 
   const data = { categoryId, productName, price, titleImg, detailImg };
 
   const formSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(data);
+    handleSubmit(data, setModalOn);
   };
 
   return (
