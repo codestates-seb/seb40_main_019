@@ -2,18 +2,6 @@ import ImageUploader from 'react-images-upload';
 import '../css/ImgUploader.scss';
 
 export default function ImgUploader({ pictures, setPictures }) {
-  //   addImageBlobHook: async (blob, callback) => {
-  //     (async () => {
-  //         const formData = new FormData();
-  //         formData.append("img", blob);
-
-  //         const res = await axios.post(`${REACT_APP_API_URL}questions/uploadImage`, formData);
-
-  //         callback(res.data, "input alt text");
-  //       })();
-
-  //     return false;
-  // }
   const onDrop = (picture) => {
     setPictures(picture);
   };

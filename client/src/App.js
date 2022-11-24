@@ -88,7 +88,7 @@ function App() {
             <Route path="/seller" element={<Seller />} />
             <Route path="/seller/product" element={<SellerProducts />} />
             <Route path="/seller/add" element={<SellerAddProduct />} />
-            <Route path="/seller/edit" element={<SellerEditProduct />} />
+            <Route path="/seller/edit/:id" element={<SellerEditProduct />} />
             <Route path="/seller/order" element={<SellerOrder />} />
             <Route path="/seller/delivering" element={<SellerDelivering />} />
             <Route path="/seller/deliverycom" element={<SellerDeliveryCom />} />
