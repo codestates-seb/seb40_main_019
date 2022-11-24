@@ -13,8 +13,8 @@ export default function SellerAddProduct() {
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState('');
   const [price, setPrice] = useState(0);
-  const [titleImg, setTitleImg] = useState(['adf']);
-  const [detailImg, setDetailImg] = useState(['asdf']);
+  const [titleImg, setTitleImg] = useState([]);
+  const [detailImg, setDetailImg] = useState([]);
 
   const data = { categoryId, productName, price, titleImg, detailImg };
 
