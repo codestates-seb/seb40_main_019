@@ -13,7 +13,6 @@ import {
   submitForm,
   guestLogin,
   sellerLogin,
-  userLogout,
 } from '../../../util/api/loginForm';
 import { tossPay } from '../../../util/api/payment';
 
@@ -106,9 +105,14 @@ export default function SigninForm() {
         </div>
         <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
         <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
-        <FormButtonBlue btnContent="Logout" formSubmit={userLogout} />
-        <FormButtonBlue btnContent="payment" formSubmit={tossPay} />
-        {/* <FormButtonYellow formSubmit={formSubmit} btnContent="Signup" /> */}
+        <FormButtonBlue
+          btnContent="payment"
+          formSubmit={() =>
+            tossPay(
+              JSON.parse(window.sessionStorage.getItem('userData')).nickname
+            )
+          }
+        />
       </form>
     </>
   );

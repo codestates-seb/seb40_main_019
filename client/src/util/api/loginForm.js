@@ -44,6 +44,7 @@ export const userLogout = async () => {
     const res = await axios.delete(`${REACT_APP_API_URL}users/logout`, {
       headers: {
         Authorization: JSON.parse(window.sessionStorage.getItem('accesstoken')),
+        // 'ngrok-skip-browser-warning': '69420',
       },
     });
     console.log(res);
