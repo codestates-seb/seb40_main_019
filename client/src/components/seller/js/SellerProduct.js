@@ -5,7 +5,7 @@ export default function SellerProduct({ item }) {
       <div className="createdAt">
         <p>{item.createdAt}</p>
       </div>
-      <img className="titleImg" src={item.img} alt="productImg" />
+      <img className="titleImg" src={item.titleImg} alt="productImg" />
       <div className="title">{item.productName}</div>
       <div className="price">{item.price} 원</div>
       <div className="productBtn">

@@ -1,16 +1,11 @@
 import '../css/SellerProducts.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+
 import SellerProduct from '../../../components/seller/js/SellerProduct';
 import { Link } from 'react-router-dom';
+import useFetch from '../../../util/useFetch';
 
 export default function SellerProducts() {
-  const [items, setItems] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/sellerproducts/').then((res) => {
-      setItems(res.data);
-    });
-  }, []);
+  const [items] = useFetch('products');
 
   return (
     <div className="sellerProducts">
@@ -36,7 +31,7 @@ export default function SellerProducts() {
       {items &&
         items.map((item) => {
           return (
-            <div key={item.productsId}>
+            <div key={item.productId}>
               <SellerProduct item={item} />
             </div>
           );
