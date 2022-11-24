@@ -47,7 +47,6 @@ public class ProductService {
         log.info(" 상품 이름 중복 검사 ");
         existSameName(product.getProductName());
 
-
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         log.info(" user : " ,user);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
