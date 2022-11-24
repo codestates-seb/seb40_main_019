@@ -70,6 +70,7 @@ import static com.backend.domain.order.domain.QOrder.order;
 
         return orderRepository.save(findorder);
     }
+
     @Transactional
     //판매자 전용 배송중으로 변경하는 기능
     public Order updateStatus(Long orderId) {
@@ -83,17 +84,9 @@ import static com.backend.domain.order.domain.QOrder.order;
     public Page<OrderHistoryDto> getAllList(Pageable pageable) {
         List<Order> orders = orderRepository.findAll();
         Long totalQuantity = orderRepository.countAllOrder();
-        List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
-        for (Order order : orders) {
-            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
-            List<OrderProduct> orderProducts = order.getOrderProducts();
-            for (OrderProduct orderProduct : orderProducts) {
-                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
-                orderHistoryDto.addOrderProductDto(orderProductDto);
-            }
-            orderHistoryDtos.add(orderHistoryDto);
-        }
-        return new PageImpl<OrderHistoryDto>(orderHistoryDtos, pageable, totalQuantity);
+
+
+        return new PageImpl<OrderHistoryDto>(OrderHistoryDto.from(orders), pageable, totalQuantity);
     }
 
 
@@ -102,7 +95,7 @@ import static com.backend.domain.order.domain.QOrder.order;
         List<Order> orders = orderRepository.findOrders(userId, pageable);
         Long totalQuantity = orderRepository.countOrder(userId);
 
-        List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
+       /*List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
 
         for (Order order : orders) {
             OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
@@ -114,9 +107,9 @@ import static com.backend.domain.order.domain.QOrder.order;
             }
 
             orderHistoryDtos.add(orderHistoryDto);
-        }
+        }*/
 
-        return new PageImpl<OrderHistoryDto>(orderHistoryDtos, pageable, totalQuantity);
+        return new PageImpl<OrderHistoryDto>(OrderHistoryDto.from(orders), pageable, totalQuantity);
     }
 
     @Transactional
@@ -127,7 +120,7 @@ import static com.backend.domain.order.domain.QOrder.order;
         orderRepository.delete(order);
     }
 
-    //매일7시마다 배송완료로 변경. 쿼리문 못작성시 이거 사용/ 성능 구림
+  /*  //매일7시마다 배송완료로 변경. 쿼리문 못작성시 이거 사용/ 성능 구림
     public void autoUpdate() {
         List<Order> orders = orderRepository.findAll();
         for (Order order : orders) {
@@ -137,22 +130,21 @@ import static com.backend.domain.order.domain.QOrder.order;
             }
 
         }
-    }
+    }*/
 
-   /* //db에서 데이터뽑아내는것만 가능하면 사용가능
+    //db에서 데이터뽑아내는것만 가능하면 사용가능
     @Transactional
     public void autoUpdate() {
-        List<Order> orders = orderRepository.findByStatus();
+        List<Order> orders = orderRepository.findByOrderStatus(SHIPPING);
         for (Order order : orders) {
             order.setOrderStatus(SHIPPED);
-            orderRepository.save(order);
+            //orderRepository.save(order);
 
-        }*/
-
-
+        }
 
 
     }
+}
 
 
     /* public Long orders(List<OrderDto> orderDtoList, String email){

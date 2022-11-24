@@ -9,6 +9,7 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,8 @@ public class Order extends Auditable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    private int orderTotalPrice;
+
     public void addOrderProduct(OrderProduct orderProduct){
         orderProducts.add(orderProduct);
         orderProduct.setOrder(this);
@@ -67,6 +70,8 @@ public class Order extends Auditable {
         order.setOrderStatus(OrderStatus.PROCESS);
         order.setCreatedAt(LocalDateTime.now());
         order.setOrderProducts(orderProductList);
+        //공부해서 리펙토링 필요
+        order.setOrderTotalPrice(order.getTotalPrice());
         return order;
     }
 

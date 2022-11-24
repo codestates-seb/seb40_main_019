@@ -12,11 +12,16 @@ public class OrderProductDto {
         this.productName = orderProduct.getProduct().getProductName();
         this.quantity = orderProduct.getQuantity();
         this.price = orderProduct.getPrice();
+        this.totalPrice = orderProduct.getTotalPrice();
         //this.imgUrl = imgUrl;
     }
     private String productName;
     private int quantity;
     private int price;
+
+    private int totalPrice;
+
+
 
     //private String imgUrl;
 

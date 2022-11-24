@@ -1,6 +1,7 @@
 package com.backend.domain.order.dto;
 
 import com.backend.domain.order.domain.Order;
+import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.domain.OrderStatus;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,7 @@ import java.util.List;
 @Setter
 public class OrderHistoryDto {
 
-    public OrderHistoryDto(Order order){
+    public OrderHistoryDto(Order order) {
         this.orderId = order.getOrderId();
         this.orderDate = order.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.orderStatus = order.getOrderStatus();
@@ -27,8 +28,22 @@ public class OrderHistoryDto {
 
     private List<OrderProductDto> orderProductDtoList = new ArrayList<>(); //주문상품리스트
 
-    public void addOrderProductDto(OrderProductDto orderProductDto){
+    public void addOrderProductDto(OrderProductDto orderProductDto) {
         orderProductDtoList.add(orderProductDto);
     }
 
+
+    public static List<OrderHistoryDto> from(List<Order> orders) {
+        List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
+        for (Order order : orders) {
+            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
+            List<OrderProduct> orderProducts = order.getOrderProducts();
+            for (OrderProduct orderProduct : orderProducts) {
+                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
+                orderHistoryDto.addOrderProductDto(orderProductDto);
+            }
+            orderHistoryDtos.add(orderHistoryDto);
+        }
+        return orderHistoryDtos;
+    }
 }
