@@ -4,6 +4,7 @@ import com.backend.domain.category.domain.Category;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.domain.User;
+import com.backend.global.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Entity
-public class Product {
+public class Product extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
