@@ -138,9 +138,11 @@ public class UserService {
 
     @Transactional
     public User updateUser(User user) {
-        verifyExistsNicknameByOriginal(user.getNickname());
 
         User findUser = findVerifiedUser(user.getUserId());
+        if (!Objects.equals(user.getNickname(), findUser.getNickname())) {
+            verifyExistsNicknameByOriginal(user.getNickname());
+        }
 
         Optional.ofNullable(user.getModifiedAt())
                 .ifPresent(findUser::setModifiedAt);
