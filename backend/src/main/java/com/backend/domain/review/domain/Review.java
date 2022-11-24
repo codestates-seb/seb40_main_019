@@ -2,6 +2,7 @@ package com.backend.domain.review.domain;
 
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.domain.User;
+import com.backend.global.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor
-public class Review {
+public class Review extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long reviewId;

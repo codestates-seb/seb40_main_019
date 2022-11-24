@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,6 +24,8 @@ public class ProductResponseDto {
 
     private String detailImg;
 
-    private Long categoryId;
+    private LocalDateTime createdAt;
+
+    private LocalDateTime modifiedAt;
 
 }

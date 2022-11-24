@@ -54,13 +54,6 @@ public class Product extends Auditable {
     private Category category;
 
 
-//    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JoinColumn(name = "product_id")
-//    private List<Cart> carts = new ArrayList<>();
-
-    // 상품에 판매자 유저 정보 입력
-
-
     public void setTitleImg(String titleImg) {
         this.titleImg = titleImg;
     }

@@ -77,7 +77,7 @@ public class ProductController {
         return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(response),pageProduct), HttpStatus.OK);
     }
 
-    // 평점 추가
+    // 제품 상세 조회
     @GetMapping("/products/{productsId}")
     public ResponseEntity getListReview(@PathVariable Long productsId){
         log.info("getListReview 실행");
@@ -86,6 +86,7 @@ public class ProductController {
         ProResponseDto proResponseDto = productMapper.productToProResponseDto(product);
         log.info(" 평균 리뷰 대입 ");
         proResponseDto.setAverage(average);
+        proResponseDto.setCategoryId(product.getCategory().getCategoryId());
         log.info(" getListReview 완료 ");
         return new ResponseEntity(new SingleResponseDto<>(proResponseDto),HttpStatus.OK);
     }
