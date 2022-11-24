@@ -7,10 +7,8 @@ export default function AIproducts() {
   const [randomItems, setRandomItems] = useState([]);
 
   function handleClick() {
-    console.log('functionName');
     axios.get('http://localhost:3001/randomproducts/').then((res) => {
       setRandomItems(res.data);
-      console.log(res.data);
     });
   }
 

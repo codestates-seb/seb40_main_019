@@ -41,7 +41,7 @@
         }
     }
 
-// body = new, 제품명, quantity
+// body = new, 제품명, -quantity
     .itemBodyContainer{
         // flex:1;
         padding: 5px 0 0 15px;
@@ -62,32 +62,41 @@
             height: 190px;
             padding-top: 10px;
         }
-        .QuantityBox{
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
+        // .QuantityBox{
+        //     display: flex;
+        //     justify-content: space-around;
+        //     align-items: center;
+        // }
 
     }
 
 
 }
 
-// footer - total, buybtn+Nowbtn, addCartBtn
+// footer - +Quantity, total, buybtn+Nowbtn, addCartBtn
 .itemFooterContainer{
     border-top: solid 2px var(--color-blue);
     margin:auto;
     text-align:center;
     
+    .QuantityBox{
+        display: inline-flex;
+        justify-content:space-between;
+        text-align:center;
+        width: 335px;
+        height: 25px;
+        margin-top: 40px;
+
+    }
     .priceBox{
         display: inline-flex;
         justify-content:space-between;
         text-align:center;
         width: 335px;
-        height: 100px;
-        line-height: 100px;
+        height: 70px;
+        line-height: 60px;
         text-align: center;
-    .totalbox{
+    .totalBox{
         border-radius: 15px;
     }
     }
@@ -95,7 +104,7 @@
     .btnBox{
         // width: fit-content;
         display: block;
-        margin:auto;
         display:inline-block
+
     }
 }

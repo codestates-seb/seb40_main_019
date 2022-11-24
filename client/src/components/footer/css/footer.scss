@@ -14,6 +14,7 @@
     
 //   }
 // }
+
 footer{
   // margin-top: 200px;
   height: 257px;
@@ -58,12 +59,17 @@ footer{
   justify-content: space-around;
   margin-top: 0.5em;
   color: var(--color-white);
+  @media (max-width: 850px) {
+        font-size: 12px;
+  }
 
 }
 
 .firstBox{
   display: flex;
-
+    @media (max-width: 680px) {
+      flex-wrap: wrap;
+  }
   .titleDiv{
     font-weight: bold;
     padding-right: 50px;
@@ -83,6 +89,9 @@ footer{
 
 .secondBox{
   margin: 32px 0 0 30px;
+    @media (max-width: 680px) {
+      display: none;
+    }
 }
 
 .thirdBox{
