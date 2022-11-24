@@ -26,6 +26,5 @@ public class ProductResponseDto {
 
     private LocalDateTime createdAt;
 
-    private LocalDateTime modifiedAt;
 
 }

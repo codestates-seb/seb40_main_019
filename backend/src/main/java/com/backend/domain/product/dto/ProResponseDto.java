@@ -25,6 +25,5 @@ public class ProResponseDto {
 
     private LocalDateTime createdAt;
 
-    private LocalDateTime modifiedAt;
 
 }
