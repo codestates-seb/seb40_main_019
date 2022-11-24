@@ -76,7 +76,10 @@ public class UserService {
             notExistUser = userRepository.findByEmail(user.getEmail());
             user.setUserId(notExistUser.get().getUserId());
             if (!Objects.equals(notExistUser.get().getNickname(), user.getNickname())) {
+                log.info("기존과 다른 닉네임 입력");
                 verifyExistsNicknameByOriginal(user.getNickname());
+            } else {
+                log.info("기존과 같은 닉네임 입력");
             }
         }
 
@@ -334,10 +337,16 @@ public class UserService {
 
     public void deleteUser(User user) {
         log.info("유저 삭제 : {}", user.getEmail());
-        user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
-        refreshTokenRepository.deleteByKey(user.getUserId());
-        userRepository.save(user);
-        log.info("유저 삭제 완료 : {}", user.getEmail());
+
+        if (user.getSocialLogin().equals("original")) {
+            user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
+            refreshTokenRepository.deleteByKey(user.getUserId());
+            userRepository.save(user);
+        } else {
+            log.info("소셜 로그인 회원탈퇴 : {}", user.getEmail());
+            userRepository.delete(user);
+        }
+            log.info("유저 삭제 완료 : {}", user.getEmail());
     }
 
     public boolean comparePassword(User user, PasswordDto password) {
