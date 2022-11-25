@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import '../css/signupForm.scss';
 import FormInput from '../../sign/js/FormInput';
 import FormButtonYellow from '../../sign/js/FormButtonYellow';
-import FormInputError from '../../sign/js/FormInputError';
 import SignupModal from './SignupModal';
-
 import { useSelector, useDispatch } from 'react-redux';
 import {
   openModal,
@@ -16,12 +14,12 @@ let emailExptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 let passwordExptext = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/;
 
 export default function Signup() {
-  const [data, setDate] = useState({});
-
-  const [nameError, setNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-  const [passwordConfirmError, setPasswordConfirmError] = useState(false);
+  const [data, setDate] = useState({
+    nickname: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  });
 
   const modal = useSelector((state) => state.modal.open);
 
@@ -29,48 +27,39 @@ export default function Signup() {
   // 회원가입 폼 전송
   const formSubmit = (e) => {
     e.preventDefault();
-    let error = false;
 
-    if (!data.nickname) {
-      setNameError(true);
-      error = true;
-    }
-    if (!emailExptext.test(data.Email)) {
-      setEmailError(true);
-      error = true;
-    }
-    if (!passwordExptext.test(data.Password)) {
-      setPasswordError(true);
-      error = true;
-    }
-    if (data.Password !== data.PasswordConfirm || !data.PasswordConfirm) {
-      setPasswordConfirmError(true);
-      error = true;
-    }
-    if (!error) {
-      openModalControl(e);
-    }
+    openModalControl(e);
   };
   // 인풋 변경 함수
   const onChangeInput = (e) => {
+    console.log(data);
     setDate({ ...data, [e.target.name]: e.target.value });
-    if (emailExptext.test(data.Email)) {
-      setEmailError(false);
-    }
-    if (passwordExptext.test(data.Password)) {
-      setPasswordError(false);
-    }
-    if (data.password === data.PasswordConfirm) {
-      setPasswordConfirmError(false);
-    }
   };
   // 이메일 인증 모달창 함수
   const openModalControl = (e) => {
     e.preventDefault();
+
+    if (!data.nickname) {
+      window.alert('Please enter your nickname');
+      return;
+    }
+    if (!emailExptext.test(data.email)) {
+      window.alert('The email is not a valid email address.');
+      return;
+    }
+    if (!passwordExptext.test(data.password)) {
+      window.alert('The password is not a valid password.');
+      return;
+    }
+    if (data.password !== data.passwordConfirm || !data.passwordConfirm) {
+      window.alert('Confirm password does not match password.');
+      return;
+    }
+
     let temp = {
       nickname: data.nickname,
-      email: data.Email,
-      password: data.Password,
+      email: data.email,
+      password: data.password,
     };
     // console.log(temp);
     dispatch(setFormData(temp));
@@ -88,47 +77,40 @@ export default function Signup() {
       >
         <FormInput
           labelName="Nickname"
-          inputId="Text"
+          inputId="nickname"
           inputType="text"
           name="nickname"
+          value={data.nickname}
           onChangeInput={onChangeInput}
           placeholder="Please enter your nickname"
         />
-        {nameError && <FormInputError text="Please enter your nickname." />}
         <FormInput
           labelName="Email"
-          inputId="Email"
+          inputId="email"
           inputType="email"
-          name="Email"
-          value={data.Email}
+          name="email"
+          value={data.email}
           onChangeInput={onChangeInput}
           placeholder="Please enter your email"
         />
-        {emailError && (
-          <FormInputError text="The email is not a valid email address." />
-        )}
         <FormInput
           labelName="Password"
-          inputId="Password"
-          inputType="Password"
-          name="Password"
+          inputId="password"
+          inputType="password"
+          name="password"
+          value={data.password}
           onChangeInput={onChangeInput}
           placeholder="Please enter your password"
         />
-        {passwordError && (
-          <FormInputError text="The password is not a valid password." />
-        )}
         <FormInput
           labelName="Password Confirm"
-          inputId="PasswordConfirm"
+          inputId="passwordConfirm"
           inputType="Password"
-          name="PasswordConfirm"
+          name="passwordConfirm"
+          value={data.passwordConfirm}
           onChangeInput={onChangeInput}
           placeholder="Please re-enter your password"
         />
-        {passwordConfirmError && (
-          <FormInputError text="Confirm password does not match password." />
-        )}
         <FormButtonYellow formSubmit={formSubmit} btnContent="Sign up" />
       </form>
       <div className="loginLink">
