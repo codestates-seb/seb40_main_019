@@ -8,6 +8,8 @@ import googleIcon from '../../../assets/img/googleIcon.png';
 import { Link } from 'react-router-dom';
 import { kakaoLogin } from '../../../util/api/oauthKakao';
 import { googleLogin } from '../../../util/api/oauthGoogle';
+import FindEmailModal from './FindEmailModal';
+import FindPasswordModal from './FindPasswordModal';
 import {
   submitForm,
   guestLogin,
@@ -21,6 +23,8 @@ export default function SigninForm() {
     email: '',
     password: '',
   });
+  const [emailModal, setEmailModal] = useState(false);
+  const [passwordModal, setPasswordModal] = useState(false);
 
   const formSubmit = (e) => {
     e.preventDefault();
@@ -74,6 +78,10 @@ export default function SigninForm() {
           placeholder="Please enter your password"
         />
         <FormButtonYellow formSubmit={formSubmit} btnContent="Log in" />
+        <div className="flexContainer">
+          <button onClick={() => setEmailModal(true)}>아이디 찾기</button>
+          <button onClick={() => setPasswordModal(true)}>비밀번호 찾기</button>
+        </div>
         <div className="signupLink">
           Don’t have an account?
           <Link to={'/signup'}>Sign in</Link>
@@ -89,6 +97,19 @@ export default function SigninForm() {
         <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
         <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
       </form>
+      {emailModal && (
+        <>
+          <FindEmailModal email={data.email} setEmailModal={setEmailModal} />
+        </>
+      )}
+      {passwordModal && (
+        <>
+          <FindPasswordModal
+            email={data.email}
+            setPasswordModal={setPasswordModal}
+          />
+        </>
+      )}
     </>
   );
 }
