@@ -7,14 +7,13 @@ import kakaoIcon from '../../../assets/img/kakaoIcon.png';
 import googleIcon from '../../../assets/img/googleIcon.png';
 import { Link } from 'react-router-dom';
 import FormInputError from '../../sign/js/FormInputError';
-// import { kakaoLogin } from '../../../util/api/oauthKakao';
-// import { googleLogin } from '../../../util/api/oauthGoogle';
+import { kakaoLogin } from '../../../util/api/oauthKakao';
+import { googleLogin } from '../../../util/api/oauthGoogle';
 import {
   submitForm,
   guestLogin,
   sellerLogin,
 } from '../../../util/api/loginForm';
-import { tossPay } from '../../../util/api/payment';
 
 export default function SigninForm() {
   const [data, setDate] = useState({});
@@ -96,23 +95,15 @@ export default function SigninForm() {
           <Link to={'/signup'}>Sign in</Link>
         </div>
         <div className="flexBox">
-          <a href="https://api.taekgil.xyz/oauth2/authorization/kakao">
+          <a href={kakaoLogin}>
             <img src={kakaoIcon} alt="kakaoAuth" />
           </a>
-          <a href="https://api.taekgil.xyz/oauth2/authorization/google">
+          <a href={googleLogin}>
             <img src={googleIcon} alt="googleAuth" />
           </a>
         </div>
         <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
         <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
-        <FormButtonBlue
-          btnContent="payment"
-          formSubmit={() =>
-            tossPay(
-              JSON.parse(window.sessionStorage.getItem('userData')).nickname
-            )
-          }
-        />
       </form>
     </>
   );
