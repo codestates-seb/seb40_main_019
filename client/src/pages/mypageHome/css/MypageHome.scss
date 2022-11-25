@@ -1,0 +1,71 @@
+.orderSummery{
+  
+  ul{
+    background-color: var(--color-grey);
+    padding: 30px 20px;
+    border-radius: 15px;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+  }
+
+  li{
+    display: flex;
+    align-items: flex-end;
+    h1{
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--color-brown);
+      margin: 0px 0px 40px 15px;
+    }
+  }
+
+  .orderIcon{
+    
+    p{
+      font-size: 15px;
+      color: var(--color-brown);
+      margin-bottom: 15px;
+    }
+    
+    i{
+      background-color: var(--color-blue);
+      text-align: center;
+      line-height: 50px;
+      width: 90px;
+      height: 90px;
+      font-size: 40px;
+      color: var(--color-white);
+      padding: 20px;
+      border-radius: 50%;
+    }
+  }
+  @media (max-width:750px){
+
+      ul{
+        flex-direction: column;
+        gap: 10px;
+      }
+
+    .orderIcon{
+      i{
+        display: none;
+      }
+      p{
+        margin-bottom: 0px;
+      }
+    }
+    
+    li{
+      justify-content: space-between;
+      align-items: center;
+      h1{
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--color-blue);
+        margin: 0px;
+      }
+    }
+    
+  }
+}
