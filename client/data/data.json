@@ -196,21 +196,24 @@
   ],
   "review": [
     {
+      "reviewId": 2,
       "reviewWriter": "윈터",
-      "reviewId": 1,
-      "reviewImg": "https://media.discordapp.net/attachments/386786128939843606/1039449376084459530/20221008_105442.jpg?width=878&height=878",
-      "reviewContent": "맛있어용",
-      "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
-      "createdAt": "2022.11.18",
-      "star": 4
+      "reviewContent": "맛있",
+      "star": 5,
+      "reviewImg": null,
+      "productId": 1,
+      "productName": "사료2",
+      "titleImg": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/3910d070-bd0e-47ca-acdf-1771dc379551.jpg"
     },
     {
+      "reviewId": 1,
       "reviewWriter": "윈터",
-      "reviewId": 2,
       "reviewContent": "맛있어용용요요요요요ㅛㅇㅇ요용",
+      "star": 3,
+      "reviewImg": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "productId": 2,
       "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
-      "createdAt": "2022.11.18",
-      "star": 1
+      "titleImg": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/3910d070-bd0e-47ca-acdf-1771dc379551.jpg"
     }
   ],
   "randomproducts": [

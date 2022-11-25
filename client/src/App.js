@@ -105,7 +105,7 @@ function App() {
             <Route path="/mypage/user/edit" element={<MypageUserEditPage />} />
             <Route path="/mypage/point" element={<MypagePointPage />} />
             <Route path="/mypage/review" element={<Review />} />
-            <Route path="/mypage/reviewadd" element={<ReviewAdd />} />
+            <Route path="/mypage/reviewadd/:id" element={<ReviewAdd />} />
             <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
             <Route path="/mypage/order" element={<ShopMypageOrderList />} />
           </Route>

@@ -1,4 +1,5 @@
 import '../css/mypageOrderListItem.scss';
+import { Link } from 'react-router-dom';
 
 export default function MypageOrderListItem({ item }) {
   let status = '상품준비중';
@@ -23,9 +24,11 @@ export default function MypageOrderListItem({ item }) {
                 <div className="price">{item.totalPrice}원</div>
                 <div className="orderCount">{item.quantity}개</div>
               </div>
-              <div className="reviewBtn">
-                <button>리뷰작성</button>
-              </div>
+              <Link to={`/mypage/reviewadd/${item.productId}`}>
+                <div className="reviewBtn">
+                  <button>리뷰작성</button>
+                </div>
+              </Link>
             </div>
           );
         })}
