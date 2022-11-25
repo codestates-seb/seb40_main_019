@@ -20,6 +20,5 @@ public class ReviewResponseDto {
     private String reviewImg;
     private LocalDateTime createdAt;
 
-    private LocalDateTime modifiedAt;
 
 }

@@ -101,4 +101,11 @@ public class ProductController {
         log.info(" getListCategory 완료 ");
         return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(content),pageProduct), HttpStatus.OK);
     }
+
+    // 랜덤 추천
+    @GetMapping("/products/random")
+    public ResponseEntity getRandomList(){
+        List<Product> random = productService.random();
+        return new ResponseEntity<>(new SingleResponseDto<>(productMapper.productsToProductResponseDto(random)),HttpStatus.OK);
+    }
 }

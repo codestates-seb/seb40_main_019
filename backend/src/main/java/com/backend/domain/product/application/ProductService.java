@@ -21,8 +21,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -142,5 +144,26 @@ public class ProductService {
     public Page<Product> getCategory(Long categoryId,int page, int size) {
         log.info(" 카테고리 별 상품 조회 ");
         return productRepository.findByCategory(categoryId,PageRequest.of(page,size,Sort.by("productId").descending()));
+    }
+
+    @Transactional
+    public List<Product> random() {
+        List<Product> list = new ArrayList<>();
+
+        Random rnd = new Random();
+
+        int[] arr = new int[3];
+
+        for (int i =0; i<arr.length;i++){
+            arr[i] = rnd.nextInt(10) +1; // 1부터 10까지 랜덤 숫자 뽑음
+            for (int j = 0; j<i;j++){
+                if (arr[i] == arr[j]) i--;  // 중복제거
+            }
+        }
+        for (int i : arr){
+            Product product = productRepository.findById((long) i).orElseThrow(ProductNotFound::new);
+            list.add(product);
+        }
+        return list;
     }
 }
