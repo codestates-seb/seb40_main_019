@@ -40,19 +40,36 @@ export default function Signup() {
     e.preventDefault();
 
     if (!data.nickname) {
-      window.alert('Please enter your nickname');
+      window.alert('닉네임을 입력하세요.');
+      return;
+    }
+
+    if (!data.email) {
+      window.alert('이메일을 입력하세요.');
       return;
     }
     if (!emailExptext.test(data.email)) {
-      window.alert('The email is not a valid email address.');
+      window.alert('유효하지 않은 형식의 이메일 주소입니다.');
+      return;
+    }
+
+    if (!data.password) {
+      window.alert('비밀번호를 입력하세요');
       return;
     }
     if (!passwordExptext.test(data.password)) {
-      window.alert('The password is not a valid password.');
+      window.alert(
+        '영문 대소문자/숫자/특수문자를 포함한 8자~16자 사이의 비밀번호를 입력해주세요.'
+      );
+      return;
+    }
+
+    if (!data.passwordConfirm) {
+      window.alert('비밀번호를 한 번 더 입력해주세요.');
       return;
     }
     if (data.password !== data.passwordConfirm || !data.passwordConfirm) {
-      window.alert('Confirm password does not match password.');
+      window.alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
       return;
     }
 
