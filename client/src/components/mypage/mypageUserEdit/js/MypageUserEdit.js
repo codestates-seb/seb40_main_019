@@ -75,7 +75,6 @@ export default function MypageUserEdit() {
       if (data.bname !== '') {
         extraAddress += data.bname;
       }
-
       if (data.buildingName !== '') {
         extraAddress +=
           extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
@@ -115,7 +114,7 @@ export default function MypageUserEdit() {
             placeholder="정보를 추가해주세요"
             onChange={onChangeInput}
           />
-          {socialLogin === 'original' ? (
+          {socialLogin === 'original' && user.userRole === 'ROLE_USER' ? (
             <>
               <button onClick={passwordToggleControl} className="passwordBtn">
                 비밀번호 설정
@@ -126,7 +125,7 @@ export default function MypageUserEdit() {
               <button
                 onClick={() => {
                   window.alert(
-                    '소셜 로그인 계정은 비밀번호를 변경할 수 없습니다.'
+                    '소셜 로그인 계정과 게스트 계정은 비밀번호를 변경할 수 없습니다.'
                   );
                 }}
                 className="passwordBtn"
