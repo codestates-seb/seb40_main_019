@@ -1,6 +1,19 @@
 import '../css/orderSummary.scss';
+import { handleOrder } from '../../../../util/api/order';
 
 export default function OrderSummary() {
+  //주문내역 생성 테스트
+  const data = {
+    receiverAddress: '십정동',
+    receiverName: '준오',
+    receiverZipcode: 2133,
+    receiverPhone: '010-2222-333',
+    productId: 2,
+    quantity: 3,
+  };
+  const clickOrder = () => {
+    handleOrder(data);
+  };
   return (
     <>
       <div className="orderSummaryContainer">
@@ -45,7 +58,7 @@ export default function OrderSummary() {
 
           {/* order버튼 -> 결제창 띄우가 */}
           <div className="orderBtnBox">
-            <button>포인트 결제</button>
+            <button onClick={clickOrder}>포인트 결제</button>
           </div>
         </div>
       </div>

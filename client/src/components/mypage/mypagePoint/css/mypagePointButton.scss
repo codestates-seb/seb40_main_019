@@ -29,6 +29,10 @@
       @media screen and (max-width: 800px) {
         width: 90px;
       }
+      button{
+        border: 0;
+        outline: none;
+      }
       p{
         color: #5C4B29;
         font-size: 18px;
@@ -49,10 +53,10 @@
           width: 80px;
           height: 80px;
         }
-        @media screen and (max-width: 600px) {
-          width: 90px;
-          height: 90px;
-        }
+        // @media screen and (max-width: 600px) {
+        //   width: 90px;
+        //   height: 90px;
+        // }
         .pointIcon{
           color: rgb(255, 255, 255);
           font-size: 40px;
@@ -60,7 +64,7 @@
             font-size: 25px;
           }
           @media screen and (max-width: 600px) {
-            font-size: 40px;
+            font-size: 35px;
           }
         }
       }
@@ -79,6 +83,19 @@
       width: 200px;
       height: 100%;
       // border: 1px solid black;
+      padding-top: 15px;
+      input{
+        width: 80%;
+        padding: 0.6rem 0;
+        // font-size: 16px;
+        text-align: center;
+        border: none;
+        outline: none;
+        border-bottom: 3px solid var(--color-blue);
+      }
+      input:focus{
+        // outline: 3px solid #b5deff;
+      }
       @media screen and (max-width: 800px) {
         width: 170px;
         font-size: 25px;
@@ -86,7 +103,7 @@
       @media screen and (max-width: 600px) {
         flex-grow: 1;
         max-width: 250px;
-        font-size: 30px;
+        font-size: 27px;
       }
     }
   }

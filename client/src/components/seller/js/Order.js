@@ -10,7 +10,7 @@ export default function Order({ item }) {
       <div className="title">{item.productName}</div>
       <div className="orderInfo">
         <span>{item.orderName}</span>
-        <span>{item.orderAdress}</span>
+        <span>{item.receiverAddress}</span>
       </div>
       <div className="orderCount">{item.orderCount} 개</div>
       <div className="productBtn">
