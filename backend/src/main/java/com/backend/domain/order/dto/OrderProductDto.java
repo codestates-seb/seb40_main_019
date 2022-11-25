@@ -9,16 +9,24 @@ import lombok.*;
 public class OrderProductDto {
 
     public OrderProductDto(OrderProduct orderProduct){
-        this.productName = orderProduct.getProduct().getProductName();
+        this.productId = orderProduct.getProduct().getProductId();
         this.quantity = orderProduct.getQuantity();
         this.price = orderProduct.getPrice();
-        //this.imgUrl = imgUrl;
+        this.totalPrice = orderProduct.getTotalPrice();
+        this.productName = orderProduct.getProduct().getProductName();
+        this.imgUrl = orderProduct.getProduct().getTitleImg();
     }
-    private String productName;
+    private Long productId;
     private int quantity;
     private int price;
 
-    //private String imgUrl;
+    private int totalPrice;
+
+    private String productName;
+
+
+
+    private String imgUrl;
 
 
 }

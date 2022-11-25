@@ -1,5 +1,6 @@
 package com.backend.domain.order.domain;
 
+import com.backend.domain.order.dto.CartOrderDto;
 import com.backend.domain.order.dto.OrderDto;
 import com.backend.domain.user.domain.User;
 import com.backend.global.audit.Auditable;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +50,8 @@ public class Order extends Auditable {
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 
+    private int orderTotalPrice;
+
     public void addOrderProduct(OrderProduct orderProduct){
         orderProducts.add(orderProduct);
         orderProduct.setOrder(this);
@@ -67,9 +71,29 @@ public class Order extends Auditable {
         order.setOrderStatus(OrderStatus.PROCESS);
         order.setCreatedAt(LocalDateTime.now());
         order.setOrderProducts(orderProductList);
+        //공부해서 리펙토링 필요
+        order.setOrderTotalPrice(order.getTotalPrice());
         return order;
     }
 
+    public static Order createCartOrder(User user, List<OrderProduct> orderProductList, CartOrderDto cartOrderDto) {
+        Order order = new Order();
+        order.setUser(user);
+        order.setReceiverAddress(cartOrderDto.getReceiverAddress());
+        order.setReceiverName(cartOrderDto.getReceiverName());
+        order.setReceiverPhone(cartOrderDto.getReceiverPhone());
+        order.setZipCode(cartOrderDto.getReceiverZipcode());
+
+        for (OrderProduct orderProduct : orderProductList) {
+            order.addOrderProduct(orderProduct);
+        }
+        order.setOrderStatus(OrderStatus.PROCESS);
+        order.setCreatedAt(LocalDateTime.now());
+        order.setOrderProducts(orderProductList);
+        //공부해서 리펙토링 필요
+        order.setOrderTotalPrice(order.getTotalPrice());
+        return order;
+    }
 
     public int getTotalPrice(){
         int totalPrice = 0;

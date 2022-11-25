@@ -1,7 +1,9 @@
 package com.backend.domain.order.domain;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Getter
 public enum OrderStatus {
 
     PROCESS(1,"상품 준비중"),

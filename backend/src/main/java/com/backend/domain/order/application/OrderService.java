@@ -1,12 +1,12 @@
 package com.backend.domain.order.application;
 
+import com.backend.domain.order.dao.OrderProductRepository;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.domain.OrderStatus;
-import com.backend.domain.order.dto.OrderDto;
-import com.backend.domain.order.dto.OrderHistoryDto;
-import com.backend.domain.order.dto.OrderProductDto;
+import com.backend.domain.order.domain.QOrderProduct;
+import com.backend.domain.order.dto.*;
 import com.backend.domain.order.exception.OrderNotFound;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
@@ -39,10 +39,13 @@ import static com.backend.domain.order.domain.QOrder.order;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
+    private final OrderProductRepository orderProductRepository;
+
     @Transactional
-    public Long order(OrderDto orderDto, Long userId) {
+    public Order order(OrderDto orderDto, Long userId) {
         Product product = productRepository.findById(orderDto.getProductId())
                 .orElseThrow(EntityNotFoundException::new);
+        log.info("");
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
 
         List<OrderProduct> orderProductList = new ArrayList<>();
@@ -52,10 +55,32 @@ import static com.backend.domain.order.domain.QOrder.order;
         Order order = Order.createOrder(user, orderProductList, orderDto);
         orderRepository.save(order);
 
-        return order.getOrderId();
+        return order;
+    } //주문 토탈가격도 보내기
+    //주문 여러건 한번에 받기
+
+
+    public Order orders(CartOrderDto cartOrderDto, Long userId) {
+
+        List<CartOrderProductDto> cartOrderProductDtoList = cartOrderDto.getCartOrderProductDtoList();
+        List<OrderProduct> orderProductList = new ArrayList<>();
+
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+
+        for (CartOrderProductDto cartOrderProductDto : cartOrderProductDtoList) {
+            Product product = productRepository.findById(cartOrderProductDto.getProductId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            OrderProduct orderProduct = OrderProduct.createOrderProduct(product, cartOrderProductDto.getQuantity());
+            orderProductList.add(orderProduct);
+        }
+        Order order = Order.createCartOrder(user, orderProductList, cartOrderDto);
+        orderRepository.save(order);
+
+
+
+        return order;
     }
-
-
     @Transactional
     public Order update(Long orderId, Order order) {
         Order findorder = orderRepository.findById(orderId).orElseThrow(OrderNotFound::new);
@@ -70,6 +95,7 @@ import static com.backend.domain.order.domain.QOrder.order;
 
         return orderRepository.save(findorder);
     }
+
     @Transactional
     //판매자 전용 배송중으로 변경하는 기능
     public Order updateStatus(Long orderId) {
@@ -83,17 +109,9 @@ import static com.backend.domain.order.domain.QOrder.order;
     public Page<OrderHistoryDto> getAllList(Pageable pageable) {
         List<Order> orders = orderRepository.findAll();
         Long totalQuantity = orderRepository.countAllOrder();
-        List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
-        for (Order order : orders) {
-            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
-            List<OrderProduct> orderProducts = order.getOrderProducts();
-            for (OrderProduct orderProduct : orderProducts) {
-                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
-                orderHistoryDto.addOrderProductDto(orderProductDto);
-            }
-            orderHistoryDtos.add(orderHistoryDto);
-        }
-        return new PageImpl<OrderHistoryDto>(orderHistoryDtos, pageable, totalQuantity);
+
+
+        return new PageImpl<OrderHistoryDto>(OrderHistoryDto.from(orders), pageable, totalQuantity);
     }
 
 
@@ -102,21 +120,7 @@ import static com.backend.domain.order.domain.QOrder.order;
         List<Order> orders = orderRepository.findOrders(userId, pageable);
         Long totalQuantity = orderRepository.countOrder(userId);
 
-        List<OrderHistoryDto> orderHistoryDtos = new ArrayList<>();
-
-        for (Order order : orders) {
-            OrderHistoryDto orderHistoryDto = new OrderHistoryDto(order);
-            List<OrderProduct> orderProducts = order.getOrderProducts();
-            for (OrderProduct orderProduct : orderProducts) {
-                // ProductImg productImg = productImgRepository.findByItemIdAndRepimgYn(orderProductt.getIte().getId(), "Y");
-                OrderProductDto orderProductDto = new OrderProductDto(orderProduct);
-                orderHistoryDto.addOrderProductDto(orderProductDto);
-            }
-
-            orderHistoryDtos.add(orderHistoryDto);
-        }
-
-        return new PageImpl<OrderHistoryDto>(orderHistoryDtos, pageable, totalQuantity);
+        return new PageImpl<OrderHistoryDto>(OrderHistoryDto.from(orders), pageable, totalQuantity);
     }
 
     @Transactional
@@ -127,32 +131,31 @@ import static com.backend.domain.order.domain.QOrder.order;
         orderRepository.delete(order);
     }
 
-    //매일7시마다 배송완료로 변경. 쿼리문 못작성시 이거 사용/ 성능 구림
-    public void autoUpdate() {
-        List<Order> orders = orderRepository.findAll();
-        for (Order order : orders) {
-            if (order.getOrderStatus() == SHIPPING) {
-                order.setOrderStatus(SHIPPED);
-                orderRepository.save(order);
-            }
-
-        }
-    }
-
-   /* //db에서 데이터뽑아내는것만 가능하면 사용가능
+    //자동 호출
     @Transactional
     public void autoUpdate() {
-        List<Order> orders = orderRepository.findByStatus();
+        List<Order> orders = orderRepository.findByOrderStatus(SHIPPING);
         for (Order order : orders) {
             order.setOrderStatus(SHIPPED);
-            orderRepository.save(order);
+            //orderRepository.save(order);
 
-        }*/
-
-
+        }
 
 
     }
+    //판매량 조회
+    public int getSalesRate(long productId) {
+        List<OrderProduct>  orderProductList = orderProductRepository.findByProductProductId(productId);
+        int totalQuantity = 0;
+        for(OrderProduct orderProduct : orderProductList) {
+            totalQuantity += orderProduct.getQuantity();
+        }
+        return totalQuantity;
+    }
+
+
+
+}
 
 
     /* public Long orders(List<OrderDto> orderDtoList, String email){
