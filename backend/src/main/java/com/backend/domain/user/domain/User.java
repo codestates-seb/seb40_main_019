@@ -109,6 +109,10 @@ public class User extends Auditable {
         return passwordEncoder.matches(otherPassword, this.password);
     }
 
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
     public enum UserStatus {
         USER_EXIST("존재하는 유저"),
         USER_NOT_EXIST("존재하지 않는 유저");
