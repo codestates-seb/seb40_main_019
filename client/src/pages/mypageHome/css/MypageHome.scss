@@ -1,6 +1,5 @@
-.orderSummery{
-  
-  ul{
+.orderSummery {
+  ul {
     background-color: var(--color-grey);
     padding: 30px 20px;
     border-radius: 15px;
@@ -9,26 +8,25 @@
     justify-content: space-around;
   }
 
-  li{
+  li {
     display: flex;
     align-items: flex-end;
-    h1{
-      font-size: 40px;
-      font-weight: 600;
+    h1 {
+      font-size: 35px;
+      font-weight: 400;
       color: var(--color-brown);
-      margin: 0px 0px 40px 15px;
+      margin: 0px 0px 32px 15px;
     }
   }
 
-  .orderIcon{
-    
-    p{
+  .orderIcon {
+    p {
       font-size: 15px;
       color: var(--color-brown);
       margin-bottom: 15px;
     }
-    
-    i{
+
+    i {
       background-color: var(--color-blue);
       text-align: center;
       line-height: 50px;
@@ -40,32 +38,30 @@
       border-radius: 50%;
     }
   }
-  @media (max-width:750px){
+  @media (max-width: 750px) {
+    ul {
+      flex-direction: column;
+      gap: 10px;
+    }
 
-      ul{
-        flex-direction: column;
-        gap: 10px;
-      }
-
-    .orderIcon{
-      i{
+    .orderIcon {
+      i {
         display: none;
       }
-      p{
+      p {
         margin-bottom: 0px;
       }
     }
-    
-    li{
+
+    li {
       justify-content: space-between;
       align-items: center;
-      h1{
+      h1 {
         font-size: 20px;
         font-weight: 600;
         color: var(--color-blue);
         margin: 0px;
       }
     }
-    
   }
 }

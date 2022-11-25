@@ -6,7 +6,7 @@ import axios from 'axios';
 export default function ShopMypageOrderList() {
   const [items, setItems] = useState();
   useEffect(() => {
-    axios.get('http://localhost:3001/orders/').then((res) => {
+    axios.get('http://localhost:3001/ordersMypage/').then((res) => {
       setItems(res.data);
     });
   }, []);
@@ -27,7 +27,7 @@ export default function ShopMypageOrderList() {
       {items &&
         items.map((item) => {
           return (
-            <div key={item.productsId}>
+            <div key={item.orederId}>
               <MypageOrderListItem item={item} />
             </div>
           );
