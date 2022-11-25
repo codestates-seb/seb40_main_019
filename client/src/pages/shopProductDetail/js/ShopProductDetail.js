@@ -10,7 +10,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 
-const shopProductDetail = () => {
+export default function shopProductDetail() {
   const [product, setProducts] = useState();
   useEffect(() => {
     axios.get('http://localhost:3001/productdetail/').then((res) => {
@@ -58,6 +58,9 @@ const shopProductDetail = () => {
       </div>
     </>
   );
-};
+}
 
-export default shopProductDetail;
+//product[id] //Route path="/detail/:id"
+//let {id} = useParams()
+//let 찾는상품 = prodcut.filter((x) => {return x.id == id})
+//{찾는상품.price}원
