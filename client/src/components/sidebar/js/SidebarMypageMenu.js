@@ -13,7 +13,7 @@ export default function SidebarMypageMenu() {
             <li>마이페이지</li>
           </Link>
           <Link to="/mypage/user">
-            <li>회원정보</li>
+            <li>회원정보수정</li>
           </Link>
           <Link to="/mypage/point">
             <li>포인트적립</li>
