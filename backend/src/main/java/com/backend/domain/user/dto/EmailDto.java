@@ -17,4 +17,10 @@ public class EmailDto {
         private String email;
     }
 
+    @Getter
+    @Builder
+    public static class ResponseMail {
+        private String email;
+    }
+
 }

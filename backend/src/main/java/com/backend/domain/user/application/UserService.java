@@ -373,4 +373,13 @@ public class UserService {
         userRepository.save(user);
         log.info("임시 비밀번호 발급 완료 : {}", email);
     }
+
+    public String findIdByPhoneNumber(String phoneNumber) {
+        User user = userRepository.findByPhone(phoneNumber).orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+        String email = user.getEmail();
+
+        return email;
+    }
 }

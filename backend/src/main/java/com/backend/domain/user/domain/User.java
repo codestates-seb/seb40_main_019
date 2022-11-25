@@ -55,7 +55,7 @@ public class User extends Auditable {
     @Column
     private String address;
 
-    @Column
+    @Column(unique = true)
     private String phone;
 
     @Column

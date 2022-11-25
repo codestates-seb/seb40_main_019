@@ -139,4 +139,13 @@ public class UserController {
         return ResponseEntity.ok(userService.comparePassword(authUser.getUser(), password));
     }
 
+    @PostMapping("/find-id")
+    public ResponseEntity<EmailDto.ResponseMail> findIdByPhoneNumber(@RequestBody PhoneNumberDto phoneNumberDto) {
+        String phoneNumber = phoneNumberDto.getPhoneNumber();
+        EmailDto.ResponseMail response = EmailDto.ResponseMail.builder()
+                .email(userService.findIdByPhoneNumber(phoneNumber))
+                .build();
+        return ResponseEntity.ok(response);
+    }
+
 }
