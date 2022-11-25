@@ -34,6 +34,9 @@ import MypagePointPage from './pages/mypage/point/js/MypagePointPage';
 import ReviewAdd from './pages/reviewAdd/js/ReviewAdd';
 import ReviewEdit from './pages/reviewEdit/js/ReviewEdit';
 import ShopMypageOrderList from './pages/shopMypageOrderList/js/ShopMypageOrderList';
+import MypageLayout from './components/layout/js/MypageLayout';
+import Review from './pages/review/js/Review';
+import MypageHome from './pages/mypageHome/js/MypageHome';
 
 function App() {
   //json-server 주소
@@ -96,10 +99,12 @@ function App() {
             <Route path="/seller/review" element={<SellerReview />} />
           </Route>
 
-          <Route path="/" element={<ShopLayout />}>
+          <Route path="/" element={<MypageLayout />}>
+            <Route path="/mypage" element={<MypageHome />} />
             <Route path="/mypage/user" element={<MypageUserPage />} />
             <Route path="/mypage/user/edit" element={<MypageUserEditPage />} />
             <Route path="/mypage/point" element={<MypagePointPage />} />
+            <Route path="/mypage/review" element={<Review />} />
             <Route path="/mypage/reviewadd" element={<ReviewAdd />} />
             <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
             <Route path="/mypage/order" element={<ShopMypageOrderList />} />
