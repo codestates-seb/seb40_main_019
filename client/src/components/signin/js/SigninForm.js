@@ -6,60 +6,47 @@ import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import kakaoIcon from '../../../assets/img/kakaoIcon.png';
 import googleIcon from '../../../assets/img/googleIcon.png';
 import { Link } from 'react-router-dom';
-import FormInputError from '../../sign/js/FormInputError';
-// import { kakaoLogin } from '../../../util/api/oauthKakao';
-// import { googleLogin } from '../../../util/api/oauthGoogle';
+import { kakaoLogin } from '../../../util/api/oauthKakao';
+import { googleLogin } from '../../../util/api/oauthGoogle';
 import {
   submitForm,
   guestLogin,
   sellerLogin,
 } from '../../../util/api/loginForm';
-import { tossPay } from '../../../util/api/payment';
+// eslint-disable-next-line no-useless-escape
+let emailExptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
 export default function SigninForm() {
-  const [data, setDate] = useState({});
-
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [data, setDate] = useState({
+    email: '',
+    password: '',
+  });
 
   const formSubmit = (e) => {
     e.preventDefault();
-    let error = false;
 
-    if (data.Email === undefined) {
-      setEmailError(true);
-      error = true;
+    if (!data.email) {
+      window.alert('이메일을 입력하세요.');
+      return;
     }
-    if (data.Password === undefined) {
-      setPasswordError(true);
-      error = true;
+    if (!emailExptext.test(data.email)) {
+      window.alert('유효하지 않은 형식의 이메일 주소입니다.');
+      return;
     }
-    if (!error) {
-      window.alert('제출');
-      submitForm({
-        email: data.Email,
-        password: data.Password,
-      });
+
+    if (!data.password) {
+      window.alert('비밀번호를 입력하세요');
+      return;
     }
+    submitForm({
+      email: data.email,
+      password: data.password,
+    });
   };
 
   const onChangeInput = (e) => {
     setDate({ ...data, [e.target.name]: e.target.value });
-
-    if (data.Email !== undefined) {
-      setEmailError(false);
-    }
-    if (data.Password !== undefined) {
-      setPasswordError(false);
-    }
   };
-
-  // const handleOAuthKakao = () => {
-  //   kakaoLogin();
-  // };
-  // const handleOAuthGoogle = () => {
-  //   googleLogin();
-  // };
   return (
     <>
       <div className="signinTitle">
@@ -72,47 +59,35 @@ export default function SigninForm() {
       >
         <FormInput
           labelName="Email"
-          inputId="Text"
-          inputType="text"
-          name="Email"
+          inputId="email"
+          inputType="email"
+          name="email"
           onChangeInput={onChangeInput}
           placeholder="Please enter your Email"
         />
-        {emailError && <FormInputError text="Email cannot be empty." />}
-
         <FormInput
           labelName="Password"
-          inputId="Password"
-          inputType="Password"
-          name="Password"
+          inputId="password"
+          inputType="password"
+          name="password"
           onChangeInput={onChangeInput}
           placeholder="Please enter your password"
         />
-        {passwordError && <FormInputError text="Password cannot be empty." />}
-
         <FormButtonYellow formSubmit={formSubmit} btnContent="Log in" />
         <div className="signupLink">
           Don’t have an account?
           <Link to={'/signup'}>Sign in</Link>
         </div>
         <div className="flexBox">
-          <a href="https://api.taekgil.xyz/oauth2/authorization/kakao">
+          <a href={kakaoLogin}>
             <img src={kakaoIcon} alt="kakaoAuth" />
           </a>
-          <a href="https://api.taekgil.xyz/oauth2/authorization/google">
+          <a href={googleLogin}>
             <img src={googleIcon} alt="googleAuth" />
           </a>
         </div>
-        <FormButtonBlue btnContent="Guest" formSubmit={guestLogin} />
-        <FormButtonBlue btnContent="Seller" formSubmit={sellerLogin} />
-        <FormButtonBlue
-          btnContent="payment"
-          formSubmit={() =>
-            tossPay(
-              JSON.parse(window.sessionStorage.getItem('userData')).nickname
-            )
-          }
-        />
+        <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
+        <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
       </form>
     </>
   );

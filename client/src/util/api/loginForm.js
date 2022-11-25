@@ -10,7 +10,6 @@ console.log(REACT_APP_API_URL);
 // 서버에 로그인 입력 데이터 전송
 export const submitForm = async (userInfo) => {
   console.log(userInfo);
-  console.log('로그인');
   try {
     const res = await axios.post(`${REACT_APP_API_URL}users/login`, userInfo);
     console.log(res);
@@ -33,7 +32,8 @@ export const submitForm = async (userInfo) => {
       window.location.replace('/');
     }
   } catch (error) {
-    console.error(error);
+    console.log(error);
+    window.alert('로그인 실패.');
     return error;
   }
 };
@@ -64,6 +64,7 @@ export const userLogout = async () => {
     }
   } catch (error) {
     console.error(error);
+    window.alert('로그아웃 실패');
     return error;
   }
 };
@@ -80,6 +81,7 @@ export const guestLogin = async () => {
       submitForm(userInfo);
     }
   } catch (error) {
+    window.alert('로그인 실패');
     return false;
   }
 };
@@ -89,13 +91,14 @@ export const guestLogin = async () => {
 export const sellerLogin = async () => {
   try {
     const res = await axios.get(`${REACT_APP_API_URL}users/test/admin`);
-    console.log(res);
     if (res.status === 200) {
       let userInfo = res.data;
       console.log(userInfo);
       submitForm(userInfo);
+      return;
     }
   } catch (error) {
+    window.alert('로그인 실패');
     return false;
   }
 };
