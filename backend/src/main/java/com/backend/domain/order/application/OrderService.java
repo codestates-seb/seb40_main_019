@@ -1,12 +1,12 @@
 package com.backend.domain.order.application;
 
+import com.backend.domain.order.dao.OrderProductRepository;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.domain.OrderStatus;
-import com.backend.domain.order.dto.OrderDto;
-import com.backend.domain.order.dto.OrderHistoryDto;
-import com.backend.domain.order.dto.OrderProductDto;
+import com.backend.domain.order.domain.QOrderProduct;
+import com.backend.domain.order.dto.*;
 import com.backend.domain.order.exception.OrderNotFound;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
@@ -39,10 +39,13 @@ import static com.backend.domain.order.domain.QOrder.order;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
+    private final OrderProductRepository orderProductRepository;
+
     @Transactional
-    public Long order(OrderDto orderDto, Long userId) {
+    public Order order(OrderDto orderDto, Long userId) {
         Product product = productRepository.findById(orderDto.getProductId())
                 .orElseThrow(EntityNotFoundException::new);
+        log.info("");
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
 
         List<OrderProduct> orderProductList = new ArrayList<>();
@@ -52,10 +55,32 @@ import static com.backend.domain.order.domain.QOrder.order;
         Order order = Order.createOrder(user, orderProductList, orderDto);
         orderRepository.save(order);
 
-        return order.getOrderId();
+        return order;
+    } //주문 토탈가격도 보내기
+    //주문 여러건 한번에 받기
+
+
+    public Order orders(CartOrderDto cartOrderDto, Long userId) {
+
+        List<CartOrderProductDto> cartOrderProductDtoList = cartOrderDto.getCartOrderProductDtoList();
+        List<OrderProduct> orderProductList = new ArrayList<>();
+
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+
+        for (CartOrderProductDto cartOrderProductDto : cartOrderProductDtoList) {
+            Product product = productRepository.findById(cartOrderProductDto.getProductId())
+                    .orElseThrow(EntityNotFoundException::new);
+
+            OrderProduct orderProduct = OrderProduct.createOrderProduct(product, cartOrderProductDto.getQuantity());
+            orderProductList.add(orderProduct);
+        }
+        Order order = Order.createCartOrder(user, orderProductList, cartOrderDto);
+        orderRepository.save(order);
+
+
+
+        return order;
     }
-
-
     @Transactional
     public Order update(Long orderId, Order order) {
         Order findorder = orderRepository.findById(orderId).orElseThrow(OrderNotFound::new);
@@ -118,8 +143,18 @@ import static com.backend.domain.order.domain.QOrder.order;
 
 
     }
+    //판매량 조회
+    public int getSalesRate(long productId) {
+        List<OrderProduct>  orderProductList = orderProductRepository.findByProductProductId(productId);
+        int totalQuantity = 0;
+        for(OrderProduct orderProduct : orderProductList) {
+            totalQuantity += orderProduct.getQuantity();
+        }
+        return totalQuantity;
+    }
 
-    public long
+
+
 }
 
 

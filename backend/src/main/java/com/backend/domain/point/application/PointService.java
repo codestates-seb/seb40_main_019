@@ -71,6 +71,7 @@ public class PointService {
         int payPrice = order.getOrderTotalPrice();
         if (payPrice > restCash) {
             throw new RuntimeException("포인트가 부족합니다.");
+
         }
         addCash(user, payPrice * -1);
         orderRepository.save(order);

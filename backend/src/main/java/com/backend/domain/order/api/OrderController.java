@@ -3,9 +3,7 @@ package com.backend.domain.order.api;
 import com.backend.domain.order.application.OrderService;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.order.dto.OrderDto;
-import com.backend.domain.order.dto.OrderHistoryDto;
-import com.backend.domain.order.dto.OrderPatchDto;
+import com.backend.domain.order.dto.*;
 
 import com.backend.domain.order.mapper.OrderMapper;
 import com.backend.domain.product.domain.Product;
@@ -46,8 +44,17 @@ public class OrderController {
     public ResponseEntity order(@CurrentUser CustomUserDetails authUser, @RequestBody @Valid OrderDto orderDto) {
         Long userId = authUser.getUser().getUserId();
         Long orderId;
-        orderId = orderService.order(orderDto, userId);
-        return new ResponseEntity<Long>(orderId, HttpStatus.OK);
+        Order order = orderService.order(orderDto, userId);
+
+        return new ResponseEntity<>(new OrderPriceDto(order), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/orders/cart")
+    public ResponseEntity cartOrders(@CurrentUser CustomUserDetails authUser, @RequestBody @Valid CartOrderDto cartOrderDto) {
+        Long userId = authUser.getUser().getUserId();
+        Order order = orderService.orders(cartOrderDto, userId);
+
+        return new ResponseEntity<>(new OrderPriceDto(order), HttpStatus.CREATED);
     }
 
 
@@ -101,6 +108,22 @@ public class OrderController {
 
     }
 
+    @GetMapping("/orders/product/{product-id}")
+    public ResponseEntity getSalesRate(@PathVariable("product-id") long productId) {
+        int orderTotalQuantity = orderService.getSalesRate(productId);
+        return ResponseEntity.ok(new SingleResponseDto<>(orderTotalQuantity));
+    }
+    /*@PostMapping(value = "/cart/orders")
+    public @ResponseBody ResponseEntity cartOrder(@RequestBody CartOrderDto cartOrderDto, @CurrentUser CustomUserDetails authUser){
 
-}
+        List<CartOrderDto> cartOrderDtoList = cartOrderDto.getCartOrderDtoList();
+
+
+        Long orderId = orderService.cartOrder(cartOrderDtoList, principal.getName());
+        return new ResponseEntity<Long>(orderId, HttpStatus.OK);*/
+    }
+
+
+
+
 
