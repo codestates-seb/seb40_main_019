@@ -67,19 +67,19 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<UserResponseDto> getUser() {
-        User user = userService.getLoginUser();
+    public ResponseEntity<UserResponseDto> getDetails(@CurrentUser CustomUserDetails authUser) {
+        User user = authUser.getUser();
         return ResponseEntity.ok(mapper.userToUserResponseDto(user));
     }
 
     /**
      * 로그아웃 시 토큰 삭제
      *
-     * @param user 현재 유저
+     * @param authUser 현재 유저
      */
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails user) {
-        Long userId = user.getUser().getUserId();
+    public ResponseEntity<Void> logout(@CurrentUser CustomUserDetails authUser) {
+        Long userId = authUser.getUser().getUserId();
         log.info("userId : {}", userId);
 
         userService.logout(userId);
@@ -115,27 +115,28 @@ public class UserController {
         return ResponseEntity.ok(testUserResponseDto);
     }
 
-//    -------------- 테스트 --------------
-//    // RefreshToken 헤더 값 받아서 유저 정보 반환
-//    @GetMapping("/test/refresh-token")
-//    public ResponseEntity<String> testRefreshToken(HttpServletRequest request) {
-//
-//        String refreshToken = request.getHeader("refreshToken");
-//        log.info("refreshToken: {}", refreshToken);
-//        String responseLoginUserInfo = userService.headerTokenGetClaimTest(refreshToken);
-//        log.info("responseLoginUserInfo: {}", responseLoginUserInfo);
-//        return ResponseEntity.ok(responseLoginUserInfo);
-//    }
-//
-//    @GetMapping("/test/access-token")
-//    public ResponseEntity<String> testAccessToken(HttpServletRequest request,
-//                                                  @CurrentUser CustomUserDetails authUser) {
-//
-//        User user = authUser.getUser();
-//
-//        String responseLoginUserInfo = userService.atkUserInfo(user);
-//
-//        return ResponseEntity.ok(responseLoginUserInfo);
-//    }
+    @GetMapping("/social-user")
+    public ResponseEntity<String> loginUserInfo(@CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+        String responseLoginUserInfo = userService.getLoginUserInfo(user);
+
+        return ResponseEntity.ok(responseLoginUserInfo);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteUser(@CurrentUser CustomUserDetails authUser) {
+
+        User user = authUser.getUser();
+        userService.deleteUser(user);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/password/confirm")
+    public ResponseEntity<Boolean> comparePassword(@CurrentUser CustomUserDetails authUser,
+                                                       @RequestBody PasswordDto password) {
+        return ResponseEntity.ok(userService.comparePassword(authUser.getUser(), password));
+    }
 
 }

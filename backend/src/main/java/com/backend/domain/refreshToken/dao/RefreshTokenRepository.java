@@ -8,4 +8,6 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Long
     // key 값으로 refresh token 삭제
     void deleteByKey(Long key);
 
+    // key 값으로 refresh token 삭제
+    void deleteByKey(String key);
 }

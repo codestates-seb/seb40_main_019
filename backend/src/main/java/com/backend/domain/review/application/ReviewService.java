@@ -10,6 +10,7 @@ import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
@@ -27,47 +29,69 @@ public class ReviewService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public Review create(Long userId,Long productId,Review review) {
+    public Review create(Long userId,Long productId,String reviewContent,int star,String reviewUrl) {
+        log.info("create 실행 ");
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        log.info("user : ",user);
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        log.info("product : ",product);
 
-        review.setReviewWriter(user.getNickname());
-        review.setUser(user);
-        review.setProduct(product);
-
+        Review review = Review.builder()
+                .reviewImg(reviewUrl)
+                .reviewWriter(user.getNickname())
+                .reviewContent(reviewContent)
+                .star(star)
+                .user(user)
+                .product(product)
+                .build();
+        log.info("review : ",review);
         return reviewRepository.save(review);
     }
     @Transactional
-    public Review update(Long reviewId, Review review) {
+    public Review update(Long reviewId,Long userId,String reviewContent,int star,String reviewUrl) {
+        log.info("upate 실행");
         Review findReview = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
-
-        Optional.ofNullable(review.getReviewId())
+        log.info("findReview : ",findReview);
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        log.info("user : ",user);
+        Optional.ofNullable(reviewId)
                 .ifPresent(findReview::setReviewId);
-        Optional.ofNullable(review.getReviewContent())
+        Optional.ofNullable(reviewContent)
                 .ifPresent(findReview::setReviewContent);
-        Optional.ofNullable(review.getStar())
+        Optional.ofNullable(star)
                 .ifPresent(findReview::setStar);
+        Optional.ofNullable(reviewUrl)
+                .ifPresent(findReview::setReviewImg);
+        log.info("findReview : ",findReview);
         return reviewRepository.save(findReview);
     }
 
     @Transactional
     public Long delete(Long reviewId){
+        log.info("delete 실행");
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
+        log.info("review : ", review);
         reviewRepository.delete(review);
         return reviewId;
     }
 
-
+    @Transactional
     public Page<Review> getList(Long userId,int page,int size) {
+        log.info("getList 실행");
         return reviewRepository.findByUser(userId, PageRequest.of(page, size, Sort.by("reviewId").descending()));
     }
 
+    @Transactional
     public Page<Review> getListProduct(Long productId, int page, int size) {
+        log.info("getListProduct 실행");
         return reviewRepository.findByProduct(productId,PageRequest.of(page,size,Sort.by("reviewId").descending()));
     }
 
+    @Transactional
     public Review getRead(Long reviewId) {
+        log.info("getRead 실행");
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
+        log.info("review : ", review);
         return review;
     }
 }

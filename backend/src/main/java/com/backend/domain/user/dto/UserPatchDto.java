@@ -12,7 +12,7 @@ public class UserPatchDto {
 
     private String profileImage;
 
-    private String about;
+//    private String about;
 
     private String address;
 

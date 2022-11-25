@@ -5,12 +5,14 @@ import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
+import com.backend.domain.user.dto.PasswordDto;
 import com.backend.domain.user.dto.TestUserResponseDto;
 import com.backend.domain.user.dto.UserLoginResponseDto;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
 import com.backend.global.utils.jwt.JwtTokenizer;
+import com.google.gson.JsonObject;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
@@ -62,27 +64,67 @@ public class UserService {
 
     @Transactional
     public User createUser(User user) {
-        // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
-        verifyExistsEmailByOriginal(user.getEmail());
+        Optional<User> notExistUser = null;
+        log.info("회원가입 시작");
+        if (!isNotExistsEmailByOriginal(user.getEmail())) {
+            log.info("신규 유저");
+            verifyExistsEmailByOriginal(user.getEmail());
+        } else {
+            log.info("탈퇴했던 유저");
+            user.setUserStatus(User.UserStatus.USER_EXIST);
+            log.info("탈퇴했던 유저의 상태를 USER_EXIST로 변경");
+            notExistUser = userRepository.findByEmail(user.getEmail());
+            user.setUserId(notExistUser.get().getUserId());
+            if (!Objects.equals(notExistUser.get().getNickname(), user.getNickname())) {
+                log.info("기존과 다른 닉네임 입력");
+                verifyExistsNicknameByOriginal(user.getNickname());
+            } else {
+                log.info("기존과 같은 닉네임 입력");
+            }
+        }
+
+        if (notExistUser == null) {
+            verifyExistsNicknameByOriginal(user.getNickname());
+        }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        log.info("비밀번호 암호화");
         pointService.addCash(user, 1000000);
-
+        log.info("회원가입 포인트 지급");
 
         return userRepository.save(user);
 
     }
 
+    private boolean isNotExistsEmailByOriginal(String email) {
+        log.info("탈퇴 여부 확인 : " + email);
+        Optional<User> notExistUser = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_NOT_EXIST, "original");
+        return notExistUser.isPresent();
+    }
+
     private void verifyExistsEmailByOriginal(String email) { // 현재 활동중인 일반 회원가입으로 가입한 유저의 이미 등록된 이메일인지 확인
-        Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
-        if (user.isPresent()) {
-            throw new BusinessLogicException(ExceptionCode.USER_NOT_FOUND);
+        log.info("이메일 중복 확인 : " + email);
+        Optional<User> existUser = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
+        if (existUser.isPresent()) {
+            log.info("이미 등록된 이메일");
+            throw new BusinessLogicException(ExceptionCode.EMAIL_DUPLICATION);
         }
+        log.info("사용 가능한 이메일");
+    }
+
+    private void verifyExistsNicknameByOriginal(String nickname) { //중복닉네임인지 확인
+        log.info("닉네임 중복 확인 : " + nickname);
+        Optional<User> user = userRepository.findByNicknameAndUserStatusAndSocialLogin(nickname, User.UserStatus.USER_EXIST, "original");
+        if (user.isPresent()) {
+            log.info("이미 등록된 닉네임");
+            throw new BusinessLogicException(ExceptionCode.NICKNAME_DUPLICATION);
+        }
+        log.info("사용 가능한 닉네임");
     }
 
     public void verifyExistUserByEmailAndOriginal(String email) { //현재 활동중인 일반 회원가입으로 가입한 유저중 email 파라미터로 조회
         Optional<User> user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, "original");
-        if (user.isEmpty()) {//DB에 없는 유저거나 이전에 탈퇴한 유저면 예외처리함
+        if (user.isEmpty()) { //DB에 없는 유저거나 이전에 탈퇴한 유저면 예외처리함
             throw new BusinessLogicException(ExceptionCode.USER_NOT_FOUND);
         }
     }
@@ -96,7 +138,11 @@ public class UserService {
 
     @Transactional
     public User updateUser(User user) {
+
         User findUser = findVerifiedUser(user.getUserId());
+        if (!Objects.equals(user.getNickname(), findUser.getNickname())) {
+            verifyExistsNicknameByOriginal(user.getNickname());
+        }
 
         Optional.ofNullable(user.getModifiedAt())
                 .ifPresent(findUser::setModifiedAt);
@@ -107,8 +153,8 @@ public class UserService {
         Optional.ofNullable(user.getProfileImage())
                 .ifPresent(findUser::setProfileImage);
 
-        Optional.ofNullable(user.getAbout())
-                .ifPresent(findUser::setAbout);
+//        Optional.ofNullable(user.getAbout())
+//                .ifPresent(findUser::setAbout);
 
         Optional.ofNullable(user.getUserStatus())
                 .ifPresent(findUser::setUserStatus);
@@ -226,7 +272,7 @@ public class UserService {
                 .email(guestEmail)
                 .nickname(guestNickname)
                 .password(randomPassword)
-                .about("안녕하세요. 테스트 계정입니다.")
+//                .about("안녕하세요. 테스트 계정입니다.")
                 .userRole(userRole)
                 .profileImage("https://i.ibb.co/7bQQYkX/kisspng-computer-icons-user-profile-avatar-5abcbc2a1f4f51-20180201102408184.png")
                 .socialLogin("original")
@@ -235,6 +281,8 @@ public class UserService {
                 .build();
 
         testUser.encodePassword(passwordEncoder);
+
+        testUser.addCash(1000000);
 
         userRepository.save(testUser);
 
@@ -278,30 +326,32 @@ public class UserService {
         adminId++;
     }
 
+    public String getLoginUserInfo(User user) {
+        JsonObject jsonObject = new JsonObject();
 
-//    -------------- 테스트 --------------
-//    // refresh Token parsing
-//    public String headerTokenGetClaimTest(String refreshToken) {
-//        JsonObject jsonObject = new JsonObject();
-//
-//        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
-//
-//        Map<String, Object> claims = jwtTokenizer.getClaims(refreshToken, base64EncodedSecretKey).getBody();
-//
-//        jsonObject.addProperty("email", claims.get("email").toString());
-//        jsonObject.addProperty("nickname", claims.get("nickname").toString());
-//        jsonObject.addProperty("imageUrl", claims.get("imageUrl").toString());
-//
-//        return jsonObject.toString();
-//    }
-//
-//    public String atkUserInfo(User user) {
-//        JsonObject jsonObject = new JsonObject();
-//
-//        jsonObject.addProperty("email", user.getEmail());
-//        jsonObject.addProperty("nickname", user.getNickname());
-//        jsonObject.addProperty("imageUrl", user.getProfileImage());
-//
-//        return jsonObject.toString();
-//    }
+        jsonObject.addProperty("email", user.getEmail());
+        jsonObject.addProperty("nickname", user.getNickname());
+        jsonObject.addProperty("imageUrl", user.getProfileImage());
+        jsonObject.addProperty("userRole", user.getUserRole());
+
+        return jsonObject.toString();
+    }
+
+    public void deleteUser(User user) {
+        log.info("유저 삭제 : {}", user.getEmail());
+
+        if (user.getSocialLogin().equals("original")) {
+            user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
+            refreshTokenRepository.deleteByKey(user.getUserId());
+            userRepository.save(user);
+        } else {
+            log.info("소셜 로그인 회원탈퇴 : {}", user.getEmail());
+            userRepository.delete(user);
+        }
+            log.info("유저 삭제 완료 : {}", user.getEmail());
+    }
+
+    public boolean comparePassword(User user, PasswordDto password) {
+        return user.comparePassword(passwordEncoder, password.getPassword());
+    }
 }
