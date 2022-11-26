@@ -197,6 +197,7 @@
   "review": [
     {
       "reviewId": 1,
+      "createdAt": "2022-11-26",
       "reviewWriter": "윈터",
       "reviewContent": "맛있",
       "star": 5,
@@ -207,6 +208,7 @@
     },
     {
       "reviewId": 2,
+      "createdAt": "2022-11-26",
       "reviewWriter": "윈터",
       "reviewContent": "맛있어용용요요요요요ㅛㅇㅇ요용",
       "star": 3,
