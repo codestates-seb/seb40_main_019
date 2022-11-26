@@ -361,8 +361,8 @@ public class UserService {
         return user.comparePassword(passwordEncoder, password.getPassword());
     }
 
-    public void issueTempPassword(String email, String newPassword) {
-        log.info("임시 비밀번호 발급 : {}", email);
+    public void newPassword(String email, String newPassword) {
+        log.info("새 비밀번호 발급 : {}", email);
         User user = userRepository.findByEmail(email).orElseThrow(() ->
                 new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
 

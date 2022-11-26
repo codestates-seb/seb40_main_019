@@ -207,7 +207,7 @@ public class UserController {
 //        String newPassword = emailService.sendSimpleMessage(email, "비밀번호 찾기");
 //        log.info("임시비밀번호 : " + newPassword);
 
-        userService.issueTempPassword(email, password);
+        userService.newPassword(email, password);
 
         return ResponseEntity.ok().build();
     }
