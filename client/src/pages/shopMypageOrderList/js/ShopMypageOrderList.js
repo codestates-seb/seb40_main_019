@@ -4,12 +4,16 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function ShopMypageOrderList() {
+  //임시
   const [items, setItems] = useState();
   useEffect(() => {
     axios.get('http://localhost:3001/ordersMypage/').then((res) => {
       setItems(res.data);
     });
   }, []);
+
+  // const [items] = useFetch('orders')//page필요
+
   return (
     <div className="MypageOrderContainer">
       <div className="orderListTitle">
