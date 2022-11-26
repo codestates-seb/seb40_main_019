@@ -23,6 +23,7 @@ export default function BuyAddBtn({ product, count }) {
         price: product.price,
         productsId: product.productsId,
         count: count,
+        check: true,
       };
     }
     window.localStorage.setItem('cartItem', JSON.stringify(data));

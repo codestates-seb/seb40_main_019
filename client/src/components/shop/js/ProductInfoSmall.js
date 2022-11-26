@@ -20,6 +20,7 @@ export default function ProductInfoSmall({ product, count, setCount }) {
         price: product.price,
         productsId: product.productsId,
         count: count,
+        check: true,
       };
     }
     window.localStorage.setItem('cartItem', JSON.stringify(data));
