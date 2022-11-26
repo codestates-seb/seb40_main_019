@@ -81,8 +81,8 @@ function App() {
 
           <Route path="/" element={<ShopLayout />}>
             <Route path="/products" element={<ShopProductList />} />
-            <Route path="/products/:id" element={<ShopProductDetail />} />
-            <Route path="/products/order" element={<ShopProductOrder />} />
+            <Route path="/product/detail/:id" element={<ShopProductDetail />} />
+            <Route path="/product/order" element={<ShopProductOrder />} />
           </Route>
 
           <Route path="/" element={<SellerLayout />}>
