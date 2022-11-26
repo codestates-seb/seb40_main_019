@@ -194,4 +194,22 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * 새로운 비밀번호 설정
+     * @param emailDto 이메일, 새로운 비밀번호
+     */
+    @PostMapping("/change-password")
+    public ResponseEntity<Void> changePassword(@RequestBody EmailDto.RequestMailWithPassword emailDto) throws Exception {
+        String email = emailDto.getEmail();
+        String password = emailDto.getPassword();
+//        log.info("임시비밀번호 발급 메일 발송 시작);");
+
+//        String newPassword = emailService.sendSimpleMessage(email, "비밀번호 찾기");
+//        log.info("임시비밀번호 : " + newPassword);
+
+        userService.issueTempPassword(email, password);
+
+        return ResponseEntity.ok().build();
+    }
+
 }

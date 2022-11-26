@@ -23,4 +23,11 @@ public class EmailDto {
         private String email;
     }
 
+    @Getter
+    @Builder
+    public static class RequestMailWithPassword {
+        private String email;
+        private String password;
+    }
+
 }
