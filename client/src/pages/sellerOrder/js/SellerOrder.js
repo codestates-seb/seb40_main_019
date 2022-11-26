@@ -16,7 +16,7 @@ export default function SellerOrder() {
   return (
     <div className="sellerProducts orderTop">
       <div className="productTitle">
-        <h1>주문 내역</h1>
+        <h1>판매 관리</h1>
         <div className="productBtn"></div>
       </div>
 
