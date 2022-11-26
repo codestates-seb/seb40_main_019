@@ -10,6 +10,8 @@ let reg_pw2 = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{8,16}/;
 let emailExptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 // const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
+const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+
 // 서버에 휴대폰 번호 전송.
 export const findEmailController = async (phone) => {
   console.log(phone);
@@ -25,16 +27,21 @@ export const findEmailController = async (phone) => {
     return;
   }
   try {
-    // const submitResult = await axios.post(
-    //   `${REACT_APP_API_URL}users/find-id`,
-    //   phone
-    // );
+    const submitResult = await axios.post(`${REACT_APP_API_URL}users/find-id`, {
+      phoneNumber: phone,
+    });
     // //이메일 정보 받아옴
+    if (submitResult.status === 200) {
+      // window.alert(`${submitResult.data}`);
+      window.alert(submitResult.data.email);
+    }
     // console.log(submitResult);
-    // // alert로 보여주기
-    // return submitResult;
+    // alert로 보여주기
+    return submitResult;
   } catch (error) {
-    return error.response.data;
+    if (error.response.data.status === 404) {
+      window.alert('이메일 찾기 실패');
+    }
   }
 };
 
