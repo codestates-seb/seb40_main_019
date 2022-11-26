@@ -3,7 +3,7 @@ import '../css/findEmailModal.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import FormButtonBlue from '../../sign/js/FormButtonBlue';
-import { findPasswordController } from '../../../util/api/userAccount';
+import { findEmailController } from '../../../util/api/userAccount';
 export default function FindEmailModal({ setEmailModal }) {
   const [inputPhone, setInputPhone] = useState('');
 
@@ -14,7 +14,7 @@ export default function FindEmailModal({ setEmailModal }) {
     setEmailModal(false);
   };
   const findEmail = () => {
-    findPasswordController(inputPhone);
+    findEmailController(inputPhone);
     // window.alert('아이디 찾기');
   };
   return (
