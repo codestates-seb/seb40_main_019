@@ -204,9 +204,7 @@ public class UserController {
     @PostMapping("/change-password")
     public ResponseEntity<Void> changePassword(@RequestBody EmailDto.RequestMailWithPassword emailDto) throws Exception {
 
-        log.info("새 비밀번호 발급 API 요청" +
-                "\n이메일 : " + emailDto.getEmail() +
-                "\n새 비밀번호 : " + emailDto.getPassword());
+        log.info("새 비밀번호 발급 API 요청");
         String email = emailDto.getEmail();
         String password = emailDto.getPassword();
 
