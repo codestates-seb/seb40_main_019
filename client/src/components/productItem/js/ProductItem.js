@@ -1,4 +1,5 @@
 import '../css/productItem.scss';
+// import { useNavigate } from 'react-router-dom';
 
 const ProductItem = ({ data }) => {
   return (

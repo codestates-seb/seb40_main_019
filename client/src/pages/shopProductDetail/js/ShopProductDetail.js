@@ -9,8 +9,13 @@ import ProductInfoBox from '../../../components/shop/js/ProductInfoBox';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
+// import { useParams } from 'react-router-dom';
 
 export default function shopProductDetail() {
+  //:id 에 따라서 해당 상품 상세페이지 보여줌
+  // const { productsid } = useParams();
+  // `products/${productsid}`
+
   const [product, setProducts] = useState();
   useEffect(() => {
     axios.get('http://localhost:3001/productdetail/').then((res) => {
@@ -60,7 +65,5 @@ export default function shopProductDetail() {
   );
 }
 
-//product[id] //Route path="/detail/:id"
-//let {id} = useParams()
 //let 찾는상품 = prodcut.filter((x) => {return x.id == id})
 //{찾는상품.price}원
