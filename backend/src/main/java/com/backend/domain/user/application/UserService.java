@@ -1,6 +1,7 @@
 package com.backend.domain.user.application;
 
 import com.backend.domain.point.application.PointService;
+import com.backend.domain.point.dao.PointRepository;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
@@ -36,7 +37,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenizer jwtTokenizer;
     private final RefreshTokenRepository refreshTokenRepository;
-
+    private final PointRepository pointRepository;
     private final PointService pointService;
 
     private Long guestId = 1L;
@@ -349,9 +350,11 @@ public class UserService {
         if (user.getSocialLogin().equals("original")) {
             user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
             refreshTokenRepository.deleteByKey(user.getUserId());
+            pointRepository.deleteByUser(user);
             userRepository.save(user);
         } else {
             log.info("소셜 로그인 회원탈퇴 : {}", user.getEmail());
+            pointRepository.deleteByUser(user);
             userRepository.delete(user);
         }
             log.info("유저 삭제 완료 : {}", user.getEmail());
