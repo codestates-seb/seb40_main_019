@@ -1,9 +1,28 @@
 import '../css/ReviewList.scss';
 import { useNavigate } from 'react-router-dom';
 import ReviewStar from '../../review/js/ReviewStar';
+// import useFetch from '../../../util/useFetch';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function ReviewList({ item }) {
   const navigate = useNavigate();
+
+  //임시
+  const [pastData, setPastData] = useState();
+  useEffect(() => {
+    axios.get('http://localhost:3001/review/').then((res) => {
+      setPastData(res.data[1]);
+    });
+  }, []);
+
+  // const [pastData] = useFetch(`review/read/${item.reviewId}`)
+
+  const clickEdit = () => {
+    navigate(`/mypage/reviewedit/${item.reviewId}`, {
+      state: { item: pastData },
+    });
+  };
   return (
     <div className="reviewListContainer">
       <div className="reviewTitle">
@@ -18,10 +37,7 @@ export default function ReviewList({ item }) {
         <div className="reviewContent">{item.reviewContent}원</div>
       </div>
       <div className="reviewBtn">
-        <button
-          className="edit"
-          onClick={() => navigate(`/mypage/reviewedit/${item.reviewId}`)}
-        >
+        <button className="edit" onClick={clickEdit}>
           <i className="fa-solid fa-pen-to-square"></i>
         </button>
         <h3>/</h3>

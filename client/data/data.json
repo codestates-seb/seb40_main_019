@@ -196,7 +196,7 @@
   ],
   "review": [
     {
-      "reviewId": 2,
+      "reviewId": 1,
       "reviewWriter": "윈터",
       "reviewContent": "맛있",
       "star": 5,
@@ -206,7 +206,7 @@
       "titleImg": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/3910d070-bd0e-47ca-acdf-1771dc379551.jpg"
     },
     {
-      "reviewId": 1,
+      "reviewId": 2,
       "reviewWriter": "윈터",
       "reviewContent": "맛있어용용요요요요요ㅛㅇㅇ요용",
       "star": 3,
