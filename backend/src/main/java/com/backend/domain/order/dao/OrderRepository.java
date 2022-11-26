@@ -30,12 +30,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     )
     Long countAllOrder();
 
-    @Query("select o from Order o " +
-            "where o.orderStatus =  'shipping' " +
-            "order by o.createdAt desc"
-    )
-
-    List<Order> findByStatus();
 
     List<Order> findAll();
+
+    List<Order> findByOrderStatus(OrderStatus orderStatus);
 }

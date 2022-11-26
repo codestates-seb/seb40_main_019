@@ -63,7 +63,7 @@ public class UserService {
     }
 
     @Transactional
-    public User createUser(User user) {
+    public void createUser(User user) {
         Optional<User> notExistUser = null;
         log.info("회원가입 시작");
         if (!isNotExistsEmailByOriginal(user.getEmail())) {
@@ -92,7 +92,7 @@ public class UserService {
         pointService.addCash(user, 1000000);
         log.info("회원가입 포인트 지급");
 
-        return userRepository.save(user);
+        userRepository.save(user);
 
     }
 
@@ -136,8 +136,16 @@ public class UserService {
         return memberDetails.getUser();
     }
 
+    public void getUserByEmail(String email) {
+        log.info("이메일로 유저 조회 : " + email);
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(email).orElseThrow(
+                () ->
+                        new BusinessLogicException(ExceptionCode.USER_NOT_FOUND)));
+        log.info("유저 조회 성공");
+    }
+
     @Transactional
-    public User updateUser(User user) {
+    public void updateUser(User user) {
 
         User findUser = findVerifiedUser(user.getUserId());
         if (!Objects.equals(user.getNickname(), findUser.getNickname())) {
@@ -174,8 +182,6 @@ public class UserService {
         Optional.ofNullable(user.getPassword())
                 .ifPresent(password -> findUser.setPassword(passwordEncoder.encode(password)));
 
-
-        return findUser;
     }
 
     /**
@@ -353,5 +359,27 @@ public class UserService {
 
     public boolean comparePassword(User user, PasswordDto password) {
         return user.comparePassword(passwordEncoder, password.getPassword());
+    }
+
+    public void issueTempPassword(String email, String newPassword) {
+        log.info("임시 비밀번호 발급 : {}", email);
+        User user = userRepository.findByEmail(email).orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+        user.changePassword(newPassword);
+        log.info("비밀번호 변경 완료");
+        user.encodePassword(passwordEncoder);
+        log.info("비밀번호 인코딩 완료");
+        userRepository.save(user);
+        log.info("임시 비밀번호 발급 완료 : {}", email);
+    }
+
+    public String findIdByPhoneNumber(String phoneNumber) {
+        User user = userRepository.findByPhone(phoneNumber).orElseThrow(() ->
+                new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
+
+        String email = user.getEmail();
+
+        return email;
     }
 }
