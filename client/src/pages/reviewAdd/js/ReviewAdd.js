@@ -2,16 +2,18 @@ import axios from 'axios';
 import { useState } from 'react';
 import ReviewForm from '../../../components/review/js/ReviewForm';
 import ReviewStar from '../../../components/review/js/ReviewStar';
+import { useNavigate } from 'react-router-dom';
 import '../css/ReviewAdd.scss';
 
 export default function ReviewAdd() {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
 
   const [reviewImg, setReviewImg] = useState([]);
   const [reviewContent, setReviewContent] = useState('');
   const [clickStar, setClickStar] = useState(0);
 
-  const data = { reviewImg, reviewContent, clickStar };
+  const data = { reviewImg, reviewContent, star: clickStar };
   console.log(data);
 
   const handleSubmit = () => {
@@ -42,7 +44,9 @@ export default function ReviewAdd() {
         setReviewContent={setReviewContent}
       />
       <div className="reviewAddBtn">
-        <button className="close">닫기</button>
+        <button className="close" onClick={() => navigate('/mypage/order')}>
+          닫기
+        </button>
         <button onClick={handleSubmit}>리뷰 작성</button>
       </div>
     </div>

@@ -1,0 +1,11 @@
+.reviewContainer {
+  ul {
+    grid-template-columns: 3fr 3fr 1fr;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 750px) {
+    .lineBold {
+      margin-bottom: 20px;
+    }
+  }
+}
