@@ -7,6 +7,7 @@ import com.backend.domain.user.mapper.UserMapper;
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URI;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/users")
 @RestController
@@ -196,18 +198,21 @@ public class UserController {
 
     /**
      * 새로운 비밀번호 설정
+     *
      * @param emailDto 이메일, 새로운 비밀번호
      */
     @PostMapping("/change-password")
     public ResponseEntity<Void> changePassword(@RequestBody EmailDto.RequestMailWithPassword emailDto) throws Exception {
+
+        log.info("새 비밀번호 발급 API 요청" +
+                "\n이메일 : " + emailDto.getEmail() +
+                "\n새 비밀번호 : " + emailDto.getPassword());
         String email = emailDto.getEmail();
         String password = emailDto.getPassword();
-//        log.info("임시비밀번호 발급 메일 발송 시작);");
-
-//        String newPassword = emailService.sendSimpleMessage(email, "비밀번호 찾기");
-//        log.info("임시비밀번호 : " + newPassword);
 
         userService.newPassword(email, password);
+
+        log.info("새 비밀번호 발급 완료");
 
         return ResponseEntity.ok().build();
     }
