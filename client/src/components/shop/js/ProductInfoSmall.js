@@ -7,7 +7,7 @@ export default function ProductInfoSmall({ product, count, setCount }) {
   function addToCart() {
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
     //console.log(data) :null
-    //장바구니 상품 같으면 count+1, 없으면 새로운 상품 추가해줌
+    //장바구니 상품 같으면 count+1, 없으면 새로운 상품 로컬스토리지에 추가해줌
     if (data[product.productsId]) {
       data[product.productsId] = {
         ...data[product.productsId],
