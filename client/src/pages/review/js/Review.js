@@ -1,4 +1,9 @@
 import '../css/Review.scss';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import ReviewList from '../../../components/review/js/ReviewList';
+// import useFetch from '../../../util/useFetch';
+
 export default function Review() {
   const [items, setItems] = useState();
   useEffect(() => {
@@ -6,28 +11,27 @@ export default function Review() {
       setItems(res.data);
     });
   }, []);
+  // const [items] = useFetch('/review')// 페이지도 있음
   return (
-    <div className="MypageOrderContainer">
+    <div className="reviewContainer">
       <div className="orderListTitle">
         <h1>내가 작성한 리뷰</h1>
       </div>
 
       <div className="lineBold"></div>
       <ul className="lineTitle">
-        <li>날짜</li>
-        <li>이미지</li>
-        <li>상품명</li>
-        <li>상품 금액 / 수량</li>
-        <li>확인 / 리뷰</li>
+        <li>상품정보</li>
+        <li>리뷰</li>
+        <li>수정 / 삭제</li>
       </ul>
-      {/* {items &&
+      {items &&
         items.map((item) => {
           return (
             <div key={item.orederId}>
-              <MypageOrderListItem item={item} />
+              <ReviewList item={item} />
             </div>
           );
-        })} */}
+        })}
     </div>
   );
 }

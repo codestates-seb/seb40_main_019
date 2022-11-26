@@ -22,7 +22,7 @@ export default function SidebarMypageMenu() {
             <li>주문목록</li>
           </Link>
           <Link to="/mypage/review">
-            <li>리뷰조회</li>
+            <li>내가작성한리뷰</li>
           </Link>
         </ul>
       </div>

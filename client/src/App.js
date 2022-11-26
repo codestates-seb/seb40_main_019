@@ -106,7 +106,7 @@ function App() {
             <Route path="/mypage/point" element={<MypagePointPage />} />
             <Route path="/mypage/review" element={<Review />} />
             <Route path="/mypage/reviewadd/:id" element={<ReviewAdd />} />
-            <Route path="/mypage/reviewedit" element={<ReviewEdit />} />
+            <Route path="/mypage/reviewedit/:id" element={<ReviewEdit />} />
             <Route path="/mypage/order" element={<ShopMypageOrderList />} />
           </Route>
         </Route>
