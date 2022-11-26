@@ -4,8 +4,9 @@ import UserInfo from '../../js/UserInfo';
 import FormButtonYellow from '../../../sign/js/FormButtonYellow';
 import FormButtonBlue from '../../../sign/js/FormButtonBlue';
 import { Link } from 'react-router-dom';
+import DeleteUserModal from './DeleteUserModal';
 import {
-  deleteUserAccount,
+  // deleteUserAccount,
   getUserInfo,
 } from '../../../../util/api/mypageUser';
 export default function MypageUser() {
@@ -15,6 +16,7 @@ export default function MypageUser() {
     phone: '',
     username: '',
   });
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [address, setAddress] = useState('');
   const [zipCode, setZipCode] = useState('');
 
@@ -39,6 +41,15 @@ export default function MypageUser() {
       setZipCode(res.zipCode);
     });
   }, []);
+
+  const deleteUser = () => {
+    let check = window.confirm('회원 탈퇴를 진행하시겠습니까?');
+    if (check) {
+      // deleteUserAccount();
+      setDeleteModalOpen(true);
+      // window.alert('회원탈퇴 이메일 모달창');
+    }
+  };
 
   return (
     <>
@@ -109,12 +120,17 @@ export default function MypageUser() {
           <Link to={'/mypage/user/edit'}>
             <FormButtonBlue btnContent="정보수정" />
           </Link>
-          <FormButtonYellow
-            formSubmit={deleteUserAccount}
-            btnContent="회원탈퇴"
-          />
+          <FormButtonYellow formSubmit={deleteUser} btnContent="회원탈퇴" />
         </div>
       </div>
+      {deleteModalOpen && (
+        <>
+          <DeleteUserModal
+            email={data.email}
+            setDeleteModalOpen={setDeleteModalOpen}
+          />
+        </>
+      )}
     </>
   );
 }

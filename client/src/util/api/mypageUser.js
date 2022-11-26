@@ -132,9 +132,11 @@ export const deleteUserAccount = async () => {
         window.location.replace('/');
         window.alert('회원 탈퇴 완료.');
       }
-      // return res;
+      return;
     } catch (error) {
-      return error.response.data;
+      console.error(error);
+      window.alert('회원 탈퇴 실패.');
+      return;
     }
   }
 };
