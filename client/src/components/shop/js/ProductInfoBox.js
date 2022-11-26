@@ -1,6 +1,8 @@
 import '../css/productInfoBox.scss';
+// import { useEffect } from 'react';
 import QuantityBtn from './QuantityBtn';
 import BuyAddBtn from './BuyAddBtn';
+
 // import ReviewStar from '../../review/js/ReviewStar';
 // 별점 지우고 Quantity 밑으로 내려서 제품사진과 간격 맞춤
 export default function ProductInfoBox({ product, count, setCount }) {
@@ -35,7 +37,7 @@ export default function ProductInfoBox({ product, count, setCount }) {
               <div>{product.price * count}원</div>
             </div>
             <div className="btnBox">
-              <BuyAddBtn />
+              <BuyAddBtn product={product} count={count} />
             </div>
           </div>
         </div>
