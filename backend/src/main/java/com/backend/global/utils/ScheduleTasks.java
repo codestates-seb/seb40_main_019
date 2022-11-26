@@ -1,4 +1,4 @@
-package com.backend.domain.order.task;
+package com.backend.global.utils;
 
 import com.backend.domain.order.application.OrderService;
 import lombok.RequiredArgsConstructor;
