@@ -382,4 +382,9 @@ public class UserService {
 
         return email;
     }
+
+    @Transactional
+    public void deleteGustAccount() {
+        userRepository.deleteAllByUserRoleOrUserRole("ROLE_USER_TEST", "ROLE_ADMIN_TEST");
+    }
 }

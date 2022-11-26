@@ -194,4 +194,12 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("test")
+    public ResponseEntity<?> test() {
+
+        userService.deleteGustAccount();
+
+        return ResponseEntity.ok().build();
+    }
+
 }
