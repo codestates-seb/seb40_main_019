@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../css/SellerProduct.scss';
 import { handleDelete } from '../../../util/api/product';
+import { formatDate } from '../../../util/function/formatData';
 export default function SellerProduct({ item }) {
   const navigate = useNavigate();
   const clickEdit = () => {
@@ -17,7 +18,7 @@ export default function SellerProduct({ item }) {
   return (
     <div className="sellerproduct">
       <div className="createdAt">
-        <p>{item.createdAt}</p>
+        <p>{formatDate(item.createdAt)}</p>
       </div>
       <img className="titleImg" src={item.titleImg} alt="productImg" />
       <div className="title">{item.productName}</div>
