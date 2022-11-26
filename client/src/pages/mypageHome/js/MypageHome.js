@@ -20,7 +20,8 @@ export default function MypageHome() {
       setReview(res.data[0]);
     });
   }, []);
-  // const [order] = [useFetch('orders')[0]]//page 0으로
+  // const [order] = useFetch('orders')[0]//page 0으로
+  // const [items] = useFetch('/review')// page 0으로
 
   return (
     <div className="mypageHome">
