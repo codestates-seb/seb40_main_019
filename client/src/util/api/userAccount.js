@@ -56,22 +56,27 @@ export const findPasswordSendEmail = async (email) => {
     window.alert('유효하지 않은 형식의 이메일 주소입니다.');
     return;
   }
-  window.alert('인증코드 발송 완료');
   try {
-    // const validationRequest = await axios.post(
-    //   `${REACT_APP_API_URL}mail/registered`,
-    //   { email }
-    // );
-    // console.log(validationRequest);
-    // return validationRequest;
+    const validationRequest = await axios.post(
+      `${REACT_APP_API_URL}mail/registered`,
+      { email }
+    );
+
+    return validationRequest;
   } catch (error) {
-    return false;
+    if (error.response.data.status === 404) {
+      window.alert('이메일 찾기 실패');
+    } else {
+      window.alert('이메일 찾기 에러');
+    }
   }
 };
 
 // 비밀번호 변경 요청
-export const changePasssword = async (password) => {
+export const changePasssword = async (email, password) => {
+  console.log(email);
   console.log(password);
+
   if (!password) {
     window.alert('새로운 비밀번호를 입력하세요.');
     return;
@@ -82,15 +87,16 @@ export const changePasssword = async (password) => {
     );
     return;
   }
+
   try {
-    // const validationRequest = await axios.post(
-    //   `${REACT_APP_API_URL}mail/registered`,
-    //   { email }
-    // );
-    // console.log(validationRequest);
-    // return validationRequest;
-    window.alert('비밀번호 변경 완료');
+    const res = await axios.post(`${REACT_APP_API_URL}users/change-password`, {
+      email,
+      password,
+    });
+    return res;
   } catch (error) {
-    return false;
+    if (error.response.data.status === 404) {
+      window.alert('비밀번호 변경 실패');
+    }
   }
 };

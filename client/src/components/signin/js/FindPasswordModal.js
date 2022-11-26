@@ -26,10 +26,16 @@ export default function FindPasswordModal({ setPasswordModal }) {
   // step 0
   const sendEmail = () => {
     // 인증번호 받아오기
-    let number = findPasswordSendEmail(inputEmail);
-    console.log(number);
+    let res = findPasswordSendEmail(inputEmail);
+    res.then((data) => {
+      console.log(data);
+      if (data.status === 200) {
+        window.alert('인증코드 발송 완료');
+        console.log(data.data);
+        setValidationCode(data.data);
+      }
+    });
     // 상태코드 200 이면 설정 후 다음 단계로 이동
-    // setValidationCode(number);
     setValidationCode('123456');
     setStep(1);
   };
@@ -51,12 +57,19 @@ export default function FindPasswordModal({ setPasswordModal }) {
 
   // step 2
   const changePassword = () => {
-    let res = changePasssword(inputPassword);
+    let res = changePasssword(inputEmail, inputPassword);
     // 응답이 200 이면 변경 완료.
     console.log(res);
+    res.then((data) => {
+      console.log(data);
+      if (data.status === 200) {
+        window.alert('비밀번호 변경 완료');
+        closeModal();
+      }
+    });
 
     // window.alert('비밀번호 변경 완료');
-    setStep(2);
+    // setStep(2);
   };
   return (
     <>
