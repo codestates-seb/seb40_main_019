@@ -4,6 +4,7 @@ import ReviewStar from '../../review/js/ReviewStar';
 // import useFetch from '../../../util/useFetch';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { handleDltReview } from '../../../util/api/review';
 
 export default function ReviewList({ item }) {
   const navigate = useNavigate();
@@ -15,6 +16,10 @@ export default function ReviewList({ item }) {
       setPastData(res.data[1]);
     });
   }, []);
+
+  const clickDlt = () => {
+    handleDltReview(item.reviewId);
+  };
 
   // const [pastData] = useFetch(`review/read/${item.reviewId}`)
 
@@ -41,7 +46,7 @@ export default function ReviewList({ item }) {
           <i className="fa-solid fa-pen-to-square"></i>
         </button>
         <h3>/</h3>
-        <button className="delete">
+        <button className="delete" onClick={clickDlt}>
           <i className="fa-solid fa-trash-can"></i>
         </button>
       </div>

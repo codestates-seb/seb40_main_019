@@ -8,6 +8,7 @@ axios.defaults.headers.common['Authorization'] = JSON.parse(
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
+//리뷰수정
 export const handleEditReview = async (data, pastData) => {
   const formData = new FormData();
   formData.append('reviewContent', data.reviewContent);
@@ -33,5 +34,18 @@ export const handleEditReview = async (data, pastData) => {
     }
   } catch (error) {
     return error.response.data;
+  }
+};
+
+//리뷰삭제
+export const handleDltReview = async (id) => {
+  try {
+    const res = await axios.delete(`${REACT_APP_API_URL}review/${id}`);
+    if (res.status === 200) {
+      console.log(res.data);
+    }
+  } catch (error) {
+    console.error(error);
+    return error;
   }
 };
