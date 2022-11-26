@@ -11,7 +11,6 @@ export default function SellerProduct({ item }) {
   };
 
   const clickDelete = () => {
-    console.log(item);
     handleDelete(item);
   };
 

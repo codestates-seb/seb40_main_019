@@ -23,7 +23,7 @@ export default function SellerProducts() {
       <div className="lineBold"></div>
       <ul className="lineTitle">
         <li>등록일</li>
-        <li>상품명</li>
+        <li>상품정보</li>
         <li>가격</li>
         <li>수정/삭제</li>
       </ul>
