@@ -2,7 +2,12 @@ import '../css/cartListItem.scss';
 // import QuantityBtn from '../../js/QuantityBtn';
 import CartQuantityBtn from './CartQuantityBtn';
 
-const CartListItem = ({ item, decreaseQuantity, increaseQuantity }) => {
+const CartListItem = ({
+  item,
+  decreaseQuantity,
+  increaseQuantity,
+  deleteItem,
+}) => {
   console.log(item);
   return (
     <div className="cartListContainer">
@@ -30,7 +35,7 @@ const CartListItem = ({ item, decreaseQuantity, increaseQuantity }) => {
         <div>{item.price * item.count}원</div>
       </div>
       <div className="delete">
-        <button>
+        <button onClick={() => deleteItem(item)}>
           <i className="fa-light fa-x"></i>
         </button>
       </div>

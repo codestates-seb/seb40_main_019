@@ -8,6 +8,7 @@ export default function CartList({
   items,
   decreaseQuantity,
   increaseQuantity,
+  deleteItem,
 }) {
   console.log(items);
   return (
@@ -36,6 +37,7 @@ export default function CartList({
                 item={item}
                 decreaseQuantity={decreaseQuantity}
                 increaseQuantity={increaseQuantity}
+                deleteItem={deleteItem}
               />
             </div>
           );
