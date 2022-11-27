@@ -190,5 +190,14 @@
       "new": true,
       "quantity": 1
      }
+   ],
+   "points": [
+    {
+      "productsId": 1,
+      "createdAt": "2022.11.18",
+      "price": "100000",
+      "newRestCash": "50000",
+      "restCash": "50000"
+    }
    ]
 }   

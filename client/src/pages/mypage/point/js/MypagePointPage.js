@@ -1,6 +1,7 @@
 // import React from 'react';
 import '../css/mypagePointPage.scss';
 import MypagePoint from '../../../../components/mypage/mypagePoint/js/MypagePoint';
+import MypagePointList from '../../../../components/mypage/mypagePoint/js/MypagePointList';
 
 export default function MypagePointPage() {
   return (
@@ -8,6 +9,7 @@ export default function MypagePointPage() {
       <div className="mypagePointContainer">
         <MypagePoint />
       </div>
+      <MypagePointList />
     </>
   );
 }
