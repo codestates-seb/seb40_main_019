@@ -9,7 +9,9 @@
         border: 0;
         outline: none;
     }
-   
+    button:focus{
+        outline: none;
+    }
     img{
         width: 100px;
         height: 100px;
