@@ -1,6 +1,7 @@
 package com.backend.global.utils;
 
 import com.backend.domain.order.application.OrderService;
+import com.backend.domain.refreshToken.application.RefreshTokenService;
 import com.backend.domain.user.application.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import javax.transaction.Transactional;
 public class ScheduleTasks {
     private final OrderService orderService;
     private final UserService userService;
+    private final RefreshTokenService refreshTokenService;
 
     private static final Logger log = LoggerFactory.getLogger(ScheduleTasks.class);
 
@@ -26,10 +28,14 @@ public class ScheduleTasks {
         log.info("배송된 주문들이 배송완료처리 되었습니다");
     }
 
-    // Scheduled 매일 06시에 실행
     @Transactional
     @Scheduled(cron = "0 0 6 * * *")
     public void deleteGustAccount() {
         userService.deleteGustAccount();
+    }
+
+    @Scheduled(fixedRate = 600000)
+    public void deleteExpiredToken() {
+        refreshTokenService.deleteExpiredToken();
     }
 }
