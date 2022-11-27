@@ -9,8 +9,8 @@ export default function CartList({
   decreaseQuantity,
   increaseQuantity,
   deleteItem,
+  checkBuyItem,
 }) {
-  console.log(items);
   return (
     <div className="CartListContatner">
       <div className="productTitle">
@@ -38,6 +38,7 @@ export default function CartList({
                 decreaseQuantity={decreaseQuantity}
                 increaseQuantity={increaseQuantity}
                 deleteItem={deleteItem}
+                checkBuyItem={checkBuyItem}
               />
             </div>
           );

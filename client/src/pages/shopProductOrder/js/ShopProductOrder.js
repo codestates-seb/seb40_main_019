@@ -84,8 +84,25 @@ export default function ShopProductOrder() {
     window.localStorage.setItem('cartItem', JSON.stringify(data));
     setItems(arr);
   };
-  // 장바구니 선택 버튼
 
+  // 장바구니 선택 버튼
+  const checkBuyItem = (item) => {
+    console.log(item);
+
+    let data = JSON.parse(window.localStorage.getItem('cartItem'));
+
+    data[item.productsId] = {
+      ...data[item.productsId],
+      check: !data[item.productsId].check,
+    };
+    console.log(data);
+    let arr = [];
+    Object.keys(data).forEach((el) => {
+      arr.push(data[el]);
+    });
+    window.localStorage.setItem('cartItem', JSON.stringify(data));
+    setItems(arr);
+  };
   // 장바구니 전체 선택 버튼
 
   return (
@@ -96,6 +113,7 @@ export default function ShopProductOrder() {
           decreaseQuantity={decreaseQuantity}
           increaseQuantity={increaseQuantity}
           deleteItem={deleteItem}
+          checkBuyItem={checkBuyItem}
         />
       </div>
       <div className="orderSummaryBox">

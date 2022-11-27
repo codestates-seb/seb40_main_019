@@ -7,11 +7,11 @@ const CartListItem = ({
   decreaseQuantity,
   increaseQuantity,
   deleteItem,
+  checkBuyItem,
 }) => {
-  console.log(item);
   return (
     <div className="cartListContainer">
-      <div className="checkbox">
+      <button onClick={() => checkBuyItem(item)} className="checkbox">
         {item.check ? (
           <>
             <input type="checkbox" checked></input>
@@ -21,7 +21,7 @@ const CartListItem = ({
             <input type="checkbox"></input>
           </>
         )}
-      </div>
+      </button>
       <img className="titleImg" src={item.titleImg} alt="productImg" />
       <div className="title">{item.title}</div>
       <div className="quantity">
