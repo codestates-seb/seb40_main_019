@@ -10,6 +10,8 @@ export default function CartList({
   increaseQuantity,
   deleteItem,
   checkBuyItem,
+  checkBuyAllItem,
+  allSelect,
 }) {
   return (
     <div className="CartListContatner">
@@ -20,7 +22,11 @@ export default function CartList({
       <div className="lineBold"></div>
       <ul className="lineTitle">
         <li>
-          <input type="checkbox"></input>
+          <input
+            onChange={() => checkBuyAllItem(allSelect)}
+            type="checkbox"
+            checked={allSelect}
+          />
         </li>
         <li>상품</li>
         <li>수량</li>

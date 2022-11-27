@@ -9,17 +9,23 @@ import OrderMobileButton from './OrderMobileButton';
 export default function ShopProductOrder() {
   const [items, setItems] = useState(null);
   // const [totalPrice, setTotalPrice] = useState(0);
+  const [allSelect, setAllSelect] = useState(true);
 
   useEffect(() => {
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
     // let price = 0;
     let arr = [];
+
+    let checked = true;
     Object.keys(data).forEach((el) => {
       // price += Number(data[el].price) * data[el].count;
       arr.push(data[el]);
+      if (!data[el].check) {
+        checked = false;
+      }
     });
-    console.log(arr);
     // setTotalPrice(price);
+    setAllSelect(checked);
     setItems(arr);
   }, []);
 
@@ -33,7 +39,6 @@ export default function ShopProductOrder() {
       return;
     }
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    console.log(data[item.productsId]);
     data[item.productsId] = {
       ...data[item.productsId],
       count: data[item.productsId].count - 1,
@@ -54,7 +59,6 @@ export default function ShopProductOrder() {
       return;
     }
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    console.log(data[item.productsId]);
     data[item.productsId] = {
       ...data[item.productsId],
       count: data[item.productsId].count + 1,
@@ -73,38 +77,56 @@ export default function ShopProductOrder() {
     window.alert('물품 삭제');
 
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-
     delete data[item.productsId];
-    console.log(data);
 
     let arr = [];
+    let checked = true;
     Object.keys(data).forEach((el) => {
       arr.push(data[el]);
+      if (!data[el].check) {
+        checked = false;
+      }
     });
-    window.localStorage.setItem('cartItem', JSON.stringify(data));
+    setAllSelect(checked);
     setItems(arr);
+    window.localStorage.setItem('cartItem', JSON.stringify(data));
   };
 
   // 장바구니 선택 버튼
   const checkBuyItem = (item) => {
-    console.log(item);
-
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
 
     data[item.productsId] = {
       ...data[item.productsId],
       check: !data[item.productsId].check,
     };
-    console.log(data);
     let arr = [];
+
+    let checked = true;
     Object.keys(data).forEach((el) => {
       arr.push(data[el]);
+      if (!data[el].check) {
+        checked = false;
+      }
     });
-    window.localStorage.setItem('cartItem', JSON.stringify(data));
+    setAllSelect(checked);
     setItems(arr);
+    window.localStorage.setItem('cartItem', JSON.stringify(data));
   };
   // 장바구니 전체 선택 버튼
+  const checkBuyAllItem = (allSelect) => {
+    let data = JSON.parse(window.localStorage.getItem('cartItem'));
 
+    let arr = [];
+    Object.keys(data).forEach((el) => {
+      data[el].check = !allSelect;
+      arr.push(data[el]);
+    });
+
+    window.localStorage.setItem('cartItem', JSON.stringify(data));
+    setItems(arr);
+    setAllSelect(!allSelect);
+  };
   return (
     <div className="productOrderContainer">
       <div className="orderCartListBox">
@@ -114,6 +136,8 @@ export default function ShopProductOrder() {
           increaseQuantity={increaseQuantity}
           deleteItem={deleteItem}
           checkBuyItem={checkBuyItem}
+          checkBuyAllItem={checkBuyAllItem}
+          allSelect={allSelect}
         />
       </div>
       <div className="orderSummaryBox">

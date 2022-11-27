@@ -11,17 +11,13 @@ const CartListItem = ({
 }) => {
   return (
     <div className="cartListContainer">
-      <button onClick={() => checkBuyItem(item)} className="checkbox">
-        {item.check ? (
-          <>
-            <input type="checkbox" checked></input>
-          </>
-        ) : (
-          <>
-            <input type="checkbox"></input>
-          </>
-        )}
-      </button>
+      <div className="checkbox">
+        <input
+          onChange={() => checkBuyItem(item)}
+          type="checkbox"
+          checked={item.check}
+        ></input>
+      </div>
       <img className="titleImg" src={item.titleImg} alt="productImg" />
       <div className="title">{item.title}</div>
       <div className="quantity">
