@@ -1,110 +1,125 @@
-.productInfoContainer{
-    width: 100%;
-    max-width: 470px;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    position: relative; 
+.productInfoContainer {
+  width: 100%;
+  max-width: 470px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
 }
-.stickyContainer{
-    width:100%;
-    height: 440px;
-    //border: 1px solid black; //for 레이아웃 
-    position: sticky !important;
-    top: 150px !important;
-    font-weight: bold;
+.stickyContainer {
+  width: 100%;
+  height: 440px;
+  //border: 1px solid black; //for 레이아웃
+  position: sticky !important;
+  top: 150px !important;
+  font-weight: bold;
 }
 
 // header = 사진+별
-.itemHeaderContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding-bottom: 30px;
-    
-    // margin: 10px 0px 40px 0px;
-    .imgStarBox{
-        // flex:1;
-        img{
-            width: 160px;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-        .reviewStar{
-            text-align: center;
-            // padding: 10px;
-            margin-top: 20px;
-            button{
-                padding: 0px 3px;
-            }
-        }
+.itemHeaderContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-bottom: 30px;
+
+  // margin: 10px 0px 40px 0px;
+  .imgStarBox {
+    // flex:1;
+    img {
+      width: 160px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
     }
-
-// body = new, 제품명, -quantity
-    .itemBodyContainer{
-        // flex:1;
-        padding: 5px 0 0 15px;
-
-        > button{
-            display: block;
-            background-color: var(--color-blue);
-            padding: 3px 6px;
-            color: var(--color-white);
-            border-radius: 15px;
-            font-size: 12px;
-            font-weight: 300;
-            float: left;
-        }
-        .titleBox{
-            display: inline-block;
-            width: -webkit-fill-available; 
-            height: 190px;
-            padding-top: 10px;
-        }
-        // .QuantityBox{
-        //     display: flex;
-        //     justify-content: space-around;
-        //     align-items: center;
-        // }
-
+    .reviewStar {
+      text-align: center;
+      // padding: 10px;
+      margin-top: 20px;
+      button {
+        padding: 0px 3px;
+      }
     }
+  }
 
+  // body = new, 제품명, -quantity
+  .itemBodyContainer {
+    // flex:1;
+    padding: 0px 0 0 15px;
 
+    > button {
+      display: block;
+      background-color: var(--color-blue);
+      padding: 3px 6px;
+      color: var(--color-white);
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 300;
+      float: left;
+    }
+    .titleBox {
+      display: inline-block;
+      width: -webkit-fill-available;
+      height: 50px;
+      padding-top: 10px;
+      line-height: 20px;
+      margin-bottom: 10px;
+    }
+    // .QuantityBox{
+    //     display: flex;
+    //     justify-content: space-around;
+    //     align-items: center;
+    // }
+    .reviewStar {
+      display: flex;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-brown);
+      align-items: center;
+      p {
+        font-size: 12px;
+        text-align: center;
+      }
+      button {
+        padding: 0px 3px 0px 0px;
+      }
+    }
+  }
 }
 
 // footer - +Quantity, total, buybtn+Nowbtn, addCartBtn
-.itemFooterContainer{
-    border-top: solid 2px var(--color-blue);
-    margin:auto;
-    text-align:center;
-    
-    .QuantityBox{
-        display: inline-flex;
-        justify-content:space-between;
-        text-align:center;
-        width: 335px;
-        height: 25px;
-        margin-top: 40px;
+.itemFooterContainer {
+  border-top: solid 1px var(--color-blue);
+  margin: auto;
+  text-align: center;
 
+  .QuantityBox {
+    display: inline-flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+    width: 350px;
+    height: 25px;
+    margin-top: 30px;
+  }
+  .priceBox {
+    display: inline-flex;
+    justify-content: space-between;
+    text-align: center;
+    width: 350px;
+    height: 70px;
+    line-height: 60px;
+    text-align: center;
+    p {
+      color: var(--color-blue);
     }
-    .priceBox{
-        display: inline-flex;
-        justify-content:space-between;
-        text-align:center;
-        width: 335px;
-        height: 70px;
-        line-height: 60px;
-        text-align: center;
-    .totalBox{
-        border-radius: 15px;
+    .totalBox {
+      border-radius: 15px;
     }
-    }
+  }
 
-    .btnBox{
-        // width: fit-content;
-        display: block;
-        display:inline-block
-
-    }
+  .btnBox {
+    // width: fit-content;
+    display: block;
+    display: inline-block;
+  }
 }
