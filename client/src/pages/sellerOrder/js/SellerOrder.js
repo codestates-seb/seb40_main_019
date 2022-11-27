@@ -11,8 +11,10 @@ export default function SellerOrder() {
       setItems(res.data);
     });
   }, []);
-  // const [items] = useFetch('orders/all');
+  // const [items, error] = useFetch('orders/all');
   // console.log(items);
+  // console.log(error);
+
   return (
     <div className="sellerProducts orderTop">
       <div className="productTitle">

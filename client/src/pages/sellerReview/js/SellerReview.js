@@ -2,6 +2,7 @@ import '../css/SellerReview.scss';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Review from '../../../components/seller/js/Review';
+// import useFetch from '../../../util/useFetch';
 // import { Link } from 'react-router-dom';
 
 export default function SellerReview() {
@@ -11,6 +12,8 @@ export default function SellerReview() {
       setItems(res.data);
     });
   }, []);
+
+  // const [items] = useFetch('리뷰전체조회api');
 
   return (
     <div className="sellerReview">
