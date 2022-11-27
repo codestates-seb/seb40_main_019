@@ -1,20 +1,19 @@
-.quantityContainer{
-    display: flex;
-    font-weight: bold;
-    justify-content: space-evenly;
-    
-    .controlBtn{
-        width: 80px;
-        // margin-left: 50px;
-        padding: 4px;
-        border: 2px solid var(--color-blue);
-        border-radius: 15px;
-        text-align: center;
-        font-size: 14px;
-        margin-left: 20px;
+.quantityContainer {
+  display: flex;
+  font-weight: bold;
+  justify-content: space-evenly;
 
-        span{
-            margin: 0px 5px;
-        }
+  .controlBtn {
+    width: 80px;
+    // margin-left: 50px;
+    padding: 2px;
+    border: 2px solid var(--color-blue);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 14px;
+
+    span {
+      margin: 0px 5px;
     }
+  }
 }
