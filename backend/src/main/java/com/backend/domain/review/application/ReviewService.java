@@ -101,29 +101,17 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<Review> getProductReview(Long userId,int page,int size) {
+        // 유저 -> 상품 -> 리뷰
         List<Review> response = new ArrayList<>();
         PageRequest pageable = PageRequest.of(page, size, Sort.by("reviewId").descending());
 
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         List<Product> product = productRepository.findByUserId(userId);
-
+        //TODO: 이 쿼리는 너무 몰상식함 좀 더 세련되게
         for (Product list : product) {
             List<Review> byProductId = reviewRepository.findByProductId(list.getProductId());
             response.addAll(byProductId);
         }
-//        Collections.sort(response, new Comparator<Review>() {
-//            @Override
-//            public int compare(Review o1, Review o2) {
-//                if(o1.getReviewId() < o2.getReviewId()) {
-//                    return 1;
-//                }else if (o1.getReviewId() == o2.getReviewId()){
-//                    return o1.getProductName().compareTo(o2.getProductName());
-//                }else {
-//                    return -1;
-//                }
-//
-//            }
-//        });
         int start =(int) pageable.getOffset();
         int end = Math.min((start+ pageable.getPageSize()), response.size());
         Page<Review> reviewPage = new PageImpl<>(response.subList(start,end),pageable, response.size());
