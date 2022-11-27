@@ -135,10 +135,14 @@ public class User extends Auditable {
     }
 
     public void addCash(int cash){
-        int pointCash = point.getCash();
-        this.point = Point.builder()
-                .cash(pointCash + cash)
-                .user(this)
-                .build();
+        this.restCash += cash;
     }
+
+//    public void addCash(int cash){
+//        int pointCash = point.getCash();
+//        this.point = Point.builder()
+//                .cash(pointCash + cash)
+//                .user(this)
+//                .build();
+//    }
 }
