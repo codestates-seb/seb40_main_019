@@ -17,7 +17,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +43,9 @@ public class ReviewService {
                 .star(star)
                 .user(user)
                 .product(product)
+                .productId(product.getProductId())
+                .productName(product.getProductName())
+                .titleImg(product.getTitleImg())
                 .build();
         log.info("review : ",review);
         return reviewRepository.save(review);
@@ -93,5 +96,33 @@ public class ReviewService {
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
         log.info("review : ", review);
         return review;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Review> getProductReview(Long userId) {
+        List<Review> response = new ArrayList<>();
+
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        List<Product> product = productRepository.findByUserId(userId);
+
+        for (Product list : product) {
+            List<Review> byProductId = reviewRepository.findByProductId(list.getProductId());
+            response.addAll(byProductId);
+        }
+        Collections.sort(response, new Comparator<Review>() {
+            @Override
+            public int compare(Review o1, Review o2) {
+                if(o1.getReviewId() < o2.getReviewId()) {
+                    return 1;
+                }else if (o1.getReviewId() == o2.getReviewId()){
+                    return o1.getProductName().compareTo(o2.getProductName());
+                }else {
+                    return -1;
+                }
+
+            }
+        });
+        
+        return response;
     }
 }

@@ -118,4 +118,11 @@ public class ReviewController {
         return new ResponseEntity(new MultiResponse<>(reviewMapper.reviewsToReviewResponseDto(content),reviews),HttpStatus.OK);
     }
 
+
+    @GetMapping("/review/seller")
+    public ResponseEntity getProductReview(@CurrentUser CustomUserDetails authUser){
+        Long userId = authUser.getUser().getUserId();
+        List<Review> review = reviewService.getProductReview(userId);
+        return new ResponseEntity(new SingleResponseDto<>(review),HttpStatus.OK);
+    }
 }

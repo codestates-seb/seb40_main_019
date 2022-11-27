@@ -37,8 +37,15 @@ public class Review extends Auditable {
     private int star;
 
     private String reviewImg;
+
+    private Long proId;
+
+    private String productName;
+
+    private String titleImg;
+
     @Builder
-    public Review(Long reviewId, String reviewWriter, String reviewContent, Product product, User user, int star, String reviewImg) {
+    public Review(Long reviewId, String reviewWriter, String reviewContent, Product product, User user, int star, String reviewImg, Long productId, String productName, String titleImg) {
         this.reviewId = reviewId;
         this.reviewWriter = reviewWriter;
         this.reviewContent = reviewContent;
@@ -46,7 +53,12 @@ public class Review extends Auditable {
         this.user = user;
         this.star = star;
         this.reviewImg = reviewImg;
+        this.proId = productId;
+        this.productName = productName;
+        this.titleImg = titleImg;
     }
+
+
 
     public void setReviewImg(String reviewImg) {
         this.reviewImg = reviewImg;
