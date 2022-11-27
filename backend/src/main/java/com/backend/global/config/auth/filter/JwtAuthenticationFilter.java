@@ -114,6 +114,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         RefreshToken refreshTokenEntity = RefreshToken.builder()
                 .key(user.getUserId())
                 .value(refreshToken)
+                .expirationDate(jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond()))
                 .build();
         refreshTokenRepository.save(refreshTokenEntity);
         log.info("JwtAuthenticationFilter: refreshToken DB 저장완료");

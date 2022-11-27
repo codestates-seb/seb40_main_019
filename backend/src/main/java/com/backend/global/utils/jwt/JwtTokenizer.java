@@ -94,7 +94,7 @@ public class JwtTokenizer {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MILLISECOND, expirationMinutes);
         Date expiration = calendar.getTime();
-        expiration = new Date(expiration.getTime() + 1000 * 60 * 60 * 24 * 7);
+        expiration = new Date(expiration.getTime());
 
         return expiration;
     }

@@ -1,6 +1,8 @@
-package com.backend.domain.order.task;
+package com.backend.global.utils;
 
 import com.backend.domain.order.application.OrderService;
+import com.backend.domain.refreshToken.application.RefreshTokenService;
+import com.backend.domain.user.application.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,8 @@ import javax.transaction.Transactional;
 @Component
 public class ScheduleTasks {
     private final OrderService orderService;
+    private final UserService userService;
+    private final RefreshTokenService refreshTokenService;
 
     private static final Logger log = LoggerFactory.getLogger(ScheduleTasks.class);
 
@@ -22,5 +26,16 @@ public class ScheduleTasks {
     public void AutoOrderTask() {
         orderService.autoUpdate();
         log.info("배송된 주문들이 배송완료처리 되었습니다");
+    }
+
+    @Transactional
+    @Scheduled(cron = "0 0 6 * * *")
+    public void deleteGustAccount() {
+        userService.deleteGustAccount();
+    }
+
+    @Scheduled(fixedRate = 600000)
+    public void deleteExpiredToken() {
+        refreshTokenService.deleteExpiredToken();
     }
 }

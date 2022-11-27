@@ -1,10 +1,7 @@
 package com.backend.domain.point.domain;
 
 import com.backend.domain.user.domain.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -30,5 +27,5 @@ public class Point {
     private int cash; // 잔액
 
 
-}
+    }
 

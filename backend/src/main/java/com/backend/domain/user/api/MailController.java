@@ -5,7 +5,6 @@ import com.backend.domain.user.application.EmailService;
 import com.backend.domain.user.application.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static com.backend.domain.user.dto.EmailDto.RequestSendMail;
@@ -47,17 +46,4 @@ public class MailController {
         return code;
     }
 
-    @PostMapping("/find-password")
-    public ResponseEntity<Void> findPassword(@RequestBody RequestSendMail emailDto) throws Exception {
-        String email = emailDto.getEmail();
-        log.info("임시비밀번호 발급 메일 발송 시작);");
-        log.info("email : {}", email);
-
-        String newPassword = emailService.sendSimpleMessage(email, "비밀번호 찾기");
-        log.info("임시비밀번호 : " + newPassword);
-
-        userService.issueTempPassword(email, newPassword);
-
-        return ResponseEntity.ok().build();
-    }
 }
