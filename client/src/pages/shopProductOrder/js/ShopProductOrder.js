@@ -171,7 +171,7 @@ export default function ShopProductOrder() {
         <OrderSummary totalPrice={totalPrice} />
       </div>
       <div className="MobileBtnContainer">
-        <OrderMobileButton />
+        <OrderMobileButton totalPrice={totalPrice} />
       </div>
     </div>
   );

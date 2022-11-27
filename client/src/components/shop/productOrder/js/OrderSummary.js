@@ -52,7 +52,7 @@ export default function OrderSummary({ totalPrice }) {
           <div>
             <div className="totalPriceBox">
               <div>총금액</div>
-              <div>35,000원</div>
+              <div>{totalPrice + 3000}원</div>
             </div>
           </div>
 
