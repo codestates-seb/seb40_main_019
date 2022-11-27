@@ -1,5 +1,10 @@
 package com.backend.domain.review.application;
 
+import com.backend.domain.order.dao.OrderProductRepository;
+import com.backend.domain.order.dao.OrderRepository;
+import com.backend.domain.order.domain.Order;
+import com.backend.domain.order.domain.OrderProduct;
+import com.backend.domain.order.domain.OrderProductReviewStatus;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.exception.ProductNotFound;
@@ -17,6 +22,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +33,10 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+
+    private final OrderRepository orderRepository;
+
+    private final OrderProductRepository orderProductRepository;
 
     @Transactional
     public Review create(Long userId,Long productId,String reviewContent,int star,String reviewUrl) {
@@ -45,6 +55,8 @@ public class ReviewService {
                 .product(product)
                 .build();
         log.info("review : ",review);
+        OrderProduct orderProduct = orderProductRepository.findOrderProduct(userId, productId);
+        orderProduct.setReviewStatus(OrderProductReviewStatus.WRITED);
         return reviewRepository.save(review);
     }
     @Transactional

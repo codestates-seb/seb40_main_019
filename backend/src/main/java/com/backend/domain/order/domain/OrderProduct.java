@@ -29,11 +29,14 @@ public class OrderProduct extends Auditable {
     private int price;
 
     private int quantity;
+
+    private OrderProductReviewStatus reviewStatus;
     public static OrderProduct createOrderProduct(Product product, int quantity){
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setProduct(product);
         orderProduct.setQuantity(quantity);
         orderProduct.setPrice(product.getPrice());
+        orderProduct.setReviewStatus(OrderProductReviewStatus.WRITING);
 
        // product.removeStock(quantity);
         return orderProduct;

@@ -43,9 +43,9 @@ import static com.backend.domain.order.domain.QOrder.order;
 
     @Transactional
     public Order order(OrderDto orderDto, Long userId) {
+        log.info("Service/ 주문생성을 위한 상품과 유저찾기 시작");
         Product product = productRepository.findById(orderDto.getProductId())
                 .orElseThrow(EntityNotFoundException::new);
-        log.info("");
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
 
         List<OrderProduct> orderProductList = new ArrayList<>();
