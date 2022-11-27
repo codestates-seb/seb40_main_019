@@ -8,23 +8,25 @@ import OrderMobileButton from './OrderMobileButton';
 
 export default function ShopProductOrder() {
   const [items, setItems] = useState(null);
-  // const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [allSelect, setAllSelect] = useState(true);
 
   useEffect(() => {
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    // let price = 0;
+    let price = 0;
     let arr = [];
 
     let checked = true;
     Object.keys(data).forEach((el) => {
-      // price += Number(data[el].price) * data[el].count;
+      if (data[el].check) {
+        price += Number(data[el].price) * data[el].count;
+      }
       arr.push(data[el]);
       if (!data[el].check) {
         checked = false;
       }
     });
-    // setTotalPrice(price);
+    setTotalPrice(price);
     setAllSelect(checked);
     setItems(arr);
   }, []);
@@ -45,9 +47,15 @@ export default function ShopProductOrder() {
     };
 
     let arr = [];
+    let price = 0;
     Object.keys(data).forEach((el) => {
       arr.push(data[el]);
+
+      if (data[el].check) {
+        price += Number(data[el].price) * data[el].count;
+      }
     });
+    setTotalPrice(price);
     window.localStorage.setItem('cartItem', JSON.stringify(data));
     setItems(arr);
   };
@@ -65,9 +73,15 @@ export default function ShopProductOrder() {
     };
 
     let arr = [];
+    let price = 0;
+
     Object.keys(data).forEach((el) => {
       arr.push(data[el]);
+      if (data[el].check) {
+        price += Number(data[el].price) * data[el].count;
+      }
     });
+    setTotalPrice(price);
     window.localStorage.setItem('cartItem', JSON.stringify(data));
     setItems(arr);
   };
@@ -81,12 +95,17 @@ export default function ShopProductOrder() {
 
     let arr = [];
     let checked = true;
+    let price = 0;
     Object.keys(data).forEach((el) => {
       arr.push(data[el]);
       if (!data[el].check) {
         checked = false;
       }
+      if (data[el].check) {
+        price += Number(data[el].price) * data[el].count;
+      }
     });
+    setTotalPrice(price);
     setAllSelect(checked);
     setItems(arr);
     window.localStorage.setItem('cartItem', JSON.stringify(data));
@@ -101,14 +120,18 @@ export default function ShopProductOrder() {
       check: !data[item.productsId].check,
     };
     let arr = [];
-
+    let price = 0;
     let checked = true;
     Object.keys(data).forEach((el) => {
       arr.push(data[el]);
       if (!data[el].check) {
         checked = false;
       }
+      if (data[el].check) {
+        price += Number(data[el].price) * data[el].count;
+      }
     });
+    setTotalPrice(price);
     setAllSelect(checked);
     setItems(arr);
     window.localStorage.setItem('cartItem', JSON.stringify(data));
@@ -118,11 +141,15 @@ export default function ShopProductOrder() {
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
 
     let arr = [];
+    let price = 0;
     Object.keys(data).forEach((el) => {
       data[el].check = !allSelect;
       arr.push(data[el]);
+      if (data[el].check) {
+        price += Number(data[el].price) * data[el].count;
+      }
     });
-
+    setTotalPrice(price);
     window.localStorage.setItem('cartItem', JSON.stringify(data));
     setItems(arr);
     setAllSelect(!allSelect);
@@ -141,7 +168,7 @@ export default function ShopProductOrder() {
         />
       </div>
       <div className="orderSummaryBox">
-        <OrderSummary />
+        <OrderSummary totalPrice={totalPrice} />
       </div>
       <div className="MobileBtnContainer">
         <OrderMobileButton />
