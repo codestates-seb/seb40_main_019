@@ -55,7 +55,7 @@ public class User extends Auditable {
     @Column
     private String address;
 
-    @Column
+    @Column(unique = true)
     private String phone;
 
     @Column
@@ -107,6 +107,10 @@ public class User extends Auditable {
 
     public boolean comparePassword(PasswordEncoder passwordEncoder, String otherPassword) {
         return passwordEncoder.matches(otherPassword, this.password);
+    }
+
+    public void changePassword(String password) {
+        this.password = password;
     }
 
     public enum UserStatus {

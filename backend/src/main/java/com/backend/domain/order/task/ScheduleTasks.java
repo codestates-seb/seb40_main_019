@@ -16,7 +16,7 @@ public class ScheduleTasks {
 
     private static final Logger log = LoggerFactory.getLogger(ScheduleTasks.class);
 
-    //@Scheduled(fixedDelay = 5000)테스트용 5초마다 실행
+    //@Scheduled(fixedDelay = 5000)//테스트용 5초마다 실행
     @Transactional
     @Scheduled(cron = "0 0 7 * * *") //매일아침 7시마다 그 전에 배송중으로 바꾼 주문들을 전부 배송완료로 변경
     public void AutoOrderTask() {

@@ -1,5 +1,10 @@
 package com.backend.domain.point.application;
 
+
+
+import com.backend.domain.order.application.OrderService;
+import com.backend.domain.order.dao.OrderRepository;
+import com.backend.domain.order.domain.Order;
 import com.backend.domain.point.dao.PointRepository;
 import com.backend.domain.point.domain.Point;
 import com.backend.domain.user.dao.UserRepository;
@@ -16,6 +21,8 @@ public class PointService {
     private final PointRepository pointRepository;
 
     private final UserRepository userRepository;
+
+    private final OrderRepository orderRepository;
 
   /*  public Point addCash(User user, PointChargeDto pointChargeDto) {
     int chargePrice = pointChargeDto.getPrice();
@@ -42,7 +49,7 @@ public class PointService {
     }
 
     public Point addCash2(User user, int price) {
-        Point point= Point.builder()
+        Point point = Point.builder()
                 .user(user)
                 .cash(price)
                 .build();
@@ -56,8 +63,20 @@ public class PointService {
         return user.getRestCash();
     }
 
-    }
+    @Transactional
+    public void pay(Order order) {
+        User user = order.getUser();
+        int restCash = user.getRestCash();
+        int payPrice = order.getOrderTotalPrice();
+        if (payPrice > restCash) {
+            throw new RuntimeException("포인트가 부족합니다.");
 
+        }
+        addCash(user, payPrice * -1);
+        orderRepository.save(order);
+
+    }
+}
 
 
 
