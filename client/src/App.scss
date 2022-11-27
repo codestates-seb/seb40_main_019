@@ -135,20 +135,22 @@ button {
   cursor: pointer;
 }
 *::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 //var(--color-blue)
 :root {
-	--color-blue: #1885AE;
-	--color-yellow: #FFB526;
-	--color-brown: #5C4B29;
-	--color-white: #FFFFFF;
-	
-	--font-notoSans: 'Noto Sans KR', sans-serif;
-	--font-work: 'Work Sans', sans-serif;
+  --color-blue: #1885ae;
+  --color-lightblue: #1886ae3f;
+  --color-yellow: #ffb526;
+  --color-brown: #5c4b29;
+  --color-white: #ffffff;
+  --color-grey: rgba(217, 217, 217, 0.17);
+
+  --font-notoSans: 'Noto Sans KR', sans-serif;
+  --font-work: 'Work Sans', sans-serif;
 }
-*{
-	box-sizing: border-box;
-	text-decoration: none;
-	font: var(--font-notoSans);
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  font: var(--font-notoSans);
 }

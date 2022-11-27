@@ -5,6 +5,7 @@ export default function ReviewForm({
   reviewImg,
   setReviewImg,
   setReviewContent,
+  reviewContent,
 }) {
   return (
     <div className="reviewForm">
@@ -18,6 +19,7 @@ export default function ReviewForm({
           onChange={(e) => {
             setReviewContent(e.target.value);
           }}
+          value={reviewContent}
         ></input>
       </div>
     </div>

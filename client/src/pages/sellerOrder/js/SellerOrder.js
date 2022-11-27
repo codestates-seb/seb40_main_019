@@ -7,26 +7,28 @@ import useFetch from '../../../util/useFetch';
 export default function SellerOrder() {
   // const [items, setItems] = useState();
   // useEffect(() => {
-  //   axios.get('http://localhost:3001/orders/').then((res) => {
+  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
   //     setItems(res.data);
   //   });
   // }, []);
-  const [items] = useFetch('orders/all');
+
+  const [items, error] = useFetch('orders/all');
   console.log(items);
+  console.log(error);
+
   return (
-    <div className="sellerProducts">
+    <div className="sellerProducts orderTop">
       <div className="productTitle">
-        <h1>주문 내역</h1>
+        <h1>판매 관리</h1>
         <div className="productBtn"></div>
       </div>
 
       <div className="lineBold"></div>
       <ul className="lineTitle">
-        <li>결제일</li>
-        <li>상품명</li>
+        <li>발송현황</li>
         <li>주문자 정보</li>
+        <li>상품정보</li>
         <li>수량</li>
-        <li>발송 처리</li>
       </ul>
 
       {items &&

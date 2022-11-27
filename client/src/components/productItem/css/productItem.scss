@@ -18,7 +18,7 @@
 	.textContainer{
 		display: flex;
 		flex-direction: column;
-		width: 86%;
+		width: 96%;
 		margin: auto;
 		padding: 10px;
 		.titleBox{
@@ -35,15 +35,16 @@
 			justify-content: space-between;
 			margin-top:8px;
 			p{
-				font-weight: bold;
 				color: var(--color-blue);
 				font-size: 15px;
+				font-weight: 600;
 			}
 
 			button{
 				color: var(--color-white);
 				border-radius: 15px;
-				font-size: 14px;
+				padding: 2px 6px;
+				font-size: 12px;
 			}
 		}
 	}

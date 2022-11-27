@@ -16,7 +16,14 @@ export default function SellerAddProduct() {
   const [titleImg, setTitleImg] = useState([]);
   const [detailImg, setDetailImg] = useState([]);
 
-  const data = { categoryId, productName, price, titleImg, detailImg };
+  const data = {
+    categoryId,
+    productName,
+    price,
+    titleImg,
+    detailImg,
+    tag: 'new', //비엇으면 빈문자열로 보냄
+  };
 
   const formSubmit = (e) => {
     e.preventDefault();

@@ -16,13 +16,7 @@ export default function SidebarSellerMenu() {
             <li>상품 관리</li>
           </Link>
           <Link to="/seller/order">
-            <li>주문 내역</li>
-          </Link>
-          <Link to="/seller/delivering">
-            <li>배송 중</li>
-          </Link>
-          <Link to="/seller/deliverycom">
-            <li>배송 완료</li>
+            <li>판매 관리</li>
           </Link>
           <Link to="/seller/review">
             <li>리뷰 목록</li>
