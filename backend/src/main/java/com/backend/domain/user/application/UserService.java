@@ -357,7 +357,7 @@ public class UserService {
             pointRepository.deleteByUser(user);
             userRepository.delete(user);
         }
-            log.info("유저 삭제 완료 : {}", user.getEmail());
+        log.info("유저 삭제 완료 : {}", user.getEmail());
     }
 
     public boolean comparePassword(User user, PasswordDto password) {
