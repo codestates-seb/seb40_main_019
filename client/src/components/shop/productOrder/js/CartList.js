@@ -1,22 +1,18 @@
 import '../css/cartList.scss';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useState } from 'react';
 
 import CartListItem from './CartListItem';
 
-export default function CartList() {
-  const [items, setItems] = useState();
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/orders/').then((res) => {
-      setItems(res.data);
-      // console.log(res.data);
-    });
-  }, []);
-
-  //quantity
-  const [count, setCount] = useState(1);
-
+export default function CartList({
+  items,
+  decreaseQuantity,
+  increaseQuantity,
+  deleteItem,
+  checkBuyItem,
+  checkBuyAllItem,
+  allSelect,
+}) {
   return (
     <div className="CartListContatner">
       <div className="productTitle">
@@ -26,7 +22,11 @@ export default function CartList() {
       <div className="lineBold"></div>
       <ul className="lineTitle">
         <li>
-          <input type="checkbox"></input>
+          <input
+            onChange={() => checkBuyAllItem(allSelect)}
+            type="checkbox"
+            checked={allSelect}
+          />
         </li>
         <li>상품</li>
         <li>수량</li>
@@ -38,7 +38,14 @@ export default function CartList() {
         items.map((item) => {
           return (
             <div key={item.productsId}>
-              <CartListItem item={item} count={count} setCount={setCount} />
+              {/* <CartListItem item={item} count={count} setCount={setCount} /> */}
+              <CartListItem
+                item={item}
+                decreaseQuantity={decreaseQuantity}
+                increaseQuantity={increaseQuantity}
+                deleteItem={deleteItem}
+                checkBuyItem={checkBuyItem}
+              />
             </div>
           );
         })}

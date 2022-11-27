@@ -1,38 +1,37 @@
 import '../css/cartListItem.scss';
-import QuantityBtn from '../../js/QuantityBtn';
+// import QuantityBtn from '../../js/QuantityBtn';
+import CartQuantityBtn from './CartQuantityBtn';
 
-const CartListItem = ({ item, count, setCount }) => {
-  function deleteCartItem() {
-    localStorage.setItem(
-      'orderItems',
-      JSON.stringify([
-        {
-          receiverAddress: item.orderAdress,
-          receiverName: item.orderName,
-          // receiverZipcode: item.,
-          // receiverPhone: item.,
-          productId: item.productsId,
-          quantity: item.orderCount,
-        },
-      ])
-    );
-    // console.log('orderItem: ', JSON.parse(localStorage.getItem('orderItem')));
-  }
+const CartListItem = ({
+  item,
+  decreaseQuantity,
+  increaseQuantity,
+  deleteItem,
+  checkBuyItem,
+}) => {
   return (
     <div className="cartListContainer">
       <div className="checkbox">
-        <input type="checkbox" checked="checked"></input>
+        <input
+          onChange={() => checkBuyItem(item)}
+          type="checkbox"
+          checked={item.check}
+        ></input>
       </div>
-      <img className="titleImg" src={item.img} alt="productImg" />
-      <div className="title">{item.productName}</div>
+      <img className="titleImg" src={item.titleImg} alt="productImg" />
+      <div className="title">{item.title}</div>
       <div className="quantity">
-        <QuantityBtn count={count} setCount={setCount} />
+        <CartQuantityBtn
+          item={item}
+          decreaseQuantity={decreaseQuantity}
+          increaseQuantity={increaseQuantity}
+        />
       </div>
       <div className="price">
-        <div>{item.price * count}원</div>
+        <div>{item.price * item.count}원</div>
       </div>
       <div className="delete">
-        <button onClick={deleteCartItem}>
+        <button onClick={() => deleteItem(item)}>
           <i className="fa-light fa-x"></i>
         </button>
       </div>

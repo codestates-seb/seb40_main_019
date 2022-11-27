@@ -1,7 +1,7 @@
 import '../css/orderSummary.scss';
 import { handleOrder } from '../../../../util/api/order';
 
-export default function OrderSummary() {
+export default function OrderSummary({ totalPrice }) {
   //주문내역 생성 테스트
   const data = {
     receiverAddress: '십정동',
@@ -40,7 +40,7 @@ export default function OrderSummary() {
             </div>
             <div className="productPriceBox">
               <div>제품 금액</div>
-              <div>32,000원</div>
+              <div>{totalPrice}원</div>
             </div>
             <div className="deliveryFeeBox">
               <div>배송비</div>
@@ -52,7 +52,7 @@ export default function OrderSummary() {
           <div>
             <div className="totalPriceBox">
               <div>총금액</div>
-              <div>35,000원</div>
+              <div>{totalPrice + 3000}원</div>
             </div>
           </div>
 
