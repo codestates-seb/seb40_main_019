@@ -7,7 +7,7 @@ export default function Review({ item }) {
       <div className="createdAt">
         <p>{item.createdAt}</p>
       </div>
-      <img className="titleImg" src={item.img} alt="productImg" />
+      <img className="titleImg" src={item.titleImg} alt="productImg" />
       <div className="title">{item.productName}</div>
       <div className="reviewcontent">{item.reviewContent}</div>
       <div className="star">

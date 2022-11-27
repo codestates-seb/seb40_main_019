@@ -143,7 +143,7 @@
           "imgUrl": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/7114f8c0-f65c-4569-9a0f-1e099bd31265.jpg"
         }
       ],
-      "receiverAddress": "부평동",
+      "receiverAddress": "부평동 102번지 101동 1008호",
       "receiverName": "한별",
       "receiverZipcode": "2133",
       "receiverPhone": "010-2222-333"
@@ -162,7 +162,7 @@
           "imgUrl": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/7114f8c0-f65c-4569-9a0f-1e099bd31265.jpg"
         }
       ],
-      "receiverAddress": "부평동",
+      "receiverAddress": "부평동 103번지 서울특별시 101동 403호",
       "receiverName": "한별",
       "receiverZipcode": "2133",
       "receiverPhone": "010-2222-333"
@@ -197,6 +197,7 @@
   "review": [
     {
       "reviewId": 1,
+      "createdAt": "2022-11-26",
       "reviewWriter": "윈터",
       "reviewContent": "맛있",
       "star": 5,
@@ -207,6 +208,7 @@
     },
     {
       "reviewId": 2,
+      "createdAt": "2022-11-26",
       "reviewWriter": "윈터",
       "reviewContent": "맛있어용용요요요요요ㅛㅇㅇ요용",
       "star": 3,

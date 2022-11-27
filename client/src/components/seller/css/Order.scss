@@ -1,47 +1,117 @@
-.orderInfo{
+.order {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
+  padding: 20px 0px 0px 0px;
+  .orderContainer {
+    width: 100%;
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 1fr 2fr 4fr;
+    align-items: center;
 
-.delivery{
-  background-color: var(--color-blue);
-  padding: 5px 10px;
-  color: var(--color-white);
-  border-radius: 10px;
-}
+    h3 {
+      font-size: 16px;
+      color: var(--color-blue);
+      font-weight: 600;
+    }
+  }
+  .createdAt {
+    margin-bottom: 10px;
+  }
 
+  .orderInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .sellerOrderContent {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+    img {
+      margin: 0 auto;
+    }
+    .title {
+      text-align: start;
+    }
+  }
 
-.order{
-  @media (max-width: 980px){
-  display: grid;
-  grid-gap: 10px;
-  grid-template-areas:
-      'data data orderCount delivery'
-      'Img title orderCount delivery'
-      'Img orderInfo orderCount delivery';
-
-      .createAt{
-          grid-area: data;
-      }
-      .titleImg{
-          grid-area: Img;
-      }
-      .title{
-          grid-area: title;
-      }
-      .orderInfo{
-          grid-area: orderInfo;
-      }
-      .orderCount{
-        grid-area: orderCount;
-      }
-      .productBtn{
+  .delivery {
+    background-color: var(--color-yellow);
+    padding: 8px 14px;
+    color: var(--color-brown);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  @media (max-width: 750px) {
+    .orderContainer {
+      padding: 0px 20px;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas:
+        'delivery info'
+        'content content';
+      .productBtn {
         grid-area: delivery;
       }
-      p{
-        text-align: center;
-        color: #969696;
+      .orderInfo {
+        grid-area: info;
+      }
+      .orderBox {
+        border-top: 1px solid var(--color-lightblue);
+        padding-top: 20px;
+        grid-area: content;
+        margin-top: 20px;
+      }
+      .delivery {
+        width: 80px;
+      }
+    }
+    .sellerOrderContent {
+      display: flex;
+      justify-content: space-between;
+      img {
+        margin: 0px;
+      }
     }
   }
 }
+
+// .order {
+//   @media (max-width: 980px) {
+//     display: grid;
+//     grid-gap: 10px;
+//     grid-template-areas:
+//       'data data orderCount delivery'
+//       'Img title orderCount delivery'
+//       'Img orderInfo orderCount delivery';
+
+//     .createAt {
+//       grid-area: data;
+//     }
+//     .titleImg {
+//       grid-area: Img;
+//     }
+//     .title {
+//       grid-area: title;
+//     }
+//     .orderInfo {
+//       grid-area: orderInfo;
+//     }
+//     .orderCount {
+//       grid-area: orderCount;
+//     }
+//     .productBtn {
+//       grid-area: delivery;
+//     }
+//     p {
+//       text-align: center;
+//       color: #969696;
+//     }
+//   }
+// }
