@@ -32,7 +32,7 @@ public class ProductController {
     @PostMapping("/products/{categoryId}")
     public ResponseEntity create(@CurrentUser CustomUserDetails authUser, @PathVariable Long categoryId,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
-                                 @RequestParam("price") String tag,
+                                 @RequestParam("tag") String tag,
                                  TitleImg titleImg, DetailImg detailImg){
         log.info("post 맵핑 실행 ");
         String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());

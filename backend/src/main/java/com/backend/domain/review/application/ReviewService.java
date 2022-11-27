@@ -12,6 +12,7 @@ import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -99,8 +100,9 @@ public class ReviewService {
     }
 
     @Transactional(readOnly = true)
-    public List<Review> getProductReview(Long userId) {
+    public Page<Review> getProductReview(Long userId,int page,int size) {
         List<Review> response = new ArrayList<>();
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("reviewId").descending());
 
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         List<Product> product = productRepository.findByUserId(userId);
@@ -109,20 +111,23 @@ public class ReviewService {
             List<Review> byProductId = reviewRepository.findByProductId(list.getProductId());
             response.addAll(byProductId);
         }
-        Collections.sort(response, new Comparator<Review>() {
-            @Override
-            public int compare(Review o1, Review o2) {
-                if(o1.getReviewId() < o2.getReviewId()) {
-                    return 1;
-                }else if (o1.getReviewId() == o2.getReviewId()){
-                    return o1.getProductName().compareTo(o2.getProductName());
-                }else {
-                    return -1;
-                }
-
-            }
-        });
+//        Collections.sort(response, new Comparator<Review>() {
+//            @Override
+//            public int compare(Review o1, Review o2) {
+//                if(o1.getReviewId() < o2.getReviewId()) {
+//                    return 1;
+//                }else if (o1.getReviewId() == o2.getReviewId()){
+//                    return o1.getProductName().compareTo(o2.getProductName());
+//                }else {
+//                    return -1;
+//                }
+//
+//            }
+//        });
+        int start =(int) pageable.getOffset();
+        int end = Math.min((start+ pageable.getPageSize()), response.size());
+        Page<Review> reviewPage = new PageImpl<>(response.subList(start,end),pageable, response.size());
         
-        return response;
+        return reviewPage;
     }
 }
