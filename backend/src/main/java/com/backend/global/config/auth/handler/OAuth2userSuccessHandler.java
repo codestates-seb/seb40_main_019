@@ -82,6 +82,7 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         RefreshToken refreshTokenEntity = RefreshToken.builder()
                 .key(userId)
                 .value(refreshToken)
+                .expirationDate(jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond()))
                 .build();
 
         refreshTokenRepository.save(refreshTokenEntity);
