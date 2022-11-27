@@ -1,19 +1,20 @@
 import '../css/SellerOrder.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
 import Order from '../../../components/seller/js/Order';
-// import useFetch from '../../../util/useFetch';
+import useFetch from '../../../util/useFetch';
 
 export default function SellerOrder() {
-  const [items, setItems] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/ordersMypage/').then((res) => {
-      setItems(res.data);
-    });
-  }, []);
-  // const [items, error] = useFetch('orders/all');
-  // console.log(items);
-  // console.log(error);
+  // const [items, setItems] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
+  //     setItems(res.data);
+  //   });
+  // }, []);
+
+  const [items, error] = useFetch('orders/all');
+  console.log(items);
+  console.log(error);
 
   return (
     <div className="sellerProducts orderTop">
