@@ -1,6 +1,5 @@
 package com.backend.domain.point.domain;
 
-import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.user.domain.User;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -29,4 +28,3 @@ public class Point {
 
 
     }
-

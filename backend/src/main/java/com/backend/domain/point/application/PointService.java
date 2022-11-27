@@ -1,19 +1,18 @@
 package com.backend.domain.point.application;
 
+
+
 import com.backend.domain.order.application.OrderService;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.point.dao.PointRepository;
 import com.backend.domain.point.domain.Point;
-import com.backend.domain.point.dto.PointChargeDto;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.Optional;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +38,7 @@ public class PointService {
        Point point =  pointRepository.findByUser(userId);
        return point;
     }*/
-
+    @Transactional
     public Integer addCash(User user, int price) {
         Point point = addCash2(user, price);
         int newRestCash = user.getRestCash() + price;

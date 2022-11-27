@@ -13,5 +13,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByNicknameAndUserStatusAndSocialLogin(String nickname, User.UserStatus userExist, String original);
     Optional<User> findByEmail(String email);
-
+    Optional<User> findByPhone(String phoneNumber);
+    void deleteAllByUserRoleOrUserRole(String guestUserRole, String guestAdminRole);
 }

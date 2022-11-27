@@ -2,6 +2,8 @@ package com.backend.domain.user.domain;
 
 
 import com.backend.domain.order.domain.Order;
+import com.backend.domain.point.domain.Point;
+import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.global.audit.Auditable;
 import lombok.Builder;
@@ -55,7 +57,7 @@ public class User extends Auditable {
     @Column
     private String address;
 
-    @Column
+    @Column(unique = true)
     private String phone;
 
     @Column
@@ -66,6 +68,13 @@ public class User extends Auditable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Product> products = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "point_id")
+    private Point point;
 
     @Builder
     public User(String email,
@@ -109,6 +118,10 @@ public class User extends Auditable {
         return passwordEncoder.matches(otherPassword, this.password);
     }
 
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
     public enum UserStatus {
         USER_EXIST("존재하는 유저"),
         USER_NOT_EXIST("존재하지 않는 유저");
@@ -122,6 +135,10 @@ public class User extends Auditable {
     }
 
     public void addCash(int cash){
-        this.restCash += cash;
+        int pointCash = point.getCash();
+        this.point = Point.builder()
+                .cash(pointCash + cash)
+                .user(this)
+                .build();
     }
 }
