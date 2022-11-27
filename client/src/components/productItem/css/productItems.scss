@@ -1,7 +1,8 @@
 .filterContainer{
 	display: flex;
 	justify-content: flex-end;
-	// margin: auto;
+	margin: 20px 0px 15px 0px;
+
 	
 	button{
 		padding: 10px;
@@ -18,7 +19,7 @@
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
-	grid-gap: 1rem;
+	grid-gap: 2rem;
 }
 
 .itemsContainer {
