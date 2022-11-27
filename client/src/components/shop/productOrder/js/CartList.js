@@ -1,22 +1,15 @@
 import '../css/cartList.scss';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useState } from 'react';
 
 import CartListItem from './CartListItem';
 
-export default function CartList() {
-  const [items, setItems] = useState();
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/orders/').then((res) => {
-      setItems(res.data);
-      // console.log(res.data);
-    });
-  }, []);
-
-  //quantity
-  const [count, setCount] = useState(1);
-
+export default function CartList({
+  items,
+  decreaseQuantity,
+  increaseQuantity,
+}) {
+  console.log(items);
   return (
     <div className="CartListContatner">
       <div className="productTitle">
@@ -38,7 +31,12 @@ export default function CartList() {
         items.map((item) => {
           return (
             <div key={item.productsId}>
-              <CartListItem item={item} count={count} setCount={setCount} />
+              {/* <CartListItem item={item} count={count} setCount={setCount} /> */}
+              <CartListItem
+                item={item}
+                decreaseQuantity={decreaseQuantity}
+                increaseQuantity={increaseQuantity}
+              />
             </div>
           );
         })}

@@ -20,6 +20,7 @@ export default function shopProductDetail() {
   useEffect(() => {
     axios.get('http://localhost:3001/productdetail/').then((res) => {
       setProducts(res.data);
+      console.log(res);
     });
 
     // 장바구니 없을 때 장바구니 생성
