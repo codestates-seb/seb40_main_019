@@ -10,10 +10,16 @@ export default function Footer() {
             <div className="firstBox">
               <div className="titleDiv">LUXMEAL</div>
               <div className="aTag">
-                <a href="https://github.com/codestates-seb/seb40_main_019">
+                <a
+                  href="https://github.com/codestates-seb/seb40_main_019"
+                  target="blank"
+                >
                   • Repository Wiki
                 </a>
-                <a href="https://github.com/codestates-seb/seb40_main_019/wiki">
+                <a
+                  href="https://github.com/codestates-seb/seb40_main_019/wiki"
+                  target="blank"
+                >
                   • Demo Video
                 </a>
               </div>
@@ -24,29 +30,29 @@ export default function Footer() {
             </div>
             <div className="thirdBox">
               <div className="frontMember">
-                <a href="https://github.com/Liieonking">
+                <a href="https://github.com/Liieonking" target="blank">
                   <i className="fa-brands fa-github" />
                   손현지
                 </a>
-                <a href="https://github.com/shinker1002">
+                <a href="https://github.com/shinker1002" target="blank">
                   <i className="fa-brands fa-github" />
                   최민수
                 </a>
-                <a href="https://github.com/GitHubJIYEON">
+                <a href="https://github.com/GitHubJIYEON" target="blank">
                   <i className="fa-brands fa-github" />
                   이지연
                 </a>
               </div>
               <div className="backMember">
-                <a href="https://github.com/hyojoonm">
+                <a href="https://github.com/hyojoonm" target="blank">
                   <i className="fa-brands fa-github" />
                   김효준
                 </a>
-                <a href="https://github.com/Taekgil99">
+                <a href="https://github.com/Taekgil99" target="blank">
                   <i className="fa-brands fa-github" />
                   박재원
                 </a>
-                <a href="https://github.com/junohheo">
+                <a href="https://github.com/junohheo" target="blank">
                   <i className="fa-brands fa-github" />
                   허준오
                 </a>
