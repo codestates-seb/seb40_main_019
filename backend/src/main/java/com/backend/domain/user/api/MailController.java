@@ -3,10 +3,8 @@ package com.backend.domain.user.api;
 
 import com.backend.domain.user.application.EmailService;
 import com.backend.domain.user.application.UserService;
-import com.backend.domain.user.dto.EmailDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import static com.backend.domain.user.dto.EmailDto.RequestSendMail;
