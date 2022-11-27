@@ -15,6 +15,6 @@ public class ProductPostDto {
     @NotBlank
     private String productName;
 
-
+    private String tag;
 
 }

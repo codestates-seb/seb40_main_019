@@ -38,13 +38,14 @@ public class ProductService {
 
     // 제품 생성
     @Transactional
-    public Product create(Long userId, int price, String productName,String titleUrl,String detailUrl,Long categoryId){
+    public Product create(Long userId, int price, String productName,String titleUrl,String detailUrl,String tag,Long categoryId){
         log.info(" 프로젝트 새로 생성 ");
         Product product = new Product();
         product.setPrice(price);
         product.setProductName(productName);
         product.setTitleImg(titleUrl);
         product.setDetailImg(detailUrl);
+        product.setTag(tag);
 
         log.info(" 상품 이름 중복 검사 ");
         existSameName(product.getProductName());

@@ -32,6 +32,7 @@ public class ProductController {
     @PostMapping("/products/{categoryId}")
     public ResponseEntity create(@CurrentUser CustomUserDetails authUser, @PathVariable Long categoryId,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
+                                 @RequestParam("tag") String tag,
                                  TitleImg titleImg, DetailImg detailImg){
         log.info("post 맵핑 실행 ");
         String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());
@@ -40,7 +41,7 @@ public class ProductController {
         log.info("상세 이미지 URL 변경 완료 ");
         Long userId = authUser.getUser().getUserId();
         log.info("user 조회 완료 ");
-        Product response = productService.create(userId,price,productName,titleUrl,detailUrl,categoryId);
+        Product response = productService.create(userId,price,productName,titleUrl,detailUrl,tag,categoryId);
 
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.CREATED);
     }
@@ -50,9 +51,22 @@ public class ProductController {
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
                                  TitleImg titleImg,DetailImg detailImg,@PathVariable Long categoryId){
         log.info(" 수정 실행 ");
-        String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());
+
+        String titleUrl;
+        String detailUrl;
+        if (titleImg.getTitleImg().isEmpty()) {
+            titleUrl = null;
+        }
+        else {
+            titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());
+        }
         log.info(" 타이틀 이미지 완료 ");
-        String detailUrl = awsS3Service.StoreImage(detailImg.getDetailImg());
+        if (detailImg.getDetailImg().isEmpty()) {
+            detailUrl = null;
+        }
+        else {
+            detailUrl = awsS3Service.StoreImage(detailImg.getDetailImg());
+        }
         log.info("  상세 이미지 완료 ");
 
         Product response = productService.update(productsId,categoryId,price,productName,titleUrl,detailUrl);

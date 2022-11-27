@@ -35,6 +35,8 @@ public class Product extends Auditable {
 
     private String detailImg;
 
+    private String tag;
+
     // 유저 맵핑 추가
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -53,6 +55,9 @@ public class Product extends Auditable {
     @JsonIgnore
     private Category category;
 
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public void setTitleImg(String titleImg) {
         this.titleImg = titleImg;

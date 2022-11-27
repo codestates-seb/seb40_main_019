@@ -20,5 +20,10 @@ public class ReviewResponseDto {
     private String reviewImg;
     private LocalDateTime createdAt;
 
+    private Long proId;
+
+    private String productName;
+
+    private String titleImg;
 
 }

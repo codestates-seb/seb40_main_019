@@ -26,5 +26,7 @@ public class ProductResponseDto {
 
     private LocalDateTime createdAt;
 
+    private String tag;
+
 
 }
