@@ -1,0 +1,83 @@
+.beforeAiContainer{
+    display: flex;
+    justify-content: center; 
+    //flex-wrap: wrap;
+}
+
+.leftContainer{
+    text-align: center;
+    h1{
+        color: var(--color-blue);
+        font-size: 35px;
+        font-weight: bold;
+    }
+    p{
+        color: var(--color-brown);
+        font-weight: 500;   
+    }
+}
+
+.rightContainer{
+    text-align: center;
+    margin-top: -92px;
+
+    .poppyImgBox{
+        position: relative;
+        top: 77px; //강아지 이미지
+        left: 90px; //위치 조정
+    }
+
+    .formContainer{
+        display: inline-block;
+        box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        padding: 80px 10px 20px 10px;
+        font-weight: bold;   
+        height: 315px;
+
+        form{
+            width: 300px;
+            height: 60px;
+            letter-spacing: 2px;
+            color: var(--color-brown);
+
+        }
+        input{
+            width: 150px;
+            height: 40px;
+            // border: 3px solid var(--color-blue);
+            background-color: #D9D9D9;
+            border: none;
+            border-radius: 10px;
+            margin: 2px 4px;
+            &:focus{
+                outline: 2px solid var(--color-blue)
+            }
+        }
+        .ageForm{
+            margin-left: 7px;
+        }
+    }
+
+
+    button{
+        background-color: var(--color-blue);
+        color: var(--color-white);
+        border: 1px solid var(--color-blue);
+        border-radius: 10px;
+        width: 150px;
+        height: 42px;
+        font-size: 16px;
+        letter-spacing: 2px;
+        margin-left: 45px;
+        margin-top: 10px;
+        &:hover{
+            background-color: #107094;
+            // color: var(--color-blue)
+        }
+    }
+}
+
+// .afterAiContainer{
+
+// }
