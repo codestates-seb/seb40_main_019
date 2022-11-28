@@ -8,17 +8,26 @@ import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import { getUserInfo } from '../../../util/api/mypageUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-export default function PaymentModal({ setModal, totalPrice }) {
+// import { handleOrder } from '../../../util/api/order';
+import { getPoint } from '../../../util/api/point';
+// import { paymentPoint } from '../../../util/api/point';
+export default function PaymentModal({ setModal, totalPrice, type }) {
   console.log(totalPrice);
   const [data, setData] = useState({
     receiverName: '',
     receiverPhone: '',
   });
+
   const [receiverAddress, setReceiverAddress] = useState('');
   const [receiverZipcode, setReceiverZipcode] = useState('');
 
   useEffect(() => {
+    getPoint().then((res) => {
+      if (res.data < totalPrice) {
+        window.alert('포인트가 부족합니다.');
+        setModal(false);
+      }
+    });
     let userData = getUserInfo();
     userData.then((res) => {
       // null 값 처리 나중에 서버에서 빈문자열로 변경
@@ -41,6 +50,37 @@ export default function PaymentModal({ setModal, totalPrice }) {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  const order = () => {
+    if (type === 'multi') {
+      let check = window.confirm('상품울 주문하시겠습니까?');
+      if (check) {
+        let temp = {
+          ...data,
+          receiverAddress,
+          receiverZipcode,
+          cartOrderProductDtoList: [],
+        };
+        let orderItem = JSON.parse(window.localStorage.getItem('cartItem'));
+        Object.keys(orderItem).forEach((el) => {
+          if (orderItem[el].check) {
+            console.log(orderItem[el]);
+            temp.cartOrderProductDtoList.push({
+              productId: orderItem[el].productsId,
+              quantity: orderItem[el].count,
+            });
+          }
+        });
+        console.log(temp);
+        console.log('주문 생성');
+        // handleOrder
+        console.log('포인트 결제');
+        // paymentPoint
+        return;
+      }
+    } else {
+      window.alert('single');
+    }
+  };
   // 주소 입력
   const open = useDaumPostcodePopup();
 
@@ -108,7 +148,7 @@ export default function PaymentModal({ setModal, totalPrice }) {
             value={receiverZipcode}
             placeholder="우편번호"
           />
-          <FormButtonBlue btnContent="주문하기" />
+          <FormButtonBlue formSubmit={order} btnContent="주문하기" />
           <FontAwesomeIcon
             className="closeBtn"
             icon={faXmark}

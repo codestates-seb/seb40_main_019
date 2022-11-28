@@ -182,11 +182,19 @@ export default function ShopProductOrder() {
         />
       </div>
       <div className="MobileBtnContainer">
-        <OrderMobileButton totalPrice={totalPrice} setModal={setModal} />
+        <OrderMobileButton
+          totalPrice={totalPrice}
+          myPoint={myPoint}
+          setModal={setModal}
+        />
       </div>
       {modal && (
         <>
-          <PaymentModal setModal={setModal} totalPrice={totalPrice} />
+          <PaymentModal
+            setModal={setModal}
+            totalPrice={totalPrice}
+            type="multi"
+          />
         </>
       )}
     </div>
