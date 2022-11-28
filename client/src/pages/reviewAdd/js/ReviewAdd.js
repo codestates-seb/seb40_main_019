@@ -1,13 +1,15 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useState } from 'react';
 import ReviewForm from '../../../components/review/js/ReviewForm';
 import ReviewStar from '../../../components/review/js/ReviewStar';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../css/ReviewAdd.scss';
+import { handleAddReview } from '../../../util/api/review';
 
 export default function ReviewAdd() {
-  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
+  const params = useParams();
+  console.log(params.id);
 
   const [reviewImg, setReviewImg] = useState([]);
   const [reviewContent, setReviewContent] = useState('');
@@ -16,20 +18,23 @@ export default function ReviewAdd() {
   const data = { reviewImg, reviewContent, star: clickStar };
   console.log(data);
 
+  // const handleSubmit = () => {
+  //   if (reviewContent.length < 10 || reviewContent.length >= 200) {
+  //     alert('리뷰가 10~200자여야 합니다');
+  //   } else if (clickStar === 0) {
+  //     alert('리뷰평점을 선택해셔야 합니다');
+  //   } else {
+  //     axios.post(`${REACT_APP_API_URL}review/{productId}`, data).then((res) => {
+  //       console.log(res.data);
+  //       // navigate(`/seller/product`)
+  //     });
+  //     // .catch((error) => {
+  //     //   console.log(error.response);
+  //     // });
+  //   }
+  // };.
   const handleSubmit = () => {
-    if (reviewContent.length < 10 || reviewContent.length >= 200) {
-      alert('리뷰가 10~200자여야 합니다');
-    } else if (clickStar === 0) {
-      alert('리뷰평점을 선택해셔야 합니다');
-    } else {
-      axios.post(`${REACT_APP_API_URL}review/{productId}`, data).then((res) => {
-        console.log(res.data);
-        // navigate(`/seller/product`)
-      });
-      // .catch((error) => {
-      //   console.log(error.response);
-      // });
-    }
+    handleAddReview(data, params.id);
   };
 
   return (
