@@ -2,12 +2,10 @@ package com.backend.domain.point.application;
 
 
 
-import com.backend.domain.order.application.OrderService;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.order.dto.OrderHistoryDto;
-import com.backend.domain.point.dao.PointRepository;
-import com.backend.domain.point.domain.Point;
+import com.backend.domain.point.dao.PointHistoryRepository;
+import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.domain.PointType;
 import com.backend.domain.point.dto.PointResponseDto;
 import com.backend.domain.point.mapper.PointMapper;
@@ -30,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class PointService {
-    private final PointRepository pointRepository;
+    private final PointHistoryRepository pointHistoryRepository;
 
     private final UserRepository userRepository;
 
@@ -40,7 +38,7 @@ public class PointService {
 
     @Transactional
     public Integer addCash(User user, int price, PointType pointType) {
-        Point point = addPoint(user, price, pointType);
+        PointHistory pointHistory = addPointHistory(user, price, pointType);
         log.info("service / 포인트 사용 및 충전 시작");
         int newRestCash = user.getRestCash() + price;
         user.setRestCash(newRestCash);
@@ -49,17 +47,17 @@ public class PointService {
         return newRestCash;
     }
 
-    public Point addPoint(User user, int price, PointType pointType) {
-        Point point = Point.builder()
+    public PointHistory addPointHistory(User user, int price, PointType pointType) {
+        PointHistory pointHistory = PointHistory.builder()
                 .user(user)
                 .cash(price)
                 .pointType(pointType)
                 .createdAt(LocalDateTime.now())
                 .build();
         log.info("service / 포인트 사용,충전 내역 저장");
-        pointRepository.save(point);
+        pointHistoryRepository.save(pointHistory);
 
-        return point;
+        return pointHistory;
     }
 
     public int getRestCash(User user) {
@@ -83,9 +81,9 @@ public class PointService {
 
     public Page<PointResponseDto> getPointList(Long userId, Pageable pageable) {
         log.info("Service/ userId : " + userId + "포인트내역 조회 시작");
-        List<Point> pointList = pointRepository.findPointList(userId, pageable);
-        List<PointResponseDto> pointResponseDtoList = mapper.toResponseDtos(pointList);
-        Long totalQuantity = pointRepository.countPoint(userId);
+        List<PointHistory> pointHistoryList = pointHistoryRepository.findPointHistoryList(userId, pageable);
+        List<PointResponseDto> pointResponseDtoList = mapper.toResponseDtos(pointHistoryList);
+        Long totalQuantity = pointHistoryRepository.countPoint(userId);
 
         return new PageImpl<PointResponseDto>(pointResponseDtoList, pageable, totalQuantity);
     }

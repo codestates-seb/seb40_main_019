@@ -2,7 +2,7 @@ package com.backend.domain.user.domain;
 
 
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.point.domain.Point;
+import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.user.dto.UserPatchDto;
 import com.backend.global.audit.Auditable;
@@ -73,8 +73,8 @@ public class User extends Auditable {
     private List<Product> products = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "point_id")
-    private Point point;
+    @JoinColumn(name = "pointHistory_id")
+    private PointHistory pointHistory;
 
     @Builder
     public User(String email,

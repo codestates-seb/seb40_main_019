@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamicInsert
-public class Point {
+public class PointHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pointId;
+    private Long pointHistoryId;
 
     @OneToOne
     @JoinColumn(name = "user_id")
