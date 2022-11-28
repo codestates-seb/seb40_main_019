@@ -1,24 +1,28 @@
 .appLayout {
   box-sizing: border-box;
   width: 100vw;
-  // height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  // grid-template-rows: 120px 1fr 250px;
+  grid-template-rows: 120px 65px 1fr 1fr;
   grid-template-areas:
     'header'
+    'nav'
     'main'
     'footer';
 
   Header {
-    grid-area: 'header';
+    grid-area: header;
+  }
+  Nav {
+    grid-area: nav;
   }
 
   Main {
-    grid-area: 'main';
+    grid-area: main;
   }
 
   Footer {
-    grid-area: 'footer';
+    grid-area: footer;
   }
 }
