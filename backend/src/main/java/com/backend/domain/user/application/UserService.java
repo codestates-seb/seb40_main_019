@@ -2,6 +2,7 @@ package com.backend.domain.user.application;
 
 import com.backend.domain.point.application.PointService;
 import com.backend.domain.point.dao.PointRepository;
+import com.backend.domain.point.domain.PointType;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
 import com.backend.domain.user.dao.UserRepository;
@@ -90,7 +91,7 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         log.info("비밀번호 암호화");
-        pointService.addCash(user, 1000000);
+        pointService.addCash(user, 1000000, PointType.SignUpPoint);
         log.info("회원가입 포인트 지급");
 
         userRepository.save(user);

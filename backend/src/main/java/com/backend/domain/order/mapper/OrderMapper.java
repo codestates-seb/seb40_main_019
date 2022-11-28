@@ -20,5 +20,5 @@ public interface OrderMapper {
 
     Order orderPatchDtoToOrder(OrderPatchDto orderPatchDto);
 
-   /* List<OrderPriceDto> orderToOrderPriceDto(List<Order> orders);*/
+
 }

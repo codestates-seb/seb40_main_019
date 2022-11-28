@@ -5,6 +5,7 @@ import com.backend.domain.payment.domain.Payment;
 import com.backend.domain.payment.dto.PaymentRequest;
 import com.backend.domain.payment.mapper.PaymentMapper;
 import com.backend.domain.point.application.PointService;
+import com.backend.domain.point.domain.PointType;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
@@ -33,7 +34,7 @@ public class PaymentController {
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Payment payment = paymentMapper.paymentRequestToPayment(paymentRequest);
         int price = payment.getAmount();
-        int newRestCash = pointService.addCash(user,price);
+        int newRestCash = pointService.addCash(user, price, PointType.AddPoint);
         JsonNode jsonNode = paymentService.create(payment);
 
         return new ResponseEntity(new SingleResponseDto<>(jsonNode), HttpStatus.OK);

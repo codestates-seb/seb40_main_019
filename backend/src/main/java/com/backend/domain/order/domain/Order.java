@@ -42,6 +42,7 @@ public class Order extends Auditable {
     @Column(nullable = false)
     private String receiverPhone;
 
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -103,12 +104,10 @@ public class Order extends Auditable {
         return totalPrice;
     }
 
-    public void cancelOrder(){
-        this.orderStatus = OrderStatus.CANCEL;
-
-        for(OrderProduct orderProduct : orderProducts){
-            orderProduct.cancel();
-        }
+    public boolean isShipping() {
+        return orderStatus.getStatusNumber()>=2;
     }
+
+
 
 }

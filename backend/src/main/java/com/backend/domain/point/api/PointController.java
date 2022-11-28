@@ -4,8 +4,10 @@ import com.backend.domain.order.dao.OrderProductRepository;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderProduct;
+import com.backend.domain.order.dto.OrderHistoryDto;
 import com.backend.domain.point.application.PointService;
 import com.backend.domain.point.domain.Point;
+import com.backend.domain.point.domain.PointType;
 import com.backend.domain.point.dto.PointChargeDto;
 import com.backend.domain.point.dto.PointResponseDto;
 import com.backend.domain.point.mapper.PointMapper;
@@ -16,14 +18,20 @@ import com.backend.domain.user.exception.MemberNotFound;
 
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
+import com.backend.global.dto.Response.MultiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
 import javax.validation.constraints.Positive;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -42,9 +50,8 @@ public class PointController {
         Long userId =authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         int price = pointChargeDto.getPrice();
-        int newRestCash = pointService.addCash(user, price);
-
-
+        PointType pointType = pointChargeDto.getPointType();
+        int newRestCash = pointService.addCash(user, price, pointType);
         return new ResponseEntity<Integer>(newRestCash, HttpStatus.OK);
     }
 
@@ -62,6 +69,17 @@ public class PointController {
         pointService.pay(order);
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/{page}")
+    public ResponseEntity<MultiResponse> getList(@PathVariable("page") Optional<Integer> page, @CurrentUser CustomUserDetails authUser) {
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
+        log.info("controller/ 유저별 포인트내역 조회 시작");
+        Page<PointResponseDto> pointResponseDtoList = pointService.getPointList(authUser.getUser().getUserId(), pageable);
+        List<PointResponseDto> content = pointResponseDtoList.getContent();
+
+
+        return new ResponseEntity<>(new MultiResponse<>(content, pointResponseDtoList), HttpStatus.OK);
     }
 
 

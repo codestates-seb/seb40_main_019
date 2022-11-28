@@ -1,5 +1,9 @@
 package com.backend.domain.review.application;
 
+import com.backend.domain.order.dao.OrderProductRepository;
+import com.backend.domain.order.dao.OrderRepository;
+import com.backend.domain.order.domain.OrderProduct;
+import com.backend.domain.order.domain.OrderProductReviewStatus;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.exception.ProductNotFound;
@@ -29,6 +33,9 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
+
+    private final OrderProductRepository orderProductRepository;
+
     @Transactional
     public Review create(Long userId,Long productId,String reviewContent,int star,String reviewUrl) {
         log.info("create 실행 ");
@@ -49,6 +56,8 @@ public class ReviewService {
                 .titleImg(product.getTitleImg())
                 .build();
         log.info("review : ",review);
+        OrderProduct orderProduct = orderProductRepository.findOrderProduct(userId, productId);
+        orderProduct.setReviewStatus(OrderProductReviewStatus.WRITED);
         return reviewRepository.save(review);
     }
     @Transactional
@@ -115,7 +124,7 @@ public class ReviewService {
         int start =(int) pageable.getOffset();
         int end = Math.min((start+ pageable.getPageSize()), response.size());
         Page<Review> reviewPage = new PageImpl<>(response.subList(start,end),pageable, response.size());
-        
+
         return reviewPage;
     }
 }
