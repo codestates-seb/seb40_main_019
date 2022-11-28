@@ -90,8 +90,3 @@ public class PointService {
         return new PageImpl<PointResponseDto>(pointResponseDtoList, pageable, totalQuantity);
     }
 }
-
-
-
-
-
