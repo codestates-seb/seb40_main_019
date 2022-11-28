@@ -30,6 +30,8 @@ public class PaymentService {
     @Transactional
     public JsonNode create(Payment payment) throws Exception {
         HttpHeaders headers = new HttpHeaders();
+
+//        headers.setBasicAuth(SECRET_KEY, ""); 이거 풀면 결제됨
         headers.set("Authorization", "Basic " + Base64.getEncoder().encodeToString((SECRET_KEY + ":").getBytes()));
         headers.setContentType(MediaType.APPLICATION_JSON);
 

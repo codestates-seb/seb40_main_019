@@ -356,9 +356,10 @@ public class UserService {
         } else {
             log.info("소셜 로그인 회원탈퇴 : {}", user.getEmail());
             pointRepository.deleteByUser(user);
+            refreshTokenRepository.deleteByKey(user.getUserId());
             userRepository.delete(user);
         }
-            log.info("유저 삭제 완료 : {}", user.getEmail());
+        log.info("유저 삭제 완료 : {}", user.getEmail());
     }
 
     public boolean comparePassword(User user, PasswordDto password) {

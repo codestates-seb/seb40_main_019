@@ -1,10 +1,5 @@
 package com.backend.domain.review.application;
 
-import com.backend.domain.order.dao.OrderProductRepository;
-import com.backend.domain.order.dao.OrderRepository;
-import com.backend.domain.order.domain.Order;
-import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.order.domain.OrderProductReviewStatus;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.exception.ProductNotFound;
@@ -17,13 +12,13 @@ import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +48,9 @@ public class ReviewService {
                 .star(star)
                 .user(user)
                 .product(product)
+                .productId(product.getProductId())
+                .productName(product.getProductName())
+                .titleImg(product.getTitleImg())
                 .build();
         log.info("review : ",review);
         OrderProduct orderProduct = orderProductRepository.findOrderProduct(userId, productId);
@@ -105,5 +103,25 @@ public class ReviewService {
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
         log.info("review : ", review);
         return review;
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Review> getProductReview(Long userId,int page,int size) {
+        // 유저 -> 상품 -> 리뷰
+        List<Review> response = new ArrayList<>();
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("reviewId").descending());
+
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        List<Product> product = productRepository.findByUserId(userId);
+        //TODO: 이 쿼리는 너무 몰상식함 좀 더 세련되게
+        for (Product list : product) {
+            List<Review> byProductId = reviewRepository.findByProductId(list.getProductId());
+            response.addAll(byProductId);
+        }
+        int start =(int) pageable.getOffset();
+        int end = Math.min((start+ pageable.getPageSize()), response.size());
+        Page<Review> reviewPage = new PageImpl<>(response.subList(start,end),pageable, response.size());
+
+        return reviewPage;
     }
 }
