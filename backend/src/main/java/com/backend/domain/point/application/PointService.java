@@ -1,11 +1,8 @@
 package com.backend.domain.point.application;
 
 
-
-import com.backend.domain.order.application.OrderService;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.order.dto.OrderHistoryDto;
 import com.backend.domain.point.dao.PointRepository;
 import com.backend.domain.point.domain.Point;
 import com.backend.domain.point.domain.PointType;
@@ -50,12 +47,14 @@ public class PointService {
     }
 
     public Point addPoint(User user, int price, PointType pointType) {
+
         Point point = Point.builder()
                 .user(user)
                 .cash(price)
                 .pointType(pointType)
                 .createdAt(LocalDateTime.now())
                 .build();
+
         log.info("service / 포인트 사용,충전 내역 저장");
         pointRepository.save(point);
 

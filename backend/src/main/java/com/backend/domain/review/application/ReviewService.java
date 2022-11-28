@@ -1,14 +1,15 @@
 package com.backend.domain.review.application;
 
 import com.backend.domain.order.dao.OrderProductRepository;
-import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.domain.OrderProductReviewStatus;
+import com.backend.domain.product.application.AwsS3Service;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.exception.ProductNotFound;
 import com.backend.domain.review.dao.ReviewRepository;
 import com.backend.domain.review.domain.Review;
+import com.backend.domain.review.dto.ReviewImg;
 import com.backend.domain.review.exception.ReviewNotFound;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
@@ -22,7 +23,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,7 +35,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
-
+    private final AwsS3Service awsS3Service;
 
     private final OrderProductRepository orderProductRepository;
 
@@ -61,11 +64,24 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
     @Transactional
-    public Review update(Long reviewId,Long userId,String reviewContent,int star,String reviewUrl) {
+    public Review update(Long reviewId, Long userId, String reviewContent, int star, ReviewImg reviewImg,String delete) {
         log.info("upate 실행");
         Review findReview = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
         log.info("findReview : ",findReview);
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        String reviewUrl ;
+        if (delete.equals("true")){
+            findReview.setReviewImg(null);
+        }
+        if(reviewImg.getReviewImg().isEmpty()){
+            log.info("리뷰 이미지 없음");
+            reviewUrl = null;
+        }
+        else {
+            reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
+            log.info("reviewUrl : ",reviewUrl);
+        }
+
         log.info("user : ",user);
         Optional.ofNullable(reviewId)
                 .ifPresent(findReview::setReviewId);
@@ -110,17 +126,19 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<Review> getProductReview(Long userId,int page,int size) {
-        // 유저 -> 상품 -> 리뷰
+
         List<Review> response = new ArrayList<>();
         PageRequest pageable = PageRequest.of(page, size, Sort.by("reviewId").descending());
 
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         List<Product> product = productRepository.findByUserId(userId);
-        //TODO: 이 쿼리는 너무 몰상식함 좀 더 세련되게
+        // TODO : 쿼리가 너무 많이 나감 더 줄일 방법이 분명히 있음.
         for (Product list : product) {
             List<Review> byProductId = reviewRepository.findByProductId(list.getProductId());
             response.addAll(byProductId);
         }
+
+
         int start =(int) pageable.getOffset();
         int end = Math.min((start+ pageable.getPageSize()), response.size());
         Page<Review> reviewPage = new PageImpl<>(response.subList(start,end),pageable, response.size());

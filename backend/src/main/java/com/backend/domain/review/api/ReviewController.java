@@ -56,21 +56,14 @@ public class ReviewController {
     public ResponseEntity update(@PathVariable Long reviewId,
                                  @CurrentUser CustomUserDetails authUser,
                                  @RequestParam("reviewContent")String reviewContent,@RequestParam("star")int star,
+                                 @RequestParam("delete")String delete,
                                  ReviewImg reviewImg){
         log.info("update 맵핑 실행");
-        String reviewUrl;
-        if(reviewImg.getReviewImg().isEmpty()){
-            log.info("리뷰 이미지 없음");
-            reviewUrl = null;
-        }
-        else {
-            reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
-            log.info("reviewUrl : ",reviewUrl);
-        }
+
         Long userId = authUser.getUser().getUserId();
         log.info("userId : ",userId);
 
-        Review response = reviewService.update(reviewId,userId,reviewContent,star,reviewUrl);
+        Review response = reviewService.update(reviewId,userId,reviewContent,star,reviewImg,delete);
         log.info("response : ",response);
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(response)),HttpStatus.OK);
     }

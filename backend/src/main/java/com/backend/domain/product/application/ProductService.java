@@ -101,9 +101,18 @@ public class ProductService {
     }
 
     @Transactional
-    public Page<Product> getLists(int page,int size) {
+    public Page<Product> getLists(int page,int size,int filter ) {
         log.info("전체 리스트 조회");
-        return productRepository.findAll(PageRequest.of(page, size, Sort.by("productId").descending()));
+        String str ="productId";
+        if(filter== 1) { str = "productId";}
+        else if (filter== 2) { str = "viewCount";}
+        else if (filter == 3 ) {
+            str = "price";
+        }
+        else if (filter == 4 ) {
+            return productRepository.findAll(PageRequest.of(page, size, Sort.by("price").ascending()));
+        }
+        return productRepository.findAll(PageRequest.of(page, size, Sort.by(str).descending()));
     }
 
     // 제품 이름이 같을 경우 오류 발생
@@ -118,7 +127,9 @@ public class ProductService {
     @Transactional
     public Product getList(Long productId) {
         log.info(" 상품 하나 조회 ");
-        return productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        product.ViewCountPlus(product.getViewCount());
+        return product;
     }
     @Transactional
     public String calculateReviewAverage(Long productId){
