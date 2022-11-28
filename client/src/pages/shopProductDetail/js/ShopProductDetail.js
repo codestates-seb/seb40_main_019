@@ -9,18 +9,21 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 // import { useParams } from 'react-router-dom';
+import PaymentModal from '../../../components/payment/js/PaymentModal';
 
 export default function shopProductDetail() {
   //:id 에 따라서 해당 상품 상세페이지 보여줌
   // const { productsid } = useParams();
   // `products/${productsid}`
-
-  const [product, setProducts] = useState();
+  const [modal, setModal] = useState(false);
+  const [product, setProducts] = useState({});
+  //quantity
+  const [count, setCount] = useState(1);
 
   useEffect(() => {
     axios.get('http://localhost:3001/productdetail/').then((res) => {
       setProducts(res.data);
-      console.log(res);
+      // console.log(res);
     });
 
     // 장바구니 없을 때 장바구니 생성
@@ -32,9 +35,6 @@ export default function shopProductDetail() {
 
   //상세페이지 detail & review선택
   const [clickBtn, setClickBtn] = useState('detail');
-
-  //quantity
-  const [count, setCount] = useState(1);
 
   return (
     <>
@@ -56,6 +56,7 @@ export default function shopProductDetail() {
               product={product}
               count={count}
               setCount={setCount}
+              setModal={setModal}
             />
           )}
         </div>
@@ -65,10 +66,20 @@ export default function shopProductDetail() {
               product={product}
               count={count}
               setCount={setCount}
+              setModal={setModal}
             />
           )}
         </div>
       </div>
+      {modal && (
+        <>
+          <PaymentModal
+            setModal={setModal}
+            totalPrice={product.price * count}
+            type="single"
+          />
+        </>
+      )}
     </>
   );
 }
