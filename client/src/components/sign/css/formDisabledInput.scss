@@ -1,6 +1,7 @@
 .disabledinputArea{
   margin-bottom: 35px;
   width: 100%;
+  padding: 0;
   .formInput{
     width: 100%;
     padding: 0.6em 0.7em;
@@ -13,7 +14,11 @@
     border: 1px solid #53baff;
     outline: 3px solid #b5deff;
   }
+}
+.labelArea{
+  width: 100%;
   .formLabel{
+    
     width: auto;
     height: 30px;
     font-weight: 600;
