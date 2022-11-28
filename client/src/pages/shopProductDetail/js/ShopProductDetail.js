@@ -77,6 +77,8 @@ export default function shopProductDetail() {
             setModal={setModal}
             totalPrice={product.price * count}
             type="single"
+            product={product}
+            count={count}
           />
         </>
       )}

@@ -11,7 +11,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { handleOrder } from '../../../util/api/order';
 import { getPoint } from '../../../util/api/point';
 // import { paymentPoint } from '../../../util/api/point';
-export default function PaymentModal({ setModal, totalPrice, type }) {
+export default function PaymentModal({
+  setModal,
+  totalPrice,
+  type,
+  product,
+  count,
+}) {
   console.log(totalPrice);
   const [data, setData] = useState({
     receiverName: '',
@@ -78,7 +84,22 @@ export default function PaymentModal({ setModal, totalPrice, type }) {
         return;
       }
     } else {
-      window.alert('single');
+      let check = window.confirm('상품울 주문하시겠습니까?');
+      if (check) {
+        let temp = {
+          ...data,
+          receiverAddress,
+          receiverZipcode,
+          productId: product.productsId,
+          quantity: count,
+        };
+        console.log(temp);
+        console.log('주문 생성');
+        // handleOrder
+        console.log('포인트 결제');
+        // paymentPoint
+        return;
+      }
     }
   };
   // 주소 입력
