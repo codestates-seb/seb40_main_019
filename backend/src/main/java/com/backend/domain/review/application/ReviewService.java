@@ -1,5 +1,9 @@
 package com.backend.domain.review.application;
 
+import com.backend.domain.order.dao.OrderProductRepository;
+import com.backend.domain.order.dao.OrderRepository;
+import com.backend.domain.order.domain.OrderProduct;
+import com.backend.domain.order.domain.OrderProductReviewStatus;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.exception.ProductNotFound;
@@ -29,7 +33,6 @@ public class ReviewService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
-    private final OrderRepository orderRepository;
 
     private final OrderProductRepository orderProductRepository;
 

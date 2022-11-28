@@ -5,6 +5,7 @@ import com.backend.domain.payment.domain.Payment;
 import com.backend.domain.payment.dto.PaymentRequest;
 import com.backend.domain.payment.mapper.PaymentMapper;
 import com.backend.domain.point.application.PointService;
+import com.backend.domain.point.domain.PointType;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
