@@ -1,27 +1,27 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+// import axios from 'axios';
+// import { useEffect, useState } from 'react';
 import MypageOrderListItem from '../../../components/mypageOrderListItem/js/MypageOrderListItem';
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
-// import useFetch from '../../../util/useFetch';
+import useFetch from '../../../util/useFetch';
 
 export default function MypageHome() {
   //임시
-  const [order, setOrder] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/ordersMypage/').then((res) => {
-      setOrder(res.data[0]);
-    });
-  }, []);
+  // const [order, setOrder] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
+  //     setOrder(res.data[0]);
+  //   });
+  // }, []);
 
-  const [review, setReview] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/review/').then((res) => {
-      setReview(res.data[0]);
-    });
-  }, []);
-  // const [order] = useFetch('orders')[0]//page 0으로
-  // const [items] = useFetch('/review')// page 0으로
+  // const [review, setReview] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/review/').then((res) => {
+  //     setReview(res.data[0]);
+  //   });
+  // }, []);
+  const [order] = useFetch('orders'); //page 0으로
+  const [review] = useFetch('user/review'); // page 0으로
 
   return (
     <div className="mypageHome">
@@ -73,7 +73,7 @@ export default function MypageHome() {
         </ul>
         {order && (
           <div>
-            <MypageOrderListItem item={order} />
+            <MypageOrderListItem item={order[0]} />
           </div>
         )}
       </div>
@@ -90,7 +90,7 @@ export default function MypageHome() {
         </ul>
         {review && (
           <div>
-            <ReviewList item={review} />
+            <ReviewList item={review[0]} />
           </div>
         )}
       </div>

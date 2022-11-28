@@ -1,19 +1,19 @@
 import '../css/SellerReview.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
 import Review from '../../../components/seller/js/Review';
-// import useFetch from '../../../util/useFetch';
+import useFetch from '../../../util/useFetch';
 // import { Link } from 'react-router-dom';
 
 export default function SellerReview() {
-  const [items, setItems] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/review/').then((res) => {
-      setItems(res.data);
-    });
-  }, []);
+  // const [items, setItems] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/review/').then((res) => {
+  //     setItems(res.data);
+  //   });
+  // }, []);
 
-  // const [items] = useFetch('리뷰전체조회api');
+  const [items] = useFetch('/review/seller');
 
   return (
     <div className="sellerReview">

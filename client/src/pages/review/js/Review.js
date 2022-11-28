@@ -1,17 +1,17 @@
 import '../css/Review.scss';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
 import ReviewList from '../../../components/review/js/ReviewList';
-// import useFetch from '../../../util/useFetch';
+import useFetch from '../../../util/useFetch';
 
 export default function Review() {
-  const [items, setItems] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/review/').then((res) => {
-      setItems(res.data);
-    });
-  }, []);
-  // const [items] = useFetch('/review')// 페이지도 있음
+  // const [items, setItems] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/review/').then((res) => {
+  //     setItems(res.data);
+  //   });
+  // }, []);
+  const [items] = useFetch('user/review'); // 페이지도 있음
   return (
     <div className="reviewContainer">
       <div className="orderListTitle">

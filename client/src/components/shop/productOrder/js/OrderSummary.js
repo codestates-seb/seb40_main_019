@@ -8,7 +8,7 @@ export default function OrderSummary({ totalPrice }) {
     receiverName: '준오',
     receiverZipcode: 2133,
     receiverPhone: '010-2222-333',
-    productId: 2,
+    productId: 1,
     quantity: 3,
   };
   const clickOrder = () => {
