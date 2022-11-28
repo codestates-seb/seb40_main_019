@@ -8,9 +8,9 @@ import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import { getUserInfo } from '../../../util/api/mypageUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { handleOrder } from '../../../util/api/order';
+import { handleOrder } from '../../../util/api/order';
 import { getPoint } from '../../../util/api/point';
-// import { paymentPoint } from '../../../util/api/point';
+import { paymentPoint } from '../../../util/api/point';
 export default function PaymentModal({
   setModal,
   totalPrice,
@@ -18,7 +18,6 @@ export default function PaymentModal({
   product,
   count,
 }) {
-  console.log(totalPrice);
   const [data, setData] = useState({
     receiverName: '',
     receiverPhone: '',
@@ -76,11 +75,12 @@ export default function PaymentModal({
             });
           }
         });
-        console.log(temp);
         console.log('주문 생성');
-        // handleOrder
+        let orderData = handleOrder(temp);
+        orderData.then((data) => {
+          paymentPoint(data.orderId);
+        });
         console.log('포인트 결제');
-        // paymentPoint
         return;
       }
     } else {
