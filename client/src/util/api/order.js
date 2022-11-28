@@ -9,10 +9,12 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 //주문생성
 export const handleOrder = async (data) => {
+  console.log(data);
   try {
-    const res = await axios.post(`${REACT_APP_API_URL}orders`, data);
+    const res = await axios.post(`${REACT_APP_API_URL}orders/cart`, data);
+    console.log(res);
     if (res.status === 201) {
-      console.log(res.data);
+      return res.data;
     }
   } catch (error) {
     console.error(error);

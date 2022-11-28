@@ -24,9 +24,16 @@ export const getPoint = async () => {
 export const paymentPoint = async (orderId) => {
   try {
     console.log('포인트 결제 내부');
-    const res = await axios.get(`${REACT_APP_API_URL}point/${orderId}`);
+    const res = await axios.post(`${REACT_APP_API_URL}point/${orderId}`);
     console.log(res);
-    return res;
+    if (res.status === 200) {
+      window.alert('결제 완료');
+      return res;
+    } else {
+      window.alert('결제 실패');
+      return;
+    }
+    // return res;
   } catch (error) {
     return error.response.data;
   }
