@@ -16,6 +16,7 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
 
   const payment = () => {
     setModal(true);
+
   };
 
   return (
