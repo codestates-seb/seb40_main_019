@@ -43,7 +43,12 @@ public enum ExceptionCode {
     // Review
     REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND"),
     //Order
-    ORDER_NOT_FOUND(404, "ORDER_NOT_FOUND");
+    ORDER_NOT_FOUND(404, "Order not found"),
+    CANNOT_CHANGE_ORDER(403, "Order can not change"),
+    CANNOT_CANCEL_ORDER(403, "Order can not cancel"),
+
+    //Point
+    NOT_ENOUGH_POINT(403,"Point is not enough");
 
     @Getter
     private int status;

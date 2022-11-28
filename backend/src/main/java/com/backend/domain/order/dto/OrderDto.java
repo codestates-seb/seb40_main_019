@@ -25,31 +25,11 @@ public class OrderDto {
 
 
 
-    public static OrderDto createOrderDto(Long productId, int quantity, String receiverAddress, String receiverName, String receiverZipcode, String receiverPhone){
-        OrderDto orderDto = new OrderDto();
-        orderDto.setProductId(productId);
-        orderDto.setQuantity(quantity);
-        orderDto.setReceiverAddress(receiverAddress);
-        orderDto.setReceiverName(receiverName);
-        orderDto.setReceiverZipcode(receiverZipcode);
-        orderDto.setReceiverPhone(receiverPhone);
-        return orderDto;
+
     }
 
-    //2차 완
-}
 
 
 
 
-   /* @Builder
-    private OrderPostDto(long userId, String receiverName, String receiverPhone, String receiverAddress, List<OrderProductDto> orderProducts, Long productId) {
-        this.userId = userId;
-        this.orderProducts = orderProducts;
-        this.receiverAddress = receiverAddress;
-        this.receiverPhone = receiverPhone;
-        this.receiverName = receiverName;
-        this.productId = productId;
-    }*/
 
-// 1차완

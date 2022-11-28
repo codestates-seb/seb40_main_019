@@ -4,8 +4,8 @@ import lombok.Getter;
 
 @Getter
 public enum OrderProductReviewStatus {
-    WRITING(1,"상품 준비중"),
-    WRITED(2, "배송중");
+    WRITING(1,"리뷰 작성가능"),
+    WRITED(2, "리뷰 작성완료");
 
     @Getter
     private int statusNumber;
