@@ -1,12 +1,8 @@
 package com.backend.domain.point.application;
 
 
-
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.order.dto.OrderHistoryDto;
-import com.backend.domain.order.dto.OrderProductDto;
 import com.backend.domain.point.dao.PointHistoryRepository;
 import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.domain.PointType;
@@ -24,7 +20,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
