@@ -71,8 +71,8 @@ public class PointController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/{page}")
-    public ResponseEntity<MultiResponse> getList(@PathVariable("page") int page, @CurrentUser CustomUserDetails authUser) {
+    @GetMapping("/history")
+    public ResponseEntity<MultiResponse> getList(@RequestParam int page, @CurrentUser CustomUserDetails authUser) {
         Pageable pageable = PageRequest.of(page - 1, 15);
         log.info("controller/ 유저별 포인트내역 조회 시작");
         Page<PointResponseDto> pointResponseDtoList = pointService.getPointList(authUser.getUser().getUserId(), pageable);
