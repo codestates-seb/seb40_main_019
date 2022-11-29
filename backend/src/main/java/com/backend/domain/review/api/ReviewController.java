@@ -1,6 +1,5 @@
 package com.backend.domain.review.api;
 
-import com.backend.domain.product.application.ImageUploadService;
 import com.backend.domain.review.Mapper.ReviewMapper;
 import com.backend.domain.review.application.ReviewService;
 import com.backend.domain.review.domain.Review;
@@ -26,7 +25,7 @@ public class ReviewController {
 
     private final ReviewService reviewService;
     private final ReviewMapper reviewMapper;
-    private final ImageUploadService awsS3Service;
+
 
 
     @PostMapping("/review/{productId}")
@@ -35,19 +34,9 @@ public class ReviewController {
                                  @RequestParam("reviewContent")String reviewContent,@RequestParam("star")int star,
                                   ReviewImg reviewImg){
         log.info(" post 맵핑 실행 ");
-        String reviewUrl;
-        if(reviewImg.getReviewImg().isEmpty()){
-            log.info(" 리뷰 이미지 없음 ");
-            reviewUrl = null;
-        }
-        else {
-             reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
-            log.info("reviewUrl : ",reviewUrl);
-        }
-        log.info(" 유저 정보 완료 ");
         Long userId = authUser.getUser().getUserId();
-
-        Review saveReview = reviewService.create(userId,productId,reviewContent,star,reviewUrl);
+        log.info(" 유저 정보 완료 ");
+        Review saveReview = reviewService.create(userId,productId,reviewContent,star,reviewImg);
         log.info(" getListCategory 실행 ");
         return new ResponseEntity<>(new SingleResponseDto<>(reviewMapper.reviewToReviewResponseDto(saveReview)), HttpStatus.CREATED);
     }

@@ -11,8 +11,6 @@ import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
-import com.backend.global.dto.Response.SingleResponseDto;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +26,15 @@ public class PaymentController {
     private final PaymentMapper paymentMapper;
     private final PointService pointService;
 
-    @RequestMapping("/success")
+    @RequestMapping("/payment/success")
     public ResponseEntity charge(@CurrentUser CustomUserDetails authUser, @RequestBody PaymentRequest paymentRequest) throws Exception {
         Long userId =authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Payment payment = paymentMapper.paymentRequestToPayment(paymentRequest);
         int price = payment.getAmount();
         int newRestCash = pointService.addCash(user, price, PointType.AddPoint);
-        JsonNode jsonNode = paymentService.create(payment);
+//        JsonNode jsonNode = paymentService.create(payment);
 
-        return new ResponseEntity(new SingleResponseDto<>(jsonNode), HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

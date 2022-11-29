@@ -5,6 +5,8 @@ import com.backend.domain.category.domain.Category;
 import com.backend.domain.category.excption.CategoryNotFound;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
+import com.backend.domain.product.dto.DetailImg;
+import com.backend.domain.product.dto.TitleImg;
 import com.backend.domain.product.exception.ProductExist;
 import com.backend.domain.product.exception.ProductNotFound;
 import com.backend.domain.review.dao.ReviewRepository;
@@ -35,35 +37,43 @@ public class ProductService {
     private final UserRepository userRepository;
     private final ReviewRepository reviewRepository;
     private final CategoryRepository categoryRepository;
-
+    private final AwsS3Service awsS3Service;
     // 제품 생성
     @Transactional
-    public Product create(Long userId, int price, String productName,String titleUrl,String detailUrl,String tag,Long categoryId){
-        log.info(" 프로젝트 새로 생성 ");
-        Product product = new Product();
-        product.setPrice(price);
-        product.setProductName(productName);
-        product.setTitleImg(titleUrl);
-        product.setDetailImg(detailUrl);
-        product.setTag(tag);
+    public Product create(Long userId, int price, String productName,TitleImg titleImg,DetailImg detailImg,String tag,Long categoryId){
 
-        log.info(" 상품 이름 중복 검사 ");
-        existSameName(product.getProductName());
+
+        log.info(" 프로젝트 새로 생성 ");
 
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         log.info(" user : " ,user);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
         log.info("category : ",category);
-        product.setCategory(category);
-        product.setUser(user);
-        log.info(" product : ",product);
+
+        String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());
+        log.info("타이틀 이미지 완료");
+        String detailUrl = awsS3Service.StoreImage(detailImg.getDetailImg());
+        log.info("디테일 이미지 완료");
+        Product product = Product.builder()
+                .productName(productName)
+                .price(price)
+                .tag(tag)
+                .detailImg(detailUrl)
+                .titleImg(titleUrl)
+                .user(user)
+                .category(category)
+                .build();
+
+        log.info(" 상품 생성 성공 ");
+
+        existSameName(product.getProductName());
+        log.info(" 상품 이름 중복 검사 ");
         return productRepository.save(product);
     }
 
     // 상품 수정
     @Transactional
-    public Product update(Long productId, Long categoryId,int price ,String productName, String titleUrl, String detailImg) {
-
+    public Product update(Long productId, Long categoryId, int price , String productName, TitleImg titleImg, DetailImg detailImg) {
         Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
         log.info(" findProduct : ",findProduct);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
@@ -81,12 +91,19 @@ public class ProductService {
         Optional.ofNullable(price)
                 .ifPresent(findProduct::setPrice);
         log.info(" 수정 타이틀 이미지 입력 ");
-        Optional.ofNullable(titleUrl)
-                .ifPresent(findProduct::setTitleImg);
+
+
+        if ( titleImg.getTitleImg() != null) {
+            awsS3Service.deleteImage(findProduct.getTitleImg());
+            findProduct.setTitleImg(awsS3Service.StoreImage(titleImg.getTitleImg()));
+        }
+        log.info(" 타이틀 이미지 완료 ");
+        if ( detailImg.getDetailImg() != null) {
+            awsS3Service.deleteImage(findProduct.getDetailImg());
+            findProduct.setDetailImg(awsS3Service.StoreImage(detailImg.getDetailImg()));
+        }
+
         log.info(" 수정 디테일 이미지 입력 ");
-        Optional.ofNullable(detailImg)
-                .ifPresent(findProduct::setDetailImg);
-        log.info(" findProduct : ", findProduct);
         return productRepository.save(findProduct);
     }
 
@@ -153,9 +170,17 @@ public class ProductService {
         }
     }
     @Transactional
-    public Page<Product> getCategory(Long categoryId,int page, int size) {
-        log.info(" 카테고리 별 상품 조회 ");
-        return productRepository.findByCategory(categoryId,PageRequest.of(page,size,Sort.by("productId").descending()));
+    public Page<Product> getCategory(Long categoryId,int filter,int page, int size) {
+        log.info(" 카테고리 별 상품 조회 ");String str ="productId";
+        if(filter== 1) { str = "productId";}
+        else if (filter== 2) { str = "viewCount";}
+        else if (filter == 3 ) {
+            str = "price";
+        }
+        else if (filter == 4 ) {
+            return productRepository.findByCategory(categoryId,PageRequest.of(page, size, Sort.by("price").ascending()));
+        }
+        return productRepository.findByCategory(categoryId,PageRequest.of(page,size,Sort.by(str).descending()));
     }
 
     @Transactional
