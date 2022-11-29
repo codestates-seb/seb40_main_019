@@ -1,15 +1,21 @@
 import '../css/mypagePointList.scss';
-import MypagePointListItem from './MypagePointListItem';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+// import MypagePointListItem from './MypagePointListItem';
+// import axios from 'axios';
+// import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { getPointList } from '../../../../util/api/point';
 
 export default function MypagePointList() {
   //임시 더미데이터
-  const [points, setPoints] = useState();
+  // const [points, setPoints] = useState();
   useEffect(() => {
-    axios.get('http://localhost:3001/points/').then((res) => {
-      setPoints(res.data);
-    });
+    // axios.get('http://localhost:3001/points/').then((res) => {
+    //   setPoints(res.data);
+    // });
+    getPointList();
+    // data.then((res) => {
+    //   setPoints(res);
+    // });
   }, []);
 
   return (
@@ -26,14 +32,14 @@ export default function MypagePointList() {
         <li>잔여 포인트</li>
       </ul>
 
-      {points &&
+      {/* {points &&
         points.map((point) => {
           return (
             <div key={point.productsId}>
               <MypagePointListItem point={point} />
             </div>
           );
-        })}
+        })} */}
     </div>
   );
 }
