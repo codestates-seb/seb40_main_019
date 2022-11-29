@@ -356,7 +356,7 @@ public class UserService {
             userRepository.save(user);
         } else {
             log.info("소셜 로그인 회원탈퇴 : {}", user.getEmail());
-            pointRepository.deleteByUser(user);
+            pointHistoryRepository.deleteByUser(user);
             refreshTokenRepository.deleteByKey(user.getUserId());
             userRepository.delete(user);
         }
