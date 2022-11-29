@@ -3,6 +3,7 @@ package com.backend.domain.review.application;
 import com.backend.domain.order.dao.OrderProductRepository;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.domain.OrderProductReviewStatus;
+import com.backend.domain.order.exception.OrderNotFound;
 import com.backend.domain.product.application.AwsS3Service;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
@@ -10,6 +11,7 @@ import com.backend.domain.product.exception.ProductNotFound;
 import com.backend.domain.review.dao.ReviewRepository;
 import com.backend.domain.review.domain.Review;
 import com.backend.domain.review.dto.ReviewImg;
+import com.backend.domain.review.exception.ReviewDuplication;
 import com.backend.domain.review.exception.ReviewNotFound;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
@@ -59,7 +61,11 @@ public class ReviewService {
                 .titleImg(product.getTitleImg())
                 .build();
         log.info("review : ",review);
-        OrderProduct orderProduct = orderProductRepository.findOrderProduct(userId, productId);
+//        OrderProduct orderProduct = orderProductRepository.findOrderProduct(userId, productId);
+        OrderProduct orderProduct = orderProductRepository.findByOrderProduct(userId, productId).orElseThrow(OrderNotFound::new);
+        if (orderProduct.getReviewStatus().equals(OrderProductReviewStatus.WRITED)){
+            throw new ReviewDuplication();
+        }
         orderProduct.setReviewStatus(OrderProductReviewStatus.WRITED);
         return reviewRepository.save(review);
     }
