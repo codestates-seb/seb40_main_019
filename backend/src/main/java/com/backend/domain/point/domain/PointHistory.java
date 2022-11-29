@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamicInsert
-public class PointHistory {
+public class PointHistory  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

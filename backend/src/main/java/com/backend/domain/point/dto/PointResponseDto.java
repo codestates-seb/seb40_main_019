@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
@@ -15,14 +16,14 @@ public class PointResponseDto {
     int cash;
     private PointType pointType;
     int restCash;
-    private LocalDateTime createdAt;
+    private String createdAt;
 
     public PointResponseDto(PointHistory pointHistory) {
         this.pointHistoryId = pointHistory.getPointHistoryId();
         this.cash = pointHistory.getCash();
         this.pointType = pointHistory.getPointType();
         this.restCash = pointHistory.getRestCash();
-        this.createdAt = pointHistory.getCreatedAt();
+        this.createdAt = pointHistory.getCreatedAt().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
     }
 
