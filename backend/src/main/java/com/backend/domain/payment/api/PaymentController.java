@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,11 +25,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PaymentController {
     private final UserRepository userRepository;
-    private final PaymentService paymentService;
+//    private final PaymentService paymentService;
     private final PaymentMapper paymentMapper;
     private final PointService pointService;
 
-    @RequestMapping("/payment/success")
+    @PostMapping("/payment/success")
     public ResponseEntity charge(@CurrentUser CustomUserDetails authUser, @RequestBody PaymentRequest paymentRequest) throws Exception {
         Long userId =authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
