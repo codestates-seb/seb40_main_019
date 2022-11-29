@@ -84,8 +84,8 @@ public class OrderController {
 
 
     @GetMapping(value = {"/orders", "/orders/{page}"})
-    public ResponseEntity<MultiResponse> getList(@PathVariable("page") Optional<Integer> page, @CurrentUser CustomUserDetails authUser) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
+    public ResponseEntity<MultiResponse> getList(@PathVariable("page") int page, @CurrentUser CustomUserDetails authUser) {
+        Pageable pageable = PageRequest.of(page - 1, 15);
         log.info("controller/ 유저별 주문 내역 get 시작");
         Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getOrderList(authUser.getUser().getUserId(), pageable);
         List<OrderHistoryDto> content = ordersHistoryDtoList.getContent();
@@ -95,8 +95,8 @@ public class OrderController {
     }
 
     @GetMapping(value = {"/orders/all", "/orders/all/{page}"})
-    public ResponseEntity<MultiResponse> getAllList(@PathVariable("page") Optional<Integer> page) {
-        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 15);
+    public ResponseEntity<MultiResponse> getAllList(@PathVariable("page") int page) {
+        Pageable pageable = PageRequest.of(page - 1, 15);
         log.info("controller/ 모든 주문 내역 get 시작");
         Page<OrderHistoryDto> ordersHistoryDtoList = orderService.getAllList(pageable);
         List<OrderHistoryDto> content = ordersHistoryDtoList.getContent();

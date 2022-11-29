@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class Product extends Auditable {
 
     private String tag;
 
+    @ColumnDefault("0")
     private int viewCount;
 
     // 유저 맵핑 추가

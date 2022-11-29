@@ -6,7 +6,7 @@ import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.dto.OrderHistoryDto;
 import com.backend.domain.point.application.PointService;
-import com.backend.domain.point.domain.Point;
+import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.domain.PointType;
 import com.backend.domain.point.dto.PointChargeDto;
 import com.backend.domain.point.dto.PointResponseDto;
