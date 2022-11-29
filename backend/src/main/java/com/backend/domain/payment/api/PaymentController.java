@@ -11,13 +11,11 @@ import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
-import com.backend.global.dto.Response.SingleResponseDto;
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -28,7 +26,7 @@ public class PaymentController {
     private final PaymentMapper paymentMapper;
     private final PointService pointService;
 
-    @RequestMapping("/payment/success")
+    @PostMapping("/payment/success")
     public ResponseEntity charge(@CurrentUser CustomUserDetails authUser, @RequestBody PaymentRequest paymentRequest) throws Exception {
         Long userId =authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
