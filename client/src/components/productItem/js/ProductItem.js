@@ -7,7 +7,7 @@ const ProductItem = ({ data }) => {
     navigate(`/product/detail/${data.productId}`);
   };
   return (
-    <div>
+    <div className="flexInner">
       <div
         role="button"
         className="itemContainer"
