@@ -1,5 +1,5 @@
 import '../css/aiComponent.scss';
-// import dogsImg from '../../../assets/img/aiRecommend1.svg';
+import dogsImg from '../../../assets/img/aiRecommend1.svg';
 import poppyImg from '../../../assets/img/aiRecommend2.svg';
 import ProductItem from './ProductItem';
 import axios from 'axios';
@@ -23,7 +23,9 @@ export default function AiComponent() {
           <div className="beforeAiContainer">
             <div className="leftContainer">
               <h1>AI 맞춤 추천 사료</h1>
-              <div>{/* <img src={dogsImg} alt="dogImg" /> */}</div>
+              <div>
+                <img src={dogsImg} alt="dogImg" />
+              </div>
               <div>
                 <p>나이별, 건강 상태별, 라이프 스타일에 따라</p>
                 <p>필요로 하는 영양 맞춤 사료를 만나보세요.</p>

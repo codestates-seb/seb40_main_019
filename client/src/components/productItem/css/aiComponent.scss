@@ -11,7 +11,7 @@
 
 .beforeAiContainer{
     display: flex;
-    justify-content: center; 
+    justify-content: space-around; 
     // flex-wrap: wrap;
     @media (max-width: 890px) {
         display: block;
@@ -20,7 +20,9 @@
 
 .leftContainer{
     text-align: center;
-
+    img{
+        width: 500px;
+    }
     h1{
         color: var(--color-blue);
         font-size: 35px;
