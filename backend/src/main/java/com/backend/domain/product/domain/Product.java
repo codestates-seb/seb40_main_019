@@ -8,6 +8,7 @@ import com.backend.global.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class Product extends Auditable {
 
     private String tag;
 
+    @ColumnDefault("0")
+    private int viewCount;
+
     // 유저 맵핑 추가
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -57,6 +61,12 @@ public class Product extends Auditable {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+    public void ViewCountPlus(int viewCount){
+        this.viewCount +=1;
+    }
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 
     public void setTitleImg(String titleImg) {

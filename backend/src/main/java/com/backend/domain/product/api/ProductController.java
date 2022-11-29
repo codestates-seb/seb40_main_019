@@ -80,11 +80,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.delete(productsId));
     }
 
-    @GetMapping("/products")
-    public ResponseEntity getLists(@RequestParam int page){
+    // 상품 조회 (필터링)
+    @GetMapping("/products/filter/{filterId}")
+    public ResponseEntity getLists(@RequestParam int page,@PathVariable int filterId){
         int size= 15;
         log.info("getLists 실행 ");
-        Page<Product> pageProduct = productService.getLists(page, size);
+        Page<Product> pageProduct = productService.getLists(page, size,filterId);
         log.info(" 페이징 리스트로 변환 ");
         List<Product> response = pageProduct.getContent();
         log.info(" 상품 목록 조회 완료 ");

@@ -2,6 +2,7 @@ package com.backend.domain.product.application;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.backend.domain.product.exception.NoImage;
@@ -44,6 +45,12 @@ public class AwsS3Service implements ImageUploadService{
         return amazonS3.getUrl(bucketName, storeFileName).toString();
     }
 
+    public void deleteImage(String fileUrl) {
+        String splitStr = ".com/";
+        String fileName = fileUrl.substring(fileUrl.lastIndexOf(splitStr) + splitStr.length());
+
+        amazonS3.deleteObject(new DeleteObjectRequest(bucketName, fileName));
+    }
 
 
     private void validateFileExists(MultipartFile multipartFile) {

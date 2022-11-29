@@ -290,7 +290,8 @@ public class UserService {
 
         testUser.encodePassword(passwordEncoder);
 
-        testUser.addCash(1000000);
+        pointService.addCash(testUser, 1000000, PointType.SignUpPoint);
+        log.info("회원가입 포인트 지급");
 
         userRepository.save(testUser);
 
@@ -351,11 +352,11 @@ public class UserService {
         if (user.getSocialLogin().equals("original")) {
             user.setUserStatus(User.UserStatus.USER_NOT_EXIST);
             refreshTokenRepository.deleteByKey(user.getUserId());
-            pointHistoryRepository.deleteByUser(user);
+//            pointRepository.deleteByUser(user);
             userRepository.save(user);
         } else {
             log.info("소셜 로그인 회원탈퇴 : {}", user.getEmail());
-            pointHistoryRepository.deleteByUser(user);
+            pointRepository.deleteByUser(user);
             refreshTokenRepository.deleteByKey(user.getUserId());
             userRepository.delete(user);
         }

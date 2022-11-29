@@ -42,6 +42,7 @@ public enum ExceptionCode {
 
     // Review
     REVIEW_NOT_FOUND(404,"REVIEW_NOT_FOUND"),
+    REVIEW_DUPLICATION(409,"Review Is Duplicated"),
     //Order
     ORDER_NOT_FOUND(404, "Order not found"),
     CANNOT_CHANGE_ORDER(403, "Order can not change"),

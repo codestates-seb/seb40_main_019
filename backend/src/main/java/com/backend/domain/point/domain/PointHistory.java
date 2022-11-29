@@ -5,6 +5,7 @@ import com.backend.global.audit.Auditable;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -30,6 +31,7 @@ public class PointHistory {
 
     private PointType pointType;
 
+    @CreatedDate
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
@@ -37,4 +39,3 @@ public class PointHistory {
 
 
     }
-
