@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
-import { googleCallback } from '../../util/api/oauthGoogle';
-export default function OauthKakao() {
+import { googleCallback } from '../../../util/api/oauthGoogle';
+import Loading from '../../../components/loading/js/Loading';
+import '../css/oauthGoogle.scss';
+
+export default function OauthGoogle() {
   useEffect(() => {
     const url = new URL(window.location.href);
     const tokenArr = url.search.split('&');
@@ -13,7 +16,9 @@ export default function OauthKakao() {
 
   return (
     <>
-      <div>oauthGoogle</div>
+      <div className="googleInner">
+        <Loading />
+      </div>
     </>
   );
 }
