@@ -49,7 +49,7 @@ export default function AiComponent() {
             </div>
           </div>
         ) : (
-          // 3가지 추천 아이템 보여주는 창
+          // 추천 상품 3개 보여주는 창
           <div className="afterAiContainer">
             <div className="poppyImgRowBox">
               <img src={poppyImg} alt="dogImg" />
@@ -57,10 +57,9 @@ export default function AiComponent() {
             <div className="itemListContainer">
               <div className="listBox">
                 <div className="rowBoxTitle">
-                  <h1>AI 맞춤</h1>
-                  <h1>추천 사료</h1>
+                  <h1>AI 맞춤 추천 사료</h1>
                 </div>
-                <div className="gridBox">
+                <div className="flexBox">
                   {randomItems.map((randomItem) => {
                     return (
                       <ProductItem
@@ -70,6 +69,9 @@ export default function AiComponent() {
                     );
                   })}
                 </div>
+              </div>
+              <div className="resetBtn">
+                <button onClick={() => setRandomItems([])}>재입력</button>
               </div>
             </div>
           </div>
