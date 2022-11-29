@@ -1,10 +1,11 @@
 import '../../sellerAddProduct/css/SellerAddProduct.scss';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import ProductForm from '../../../components/seller/js/ProductForm';
 import { handleEdit } from '../../../util/api/product';
 import { useState } from 'react';
 
 export default function SellerEditProduct() {
+  const navigate = useNavigate();
   const location = useLocation();
   const { item } = location.state;
 
@@ -47,9 +48,9 @@ export default function SellerEditProduct() {
       />
 
       <div className="addPageBtns">
-        <Link to="/seller/product">
-          <button className="close">닫기</button>
-        </Link>
+        <button className="close" onClick={() => navigate('/seller/product')}>
+          닫기
+        </button>
         <button onClick={clickEdit}>수정하기</button>
       </div>
     </div>

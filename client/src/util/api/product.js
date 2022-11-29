@@ -31,8 +31,9 @@ export const handleSubmit = async (data, setModalOn) => {
       `${REACT_APP_API_URL}products/${data.categoryId}`,
       formData
     );
-    if (res.status === 200) {
+    if (res.status === 201) {
       console.log(res.data);
+      window.location.replace('/seller/product');
     }
   } catch (error) {
     console.error(error);
@@ -71,6 +72,7 @@ export const handleEdit = async (data, pastData) => {
     );
     if (res.status === 200) {
       console.log(res.data);
+      window.location.replace('/seller/product');
     }
   } catch (error) {
     console.error(error);

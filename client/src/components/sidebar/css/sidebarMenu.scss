@@ -17,7 +17,7 @@
     background: url('../../../assets/img/logo_side_blue.png');
     background-size: cover;
     display: flex;
-    width: 45px;
+    width: 60px;
     height: 47px;
     margin: 10px;
 
@@ -31,12 +31,12 @@
   .tittleList {
     list-style: none;
     cursor: pointer;
-    li {
+    button {
       padding: 10px;
       color: var(--color-blue);
       font-size: 14px;
     }
-    li:hover {
+    button:hover {
       color: var(--color-yellow);
     }
   }

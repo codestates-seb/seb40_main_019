@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-const useFetch = (url) => {
+const useFetch = (url, state, state2) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -23,7 +23,7 @@ const useFetch = (url) => {
           setError(err.message);
         });
     }, 1000);
-  }, []);
+  }, [state, state2]);
 
   return [data, error];
 };
