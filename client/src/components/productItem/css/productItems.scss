@@ -18,18 +18,18 @@
 .itemsContainer {
 	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(5, 1fr);
 	grid-gap: 2rem;
 }
 
 .itemsContainer {
 	@media (max-width: 1050px) {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 	@media (max-width: 800px) {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 	}
-	@media (max-width: 500px) {
-		grid-template-columns: repeat(1, 0.9fr);
+	@media (max-width: 600px) {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }

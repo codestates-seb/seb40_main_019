@@ -15,8 +15,12 @@
 
 .leftContainer{
     text-align: center;
+    width: 100%;
     img{
-        width: 500px;
+        max-width: 500px;
+        @media (max-width: 1250px) {
+            width: 100%;
+        }
     }
     h1{
         color: var(--color-blue);
@@ -35,9 +39,13 @@
     margin-top: -92px;
  
     .poppyImgBox{
-        position: relative;
-        top: 77px; //강아지 이미지
-        left: 90px; //위치 조정 
+        width: 100%;
+        img{
+            position: relative;
+            top: 77px; //강아지 이미지
+            left: 20px; //위치 조정 
+            
+        }
     }
 
     .formContainer{
