@@ -61,9 +61,8 @@ export const addPoint = async (data) => {
     const res = await axios.post(`${REACT_APP_API_URL}point`, data);
     console.log(res);
     if (res.status === 200) {
-      console.log('결제 성공');
+      window.alert('결제 성공');
     }
-    console.log('결제 데이터 전송 함수 종료');
   } catch (error) {
     console.error(error);
     return error;
