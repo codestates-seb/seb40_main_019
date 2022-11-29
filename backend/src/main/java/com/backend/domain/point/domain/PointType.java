@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-
 public enum PointType {
     SignUpPoint(1, "회원가입 축하 포인트 추가"),
     AddPoint(2, "현금으로 포인트 충전"),

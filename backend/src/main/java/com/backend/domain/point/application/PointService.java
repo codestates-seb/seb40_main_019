@@ -4,6 +4,9 @@ package com.backend.domain.point.application;
 
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
+import com.backend.domain.order.domain.OrderProduct;
+import com.backend.domain.order.dto.OrderHistoryDto;
+import com.backend.domain.order.dto.OrderProductDto;
 import com.backend.domain.point.dao.PointHistoryRepository;
 import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.domain.PointType;
@@ -21,7 +24,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,6 +58,7 @@ public class PointService {
                 .cash(price)
                 .pointType(pointType)
                 .createdAt(LocalDateTime.now())
+                .restCash(user.getRestCash() + price)
                 .build();
         log.info("service / 포인트 사용,충전 내역 저장");
         pointHistoryRepository.save(pointHistory);
@@ -82,7 +88,13 @@ public class PointService {
     public Page<PointResponseDto> getPointList(Long userId, Pageable pageable) {
         log.info("Service/ userId : " + userId + "포인트내역 조회 시작");
         List<PointHistory> pointHistoryList = pointHistoryRepository.findPointHistoryList(userId, pageable);
-        List<PointResponseDto> pointResponseDtoList = mapper.toResponseDtos(pointHistoryList);
+
+        List<PointResponseDto> pointResponseDtoList = new ArrayList<>();
+        for (PointHistory pointHistory : pointHistoryList) {
+            PointResponseDto pointResponseDto = new PointResponseDto(pointHistory);
+            pointResponseDtoList.add(pointResponseDto);
+        }
+
         Long totalQuantity = pointHistoryRepository.countPoint(userId);
 
         return new PageImpl<PointResponseDto>(pointResponseDtoList, pageable, totalQuantity);
