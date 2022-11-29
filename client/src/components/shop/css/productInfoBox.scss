@@ -19,8 +19,9 @@
 .itemHeaderContainer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  margin: auto;
   padding-bottom: 30px;
+  max-width: 350px;
 
   // margin: 10px 0px 40px 0px;
   .imgStarBox {
@@ -28,6 +29,7 @@
     img {
       width: 160px;
       height: 200px;
+      margin-right: 10px;
       object-fit: cover;
       border-radius: 15px;
     }

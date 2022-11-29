@@ -18,7 +18,7 @@ export default function ProductInfoBox({ product, count, setCount, setModal }) {
             {/* body = new, 제품명, -quantity */}
             <div className="itemBodyContainer">
               {product.new === true && <button>NEW</button>}
-              <div className="titleBox">{product.title}</div>
+              <div className="titleBox">{product.productName}</div>
               <div className="reviewStar">
                 <ReviewStar clickStar={product.average} type={'small'} />
                 <p>평점 {product.average}</p>
