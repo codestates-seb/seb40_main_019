@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
-import { kakaoCallback } from '../../util/api/oauthKakao';
+import { kakaoCallback } from '../../../util/api/oauthKakao';
+import Loading from '../../../components/loading/js/Loading';
+import '../css/oauthKakao.scss';
+
 export default function OauthKakao() {
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -13,7 +16,9 @@ export default function OauthKakao() {
 
   return (
     <>
-      <div>oauthKakao</div>
+      <div className="kakaoInner">
+        <Loading />
+      </div>
     </>
   );
 }
