@@ -42,13 +42,29 @@ public class ReviewService {
     private final OrderProductRepository orderProductRepository;
 
     @Transactional
-    public Review create(Long userId,Long productId,String reviewContent,int star,String reviewUrl) {
-        log.info("create 실행 ");
-        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
-        log.info("user : ",user);
-        Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
-        log.info("product : ",product);
+    public Review create(Long userId,Long productId,String reviewContent,int star,ReviewImg reviewImg) {
 
+        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
+        log.info("유저 찾기 성공 ");
+
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        log.info("상품 찾기 성공 ");
+
+        OrderProduct orderProduct = orderProductRepository.findByOrderProduct(userId, productId).orElseThrow(OrderNotFound::new);
+        log.info("주문 찾기 성공");
+        if (orderProduct.getReviewStatus().equals(OrderProductReviewStatus.WRITED)){
+            throw new ReviewDuplication();
+        }
+        orderProduct.setReviewStatus(OrderProductReviewStatus.WRITED);
+        log.info("주문 중복 방지");
+        String reviewUrl;
+        if(reviewImg.getReviewImg().isEmpty()){
+            reviewUrl = null;
+        }
+        else {
+            reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
+        }
+        log.info("리뷰 이미지 완료");
         Review review = Review.builder()
                 .reviewImg(reviewUrl)
                 .reviewWriter(user.getNickname())
@@ -60,13 +76,7 @@ public class ReviewService {
                 .productName(product.getProductName())
                 .titleImg(product.getTitleImg())
                 .build();
-        log.info("review : ",review);
-//        OrderProduct orderProduct = orderProductRepository.findOrderProduct(userId, productId);
-        OrderProduct orderProduct = orderProductRepository.findByOrderProduct(userId, productId).orElseThrow(OrderNotFound::new);
-        if (orderProduct.getReviewStatus().equals(OrderProductReviewStatus.WRITED)){
-            throw new ReviewDuplication();
-        }
-        orderProduct.setReviewStatus(OrderProductReviewStatus.WRITED);
+        log.info("리뷰 생성 ");
         return reviewRepository.save(review);
     }
     @Transactional
@@ -75,18 +85,6 @@ public class ReviewService {
         Review findReview = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
         log.info("findReview : ",findReview);
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
-        String reviewUrl ;
-        if (delete.equals("true")){
-            findReview.setReviewImg(null);
-        }
-        if(reviewImg.getReviewImg().isEmpty()){
-            log.info("리뷰 이미지 없음");
-            reviewUrl = null;
-        }
-        else {
-            reviewUrl = awsS3Service.StoreImage(reviewImg.getReviewImg());
-            log.info("reviewUrl : ",reviewUrl);
-        }
 
         log.info("user : ",user);
         Optional.ofNullable(reviewId)
@@ -95,8 +93,16 @@ public class ReviewService {
                 .ifPresent(findReview::setReviewContent);
         Optional.ofNullable(star)
                 .ifPresent(findReview::setStar);
-        Optional.ofNullable(reviewUrl)
-                .ifPresent(findReview::setReviewImg);
+        String reviewUrl ;
+
+        if(reviewImg.getReviewImg() != null){
+            awsS3Service.deleteImage(findReview.getReviewImg());
+            findReview.setReviewImg(awsS3Service.StoreImage(reviewImg.getReviewImg()));
+        }
+        if (delete.equals("true")){
+            awsS3Service.deleteImage(findReview.getReviewImg());
+            findReview.setReviewImg(null);
+        }
         log.info("findReview : ",findReview);
         return reviewRepository.save(findReview);
     }

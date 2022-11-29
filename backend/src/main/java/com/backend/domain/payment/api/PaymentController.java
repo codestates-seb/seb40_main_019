@@ -28,15 +28,15 @@ public class PaymentController {
     private final PaymentMapper paymentMapper;
     private final PointService pointService;
 
-    @RequestMapping("/success")
+    @RequestMapping("/payment/success")
     public ResponseEntity charge(@CurrentUser CustomUserDetails authUser, @RequestBody PaymentRequest paymentRequest) throws Exception {
         Long userId =authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Payment payment = paymentMapper.paymentRequestToPayment(paymentRequest);
         int price = payment.getAmount();
-        JsonNode jsonNode = paymentService.create(payment);
         int newRestCash = pointService.addCash(user, price, PointType.AddPoint);
+//        JsonNode jsonNode = paymentService.create(payment);
 
-        return new ResponseEntity(new SingleResponseDto<>(jsonNode), HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 }

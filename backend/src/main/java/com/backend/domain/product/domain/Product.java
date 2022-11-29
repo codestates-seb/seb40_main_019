@@ -6,6 +6,7 @@ import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.domain.User;
 import com.backend.global.audit.Auditable;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -97,5 +98,19 @@ public class Product extends Auditable {
         this.category = category;
     }
 
-
+    @Builder
+    public Product(Long productId, int price, String productName, int discountPrice, String titleImg, String detailImg, String tag, int viewCount, User user, List<Review> reviews, List<OrderProduct> orderProducts, Category category) {
+        this.productId = productId;
+        this.price = price;
+        this.productName = productName;
+        this.discountPrice = discountPrice;
+        this.titleImg = titleImg;
+        this.detailImg = detailImg;
+        this.tag = tag;
+        this.viewCount = viewCount;
+        this.user = user;
+        this.reviews = reviews;
+        this.orderProducts = orderProducts;
+        this.category = category;
+    }
 }
