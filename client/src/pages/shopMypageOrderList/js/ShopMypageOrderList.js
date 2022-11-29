@@ -13,8 +13,8 @@ export default function ShopMypageOrderList() {
   //   });
   // }, []);
 
-  const [items] = useFetch('orders'); //page필요
-
+  const [items] = useFetch('orders/1'); //page필요
+  console.log(items);
   return (
     <div className="MypageOrderContainer">
       <div className="orderListTitle">

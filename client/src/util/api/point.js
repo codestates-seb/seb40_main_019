@@ -29,9 +29,6 @@ export const paymentPoint = async (orderId) => {
     if (res.status === 200) {
       window.alert('결제 완료');
       return res;
-    } else {
-      window.alert('결제 실패');
-      return;
     }
     // return res;
   } catch (error) {

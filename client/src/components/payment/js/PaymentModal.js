@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handleOrderCart, handleOrderSingle } from '../../../util/api/order';
 import { getPoint } from '../../../util/api/point';
 import { paymentPoint } from '../../../util/api/point';
+import { useNavigate } from 'react-router-dom';
+
 export default function PaymentModal({
   setModal,
   totalPrice,
@@ -18,6 +20,8 @@ export default function PaymentModal({
   product,
   count,
 }) {
+  const navigate = useNavigate();
+
   const [data, setData] = useState({
     receiverName: '',
     receiverPhone: '',
@@ -78,7 +82,12 @@ export default function PaymentModal({
         console.log('주문 생성');
         let orderData = handleOrderCart(temp);
         orderData.then((data) => {
-          paymentPoint(data.orderId);
+          let res = paymentPoint(data.orderId);
+          res.then((data) => {
+            if (data.status === 200) {
+              navigate('/mypage/order');
+            }
+          });
         });
         console.log('포인트 결제');
         return;
@@ -96,7 +105,12 @@ export default function PaymentModal({
         console.log('주문 생성');
         let orderData = handleOrderSingle(temp);
         orderData.then((data) => {
-          paymentPoint(data.orderId);
+          let res = paymentPoint(data.orderId);
+          res.then((data) => {
+            if (data.status === 200) {
+              navigate('/mypage/order');
+            }
+          });
         });
         console.log('포인트 결제');
         return;

@@ -33,7 +33,7 @@ export const findEmailController = async (phone) => {
     // //이메일 정보 받아옴
     if (submitResult.status === 200) {
       // window.alert(`${submitResult.data}`);
-      window.alert(submitResult.data.email);
+      window.alert(`아이디: ${submitResult.data.email}`);
     }
     // console.log(submitResult);
     // alert로 보여주기
