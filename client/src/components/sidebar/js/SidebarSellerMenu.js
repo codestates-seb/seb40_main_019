@@ -10,16 +10,16 @@ export default function SidebarSellerMenu() {
         </Link>
         <ul className="tittleList">
           <Link to="/seller">
-            <li>대시보드</li>
+            <button>대시보드</button>
           </Link>
           <Link to="/seller/product">
-            <li>상품 관리</li>
+            <button>상품 관리</button>
           </Link>
           <Link to="/seller/order">
-            <li>판매 관리</li>
+            <button>판매 관리</button>
           </Link>
           <Link to="/seller/review">
-            <li>리뷰 목록</li>
+            <button>리뷰 목록</button>
           </Link>
         </ul>
       </div>

@@ -10,19 +10,19 @@ export default function SidebarMypageMenu() {
         </Link>
         <ul className="tittleList">
           <Link to="/mypage">
-            <li>마이페이지</li>
+            <button>마이페이지</button>
           </Link>
           <Link to="/mypage/user">
-            <li>회원정보수정</li>
+            <button>회원정보수정</button>
           </Link>
           <Link to="/mypage/point">
-            <li>포인트적립</li>
+            <button>포인트적립</button>
           </Link>
           <Link to="/mypage/order">
-            <li>주문목록</li>
+            <button>주문목록</button>
           </Link>
           <Link to="/mypage/review">
-            <li>내가작성한리뷰</li>
+            <button>내가작성한리뷰</button>
           </Link>
         </ul>
       </div>

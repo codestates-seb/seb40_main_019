@@ -43,11 +43,11 @@ export const handleEditReview = async (data, pastData) => {
 
   // formData.append('reviewImg', data.reviewImg[0]);
 
-  if (data.reviewImg[0] !== pastData.reviewImg) {
-    formData.append('reviewImg', data.reviewImg[0]);
-  } else {
-    formData.append('reviewImg', null);
-  }
+  // if (data.reviewImg[0] !== pastData.reviewImg) {
+  //   formData.append('reviewImg', data.reviewImg[0]);
+  // } else {
+  //   formData.append('reviewImg', null);
+  // }
   console.log(data.reviewImg[0]);
   console.log(pastData.reviewImg);
   for (let value of formData.values()) {

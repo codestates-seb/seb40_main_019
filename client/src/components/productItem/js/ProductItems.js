@@ -1,31 +1,34 @@
 import '../css/productItems.scss';
 import ProductItem from './ProductItem';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+import useFetch from '../../../util/useFetch';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
 
 function ProductItems() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:3001/products/').then((res) => {
-      setProducts(res.data);
-      // console.log(res.data);
-    });
-  }, []);
-  //console.log(data);
-
-  // const navigate = useNavigate();
-  // const clickItem = () => {
-  //   navigate(`products/${productsId}`);
-  // };
+  const [filterId, setFilter] = useState('1');
+  const categoryState = useSelector((state) => state.product);
+  let [products] = [];
+  if (categoryState.allProduct) {
+    [products] = useFetch(
+      `products/filter/${filterId}`,
+      categoryState,
+      filterId
+    );
+  } else {
+    [products] = useFetch(
+      `products/category/${categoryState.category}/${filterId}`,
+      categoryState,
+      filterId
+    );
+  }
 
   return (
     <>
       <div className="filterContainer">
-        <button>인기순</button>
-        <button>낮은 가격순</button>
-        <button>높은 가격순</button>
-        <button>최신순</button>
+        <button onClick={() => setFilter('1')}>최신순</button>
+        <button onClick={() => setFilter('2')}>인기순</button>
+        <button onClick={() => setFilter('3')}>높은 가격순</button>
+        <button onClick={() => setFilter('4')}>낮은 가격순</button>
       </div>
       <div className="itemsContainer">
         {products &&
