@@ -71,7 +71,7 @@ export default function AiComponent() {
                 </div>
               </div>
               <div className="resetBtn">
-                <button>재검색</button>
+                <button onClick={() => setRandomItems([])}>재입력</button>
               </div>
             </div>
           </div>
