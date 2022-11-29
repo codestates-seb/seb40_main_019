@@ -13,6 +13,7 @@ import MainImg from '../../../components/home/js/MainImg';
 import MainVideo from '../../../components/home/js/MainVideo';
 import MainBox from '../../../components/home/js/MainBox';
 import MainReview from '../../../components/home/js/MainReview';
+import 'animate.css';
 
 export default function Home() {
   return (

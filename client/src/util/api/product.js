@@ -17,7 +17,6 @@ export const handleSubmit = async (data, setModalOn) => {
   formData.append('productName', data.productName);
   formData.append('price', data.price);
   formData.append('tag', data.tag);
-
   if (data.productName.length < 5 || data.productName.length >= 30) {
     setModalOn(true);
   } else if (data.price < 100 || data.price > 1000000000) {
@@ -42,14 +41,24 @@ export const handleSubmit = async (data, setModalOn) => {
 };
 
 //상품수정
-export const handleEdit = async (data) => {
+export const handleEdit = async (data, pastData) => {
   //formdata에 data입력
   const formData = new FormData();
-  formData.append('titleImg', data.titleImg[0]);
-  formData.append('detailImg', data.detailImg[0]);
+  // formData.append('titleImg', data.titleImg[0]);
+  // formData.append('detailImg', data.detailImg[0]);
   formData.append('productName', data.productName);
   formData.append('price', data.price);
 
+  if (data.titleImg[0] !== pastData.titleImg) {
+    formData.append('titleImg', data.titleImg[0]);
+  } else {
+    formData.append('titleImg', '');
+  }
+  if (data.detailImg[0] !== pastData.detailImg) {
+    formData.append('detailImg', data.detailImg[0]);
+  } else {
+    formData.append('detailImg', '');
+  }
   // if (data.productName.length < 5 || data.productName.length >= 30) {
   //   setModalOn(true);
   // } else if (data.price < 100 || data.price > 1000000000) {

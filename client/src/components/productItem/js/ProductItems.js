@@ -1,17 +1,18 @@
 import '../css/productItems.scss';
 import ProductItem from './ProductItem';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import { useState, useEffect } from 'react';
+import useFetch from '../../../util/useFetch';
 
 function ProductItems() {
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    axios.get('http://localhost:3001/products/').then((res) => {
-      setProducts(res.data);
-      // console.log(res.data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/products/').then((res) => {
+  //     setProducts(res.data);
+  //     // console.log(res.data);
+  //   });
+  // }, []);
   //console.log(data);
 
   // const navigate = useNavigate();
@@ -19,6 +20,8 @@ function ProductItems() {
   //   navigate(`products/${productsId}`);
   // };
 
+  const [products] = useFetch('products/filter/1');
+  console.log(products);
   return (
     <>
       <div className="filterContainer">

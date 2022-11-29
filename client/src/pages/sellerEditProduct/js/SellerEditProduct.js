@@ -25,7 +25,7 @@ export default function SellerEditProduct() {
   };
 
   const clickEdit = () => {
-    handleEdit(data);
+    handleEdit(data, item);
   };
 
   return (
