@@ -1,5 +1,8 @@
 import { useEffect } from 'react';
 import { addPoint } from '../../../util/api/payment';
+import Loading from '../../../components/loading/js/Loading';
+import '../css/success.scss';
+
 export default function Success() {
   useEffect(() => {
     const orderId = new URL(window.location.href).searchParams.get('orderId');
@@ -21,7 +24,9 @@ export default function Success() {
 
   return (
     <>
-      <div>Success</div>
+      <div className="successInner">
+        <Loading />
+      </div>
     </>
   );
 }
