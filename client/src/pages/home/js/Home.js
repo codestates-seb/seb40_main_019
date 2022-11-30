@@ -11,36 +11,72 @@ import MainBox from '../../../components/home/js/MainBox';
 import MainReview from '../../../components/home/js/MainReview';
 import mainCircle3 from '../../../assets/img/mainCircle3.svg';
 import 'animate.css';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [scroll, setScroll] = useState('');
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { capture: true }); // 스크롤 이벤트 등록
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // 스크롤 이벤트 등록 제거(성능저하방지)
+    };
+  }, []);
+
+  const handleScroll = () => {
+    // if (scrollY > 120) {
+    //   setFixNav({
+
+    //   });
+    setScroll(scrollY);
+  };
+  console.log(scroll > 400 ? 'main2Text animate__backInDown' : 'main2Text');
+
   return (
     <>
-      <div className="home">
+      <div className="home ">
         <div className="main1Wrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
-              <MainVideo name={'video2'} src={video2} />
-              <MainVideo name={'video4'} src={video4} />
+              <div className="wrap2">
+                <MainVideo name={'video2'} src={video2} />
+              </div>
+              <div className="wrap4">
+                <MainVideo name={'video4'} src={video4} />
+              </div>
             </div>
             <div className="videoCenterWrap">
               <MainVideo name={'video1'} src={video1} />
             </div>
             <div className="videoRightWrap">
-              <MainVideo name={'video5'} src={video5} />
-              <MainVideo name={'video3'} src={video3} />
+              <div className="wrap5">
+                <MainVideo name={'video5'} src={video5} />
+              </div>
+              <div className="wrap3">
+                <MainVideo name={'video3'} src={video3} />
+              </div>
             </div>
           </div>
           <div className="mainText">
-            <div className="mainTextTop">
-              <h2>유기농 고급재료로 신선하게!</h2>
+            <div className="mainTextTopOverflow">
+              <div className="mainTextTop">
+                <h2>유기농 고급재료로 신선하게!</h2>
+              </div>
             </div>
-            <div className="mainTextBottom">
-              <h1>DOG FOOD WITH LOVE</h1>
+            <div className="mainTextBottomOverflow">
+              <div className="mainTextBottom">
+                <h1>DOG FOOD WITH LOVE</h1>
+              </div>
             </div>
           </div>
         </div>
         <div className="main2Wrap">
-          <div className="main2Text">
+          <div
+            className={
+              scroll > 400
+                ? 'main2Text animate__animated animate__backInDown'
+                : 'hidden'
+            }
+          >
             <h1>건강에 대한 바른 집념</h1>
             <p>
               LUXMEAL은 영양을 통해 반려견의 건강을 향상시키겠다는 포부로
