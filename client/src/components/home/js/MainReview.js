@@ -9,7 +9,7 @@ import review6 from '../../../assets/img/review6.svg';
 import reviewStar from '../../../assets/img/reviewStar.svg';
 import { useState } from 'react';
 
-export default function MainReview() {
+export default function MainReview({ scroll }) {
   const data = [
     {
       src: review1,
@@ -49,7 +49,11 @@ export default function MainReview() {
   return (
     <>
       <div className="mainReview">
-        <div className="reviewBtn">
+        <div
+          className={
+            scroll > 2800 ? 'reviewBtn reviewTextAni' : 'reviewBtn hidden'
+          }
+        >
           <button onClick={handleLeft}>
             <i className="fa-solid fa-arrow-left"></i>
           </button>
@@ -57,7 +61,11 @@ export default function MainReview() {
             <i className="fa-solid fa-arrow-right"></i>
           </button>
         </div>
-        <div className="mainReviewWrap">
+        <div
+          className={
+            scroll > 2800 ? 'mainReviewWrap reviewAni' : 'mainReviewWrap hidden'
+          }
+        >
           {data &&
             data.map((data, idx) => {
               return (
