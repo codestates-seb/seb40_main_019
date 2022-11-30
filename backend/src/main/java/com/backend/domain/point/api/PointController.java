@@ -60,7 +60,7 @@ public class PointController {
     @PostMapping("/{order-id}")
     public ResponseEntity pay(@CurrentUser CustomUserDetails authUser, @PathVariable("order-id") @Positive long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(EntityNotFoundException::new);
-        pointService.pay(order);
+        pointService.pay(order, authUser.getUser().getUserId());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
