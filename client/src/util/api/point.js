@@ -35,12 +35,15 @@ export const paymentPoint = async (orderId) => {
     return error.response.data;
   }
 };
-
 // 포인트 내역 조회
 export const getPointList = async () => {
   try {
     console.log('포인트 결제 내부');
-    const res = await axios.get(`${REACT_APP_API_URL}point/1`);
+    const res = await axios.get(`${REACT_APP_API_URL}point/history`, {
+      params: {
+        page: 1,
+      },
+    });
     console.log(res);
     return res;
   } catch (error) {

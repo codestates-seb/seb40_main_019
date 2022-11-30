@@ -9,20 +9,18 @@ const useFetch = (url, state, state2) => {
     let params = {
       page: 0,
     };
-    setTimeout(() => {
-      //요청과 통신하거나 중단하는 데에 사용하는 신호 역할
-      axios
-        .get(`${REACT_APP_API_URL}${url}`, {
-          params: params,
-        })
-        .then((res) => {
-          setData(res.data.data);
-          setError(null);
-        })
-        .catch((err) => {
-          setError(err.message);
-        });
-    }, 1000);
+    //요청과 통신하거나 중단하는 데에 사용하는 신호 역할
+    axios
+      .get(`${REACT_APP_API_URL}${url}`, {
+        params: params,
+      })
+      .then((res) => {
+        setData(res.data.data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.message);
+      });
   }, [state, state2]);
 
   return [data, error];
