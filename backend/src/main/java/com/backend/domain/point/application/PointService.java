@@ -66,9 +66,9 @@ public class PointService {
     }
 
     @Transactional
-    public void pay(Order order) {
+    public void pay(Order order, Long userId) {
         log.info("service / 포인트로 상품결제 시작");
-        User user = order.getUser();
+        User user = userRepository.findById(userId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
         int restCash = user.getRestCash();
         int payPrice = order.getOrderTotalPrice();
         if (payPrice > restCash) {
@@ -76,8 +76,6 @@ public class PointService {
 
         }
         addCash(user, payPrice * -1, PointType.PayPoint);
-        orderRepository.save(order);
-
     }
 
     public Page<PointResponseDto> getPointList(Long userId, Pageable pageable) {
