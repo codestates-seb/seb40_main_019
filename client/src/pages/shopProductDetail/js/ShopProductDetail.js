@@ -5,11 +5,12 @@ import ProductDetailReadme from '../../../components/shop/js/ProductDetailReadme
 import ProductDetailReview from '../../../components/shop/js/ProductDetailReview';
 import ProductInfoBox from '../../../components/shop/js/ProductInfoBox';
 //상품 디테일 데이터 1개만 담고 보여주게 했음
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 import { useParams } from 'react-router-dom';
 import PaymentModal from '../../../components/payment/js/PaymentModal';
 import useFetch from '../../../util/useFetch';
+import { getPoint } from '../../../util/api/point';
 
 export default function shopProductDetail() {
   //:id 에 따라서 해당 상품 상세페이지 보여줌
@@ -22,18 +23,13 @@ export default function shopProductDetail() {
 
   const [product] = useFetch(`products/${params.id}`);
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/productdetail/').then((res) => {
-  //     setProducts(res.data);
-  //     // console.log(res);
-  //   });
+  const [myPoint, setMyPoint] = useState(0);
 
-  // 장바구니 없을 때 장바구니 생성
-  //   if (!JSON.parse(window.localStorage.getItem('cartItem'))) {
-  //     // window.alert('장바구니 없음');
-  //     window.localStorage.setItem('cartItem', JSON.stringify({}));
-  //   }
-  // }, []);
+  useEffect(() => {
+    getPoint().then((res) => {
+      setMyPoint(res.data);
+    });
+  }, []);
 
   //상세페이지 detail & review선택
   const [clickBtn, setClickBtn] = useState('detail');
@@ -58,6 +54,7 @@ export default function shopProductDetail() {
               count={count}
               setCount={setCount}
               setModal={setModal}
+              myPoint={myPoint}
             />
           )}
         </div>
@@ -68,6 +65,7 @@ export default function shopProductDetail() {
               count={count}
               setCount={setCount}
               setModal={setModal}
+              myPoint={myPoint}
             />
           )}
         </div>
@@ -76,7 +74,6 @@ export default function shopProductDetail() {
         <>
           <PaymentModal
             setModal={setModal}
-            totalPrice={product.price * count}
             type="single"
             product={product}
             count={count}

@@ -5,7 +5,13 @@ import BuyAddBtn from './BuyAddBtn';
 
 import ReviewStar from '../../review/js/ReviewStar';
 // 별점 지우고 Quantity 밑으로 내려서 제품사진과 간격 맞춤
-export default function ProductInfoBox({ product, count, setCount, setModal }) {
+export default function ProductInfoBox({
+  product,
+  count,
+  setCount,
+  setModal,
+  myPoint,
+}) {
   return (
     <>
       <div className="productInfoContainer">
@@ -38,7 +44,12 @@ export default function ProductInfoBox({ product, count, setCount, setModal }) {
               <p>{product.price * count}원</p>
             </div>
             <div className="btnBox">
-              <BuyAddBtn product={product} count={count} setModal={setModal} />
+              <BuyAddBtn
+                product={product}
+                count={count}
+                setModal={setModal}
+                myPoint={myPoint}
+              />
             </div>
           </div>
         </div>

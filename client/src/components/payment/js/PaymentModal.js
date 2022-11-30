@@ -9,13 +9,13 @@ import { getUserInfo } from '../../../util/api/mypageUser';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { handleOrderCart, handleOrderSingle } from '../../../util/api/order';
-import { getPoint } from '../../../util/api/point';
+// import { getPoint } from '../../../util/api/point';
 import { paymentPoint } from '../../../util/api/point';
 import { useNavigate } from 'react-router-dom';
 
 export default function PaymentModal({
   setModal,
-  totalPrice,
+  // totalPrice,
   type,
   product,
   count,
@@ -31,12 +31,12 @@ export default function PaymentModal({
   const [receiverZipcode, setReceiverZipcode] = useState('');
 
   useEffect(() => {
-    getPoint().then((res) => {
-      if (res.data < totalPrice) {
-        window.alert('포인트가 부족합니다.');
-        setModal(false);
-      }
-    });
+    // getPoint().then((res) => {
+    //   if (res.data < totalPrice) {
+    //     window.alert('포인트가 부족합니다.');
+    //     setModal(false);
+    //   }
+    // });
     let userData = getUserInfo();
     userData.then((res) => {
       // null 값 처리 나중에 서버에서 빈문자열로 변경

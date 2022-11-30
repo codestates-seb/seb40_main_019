@@ -1,13 +1,13 @@
 import '../css/orderSummary.scss';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export default function OrderSummary({ totalPrice, myPoint, setModal }) {
-  console.log(myPoint);
+  const user = useSelector((state) => state.user);
   const [total, setTotal] = useState(0);
   const [point, setPoint] = useState(0);
   const [remain, setRemain] = useState(0);
   // const [minus, setRemain] = useState(0);
-
   useEffect(() => {
     setTotal(totalPrice);
     setPoint(myPoint);
@@ -15,6 +15,18 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
   }, [totalPrice, myPoint]);
 
   const payment = () => {
+    if (user.userRole === '') {
+      window.alert('로그인이 필요한 서비스입니다');
+      return;
+    }
+    if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
+      window.alert('판매자는 이용할 수 없습니다.');
+      return;
+    }
+    if (myPoint < totalPrice + 3000) {
+      window.alert('포인트가 부족합니다');
+      return;
+    }
     setModal(true);
   };
 
@@ -43,7 +55,15 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
           <div>
             <div className="totalPointBox">
               <div>사용 가능 포인트</div>
-              <div>{point}원</div>
+              {user.userRole !== '' ? (
+                <>
+                  <div>{point}원</div>
+                </>
+              ) : (
+                <>
+                  <div>-</div>
+                </>
+              )}
             </div>
             <div className="totalPriceBox">
               <div>결제 금액</div>
@@ -51,7 +71,15 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
             </div>
             <div className="remainPoint">
               <div>잔여 포인트</div>
-              <div>{remain}원</div>
+              {user.userRole !== '' ? (
+                <>
+                  <div>{remain}원</div>
+                </>
+              ) : (
+                <>
+                  <div>-</div>
+                </>
+              )}
             </div>
           </div>
 
