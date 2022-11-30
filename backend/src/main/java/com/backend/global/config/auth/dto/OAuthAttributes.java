@@ -1,14 +1,18 @@
 package com.backend.global.config.auth.dto;
 
+import com.backend.domain.point.application.PointService;
+import com.backend.domain.point.domain.PointType;
 import com.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
 /**
  * OAuth2 로그인 시 반환되는 사용자 정보
  */
+@Slf4j
 @Getter
 public class OAuthAttributes {
     private final Map<String, Object> attributes;
@@ -90,7 +94,7 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity() {
+    public User toEntity(PointService pointService) {
         User user = User.builder()
                 .userRole("ROLE_USER")
                 .profileImage(profileImage)
@@ -99,6 +103,9 @@ public class OAuthAttributes {
                 .socialLogin(registrationId)
 //                .about("안녕하세요. " + name + "입니다.")
                 .build();
+
+        pointService.addCash(user, 1000000, PointType.SignUpPoint);
+        log.info("회원가입 포인트 지급");
 
         return user;
 
