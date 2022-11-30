@@ -1,7 +1,8 @@
 package com.backend.domain.order.dto;
 
-import com.backend.domain.order.domain.OrderStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor

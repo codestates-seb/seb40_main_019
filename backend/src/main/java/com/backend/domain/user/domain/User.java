@@ -65,7 +65,7 @@ public class User extends Auditable {
     private String username;
 
     @Column
-    @ColumnDefault("0")
+    @ColumnDefault("-1")
     private int restCash;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

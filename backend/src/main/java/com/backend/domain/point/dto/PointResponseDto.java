@@ -5,7 +5,6 @@ import com.backend.domain.point.domain.PointType;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Getter

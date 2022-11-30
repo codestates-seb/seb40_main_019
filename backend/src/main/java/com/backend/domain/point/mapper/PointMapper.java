@@ -1,7 +1,6 @@
 package com.backend.domain.point.mapper;
 
 import com.backend.domain.point.domain.PointHistory;
-import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.dto.PointResponseDto;
 import org.mapstruct.Mapper;
 

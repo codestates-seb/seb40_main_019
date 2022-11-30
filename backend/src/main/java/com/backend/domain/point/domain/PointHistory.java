@@ -1,8 +1,10 @@
 package com.backend.domain.point.domain;
 
 import com.backend.domain.user.domain.User;
-import com.backend.global.audit.Auditable;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;

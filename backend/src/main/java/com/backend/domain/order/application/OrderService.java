@@ -4,13 +4,13 @@ import com.backend.domain.order.dao.OrderProductRepository;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.order.domain.OrderStatus;
-import com.backend.domain.order.domain.QOrderProduct;
-import com.backend.domain.order.dto.*;
+import com.backend.domain.order.dto.CartOrderDto;
+import com.backend.domain.order.dto.CartOrderProductDto;
+import com.backend.domain.order.dto.OrderDto;
+import com.backend.domain.order.dto.OrderHistoryDto;
 import com.backend.domain.order.exception.OrderNotFound;
 import com.backend.domain.product.dao.ProductRepository;
 import com.backend.domain.product.domain.Product;
-import com.backend.domain.product.exception.ProductNotFound;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
@@ -18,19 +18,19 @@ import com.backend.global.error.BusinessLogicException;
 import com.backend.global.error.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static com.backend.domain.order.domain.OrderStatus.SHIPPED;
 import static com.backend.domain.order.domain.OrderStatus.SHIPPING;
-import static com.backend.domain.order.domain.QOrder.order;
 import static com.backend.global.error.ExceptionCode.CANNOT_CHANGE_ORDER;
 
 @Transactional
@@ -210,5 +210,3 @@ import static com.backend.global.error.ExceptionCode.CANNOT_CHANGE_ORDER;
         return orderRepository.findOrders(userId, PageRequest.of(page,size, Sort.by("orderId").descending()));
 
     }*/
-
-

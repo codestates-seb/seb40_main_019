@@ -1,7 +1,6 @@
 package com.backend.domain.order.domain;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public enum OrderStatus {

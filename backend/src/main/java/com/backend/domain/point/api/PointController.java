@@ -3,19 +3,14 @@ package com.backend.domain.point.api;
 import com.backend.domain.order.dao.OrderProductRepository;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
-import com.backend.domain.order.domain.OrderProduct;
-import com.backend.domain.order.dto.OrderHistoryDto;
 import com.backend.domain.point.application.PointService;
-import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.domain.PointType;
 import com.backend.domain.point.dto.PointChargeDto;
 import com.backend.domain.point.dto.PointResponseDto;
 import com.backend.domain.point.mapper.PointMapper;
 import com.backend.domain.user.dao.UserRepository;
-
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
-
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
 import com.backend.global.dto.Response.MultiResponse;
@@ -31,7 +26,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.persistence.EntityNotFoundException;
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor

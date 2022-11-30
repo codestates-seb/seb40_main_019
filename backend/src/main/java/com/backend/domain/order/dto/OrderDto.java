@@ -1,6 +1,7 @@
 package com.backend.domain.order.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -27,9 +28,3 @@ public class OrderDto {
 
 
     }
-
-
-
-
-
-

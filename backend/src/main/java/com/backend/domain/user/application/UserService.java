@@ -93,9 +93,6 @@ public class UserService {
         log.info("비밀번호 암호화");
         pointService.addCash(user, 1000000, PointType.SignUpPoint);
         log.info("회원가입 포인트 지급");
-
-        userRepository.save(user);
-
     }
 
     private boolean isNotExistsEmailByOriginal(String email) {
