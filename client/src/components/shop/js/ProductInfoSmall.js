@@ -22,17 +22,17 @@ export default function ProductInfoSmall({
 
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
 
-    if (data[product.productsId]) {
-      data[product.productsId] = {
-        ...data[product.productsId],
-        count: data[product.productsId].count + count,
+    if (data[product.productId]) {
+      data[product.productId] = {
+        ...data[product.productId],
+        count: data[product.productId].count + count,
       };
     } else {
-      data[product.productsId] = {
+      data[product.productId] = {
         titleImg: product.titleImg,
-        title: product.title,
+        productName: product.productName,
         price: product.price,
-        productsId: product.productsId,
+        productId: product.productId,
         count: count,
         check: true,
       };
