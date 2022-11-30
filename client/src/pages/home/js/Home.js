@@ -29,7 +29,7 @@ export default function Home() {
     //   });
     setScroll(scrollY);
   };
-  console.log(scroll > 400 ? 'main2Text animate__backInDown' : 'main2Text');
+  console.log(scrollY);
 
   return (
     <>
@@ -72,9 +72,7 @@ export default function Home() {
         <div className="main2Wrap">
           <div
             className={
-              scroll > 400
-                ? 'main2Text animate__animated animate__backInDown'
-                : 'hidden'
+              scroll > 400 ? 'main2Text main2TextAni' : 'main2Text hidden'
             }
           >
             <h1>건강에 대한 바른 집념</h1>
@@ -86,47 +84,86 @@ export default function Home() {
               일에 원동력이 되고 있습니다
             </p>
           </div>
-          <div className="main2Img">
+          <div
+            className={
+              scroll > 400 ? 'main2Img main2ImgAni' : 'main2Img hidden'
+            }
+          >
             <img className="main1" src={mainCircle3} alt="mainImg" />
           </div>
         </div>
         <div className="main3Wrap">
           <div className="main3WrapParent">
-            <img className="aiDog" src={aiDog} alt="aiDog" />
+            <img
+              className={scroll > 900 ? 'aiDog aiDogAni' : 'aiDog hidden'}
+              src={aiDog}
+              alt="aiDog"
+            />
             <div className="aiText">
-              <div className="aiTextTop">
+              <div
+                className={
+                  scroll > 900 ? 'aiTextTop aiTextTopAni' : 'aiTextTop hidden'
+                }
+              >
                 <h1>AI를 이용한 맞춤 추천</h1>
               </div>
-              <div className="aiTextBottom">
+              <div
+                className={
+                  scroll > 900
+                    ? 'aiTextBottom aiTextBottomAni'
+                    : 'aiTextBottom hidden'
+                }
+              >
                 <h3>나이별, 건강 상태별, 라이프 스타일에 따라</h3>
                 <h3>필요로 하는 영양 맞춤 사료를 만나보세요.</h3>
               </div>
-              <button>AI 추천 바로가기</button>
+              <button className={scroll > 900 ? 'aiBtnAni' : 'hidden'}>
+                AI 추천 바로가기
+              </button>
             </div>
           </div>
         </div>
         <div className="main4Wrap">
           <div className="mainBoxWrap">
-            <div className="boxLeft">
+            <div
+              className={
+                scroll > 1700 ? 'boxLeft boxLeftAni' : 'boxLeft hidden'
+              }
+            >
               <div className="firstBox">
                 <MainBox name={'boxOne'} idx={0} />
               </div>
               <MainBox name={'boxTwo'} idx={1} />
             </div>
-            <div className="boxRight">
+            <div
+              className={
+                scroll > 1700 ? 'boxRight boxRightAni' : 'boxRight hidden'
+              }
+            >
               <div className="firstBox">
                 <MainBox name={'boxThree'} idx={2} />
               </div>
               <MainBox name={'boxFour'} idx={3} />
             </div>
-            <div className="mainBoxBack"></div>
+            <div
+              className={
+                scroll > 1700
+                  ? 'mainBoxBack mainBoxBackAni'
+                  : 'mainBoxBack hidden'
+              }
+            ></div>
           </div>
         </div>
         <div className="main5Wrap">
-          <img src={reviewBar} alt="reviewBar" className="reviewBar" />
-          <div className="reviewWrap"></div>
-          <h3>REVIEW</h3>
-          <MainReview />
+          <img
+            src={reviewBar}
+            alt="reviewBar"
+            className={
+              scroll > 2600 ? 'reviewBar reviewBarAni' : 'reviewBar hidden'
+            }
+          />
+          <h3 className={scroll > 2800 ? 'reviewTextAni' : 'hidden'}>REVIEW</h3>
+          <MainReview scroll={scroll} />
         </div>
       </div>
     </>

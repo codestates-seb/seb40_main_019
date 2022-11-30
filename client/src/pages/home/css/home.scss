@@ -99,7 +99,7 @@
 .main2Wrap {
   display: flex;
   justify-content: space-around;
-  margin-top: 120px;
+  // margin-top: 50px;
   .main2Text{
     display: flex;
     flex-direction: column;
@@ -115,9 +115,11 @@
       width: 500px;
       text-align: center;
       color: var(--color-brown);
-      line-height: 22px;
+      line-height: 28px;
     }
     @media (max-width:640px){
+        margin-top: 50px;
+
       h1{
         font-size: 20px;
       }
@@ -127,6 +129,12 @@
       }
     }
   }
+  .main2TextAni{
+    animation: fadeInLeft;
+    animation-duration: 1.5s; 
+    animation-fill-mode: forwards;
+  }
+
   .main2Img{
     .main1{
       max-width: 500px;
@@ -135,6 +143,12 @@
         display: none;
       }
     }
+  }
+  .main2ImgAni{
+    animation: bounceIn;
+    animation-duration: 1s; 
+    animation-fill-mode: backwards;
+    animation-delay: .5s;
   }
   @media (max-width:980px){
       justify-content: center;
@@ -153,7 +167,12 @@
     .aiDog {
       width: 55%;
       position: relative;
-      right: 10vw;
+      right: 5vw;
+    }
+    .aiDogAni{
+      animation: fadeInLeft;
+      animation-duration: 2s; 
+      animation-fill-mode: backwards;
     }
 
     .aiText {
@@ -196,11 +215,29 @@
         font-weight: 300;
       }
     }
+    .aiTextTopAni{
+      animation: fadeInUp;
+      animation-duration: 1s; 
+      animation-fill-mode: backwards;
+      animation-delay: 1s;
+    }
+    .aiTextBottomAni{
+      animation: fadeInUp;
+      animation-duration: 1s; 
+      animation-fill-mode: backwards;
+      animation-delay: 1.2s;
+    }
+    .aiBtnAni{
+      animation: fadeInUp;
+      animation-duration: 1s; 
+      animation-fill-mode: backwards;
+      animation-delay: 1.4s;
+    }
   }
 }
 
 .main4Wrap {
-  margin-bottom: 150px;
+  margin-bottom: 200px;
   .mainBoxWrap {
     display: flex;
     justify-content: center;
@@ -213,11 +250,22 @@
         margin-left: auto;
       }
     }
+    .boxLeftAni{
+      animation: fadeInUp;
+      animation-duration: 2s; 
+      animation-fill-mode: backwards;
+      animation-delay: .5s;
+    }
 
     .boxRight {
       flex-direction: column;
       position: relative;
       bottom: 50px;
+    }
+    .boxRightAni{
+      animation: fadeInUp;
+      animation-duration: 2s; 
+      animation-fill-mode: backwards;
     }
     .firstBox {
       margin-bottom: 30px;
@@ -233,6 +281,12 @@
     background-color: #6ea9bf;
     border-radius: 15px 0px 0px 15px;
   }
+  .mainBoxBackAni{
+    animation: slideInRight;
+    animation-duration: 2s; 
+    animation-fill-mode: backwards;
+    animation-delay: 1.5s;
+  }
 }
 
 .main5Wrap {
@@ -242,13 +296,24 @@
   .reviewBar {
     width: 60vw;
   }
+  .reviewBarAni{
+    animation: fadeInUp;
+    animation-duration: 1s; 
+    animation-fill-mode: backwards;
+    // animation-delay: 1.4s;
+  }
   h3 {
     font-weight: 500;
     font-family: var(--font-notoSans);
     margin: 50px 0px;
   }
+  .reviewTextAni{
+    animation: fadeInUp;
+    animation-duration: 1s; 
+    animation-fill-mode: backwards;
+  }
 }
 
 .hidden{
-  display: none;
+  opacity: 0;
 }

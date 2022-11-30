@@ -76,4 +76,9 @@
       }
     }
   }
+  .reviewAni{
+    animation: fadeInUp;
+    animation-duration: 2s; 
+    animation-fill-mode: backwards;
+  }
 }
