@@ -23,6 +23,10 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
       window.alert('판매자는 이용할 수 없습니다.');
       return;
     }
+    if (total === 0) {
+      window.alert('선택한 상품이 없습니다.');
+      return;
+    }
     if (myPoint < totalPrice + 3000) {
       window.alert('포인트가 부족합니다');
       return;

@@ -29,7 +29,8 @@
         "useTabs": false,
         "endOfLine": "auto"
       }
-    ]
+    ],
+    "import/no-unresolved": "off"
   }
 }
  

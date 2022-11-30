@@ -72,19 +72,25 @@ export default function PaymentModal({
         let orderItem = JSON.parse(window.localStorage.getItem('cartItem'));
         Object.keys(orderItem).forEach((el) => {
           if (orderItem[el].check) {
-            console.log(orderItem[el]);
             temp.cartOrderProductDtoList.push({
-              productId: orderItem[el].productsId,
+              productId: orderItem[el].productId,
               quantity: orderItem[el].count,
             });
           }
         });
-        console.log('주문 생성');
+
         let orderData = handleOrderCart(temp);
         orderData.then((data) => {
           let res = paymentPoint(data.orderId);
           res.then((data) => {
             if (data.status === 200) {
+              temp.cartOrderProductDtoList.forEach((el) => {
+                delete orderItem[el.productId];
+              });
+              window.localStorage.setItem(
+                'cartItem',
+                JSON.stringify(orderItem)
+              );
               navigate('/mypage/order');
             }
           });
@@ -99,10 +105,9 @@ export default function PaymentModal({
           ...data,
           receiverAddress,
           receiverZipcode,
-          productId: product.productsId,
+          productId: product.productId,
           quantity: count,
         };
-        console.log('주문 생성');
         let orderData = handleOrderSingle(temp);
         orderData.then((data) => {
           let res = paymentPoint(data.orderId);

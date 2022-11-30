@@ -19,7 +19,7 @@ const CartListItem = ({
         ></input>
       </div>
       <img className="titleImg" src={item.titleImg} alt="productImg" />
-      <div className="title">{item.title}</div>
+      <div className="title">{item.productName}</div>
       <div className="quantity">
         <CartQuantityBtn
           item={item}

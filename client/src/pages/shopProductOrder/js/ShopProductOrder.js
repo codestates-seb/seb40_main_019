@@ -48,9 +48,9 @@ export default function ShopProductOrder() {
       return;
     }
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    data[item.productsId] = {
-      ...data[item.productsId],
-      count: data[item.productsId].count - 1,
+    data[item.productId] = {
+      ...data[item.productId],
+      count: data[item.productId].count - 1,
     };
 
     let arr = [];
@@ -74,9 +74,9 @@ export default function ShopProductOrder() {
       return;
     }
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    data[item.productsId] = {
-      ...data[item.productsId],
-      count: data[item.productsId].count + 1,
+    data[item.productId] = {
+      ...data[item.productId],
+      count: data[item.productId].count + 1,
     };
 
     let arr = [];
@@ -98,7 +98,7 @@ export default function ShopProductOrder() {
     window.alert('물품 삭제');
 
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    delete data[item.productsId];
+    delete data[item.productId];
 
     let arr = [];
     let checked = true;
@@ -122,9 +122,9 @@ export default function ShopProductOrder() {
   const checkBuyItem = (item) => {
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
 
-    data[item.productsId] = {
-      ...data[item.productsId],
-      check: !data[item.productsId].check,
+    data[item.productId] = {
+      ...data[item.productId],
+      check: !data[item.productId].check,
     };
     let arr = [];
     let price = 0;
