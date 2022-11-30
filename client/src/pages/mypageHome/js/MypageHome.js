@@ -4,6 +4,7 @@ import MypageOrderListItem from '../../../components/mypageOrderListItem/js/Mypa
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
 import useFetch from '../../../util/useFetch';
+import '../../review/css/Review.scss';
 
 export default function MypageHome() {
   //임시
@@ -23,6 +24,7 @@ export default function MypageHome() {
   const [order] = useFetch('orders'); //page 0으로
   const [review] = useFetch('user/review'); // page 0으로
 
+  console.log(review);
   return (
     <div className="mypageHome">
       <div className="orderSummery">

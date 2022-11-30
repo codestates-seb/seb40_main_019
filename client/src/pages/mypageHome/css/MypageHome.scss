@@ -1,5 +1,6 @@
 .orderSummery {
   margin-bottom: 40px;
+  
   ul {
     background-color: var(--color-grey);
     padding: 30px 20px;
@@ -69,4 +70,30 @@
 
 .MypageOrderContainer {
   margin-bottom: 40px;
+}
+
+.reviewContainer {
+  h1{
+    color: var(--color-blue);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  .lineTitle{
+      display: grid;
+      grid-template-columns: 3fr 3fr 1fr;
+    text-align: center;
+    padding: 10px 0px;
+    border-bottom: 1px solid var(--color-blue);
+    li{
+      color: var(--color-blue);
+    font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 750px) {
+    .lineBold {
+      margin-bottom: 20px;
+    }
+  }
 }
