@@ -4,15 +4,12 @@ import video2 from '../../../assets/video/main3.webm';
 import video3 from '../../../assets/video/main4.webm';
 import video4 from '../../../assets/video/main5.webm';
 import video5 from '../../../assets/video/main6.webm';
-import mainImg1 from '../../../assets/img/mainImg1.png';
-import mainImg2 from '../../../assets/img/mainImg2.png';
-import mainImg3 from '../../../assets/img/mainImg3.jpg';
 import aiDog from '../../../assets/img/aiDog.svg';
 import reviewBar from '../../../assets/img/reviewBar.svg';
-import MainImg from '../../../components/home/js/MainImg';
 import MainVideo from '../../../components/home/js/MainVideo';
 import MainBox from '../../../components/home/js/MainBox';
 import MainReview from '../../../components/home/js/MainReview';
+import mainCircle3 from '../../../assets/img/mainCircle3.svg';
 import 'animate.css';
 
 export default function Home() {
@@ -43,11 +40,18 @@ export default function Home() {
           </div>
         </div>
         <div className="main2Wrap">
-          <h3>BEST PRODUCTS</h3>
-          <div className="bestProducts">
-            <MainImg src={mainImg1} idx={0} />
-            <MainImg src={mainImg2} idx={1} />
-            <MainImg src={mainImg3} idx={2} />
+          <div className="main2Text">
+            <h1>건강에 대한 바른 집념</h1>
+            <p>
+              LUXMEAL은 영양을 통해 반려견의 건강을 향상시키겠다는 포부로
+              설립되었습니다. 어느 곳에서 볼수없었던 최고급 사료를 취급하는
+              쇼핑몰로서 품질을 유지하기위해 항상 노력하고있습니다. 항상
+              반려견의 건강을 최우선으로 하자는 그 사명은 LUXMEAL이 하는 모든
+              일에 원동력이 되고 있습니다
+            </p>
+          </div>
+          <div className="main2Img">
+            <img className="main1" src={mainCircle3} alt="mainImg" />
           </div>
         </div>
         <div className="main3Wrap">
@@ -55,12 +59,11 @@ export default function Home() {
             <img className="aiDog" src={aiDog} alt="aiDog" />
             <div className="aiText">
               <div className="aiTextTop">
-                <p>세계 최초 도입</p>
                 <h1>AI를 이용한 맞춤 추천</h1>
               </div>
               <div className="aiTextBottom">
-                <h3>나이와 몸무게만 입력하면</h3>
-                <h3>우리 아이에게 맞는 사료 추천!</h3>
+                <h3>나이별, 건강 상태별, 라이프 스타일에 따라</h3>
+                <h3>필요로 하는 영양 맞춤 사료를 만나보세요.</h3>
               </div>
               <button>AI 추천 바로가기</button>
             </div>

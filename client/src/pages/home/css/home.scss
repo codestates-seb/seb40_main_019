@@ -1,6 +1,7 @@
 .home {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .main1Wrap {
@@ -75,53 +76,48 @@
 }
 
 .main2Wrap {
-  text-align: center;
-  margin-top: 150px;
-  h3 {
-    font-weight: 500;
-    font-family: var(--font-notoSans);
-    margin-bottom: 50px;
-  }
-  .bestProducts {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 120px;
+  .main2Text{
     display: flex;
-    justify-content: center;
-    width: 100%;
-    :nth-child(1) {
-      margin-right: 40px;
+    flex-direction: column;
+    align-items: center;
+    margin: auto 0;
+    h1{
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--color-blue);
+      margin-bottom: 30px;
     }
-    :nth-child(2) {
-      margin-right: 40px;
+    p{
+      width: 500px;
+      text-align: center;
+      color: var(--color-brown);
+      line-height: 22px;
     }
-    .mainImgWrap {
-      @media (max-width: 980px) {
-        width: 25vw;
+    @media (max-width:640px){
+      h1{
+        font-size: 20px;
       }
-      @media (max-width: 640px) {
-        margin-right: 0px;
-        width: 80%;
-        align-items: center;
-        margin-bottom: 40px;
+      p{
+        width: 350px;
+        font-size: 14px;
       }
-    }
-    .mainImg {
-      @media (max-width: 980px) {
-        width: 25vw;
-        height: 30vw;
-      }
-      @media (max-width: 640px) {
-        margin-right: 0px;
-        width: 100%;
-        height: 90vw;
-      }
-    }
-    @media (max-width: 640px) {
-      flex-direction: column;
-      align-items: center;
     }
   }
-  @media (max-width: 980px) {
-    margin-top: 80px;
+  .main2Img{
+    .main1{
+      max-width: 500px;
+      width: 30vw;
+      @media (max-width:980px){
+        display: none;
+      }
+    }
   }
+  @media (max-width:980px){
+      justify-content: center;
+      }
 }
 
 .main3Wrap {
@@ -154,7 +150,7 @@
         h1 {
           font-size: 3vw;
           font-weight: 600;
-          color: var(--color-brown);
+          color: var(--color-blue);
         }
       }
 
@@ -170,9 +166,9 @@
       }
 
       button {
-        background-color: var(--color-brown);
+        background-color: var(--color-blue);
         color: var(--color-white);
-        font-size: 0.8vw;
+        font-size: 1vw;
         padding: 12px 20px;
         border-radius: 10px;
         font-family: var(--font-notoSans);
