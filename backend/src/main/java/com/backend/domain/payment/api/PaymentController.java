@@ -1,6 +1,5 @@
 package com.backend.domain.payment.api;
 
-import com.backend.domain.payment.application.PaymentService;
 import com.backend.domain.payment.domain.Payment;
 import com.backend.domain.payment.dto.PaymentRequest;
 import com.backend.domain.payment.mapper.PaymentMapper;

@@ -4,15 +4,9 @@ import com.backend.domain.order.application.OrderService;
 import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.dto.*;
-
 import com.backend.domain.order.mapper.OrderMapper;
-import com.backend.domain.product.domain.Product;
-import com.backend.domain.product.dto.ProductPatchDto;
-
-
 import com.backend.global.annotation.CurrentUser;
 import com.backend.global.config.auth.userdetails.CustomUserDetails;
-
 import com.backend.global.dto.Response.MultiResponse;
 import com.backend.global.dto.Response.SingleResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +16,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -130,8 +122,3 @@ public class OrderController {
         Long orderId = orderService.cartOrder(cartOrderDtoList, principal.getName());
         return new ResponseEntity<Long>(orderId, HttpStatus.OK);*/
     }
-
-
-
-
-

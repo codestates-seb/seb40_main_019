@@ -3,7 +3,6 @@ package com.backend.domain.order.mapper;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.dto.OrderDto;
 import com.backend.domain.order.dto.OrderPatchDto;
-import com.backend.domain.order.dto.OrderPriceDto;
 import com.backend.domain.order.dto.OrderResponseDto;
 import org.mapstruct.Mapper;
 

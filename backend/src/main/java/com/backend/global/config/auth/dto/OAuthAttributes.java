@@ -1,12 +1,9 @@
 package com.backend.global.config.auth.dto;
 
-import com.backend.domain.point.application.PointService;
-import com.backend.domain.point.domain.PointType;
 import com.backend.domain.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Map;
 

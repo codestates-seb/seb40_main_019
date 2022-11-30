@@ -1,10 +1,9 @@
 package com.backend.domain.order.dto;
+
 import com.backend.domain.order.domain.OrderProduct;
 import com.backend.domain.order.domain.OrderProductReviewStatus;
-import com.querydsl.core.annotations.QueryProjection;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter @Setter
 public class OrderProductDto {
@@ -36,7 +35,3 @@ public class OrderProductDto {
 
 
 }
-
-
-
-

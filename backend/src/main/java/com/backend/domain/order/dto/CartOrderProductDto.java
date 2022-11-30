@@ -1,6 +1,5 @@
 package com.backend.domain.order.dto;
 
-import com.backend.domain.order.domain.OrderProduct;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

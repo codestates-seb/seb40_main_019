@@ -1,10 +1,10 @@
 package com.backend.domain.order.domain;
 
-import com.backend.domain.order.dto.OrderProductDto;
 import com.backend.domain.product.domain.Product;
 import com.backend.global.audit.Auditable;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 

@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
@@ -78,7 +79,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
      * @param attributes OAuthAttributes
      * @return User
      */
-    private User saveOrUpdate(OAuthAttributes attributes) {
+    @Transactional
+    public User saveOrUpdate(OAuthAttributes attributes) {
         log.info("saveOrUpdate 실행");
         User user = userRepository.findByEmailAndUserStatusAndSocialLogin(attributes.getEmail(), User.UserStatus.USER_EXIST, attributes.getRegistrationId())
                 .orElse(attributes.toEntity());
@@ -87,15 +89,14 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             user.setPassword(passwordEncoder.encode(user.getNickname()));
         }
 
-        User savedUser = userRepository.save(user);
-
-        if (savedUser.getRestCash() == 0) {
+        if (user.getRestCash() == -1) {
+            user.setRestCash(0);
             pointService.addCash(user, 1000000, PointType.SignUpPoint);
             log.info("회원가입 포인트 지급");
         }
 
         log.info("saved User");
-        return savedUser;
+        return user;
     }
 
 }
