@@ -1,6 +1,7 @@
 import '../css/productDetailBox.scss';
 
 export default function ProductDetailBox({ product, setClickBtn }) {
+  // console.log(product.detailImg);
   return (
     <div className="detailContainer">
       {product && (

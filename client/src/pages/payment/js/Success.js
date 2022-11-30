@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 import { addPoint } from '../../../util/api/payment';
+import Loading from '../../../components/loading/js/Loading';
+import { useNavigate } from 'react-router-dom';
+import '../css/success.scss';
+
 export default function Success() {
+  const navigate = useNavigate();
   useEffect(() => {
     const orderId = new URL(window.location.href).searchParams.get('orderId');
     const paymentKey = new URL(window.location.href).searchParams.get(
@@ -16,12 +21,20 @@ export default function Success() {
       paymentKey: paymentKey,
       amount: amount,
     };
-    addPoint(data);
+    let res = addPoint(data);
+    res.then((res) => {
+      if (res.status === 200) {
+        window.alert('결제완료');
+        navigate('/mypage/point');
+      }
+    });
   }, []);
 
   return (
     <>
-      <div>Success</div>
+      <div className="successInner">
+        <Loading />
+      </div>
     </>
   );
 }

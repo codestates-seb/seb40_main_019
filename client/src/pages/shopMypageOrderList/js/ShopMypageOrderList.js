@@ -1,19 +1,20 @@
 import '../css/shopMypageOrderList.scss';
 import MypageOrderListItem from '../../../components/mypageOrderListItem/js/MypageOrderListItem';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import useFetch from '../../../util/useFetch';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
 
 export default function ShopMypageOrderList() {
   //임시
-  const [items, setItems] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/ordersMypage/').then((res) => {
-      setItems(res.data);
-    });
-  }, []);
+  // const [items, setItems] = useState();
+  // useEffect(() => {
+  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
+  //     setItems(res.data);
+  //   });
+  // }, []);
 
-  // const [items] = useFetch('orders')//page필요
-
+  const [items] = useFetch('orders/1'); //page필요
+  console.log(items);
   return (
     <div className="MypageOrderContainer">
       <div className="orderListTitle">

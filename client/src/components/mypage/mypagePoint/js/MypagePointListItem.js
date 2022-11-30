@@ -6,8 +6,17 @@ export default function MypagePointListItem({ point }) {
       <div className="createdAt">
         <p>{point.createdAt}</p>
       </div>
-      <div className="plusPoint">+{point.price}원</div>
-      <div className="minusPoint">-{point.newRestCash} 원</div>
+      {point.cash >= 0 ? (
+        <>
+          <div className="plusPoint">+{point.cash}원</div>
+          <div className="minusPoint">0원</div>
+        </>
+      ) : (
+        <>
+          <div className="plusPoint">0원</div>
+          <div className="minusPoint">-{point.cash}원</div>
+        </>
+      )}
       <div className="remainingPoint">{point.restCash} 원</div>
     </div>
   );

@@ -1,19 +1,22 @@
 // import React from 'react';
 import '../css/formDisabledInput.scss';
 
-export default function FormInput({
+export default function FormDisabledInput({
   labelName,
   inputId,
   inputType,
   name,
   value,
+  onClick,
 }) {
   return (
     <>
-      <div className="disabledinputArea">
+      <div className="labelArea">
         <label className="formLabel" htmlFor={inputId}>
           {labelName}
         </label>
+      </div>
+      <button onClick={onClick} className="disabledinputArea">
         <input
           name={name}
           className="formInput"
@@ -22,7 +25,7 @@ export default function FormInput({
           value={value}
           disabled
         />
-      </div>
+      </button>
     </>
   );
 }

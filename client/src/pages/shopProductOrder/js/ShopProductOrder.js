@@ -1,21 +1,28 @@
 import '../css/shopProductOrder.scss';
 import { useState, useEffect } from 'react';
 // import { useEffect } from 'react';
-
+import PaymentModal from '../../../components/payment/js/PaymentModal';
 import CartList from '../../../components/shop/productOrder/js/CartList';
 import OrderSummary from '../../../components/shop/productOrder/js/OrderSummary';
 import OrderMobileButton from './OrderMobileButton';
+import { getPoint } from '../../../util/api/point';
 
 export default function ShopProductOrder() {
   const [items, setItems] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [allSelect, setAllSelect] = useState(true);
+  const [modal, setModal] = useState(false);
+
+  const [myPoint, setMyPoint] = useState(0);
 
   useEffect(() => {
+    getPoint().then((res) => {
+      setMyPoint(res.data);
+    });
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
+
     let price = 0;
     let arr = [];
-
     let checked = true;
     Object.keys(data).forEach((el) => {
       if (data[el].check) {
@@ -168,11 +175,28 @@ export default function ShopProductOrder() {
         />
       </div>
       <div className="orderSummaryBox">
-        <OrderSummary totalPrice={totalPrice} />
+        <OrderSummary
+          totalPrice={totalPrice}
+          myPoint={myPoint}
+          setModal={setModal}
+        />
       </div>
       <div className="MobileBtnContainer">
-        <OrderMobileButton totalPrice={totalPrice} />
+        <OrderMobileButton
+          totalPrice={totalPrice}
+          myPoint={myPoint}
+          setModal={setModal}
+        />
       </div>
+      {modal && (
+        <>
+          <PaymentModal
+            setModal={setModal}
+            totalPrice={totalPrice}
+            type="multi"
+          />
+        </>
+      )}
     </div>
   );
 }

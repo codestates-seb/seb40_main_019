@@ -24,18 +24,23 @@ export const getPoint = async () => {
 export const paymentPoint = async (orderId) => {
   try {
     console.log('포인트 결제 내부');
-    const res = await axios.get(`${REACT_APP_API_URL}point/${orderId}`);
+    const res = await axios.post(`${REACT_APP_API_URL}point/${orderId}`);
     console.log(res);
-    return res;
+    if (res.status === 200) {
+      window.alert('결제 완료');
+      return res;
+    }
+    // return res;
   } catch (error) {
     return error.response.data;
   }
 };
+
 // 포인트 내역 조회
 export const getPointList = async () => {
   try {
     console.log('포인트 결제 내부');
-    const res = await axios.get(`${REACT_APP_API_URL}point`);
+    const res = await axios.get(`${REACT_APP_API_URL}point/1`);
     console.log(res);
     return res;
   } catch (error) {

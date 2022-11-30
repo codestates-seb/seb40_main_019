@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import useFetch from '../../../util/useFetch';
 
 export default function SellerProducts() {
-  const [items] = useFetch('products');
+  const [items] = useFetch('products/filter/1');
 
   return (
     <div className="sellerProducts">

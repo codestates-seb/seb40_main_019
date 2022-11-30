@@ -30,7 +30,7 @@
 //배송지 정보
 .orderAddressContainer{
     border-top: 2px solid var(--color-blue);
-    border-bottom: 2px solid var(--color-blue);
+    // border-bottom: 2px solid var(--color-blue);
     padding: 20px;
     font-size: 16px;
 
@@ -57,44 +57,43 @@
 
 //결제 정보
 .orderInfoContainer{
+    border-top: 2px solid var(--color-blue);
+    border-bottom: 2px solid var(--color-blue);
     padding: 20px;
-
 }
 .orderTextAlign{
     text-align: center;
     padding-bottom: 20px;
     color: var(--color-brown);
 }
-
 .totalPointBox{
     display: flex;
     justify-content: space-between;
-    font-weight: 500;
-    padding: 12px 0;
+    padding: 26px 20px 6px;
 }
-
+.remainPoint{
+    display: flex;
+    justify-content: space-between;
+    padding: 26px 20px 26px;
+    font-weight: 700;
+}
 .productPriceBox{
     display: flex;
     justify-content: space-between;
     padding: 6px 0;
-
 }
-
 .deliveryFeeBox{
     display: flex;
     justify-content: space-between;
     padding: 6px 0;
-
-
 }
 
 //총 금액 정보
 .totalPriceBox{
     display: flex;
     justify-content: space-between;
-    padding: 40px 20px;
-    font-weight: bold;
-    border-top: 2px solid var(--color-blue);
+    padding: 6px 20px 26px;
+    border-bottom: 2px solid var(--color-blue);
 }
 
 //order버튼 -> 결제창 띄우가

@@ -6,10 +6,12 @@ import MypagePointList from '../../../../components/mypage/mypagePoint/js/Mypage
 export default function MypagePointPage() {
   return (
     <>
-      <div className="mypagePointContainer">
-        <MypagePoint />
+      <div>
+        <div className="mypagePointContainer">
+          <MypagePoint />
+        </div>
+        <MypagePointList />
       </div>
-      <MypagePointList />
     </>
   );
 }

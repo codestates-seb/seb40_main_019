@@ -1,7 +1,12 @@
 import '../css/productInfoSmall.scss';
 import QuantityBtn from './QuantityBtn';
 
-export default function ProductInfoSmall({ product, count, setCount }) {
+export default function ProductInfoSmall({
+  product,
+  count,
+  setCount,
+  setModal,
+}) {
   // addToCart 버튼 누르면 장바구니에 상품담기
 
   function addToCart() {
@@ -36,7 +41,7 @@ export default function ProductInfoSmall({ product, count, setCount }) {
         <button onClick={addToCart} className="cart">
           CART
         </button>
-        <button>ORDER</button>
+        <button onClick={() => setModal(true)}>ORDER</button>
       </div>
     </div>
   );

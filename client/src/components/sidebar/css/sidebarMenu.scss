@@ -7,9 +7,9 @@
   border-radius: 15px;
   z-index: 100;
   
-  @media (max-width: 1280px) {
+  @media (max-width: 1364px) {
     background-color: var(--color-white);
-    width: 100px;
+    width: 120px;
     box-shadow: 5px 5px 5px rgba(75, 73, 72, 0.3);
   }
   
@@ -30,13 +30,16 @@
 
   .tittleList {
     list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     cursor: pointer;
-    li {
+    button {
       padding: 10px;
       color: var(--color-blue);
       font-size: 14px;
     }
-    li:hover {
+    button:hover {
       color: var(--color-yellow);
     }
   }
