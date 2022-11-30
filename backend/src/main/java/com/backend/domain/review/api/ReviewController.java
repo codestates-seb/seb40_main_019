@@ -81,7 +81,7 @@ public class ReviewController {
         }
         Long userId = authUser.getUser().getUserId();
         log.info("userId : ",userId);
-        Page<Review> reviewPage = reviewService.getList(userId, page, size);
+        Page<Review> reviewPage = reviewService.getList(userId, page-1, size);
         log.info("reviewPage :",reviewPage);
         List<Review> content = reviewPage.getContent();
         log.info("content : ",content);
@@ -92,7 +92,7 @@ public class ReviewController {
     public ResponseEntity getLestProduct(@PathVariable Long productId, @RequestParam int page){
         int size = 15;
         log.info("getLestProduct 실행 ");
-        Page<Review> reviews = reviewService.getListProduct(productId, page, size);
+        Page<Review> reviews = reviewService.getListProduct(productId, page-1, size);
         log.info("reviews : " , reviews);
         List<Review> content = reviews.getContent();
         log.info("content : ",content);
@@ -105,7 +105,7 @@ public class ReviewController {
     public ResponseEntity getProductReview(@CurrentUser CustomUserDetails authUser,@RequestParam int page){
         int size = 15;
         Long userId = authUser.getUser().getUserId();
-        Page<Review> reviews = reviewService.getProductReview(userId, page, size);
+        Page<Review> reviews = reviewService.getProductReview(userId, page-1, size);
         List<Review> content = reviews.getContent();
         return new ResponseEntity(new MultiResponse<>(reviewMapper.reviewsToReviewResponseDto(content),reviews),HttpStatus.OK);
     }

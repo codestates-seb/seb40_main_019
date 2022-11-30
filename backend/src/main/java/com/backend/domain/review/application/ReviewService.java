@@ -19,14 +19,11 @@ import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -138,23 +135,8 @@ public class ReviewService {
 
     @Transactional(readOnly = true)
     public Page<Review> getProductReview(Long userId,int page,int size) {
+        log.info("getProductReview 실행");
+        return reviewRepository.findByUserId(userId,PageRequest.of(page,size,Sort.by("reviewId").descending()));
 
-        List<Review> response = new ArrayList<>();
-        PageRequest pageable = PageRequest.of(page, size, Sort.by("reviewId").descending());
-
-        User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
-        List<Product> product = productRepository.findByUserId(userId);
-        // TODO : 쿼리가 너무 많이 나감 더 줄일 방법이 분명히 있음.
-        for (Product list : product) {
-            List<Review> byProductId = reviewRepository.findByProductId(list.getProductId());
-            response.addAll(byProductId);
-        }
-
-
-        int start =(int) pageable.getOffset();
-        int end = Math.min((start+ pageable.getPageSize()), response.size());
-        Page<Review> reviewPage = new PageImpl<>(response.subList(start,end),pageable, response.size());
-
-        return reviewPage;
     }
 }

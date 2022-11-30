@@ -63,7 +63,7 @@ public class ProductController {
     public ResponseEntity getLists(@RequestParam int page,@PathVariable int filterId){
         int size= 15;
         log.info("getLists 실행 ");
-        Page<Product> pageProduct = productService.getLists(page, size,filterId);
+        Page<Product> pageProduct = productService.getLists(page-1, size,filterId);
         log.info(" 페이징 리스트로 변환 ");
         List<Product> response = pageProduct.getContent();
         log.info(" 상품 목록 조회 완료 ");
@@ -88,7 +88,7 @@ public class ProductController {
     public ResponseEntity getListCategory(@PathVariable Long categoryId,@RequestParam int page,@PathVariable int filterId){
         int size= 15;
         log.info(" getListCategory 실행 ");
-        Page<Product> pageProduct = productService.getCategory(categoryId,filterId, page, size);
+        Page<Product> pageProduct = productService.getCategory(categoryId,filterId, page-1, size);
         log.info(" getcategory 리스트로 변환 ");
         List<Product> content = pageProduct.getContent();
         log.info(" getListCategory 완료 ");
