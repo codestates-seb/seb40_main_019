@@ -94,7 +94,7 @@ public class OAuthAttributes {
                 .build();
     }
 
-    public User toEntity(PointService pointService) {
+    public User toEntity() {
         User user = User.builder()
                 .userRole("ROLE_USER")
                 .profileImage(profileImage)
