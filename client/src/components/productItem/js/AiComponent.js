@@ -24,7 +24,7 @@ export default function AiComponent() {
             <div className="leftContainer">
               <h1>AI 맞춤 추천 사료</h1>
               <div>
-                <img src={dogsImg} alt="dogImg" />
+                <img className="aiImg" src={dogsImg} alt="dogImg" />
               </div>
               <div>
                 <p>나이별, 건강 상태별, 라이프 스타일에 따라</p>
