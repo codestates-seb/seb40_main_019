@@ -210,12 +210,18 @@
     }
 }
 
-@media (max-width: 880px) {
+@media (max-width: 890px) {
+    .aiImg{
+    display: none;
+    }
+    .pTagBox{
+        display: none;
+    }
     .beforeAiContainer{
         flex-direction: column;
-
     }
     .rightContainer{
         margin-top: -70px;    
     }
+
 }
