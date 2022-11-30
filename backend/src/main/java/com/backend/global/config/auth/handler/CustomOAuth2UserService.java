@@ -23,7 +23,6 @@ import java.util.Map;
 
 /**
  * OAuth2UserService 인터페이스를 구현한 클래스
- *
  */
 @AllArgsConstructor
 @Slf4j
@@ -88,14 +87,15 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             user.setPassword(passwordEncoder.encode(user.getNickname()));
         }
 
-        pointService.addCash(user, 1000000, PointType.SignUpPoint);
-        log.info("회원가입 포인트 지급");
+        User savedUser = userRepository.save(user);
 
-        user.encodePassword(passwordEncoder);
-        User save = userRepository.save(user);
+        if (savedUser.getRestCash() == 0) {
+            pointService.addCash(user, 1000000, PointType.SignUpPoint);
+            log.info("회원가입 포인트 지급");
+        }
 
         log.info("saved User");
-        return save;
+        return savedUser;
     }
 
 }
