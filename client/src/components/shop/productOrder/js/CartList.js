@@ -37,7 +37,7 @@ export default function CartList({
       {items &&
         items.map((item) => {
           return (
-            <div key={item.productsId}>
+            <div key={item.productId}>
               {/* <CartListItem item={item} count={count} setCount={setCount} /> */}
               <CartListItem
                 item={item}

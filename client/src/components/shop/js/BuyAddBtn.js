@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 //BUY NOW 클릭하면, 단품으로 결제
 //ADD CART 클릭하면, 장바구니 상품 갯수가 증가
 export default function BuyAddBtn({ product, count, setModal, myPoint }) {
+  console.log(product);
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
 
@@ -16,17 +17,17 @@ export default function BuyAddBtn({ product, count, setModal, myPoint }) {
 
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
 
-    if (data[product.productsId]) {
-      data[product.productsId] = {
-        ...data[product.productsId],
-        count: data[product.productsId].count + count,
+    if (data[product.productId]) {
+      data[product.productId] = {
+        ...data[product.productId],
+        count: data[product.productId].count + count,
       };
     } else {
-      data[product.productsId] = {
+      data[product.productId] = {
         titleImg: product.titleImg,
-        title: product.title,
+        productName: product.productName,
         price: product.price,
-        productsId: product.productsId,
+        productId: product.productId,
         count: count,
         check: true,
       };
