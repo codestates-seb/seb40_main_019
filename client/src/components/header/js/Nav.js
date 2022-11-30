@@ -53,7 +53,7 @@ export default function Nav() {
               <Link to="/seller" onClick={handleSeller}>
                 <button className="margin">Seller</button>
               </Link>
-              <Link to="/mypage/user" onClick={handleMypage}>
+              <Link to="/mypage" onClick={handleMypage}>
                 <button>Mypage</button>
               </Link>
             </div>
