@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class ProResponseDto {
+
+    private Long productId;
     @NotNull
     private int price;
 
@@ -20,6 +22,8 @@ public class ProResponseDto {
     private String average;
 
     private String titleImg;
+
+    private String detailImg;
 
     private Long categoryId;
 
