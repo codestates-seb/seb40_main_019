@@ -104,9 +104,6 @@ public class OAuthAttributes {
 //                .about("안녕하세요. " + name + "입니다.")
                 .build();
 
-        pointService.addCash(user, 1000000, PointType.SignUpPoint);
-        log.info("회원가입 포인트 지급");
-
         return user;
 
     }
