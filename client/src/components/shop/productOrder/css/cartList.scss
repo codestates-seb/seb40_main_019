@@ -1,6 +1,7 @@
 .CartListContatner{
-    min-height: 568px; //반응형 때문에 1000->568 줄임
-
+    // min-height: 568px; //반응형 때문에 1000->568 줄임
+    margin-bottom: 100px;
+    border-bottom: 2px solid var(--color-blue);
     .productTitle{
         display: flex;
         justify-content: space-between;
