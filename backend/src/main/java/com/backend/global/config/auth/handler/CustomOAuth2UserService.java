@@ -82,16 +82,7 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
     private User saveOrUpdate(OAuthAttributes attributes) {
         log.info("saveOrUpdate 실행");
         User user = userRepository.findByEmailAndUserStatusAndSocialLogin(attributes.getEmail(), User.UserStatus.USER_EXIST, attributes.getRegistrationId())
-                .orElse(attributes.toEntity());
-
-        if (user.getPassword() == null) {
-            user.setPassword(passwordEncoder.encode(user.getNickname()));
-        }
-
-        pointService.addCash(user, 1000000, PointType.SignUpPoint);
-        log.info("회원가입 포인트 지급");
-
-        user.encodePassword(passwordEncoder);
+                .orElse(attributes.toEntity(pointService, passwordEncoder));
         User save = userRepository.save(user);
 
         log.info("saved User");
