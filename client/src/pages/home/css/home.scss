@@ -34,7 +34,11 @@
 
     .mainTextTopOverflow{
       overflow: hidden;
+      height: 2vw;
       margin-bottom: 10px;
+      @media (max-width: 640px) {
+        height: 4vw;
+      }
     }
 
     .mainTextTop {
@@ -64,14 +68,13 @@
         }
       }
       @media (max-width: 640px) {
-        bottom: 10px;
         height: 4vw;
       }
     }
 
     .mainTextBottomOverflow{
       overflow: hidden;
-      height: 130px;
+      // height: 130px;
     }
 
     .mainTextBottom {
