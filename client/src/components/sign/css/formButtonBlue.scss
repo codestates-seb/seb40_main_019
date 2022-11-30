@@ -11,4 +11,10 @@
 .btnColorBlue{
   color: white;
   background-color:var(--color-blue);
+  border: 1px solid var(--color-blue);
+  transition: all 0.2s;
 }
+  .btnColorBlue:hover{
+    color: var(--color-blue);
+    background-color: var(--color-white);
+  }
