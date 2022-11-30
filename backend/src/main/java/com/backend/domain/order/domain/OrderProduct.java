@@ -18,11 +18,11 @@ public class OrderProduct extends Auditable {
     private Long orderProductId;
 
     //1
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -50,8 +50,3 @@ public class OrderProduct extends Auditable {
         //this.getProduct().addStock(quantity);//todo:재고추가로직만들기
     }
     }
-
-
-
-
-
