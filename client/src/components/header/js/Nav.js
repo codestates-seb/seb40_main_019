@@ -79,7 +79,9 @@ export default function Nav() {
               <div className="textLogo">
                 <img
                   src={
-                    location.pathname === '/seller' ? textLogoYellow : textLogo
+                    location.pathname.split('/')[1] === 'seller'
+                      ? textLogoYellow
+                      : textLogo
                   }
                   alt="textLogo"
                 />
