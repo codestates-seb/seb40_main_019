@@ -12,6 +12,7 @@ import java.util.List;
 public interface PointHistoryRepository extends JpaRepository<PointHistory, Long> {
     @Query("select p from PointHistory p where p.user.userId = :userId")
     PointHistory findByUser(long userId);
+
     void deleteByUser(User user);
 
     @Query("select p from PointHistory p " +
@@ -21,9 +22,10 @@ public interface PointHistoryRepository extends JpaRepository<PointHistory, Long
     List<PointHistory> findPointHistoryList(@Param("userId") Long userId, Pageable pageable);
 
 
-
     @Query("select count(p) from PointHistory p " +
             "where p.user.userId = :userId"
     )
     Long countPoint(@Param("userId") Long userId);
+
+    void deleteByUser_UserRoleOrUser_UserRole(String guestUserRole, String guestAdminRole);
 }
