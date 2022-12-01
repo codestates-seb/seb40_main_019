@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 import { useParams } from 'react-router-dom';
 import PaymentModal from '../../../components/payment/js/PaymentModal';
-import useFetch from '../../../util/useFetch';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 import { getPoint } from '../../../util/api/point';
 
 export default function shopProductDetail() {
@@ -21,7 +21,7 @@ export default function shopProductDetail() {
   //quantity
   const [count, setCount] = useState(1);
 
-  const [product] = useFetch(`products/${params.id}`);
+  const [product] = useFetchNotPage(`products/${params.id}`);
 
   const [myPoint, setMyPoint] = useState(0);
 
