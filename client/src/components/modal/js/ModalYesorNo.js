@@ -2,7 +2,15 @@ import '../css/Modal.scss';
 import { Transition } from 'react-transition-group';
 import { useEffect, useRef } from 'react';
 
-export default function ModalYesorNo({ setModalOn, modalOn, modalText, api }) {
+export default function ModalYesorNo({
+  setModalOn,
+  modalOn,
+  modalText,
+  api,
+  modalYesType,
+  singleOrder,
+  multiOrder,
+}) {
   const box = useRef();
   const handleColseModal = (e) => {
     if (modalOn && (!box.current || !box.current.contains(e.target)))
@@ -16,6 +24,12 @@ export default function ModalYesorNo({ setModalOn, modalOn, modalText, api }) {
       };
     }
   }, []);
+
+  if (modalYesType === 'single') {
+    api = singleOrder;
+  } else if (modalYesType === 'multi') {
+    api = multiOrder;
+  }
   return (
     <Transition
       in={modalOn}
@@ -25,7 +39,7 @@ export default function ModalYesorNo({ setModalOn, modalOn, modalText, api }) {
     >
       <div
         className={
-          modalOn ? 'modalBackground modalOpen' : 'modalBackground modalClose'
+          modalOn ? 'modalsBackground modalOpen' : 'modalsBackground modalClose'
         }
         ref={box}
       >

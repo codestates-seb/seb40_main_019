@@ -12,6 +12,8 @@ import { handleOrderCart, handleOrderSingle } from '../../../util/api/order';
 // import { getPoint } from '../../../util/api/point';
 import { paymentPoint } from '../../../util/api/point';
 import { useNavigate } from 'react-router-dom';
+import ModalYesorNo from '../../modal/js/ModalYesorNo';
+import ModalOk from '../../modal/js/ModalOk';
 
 export default function PaymentModal({
   setModal,
@@ -21,6 +23,11 @@ export default function PaymentModal({
   count,
 }) {
   const navigate = useNavigate();
+  const [modalOkOn, setModalOkOn] = useState(false);
+  const [modalOkText, setModalOkText] = useState('');
+  const [modalYesOn, setModalYesOn] = useState(false);
+  const [modalYesText, setModalYesText] = useState('');
+  const [modalYesType, setModalYesType] = useState('');
 
   const [data, setData] = useState({
     receiverName: '',
@@ -61,67 +68,72 @@ export default function PaymentModal({
 
   const order = () => {
     if (type === 'multi') {
-      let check = window.confirm('상품울 주문하시겠습니까?');
-      if (check) {
-        let temp = {
-          ...data,
-          receiverAddress,
-          receiverZipcode,
-          cartOrderProductDtoList: [],
-        };
-        let orderItem = JSON.parse(window.localStorage.getItem('cartItem'));
-        Object.keys(orderItem).forEach((el) => {
-          if (orderItem[el].check) {
-            temp.cartOrderProductDtoList.push({
-              productId: orderItem[el].productId,
-              quantity: orderItem[el].count,
-            });
-          }
-        });
-
-        let orderData = handleOrderCart(temp);
-        orderData.then((data) => {
-          let res = paymentPoint(data.orderId);
-          res.then((data) => {
-            if (data.status === 200) {
-              temp.cartOrderProductDtoList.forEach((el) => {
-                delete orderItem[el.productId];
-              });
-              window.localStorage.setItem(
-                'cartItem',
-                JSON.stringify(orderItem)
-              );
-              navigate('/mypage/order');
-            }
-          });
-        });
-        console.log('포인트 결제');
-        return;
-      }
+      setModalYesOn(true);
+      setModalYesText('상품울 주문하시겠습니까?');
+      // setApi(multiOrder);
+      setModalYesType('multi');
     } else {
-      let check = window.confirm('상품울 주문하시겠습니까?');
-      if (check) {
-        let temp = {
-          ...data,
-          receiverAddress,
-          receiverZipcode,
-          productId: product.productId,
-          quantity: count,
-        };
-        let orderData = handleOrderSingle(temp);
-        orderData.then((data) => {
-          let res = paymentPoint(data.orderId);
-          res.then((data) => {
-            if (data.status === 200) {
-              navigate('/mypage/order');
-            }
-          });
-        });
-        console.log('포인트 결제');
-        return;
-      }
+      setModalYesOn(true);
+      setModalYesText('상품울 주문하시겠습니까?');
+      setModalYesType('single');
     }
   };
+
+  const multiOrder = () => {
+    let temp = {
+      ...data,
+      receiverAddress,
+      receiverZipcode,
+      cartOrderProductDtoList: [],
+    };
+    let orderItem = JSON.parse(window.localStorage.getItem('cartItem'));
+    Object.keys(orderItem).forEach((el) => {
+      if (orderItem[el].check) {
+        temp.cartOrderProductDtoList.push({
+          productId: orderItem[el].productId,
+          quantity: orderItem[el].count,
+        });
+      }
+    });
+
+    let orderData = handleOrderCart(temp, setModalOkText, setModalOkOn);
+    orderData.then((data) => {
+      let res = paymentPoint(data.orderId, setModalOkText, setModalOkOn);
+      res.then((data) => {
+        if (data.status === 200) {
+          temp.cartOrderProductDtoList.forEach((el) => {
+            delete orderItem[el.productId];
+          });
+          window.localStorage.setItem('cartItem', JSON.stringify(orderItem));
+          navigate('/mypage/order');
+        }
+      });
+    });
+    console.log('포인트 결제');
+    return;
+  };
+
+  const singleOrder = () => {
+    let temp = {
+      ...data,
+      receiverAddress,
+      receiverZipcode,
+      productId: product.productId,
+      quantity: count,
+    };
+    let orderData = handleOrderSingle(temp, setModalOkText, setModalOkOn);
+    orderData.then((data) => {
+      let res = paymentPoint(data.orderId, setModalOkText, setModalOkOn);
+      res.then((data) => {
+        if (data.status === 200) {
+          navigate('/mypage/order');
+        }
+      });
+    });
+    console.log('포인트 결제');
+    return;
+  };
+
   // 주소 입력
   const open = useDaumPostcodePopup();
 
@@ -197,6 +209,19 @@ export default function PaymentModal({
           />
         </div>
       </div>
+      <ModalYesorNo
+        setModalOn={setModalYesOn}
+        modalOn={modalYesOn}
+        modalText={modalYesText}
+        modalYesType={modalYesType}
+        singleOrder={singleOrder}
+        multiOrder={multiOrder}
+      />
+      <ModalOk
+        setModalOn={setModalOkOn}
+        modalOn={modalOkOn}
+        modalText={modalOkText}
+      />
     </>
   );
 }

@@ -13,26 +13,31 @@ let reg_name1 = /^[가-힣]+$/;
 let reg_mobile = /^\d{3}-\d{3,4}-\d{4}$/;
 
 //주문생성- 장바구니
-export const handleOrderCart = async (data) => {
+export const handleOrderCart = async (data, setModalOkText, setModalOkOn) => {
+  console.log('실행');
   if (!reg_name1.test(data.receiverName)) {
-    window.alert('올바른 이름을 입력해주세요');
+    setModalOkOn(true);
+    setModalOkText('올바른 이름을 입력해주세요');
     return;
   }
 
   if (!reg_mobile.test(data.receiverPhone)) {
-    window.alert(
+    setModalOkOn(true);
+    setModalOkText(
       '-를 포함하여 휴대폰 번호 11자리를 입력해주세요. \n EX ) 010-1234-5678'
     );
     return;
   }
 
   if (!data.receiverAddress) {
-    window.alert('배송지를 입력해주세요.');
+    setModalOkOn(true);
+    setModalOkText('배송지를 입력해주세요.');
     return;
   }
 
   if (!data.receiverZipcode) {
-    window.alert('우편번호를 입력해주세요');
+    setModalOkOn(true);
+    setModalOkText('우편번호를 입력해주세요');
     return;
   }
 
@@ -49,26 +54,30 @@ export const handleOrderCart = async (data) => {
 };
 
 //주문생성- 단품
-export const handleOrderSingle = async (data) => {
+export const handleOrderSingle = async (data, setModalOkText, setModalOkOn) => {
   if (!reg_name1.test(data.receiverName)) {
-    window.alert('올바른 이름을 입력해주세요');
+    setModalOkOn(true);
+    setModalOkText('올바른 이름을 입력해주세요');
     return;
   }
 
   if (!reg_mobile.test(data.receiverPhone)) {
-    window.alert(
+    setModalOkOn(true);
+    setModalOkText(
       '-를 포함하여 휴대폰 번호 11자리를 입력해주세요. \n EX ) 010-1234-5678'
     );
     return;
   }
 
   if (!data.receiverAddress) {
-    window.alert('배송지를 입력해주세요.');
+    setModalOkOn(true);
+    setModalOkText('배송지를 입력해주세요.');
     return;
   }
 
   if (!data.receiverZipcode) {
-    window.alert('우편번호를 입력해주세요');
+    setModalOkOn(true);
+    setModalOkText('우편번호를 입력해주세요');
     return;
   }
 

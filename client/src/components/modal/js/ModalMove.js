@@ -27,7 +27,7 @@ export default function ModalMove({ setModalOn, modalOn, modalText, link }) {
     >
       <div
         className={
-          modalOn ? 'modalBackground modalOpen' : 'modalBackground modalClose'
+          modalOn ? 'modalsBackground modalOpen' : 'modalsBackground modalClose'
         }
         ref={box}
       >

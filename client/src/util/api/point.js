@@ -27,7 +27,6 @@ export const paymentPoint = async (orderId) => {
     const res = await axios.post(`${REACT_APP_API_URL}point/${orderId}`);
     console.log(res);
     if (res.status === 200) {
-      window.alert('결제 완료');
       return res;
     }
     // return res;

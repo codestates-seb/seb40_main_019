@@ -1,6 +1,7 @@
 import '../css/mypageOrderListItem.scss';
 import { Link } from 'react-router-dom';
 import Empty from '../../empty/js/Empty';
+import { formatDate } from '../../../util/function/formatData';
 
 export default function MypageOrderListItem({ item }) {
   let status = '상품준비중';
@@ -15,7 +16,7 @@ export default function MypageOrderListItem({ item }) {
       {item ? (
         <div className="mypageOrderContainer">
           <div className="orderDate">
-            <p>{item.orderDate}</p>
+            <p>{formatDate(item.orderDate)}</p>
           </div>
           <div className="orderContainer">
             {item.orderProductDtoList.map((item) => {

@@ -25,7 +25,7 @@ export default function ModalOk({ setModalOn, modalOn, modalText }) {
     >
       <div
         className={
-          modalOn ? 'modalBackground modalOpen' : 'modalBackground modalClose'
+          modalOn ? 'modalsBackground modalOpen' : 'modalsBackground modalClose'
         }
         ref={box}
       >
