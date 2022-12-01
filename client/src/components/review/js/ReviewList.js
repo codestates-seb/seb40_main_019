@@ -1,7 +1,7 @@
 import '../css/ReviewList.scss';
 import { useNavigate } from 'react-router-dom';
 import ReviewStar from '../../review/js/ReviewStar';
-import useFetch from '../../../util/useFetch';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 import {
   handleDltReview,
   handleDltReviewAlert,
@@ -27,7 +27,7 @@ export default function ReviewList({ item }) {
   let [pastData] = '';
 
   if (item) {
-    pastData = useFetch(`review/read/${item.reviewId}`);
+    pastData = useFetchNotPage(`review/read/${item.reviewId}`);
   }
 
   const clickEdit = () => {

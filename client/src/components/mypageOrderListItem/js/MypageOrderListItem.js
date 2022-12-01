@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Empty from '../../empty/js/Empty';
 import { formatDate } from '../../../util/function/formatData';
 import { handleDltReview } from '../../../util/api/review';
-import useFetch from '../../../util/useFetch';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 
 export default function MypageOrderListItem({ item }) {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function MypageOrderListItem({ item }) {
   let [pastData] = '';
 
   if (item) {
-    pastData = useFetch(`review/read/${item.reviewId}`);
+    pastData = useFetchNotPage(`review/read/${item.reviewId}`);
   }
 
   const clickEdit = () => {
