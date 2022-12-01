@@ -32,6 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
+    implementation 'org.springframework:spring-test:5.3.9'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
@@ -72,6 +73,8 @@ dependencies {
 
     // 이미지 리사이징
     implementation group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+    implementation 'com.github.downgoon:marvin:1.5.5'
+    implementation 'com.github.downgoon:MarvinPlugins:1.5.5'
 
     // DEB-TOOL
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
