@@ -1,3 +1,4 @@
+//민수님
 // footer{
 //   // margin-top: 200px;
 //   img{
@@ -11,13 +12,10 @@
 //     background-color: var(--color-blue);
 //     height: 100px;
 //     width: 100%;
-
 //   }
 // }
 
 footer {
-  // margin-top: 200px;
-  // height: 257px;
   img {
     width: 100%;
     // height: 157px;
@@ -34,7 +32,7 @@ footer {
     width: 100%;
   }
 }
-
+//민수님
 // footer{
 //   // margin-top: 200px;
 //   height: 257px;
@@ -49,7 +47,6 @@ footer {
 //     background-color: var(--color-blue);
 //     height: 100%;
 //     width: 100%;
-
 //   }
 // }
 
@@ -57,18 +54,12 @@ footer {
   display: flex;
   width: 100%;
   justify-content: space-around;
-  // margin-top: 0.5em;
   color: var(--color-white);
-  @media (max-width: 850px) {
-    font-size: 12px;
-  }
 }
 
 .firstBox {
   display: flex;
-  @media (max-width: 680px) {
-    flex-wrap: wrap;
-  }
+
   .titleDiv {
     font-weight: bold;
     padding-right: 50px;
@@ -87,14 +78,9 @@ footer {
 
 .secondBox {
   margin: 32px 0 0 30px;
-  @media (max-width: 680px) {
-    display: none;
-  }
 }
 
 .thirdBox {
-  .frontMember {
-  }
   a {
     color: var(--color-white);
     padding: 5px;
@@ -103,5 +89,20 @@ footer {
     color: var(--color-white);
     padding: 5px;
     font-size: 20px;
+  }
+}
+
+//푸터 반응형
+@media (max-width: 980px){
+  .secondBox{
+    display: none;
+  }
+}
+@media (max-width: 640px){
+  .footerContainer{
+    padding-top: 12px;
+  }
+  .thirdBox{
+    display: none;
   }
 }
