@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   allProduct: true,
   category: '',
+  categoryPage: { selected: 1 },
 };
 
 export const productSlice = createSlice({
@@ -14,6 +15,7 @@ export const productSlice = createSlice({
         ...state,
         allProduct: payload.allProduct,
         category: payload.category,
+        categoryPage: payload.categoryPage,
       };
     },
     // clearUser: (state) => {

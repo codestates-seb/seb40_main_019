@@ -1,20 +1,18 @@
 import '../css/SellerOrder.scss';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
 import Order from '../../../components/seller/js/Order';
 import useFetch from '../../../util/useFetch';
+import ReactPaginate from 'react-paginate';
+import { useState } from 'react';
 
 export default function SellerOrder() {
-  // const [items, setItems] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
-  //     setItems(res.data);
-  //   });
-  // }, []);
+  const [pageNum, setPageNum] = useState({ selected: 1 });
+  const [pageInfo, setPageInfo] = useState();
 
-  const [items, error] = useFetch('orders/all');
-  console.log(items);
-  console.log(error);
+  const handlePageChange = (page) => {
+    setPageNum({ selected: page.selected + 1 });
+  };
+
+  const [items] = useFetch('orders/all', pageNum, setPageInfo);
 
   return (
     <div className="sellerProducts orderTop">
@@ -39,6 +37,20 @@ export default function SellerOrder() {
             </div>
           );
         })}
+      <ReactPaginate
+        pageCount={pageInfo && pageInfo.totalPages}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        breakLabel={''}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination-ul'}
+        pageClassName={'pageButton'}
+        activeClassName={'currentPage'}
+        previousClassName={'switchPage'}
+        nextClassName={'switchPage'}
+      />
     </div>
   );
 }

@@ -1,18 +1,19 @@
 import '../css/mypagePointList.scss';
 import MypagePointListItem from './MypagePointListItem';
-import { useState, useEffect } from 'react';
-import { getPointList } from '../../../../util/api/point';
+
+import Empty from '../../../empty/js/Empty';
+import useFetch from '../../../../util/useFetch';
+import ReactPaginate from 'react-paginate';
+import { useState } from 'react';
 
 export default function MypagePointList() {
-  const [pointList, setPointList] = useState([]);
+  const [pageNum, setPageNum] = useState({ selected: 1 });
+  const [pageInfo, setPageInfo] = useState();
 
-  useEffect(() => {
-    let data = getPointList();
-    data.then((res) => {
-      setPointList(res.data.data);
-    });
-  }, []);
-
+  const handlePageChange = (page) => {
+    setPageNum({ selected: page.selected + 1 });
+  };
+  const [pointList] = useFetch('point/history', pageNum, setPageInfo);
   return (
     <div className="mypagePointListContainer">
       <div className="pointListTitle">
@@ -27,14 +28,31 @@ export default function MypagePointList() {
         <li>잔여 포인트</li>
       </ul>
 
-      {pointList &&
+      {pointList ? (
         pointList.map((point) => {
           return (
             <div key={point.pointHistoryId}>
               <MypagePointListItem point={point} />
             </div>
           );
-        })}
+        })
+      ) : (
+        <Empty text={'포인트 거래내역이 없습니다'} />
+      )}
+      <ReactPaginate
+        pageCount={pageInfo && pageInfo.totalPages}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        breakLabel={''}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination-ul'}
+        pageClassName={'pageButton'}
+        activeClassName={'currentPage'}
+        previousClassName={'switchPage'}
+        nextClassName={'switchPage'}
+      />
     </div>
   );
 }

@@ -1,15 +1,10 @@
 import '../css/productDetailReview.scss';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import ReviewShop from '../../review/js/ReviewShop';
+import useFetch from '../../../util/useFetch';
 
-export default function ProductDetailReview({ setClickBtn }) {
-  const [items, setItems] = useState();
-  useEffect(() => {
-    axios.get('http://localhost:3001/review/').then((res) => {
-      setItems(res.data);
-    });
-  }, []);
+export default function ProductDetailReview({ setClickBtn, id }) {
+  const [items] = useFetch(`review/${id}`);
+
   return (
     <div className="reviewContainer">
       <div className="detailProductBtn">

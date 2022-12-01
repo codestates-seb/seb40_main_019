@@ -1,8 +1,6 @@
 .aiContainer{
     width: 100%;
     height: 100%;
-}
-
 .beforeAiContainer{
     display: flex;
     justify-content: space-around; 
@@ -76,6 +74,14 @@
         }
         .ageForm{
             margin-left: 7px;
+            input{
+                text-align: center;
+            }
+        }
+        .weightForm{
+            input{
+                text-align: center;
+            }
         }
     }
 
@@ -225,3 +231,6 @@
     }
 
 }
+
+}
+

@@ -1,3 +1,4 @@
+import ModalYesorNo from '../../../modal/js/ModalYesorNo';
 import '../css/cartListItem.scss';
 // import QuantityBtn from '../../js/QuantityBtn';
 import CartQuantityBtn from './CartQuantityBtn';
@@ -8,6 +9,10 @@ const CartListItem = ({
   increaseQuantity,
   deleteItem,
   checkBuyItem,
+  setModalOn,
+  modalOn,
+  modalText,
+  api,
 }) => {
   return (
     <div className="cartListContainer">
@@ -35,6 +40,14 @@ const CartListItem = ({
           <i className="fa-light fa-x"></i>
         </button>
       </div>
+      <ModalYesorNo
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+        api={() => {
+          api(item);
+        }}
+      />
     </div>
   );
 };

@@ -9,6 +9,7 @@ import {
   openModal,
   setFormData,
 } from '../../../redux/reducers/signupModalSlice';
+import ModalOk from '../../modal/js/ModalOk';
 // eslint-disable-next-line no-useless-escape
 let emailExptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 let passwordExptext = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,16}$/;
@@ -20,6 +21,9 @@ export default function Signup() {
     password: '',
     passwordConfirm: '',
   });
+
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
 
   const modal = useSelector((state) => state.modal.open);
 
@@ -40,36 +44,43 @@ export default function Signup() {
     e.preventDefault();
 
     if (!data.nickname) {
-      window.alert('닉네임을 입력하세요.');
+      setModalOn(true);
+      setModalText('닉네임을 입력하세요.');
       return;
     }
 
     if (!data.email) {
-      window.alert('이메일을 입력하세요.');
+      setModalOn(true);
+      setModalText('이메일을 입력하세요.');
       return;
     }
     if (!emailExptext.test(data.email)) {
-      window.alert('유효하지 않은 형식의 이메일 주소입니다.');
+      setModalOn(true);
+      setModalText('유효하지 않은 형식의 이메일 주소입니다.');
       return;
     }
 
     if (!data.password) {
-      window.alert('비밀번호를 입력하세요');
+      setModalOn(true);
+      setModalText('비밀번호를 입력하세요');
       return;
     }
     if (!passwordExptext.test(data.password)) {
-      window.alert(
+      setModalOn(true);
+      setModalText(
         '영문 대소문자/숫자/특수문자를 포함한 8자~16자 사이의 비밀번호를 입력해주세요.'
       );
       return;
     }
 
     if (!data.passwordConfirm) {
-      window.alert('비밀번호를 한 번 더 입력해주세요.');
+      setModalOn(true);
+      setModalText('비밀번호를 한 번 더 입력해주세요.');
       return;
     }
     if (data.password !== data.passwordConfirm || !data.passwordConfirm) {
-      window.alert('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
+      setModalOn(true);
+      setModalText('비밀번호와 비밀번호 확인이 일치하지 않습니다.');
       return;
     }
 
@@ -135,6 +146,11 @@ export default function Signup() {
         <Link to={'/login'}>Log in</Link>
       </div>
       {modal && <SignupModal />}
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </>
   );
 }

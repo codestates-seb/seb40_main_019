@@ -15,6 +15,7 @@ import {
   guestLogin,
   sellerLogin,
 } from '../../../util/api/loginForm';
+import ModalOk from '../../modal/js/ModalOk';
 // eslint-disable-next-line no-useless-escape
 let emailExptext = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
 
@@ -26,20 +27,26 @@ export default function SigninForm() {
   const [emailModal, setEmailModal] = useState(false);
   const [passwordModal, setPasswordModal] = useState(false);
 
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
+
   const formSubmit = (e) => {
     e.preventDefault();
 
     if (!data.email) {
-      window.alert('이메일을 입력하세요.');
+      setModalOn(true);
+      setModalText('이메일을 입력하세요.');
       return;
     }
     if (!emailExptext.test(data.email)) {
-      window.alert('유효하지 않은 형식의 이메일 주소입니다.');
+      setModalOn(true);
+      setModalText('유효하지 않은 형식의 이메일 주소입니다.');
       return;
     }
 
     if (!data.password) {
-      window.alert('비밀번호를 입력하세요');
+      setModalOn(true);
+      setModalText('비밀번호를 입력하세요');
       return;
     }
     submitForm({
@@ -110,6 +117,11 @@ export default function SigninForm() {
           />
         </>
       )}
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </>
   );
 }

@@ -2,17 +2,29 @@ import '../css/aiComponent.scss';
 import dogsImg from '../../../assets/img/aiRecommend1.svg';
 import poppyImg from '../../../assets/img/aiRecommend2.svg';
 import ProductItem from './ProductItem';
-import axios from 'axios';
 import { useState } from 'react';
+import { recommendProduct } from '../../../util/api/aiRecommend';
 
 export default function AiComponent() {
   //임시 데이터
   const [randomItems, setRandomItems] = useState([]);
-  function handleClick() {
-    axios.get('http://localhost:3001/randomproducts/').then((res) => {
-      setRandomItems(res.data);
+
+  const [data, setData] = useState({
+    age: '',
+    weight: '',
+  });
+
+  const onChangeInput = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleClick = () => {
+    let res = recommendProduct(data);
+    res.then((data) => {
+      console.log(data.data);
+      setRandomItems(data.data);
     });
-  }
+  };
 
   return (
     <>
@@ -38,26 +50,22 @@ export default function AiComponent() {
                 <form className="ageForm" name="나이">
                   나이
                   <input
+                    onChange={onChangeInput}
+                    id="age"
+                    name="age"
+                    value={data.age}
                     type="text"
-                    maxLength="3"
-                    onKeyPress={(event) => {
-                      if (!/[0-9]/.test(event.key)) {
-                        event.preventDefault();
-                      }
-                    }}
-                  ></input>
+                  />
                 </form>
-                <form name="몸무게">
+                <form className="weightForm" name="몸무게">
                   몸무게
                   <input
+                    onChange={onChangeInput}
+                    id="weight"
+                    name="weight"
+                    value={data.weight}
                     type="text"
-                    maxLength="3"
-                    onKeyPress={(event) => {
-                      if (!/[0-9]/.test(event.key)) {
-                        event.preventDefault();
-                      }
-                    }}
-                  ></input>
+                  />
                 </form>
                 <button onClick={handleClick}>입력</button>
               </div>

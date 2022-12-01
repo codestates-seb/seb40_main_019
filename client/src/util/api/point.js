@@ -27,7 +27,6 @@ export const paymentPoint = async (orderId) => {
     const res = await axios.post(`${REACT_APP_API_URL}point/${orderId}`);
     console.log(res);
     if (res.status === 200) {
-      window.alert('결제 완료');
       return res;
     }
     // return res;
@@ -36,17 +35,17 @@ export const paymentPoint = async (orderId) => {
   }
 };
 // 포인트 내역 조회
-export const getPointList = async () => {
-  try {
-    console.log('포인트 결제 내부');
-    const res = await axios.get(`${REACT_APP_API_URL}point/history`, {
-      params: {
-        page: 1,
-      },
-    });
-    console.log(res);
-    return res;
-  } catch (error) {
-    return error.response.data;
-  }
-};
+// export const getPointList = async () => {
+//   try {
+//     console.log('포인트 결제 내부');
+//     const res = await axios.get(`${REACT_APP_API_URL}point/history`, {
+//       params: {
+//         page: 1,
+//       },
+//     });
+//     console.log(res);
+//     return res;
+//   } catch (error) {
+//     return error.response.data;
+//   }
+// };

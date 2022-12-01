@@ -1,30 +1,14 @@
-// import axios from 'axios';
-// import { useEffect, useState } from 'react';
 import MypageOrderListItem from '../../../components/mypageOrderListItem/js/MypageOrderListItem';
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
-import useFetch from '../../../util/useFetch';
 import '../../review/css/Review.scss';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 
 export default function MypageHome() {
-  //임시
-  // const [order, setOrder] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
-  //     setOrder(res.data[0]);
-  //   });
-  // }, []);
+  const [order] = useFetchNotPage('orders'); //page 0으로
+  const [review] = useFetchNotPage('user/review'); // page 0으로
 
-  // const [review, setReview] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/review/').then((res) => {
-  //     setReview(res.data[0]);
-  //   });
-  // }, []);
-  const [order] = useFetch('orders'); //page 0으로
-  const [review] = useFetch('user/review'); // page 0으로
-
-  console.log(review);
+  // console.log(review);
   return (
     <div className="mypageHome">
       <div className="orderSummery">

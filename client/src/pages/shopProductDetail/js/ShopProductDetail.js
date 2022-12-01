@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 import { useParams } from 'react-router-dom';
 import PaymentModal from '../../../components/payment/js/PaymentModal';
-import useFetch from '../../../util/useFetch';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 import { getPoint } from '../../../util/api/point';
 
 export default function shopProductDetail() {
@@ -21,11 +21,16 @@ export default function shopProductDetail() {
   //quantity
   const [count, setCount] = useState(1);
 
-  const [product] = useFetch(`products/${params.id}`);
+  const [product] = useFetchNotPage(`products/${params.id}`);
 
   const [myPoint, setMyPoint] = useState(0);
 
   useEffect(() => {
+    if (!JSON.parse(window.localStorage.getItem('cartItem'))) {
+      // window.alert('장바구니 없음');
+      window.localStorage.setItem('cartItem', JSON.stringify({}));
+    }
+
     getPoint().then((res) => {
       setMyPoint(res.data);
     });
@@ -43,7 +48,7 @@ export default function shopProductDetail() {
           {clickBtn === 'detail' ? (
             <ProductDetailBox product={product} setClickBtn={setClickBtn} />
           ) : (
-            <ProductDetailReview setClickBtn={setClickBtn} />
+            <ProductDetailReview setClickBtn={setClickBtn} id={params.id} />
           )}
           <ProductDetailReadme />
         </div>

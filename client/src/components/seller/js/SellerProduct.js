@@ -1,9 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import '../css/SellerProduct.scss';
-import { handleDelete } from '../../../util/api/product';
+import { handleDelete, handleDeleteAlert } from '../../../util/api/product';
 import { formatDate } from '../../../util/function/formatData';
+import ModalYesorNo from '../../modal/js/ModalYesorNo';
+import { useState } from 'react';
 export default function SellerProduct({ item }) {
   const navigate = useNavigate();
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
+
   const clickEdit = () => {
     navigate(`/seller/edit/${item.productId}`, {
       state: { item },
@@ -11,6 +16,10 @@ export default function SellerProduct({ item }) {
   };
 
   const clickDelete = () => {
+    handleDeleteAlert(setModalText, setModalOn);
+  };
+
+  const clickDeleteOk = () => {
     handleDelete(item);
   };
 
@@ -31,6 +40,12 @@ export default function SellerProduct({ item }) {
           <i className="fa-solid fa-trash-can"></i>
         </button>
       </div>
+      <ModalYesorNo
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+        api={clickDeleteOk}
+      />
     </div>
   );
 }
