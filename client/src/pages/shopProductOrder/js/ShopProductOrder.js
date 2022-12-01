@@ -6,8 +6,15 @@ import CartList from '../../../components/shop/productOrder/js/CartList';
 import OrderSummary from '../../../components/shop/productOrder/js/OrderSummary';
 import OrderMobileButton from './OrderMobileButton';
 import { getPoint } from '../../../util/api/point';
+import ModalOk from '../../../components/modal/js/ModalOk';
+// import ModalYesorNo from '../../../components/modal/js/ModalYesorNo';
 
 export default function ShopProductOrder() {
+  const [modalOkOn, setModalOkOn] = useState(false);
+  const [modalOkText, setModalOkText] = useState('');
+  const [modalYesOn, setModalYesOn] = useState(false);
+  const [modalYesText, setModalYesText] = useState('');
+
   const [items, setItems] = useState(null);
   const [totalPrice, setTotalPrice] = useState(0);
   const [allSelect, setAllSelect] = useState(true);
@@ -44,7 +51,8 @@ export default function ShopProductOrder() {
   // 수량 감소 함수
   const decreaseQuantity = (item) => {
     if (item.count === 1) {
-      window.alert('최소 수량입니다.');
+      setModalOkOn(true);
+      setModalOkText('최소 수량입니다.');
       return;
     }
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
@@ -70,7 +78,8 @@ export default function ShopProductOrder() {
   // 수량 증가 함수
   const increaseQuantity = (item) => {
     if (item.count === 9) {
-      window.alert('최대 수량입니다.');
+      setModalOkOn(true);
+      setModalOkText('최대 수량입니다.');
       return;
     }
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
@@ -94,9 +103,12 @@ export default function ShopProductOrder() {
   };
 
   // 물품 삭제 함수
-  const deleteItem = (item) => {
-    window.alert('물품 삭제');
+  const deleteItem = () => {
+    setModalYesOn(true);
+    setModalYesText('삭제하시겠습니까?');
+  };
 
+  const deleteOk = (item) => {
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
     delete data[item.productId];
 
@@ -169,9 +181,14 @@ export default function ShopProductOrder() {
           decreaseQuantity={decreaseQuantity}
           increaseQuantity={increaseQuantity}
           deleteItem={deleteItem}
+          deleteOk={deleteOk}
           checkBuyItem={checkBuyItem}
           checkBuyAllItem={checkBuyAllItem}
           allSelect={allSelect}
+          setModalOn={setModalYesOn}
+          modalOn={modalYesOn}
+          modalText={modalYesText}
+          api={deleteOk}
         />
       </div>
       <div className="orderSummaryBox">
@@ -197,6 +214,17 @@ export default function ShopProductOrder() {
           />
         </>
       )}
+      <ModalOk
+        setModalOn={setModalOkOn}
+        modalOn={modalOkOn}
+        modalText={modalOkText}
+      />
+      {/* <ModalYesorNo
+        setModalOn={setModalYesOn}
+        modalOn={modalYesOn}
+        modalText={modalYesText}
+        api={deleteOk}
+      /> */}
     </div>
   );
 }
