@@ -1,6 +1,7 @@
 import '../css/shopMypageOrderList.scss';
 import MypageOrderListItem from '../../../components/mypageOrderListItem/js/MypageOrderListItem';
 import useFetch from '../../../util/useFetch';
+import Empty from '../../../components/empty/js/Empty';
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
 
@@ -29,14 +30,17 @@ export default function ShopMypageOrderList() {
         <li>상품 금액 / 수량</li>
         <li>확인 / 리뷰</li>
       </ul>
-      {items &&
+      {items && items.length !== 0 ? (
         items.map((item) => {
           return (
             <div key={item.orederId}>
               <MypageOrderListItem item={item} />
             </div>
           );
-        })}
+        })
+      ) : (
+        <Empty text={'주문한 목록이 없습니다'} />
+      )}
     </div>
   );
 }

@@ -5,6 +5,7 @@ import useFetch from '../../../util/useFetch';
 // import { useEffect, useState } from 'react';
 // import axios from 'axios';
 import { handleDltReview } from '../../../util/api/review';
+import Empty from '../../empty/js/Empty';
 
 export default function ReviewList({ item }) {
   const navigate = useNavigate();
@@ -33,9 +34,9 @@ export default function ReviewList({ item }) {
     });
   };
   return (
-    <div className="reviewListContainer">
-      {item && (
-        <>
+    <>
+      {item ? (
+        <div className="reviewListContainer">
           <div className="reviewTitle">
             <img className="titleImg" src={item.titleImg} alt="productImg" />
             <div className="title">{item.productName}</div>
@@ -56,8 +57,10 @@ export default function ReviewList({ item }) {
               <i className="fa-solid fa-trash-can"></i>
             </button>
           </div>
-        </>
+        </div>
+      ) : (
+        <Empty text={'최근 작성된 리뷰가 없습니다'} />
       )}
-    </div>
+    </>
   );
 }
