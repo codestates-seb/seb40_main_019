@@ -1,11 +1,11 @@
 .mobileButtonContainer{
   box-shadow: 5px 5px 5px 5px gray;
 }
-
 .buttonBox{
-    height: 70px;
+  height: 95px;
   display: grid;
   grid-template-columns: 1fr 2fr;
+
   >button {
     width: 100%;
     background-color: var(--color-blue);

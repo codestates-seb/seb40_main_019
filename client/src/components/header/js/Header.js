@@ -1,9 +1,14 @@
 import '../css/header.scss';
 import logo from '../../../assets/img/logo_white.png';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const location = useLocation();
+  const Navigate = useNavigate();
+  const gotoMain = () => {
+    Navigate('/');
+  };
+
   return (
     <>
       <div>
@@ -12,9 +17,12 @@ export default function Header() {
             location.pathname === '/seller' ? 'header sellerHeader' : 'header'
           }
         >
-          <img src={logo} alt="logo" />
+          <button onClick={gotoMain}>
+            <img src={logo} alt="logo" />
+          </button>
         </div>
       </div>
     </>
   );
 }
+//img 네비게이션 오류나서 button만들어서 Navigation 추가함
