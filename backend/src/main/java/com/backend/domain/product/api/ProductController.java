@@ -4,6 +4,7 @@ import com.backend.domain.product.application.ProductService;
 import com.backend.domain.product.domain.Product;
 import com.backend.domain.product.dto.DetailImg;
 import com.backend.domain.product.dto.ProResponseDto;
+import com.backend.domain.product.dto.ProductResponseDto;
 import com.backend.domain.product.dto.TitleImg;
 import com.backend.domain.product.mapper.ProductMapper;
 import com.backend.global.annotation.CurrentUser;
@@ -48,8 +49,10 @@ public class ProductController {
         log.info(" 수정 실행 ");
 
         Product response = productService.update(productsId,categoryId,price,productName,titleImg,detailImg);
+        ProductResponseDto productResponseDto = productMapper.productToProductResponseDto(response);
+        productResponseDto.setCategoryId(response.getCategory().getCategoryId());
         log.info(" 수정 된 상품 출력 ");
-        return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.OK);
+        return new ResponseEntity(new SingleResponseDto<>(productResponseDto), HttpStatus.OK);
     }
 
     @DeleteMapping("/products/{productsId}")

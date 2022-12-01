@@ -28,5 +28,7 @@ public class ProductResponseDto {
 
     private String tag;
 
+    private Long categoryId;
+
 
 }
