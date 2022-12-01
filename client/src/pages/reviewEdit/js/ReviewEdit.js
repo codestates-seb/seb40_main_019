@@ -36,6 +36,7 @@ export default function ReviewEdit() {
         setReviewImg={setReviewImg}
         setReviewContent={setReviewContent}
         reviewContent={reviewContent}
+        pastImg={item[0].reviewImg}
       />
       <div className="reviewAddBtn">
         <button className="close" onClick={() => navigate('/mypage/review')}>

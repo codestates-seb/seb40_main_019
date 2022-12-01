@@ -49,6 +49,8 @@ export default function SellerEditProduct() {
         setTitleImg={setTitleImg}
         detailImg={detailImg}
         setDetailImg={setDetailImg}
+        pastTitleImg={item.titleImg}
+        pastDetailImg={item.detailImg}
       />
 
       <div className="addPageBtns">
