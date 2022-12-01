@@ -112,6 +112,14 @@ public class ReviewService {
     public Long delete(Long reviewId){
         log.info("delete 실행");
         Review review = reviewRepository.findById(reviewId).orElseThrow(ReviewNotFound::new);
+        long productId = review.getProduct().getProductId();
+        long userId = review.getUser().getUserId();
+        OrderProduct orderProduct = orderProductRepository.findByOrderProduct(userId, productId).orElseThrow(OrderNotFound::new);
+        log.info("주문 찾기 성공");
+        if (orderProduct.getReviewStatus().equals(OrderProductReviewStatus.WRITING)){
+            throw new ReviewDuplication();
+        }
+        orderProduct.setReviewStatus(OrderProductReviewStatus.WRITING);
         log.info("review : ", review);
         reviewRepository.delete(review);
         return reviewId;
