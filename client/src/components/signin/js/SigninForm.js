@@ -49,10 +49,14 @@ export default function SigninForm() {
       setModalText('비밀번호를 입력하세요');
       return;
     }
-    submitForm({
-      email: data.email,
-      password: data.password,
-    });
+    submitForm(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      setModalOn,
+      setModalText
+    );
   };
 
   const onChangeInput = (e) => {
@@ -101,8 +105,18 @@ export default function SigninForm() {
             <img src={googleIcon} alt="googleAuth" />
           </a>
         </div>
-        <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
-        <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
+        <FormButtonBlue
+          btnContent="Guest User"
+          formSubmit={guestLogin}
+          setModalOn={setModalOn}
+          setModalText={setModalText}
+        />
+        <FormButtonBlue
+          btnContent="Guest Seller"
+          formSubmit={sellerLogin}
+          setModalOn={setModalOn}
+          setModalText={setModalText}
+        />
       </form>
       {emailModal && (
         <>

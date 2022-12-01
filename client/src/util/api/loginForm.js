@@ -8,7 +8,7 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 console.log(REACT_APP_API_URL);
 
 // 서버에 로그인 입력 데이터 전송
-export const submitForm = async (userInfo) => {
+export const submitForm = async (userInfo, setModalOn, setModalText) => {
   console.log(userInfo);
   try {
     const res = await axios.post(`${REACT_APP_API_URL}users/login`, userInfo);
@@ -33,7 +33,8 @@ export const submitForm = async (userInfo) => {
     }
   } catch (error) {
     console.log(error);
-    window.alert('로그인 실패.');
+    setModalOn(true);
+    setModalText('로그인 실패.');
     return error;
   }
 };
@@ -71,7 +72,7 @@ export const userLogout = async () => {
 
 // 구매자 체험 로그인
 // 받아온 아이디 이메일로 로그인 진행.
-export const guestLogin = async () => {
+export const guestLogin = async (setModalOn, setModalText) => {
   try {
     const res = await axios.get(`${REACT_APP_API_URL}users/test/user`);
     console.log(res);
@@ -81,14 +82,15 @@ export const guestLogin = async () => {
       submitForm(userInfo);
     }
   } catch (error) {
-    window.alert('로그인 실패');
+    setModalOn(true);
+    setModalText('로그인 실패');
     return false;
   }
 };
 
 // 판매자 체험 로그인
 // 받아온 아이디 이메일로 로그인 진행.
-export const sellerLogin = async () => {
+export const sellerLogin = async (setModalOn, setModalText) => {
   try {
     const res = await axios.get(`${REACT_APP_API_URL}users/test/admin`);
     if (res.status === 200) {
@@ -98,7 +100,8 @@ export const sellerLogin = async () => {
       return;
     }
   } catch (error) {
-    window.alert('로그인 실패');
+    setModalOn(true);
+    setModalText('로그인 실패');
     return false;
   }
 };
