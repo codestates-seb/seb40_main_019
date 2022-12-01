@@ -21,31 +21,31 @@
   width: 400px;
   height: 200px;
 
-  .modalYesorNoBtn{
+  .modalYesorNoBtn {
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 100%;
-    .close{
+    .close {
       border-right: 1px solid rgb(224, 224, 224);
     }
-    .close:hover{
+    .close:hover {
       background-color: rgb(224, 224, 224);
       border-radius: 0px 0px 0px 15px;
     }
-    button:hover{
+    button:hover {
       background-color: rgb(224, 224, 224);
       border-radius: 0px 0px 15px 0px;
     }
   }
 
-  button{
+  button {
     font-size: 20px;
     color: var(--color-blue);
     font-weight: 600;
     border-top: 1px solid rgb(224, 224, 224);
     height: 100%;
   }
-  button:hover{
+  button:hover {
     background-color: rgb(224, 224, 224);
     border-radius: 0px 0px 15px 15px;
   }
@@ -55,43 +55,44 @@
   align-items: center;
   padding: 30px;
   line-height: 22px;
-  h3{
+  h3 {
     font-size: 16px;
     font-weight: 400;
+    white-space: pre-wrap;
   }
 }
 
-.modalOpen{
-  opacity: 1;   
-  animation: FadeIn .3s ease-in;
+.modalOpen {
+  opacity: 1;
+  animation: FadeIn 0.3s ease-in;
 }
 
-.modalClose{
+.modalClose {
   opacity: 0;
   pointer-events: none;
-  animation: FadeOut .3s ease-out;
+  animation: FadeOut 0.3s ease-out;
 }
 
 @keyframes FadeIn {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
-  1%{
-      opacity: 0;
+  1% {
+    opacity: 0;
   }
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
 @keyframes FadeOut {
   0% {
-      opacity:1
+    opacity: 1;
   }
   1% {
-      opacity:1;
+    opacity: 1;
   }
   100% {
-      opacity:0;
+    opacity: 0;
   }
 }

@@ -21,7 +21,7 @@ export default function Nav() {
   const handleMypage = (e) => {
     if (user.userRole === '') {
       setModalMoveOn(true);
-      setModalMoveText('구매자로 로그인 시 이용 가능합니다 이동하시겠습니까?');
+      setModalMoveText(`구매자로 로그인 시 이용 가능합니다\n이동하시겠습니까?`);
       e.preventDefault();
     } else if (
       user.userRole === 'ROLE_ADMIN_TEST' ||
@@ -37,7 +37,9 @@ export default function Nav() {
   const handleSeller = (e) => {
     if (user.userRole === '') {
       setModalMoveOn(true);
-      setModalMoveText('판매자로 로그인 시 이용 가능합니다 이동하시겠습니까?');
+      setModalMoveText(
+        `판매자게스트로 로그인 시 이용 가능합니다\n체험하러 이동하시겠습니까?`
+      );
       e.preventDefault();
     } else if (
       user.userRole === 'ROLE_USER' ||
