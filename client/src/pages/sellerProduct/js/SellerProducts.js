@@ -3,9 +3,18 @@ import '../css/SellerProducts.scss';
 import SellerProduct from '../../../components/seller/js/SellerProduct';
 import { Link } from 'react-router-dom';
 import useFetch from '../../../util/useFetch';
+import ReactPaginate from 'react-paginate';
+import { useState } from 'react';
 
 export default function SellerProducts() {
-  const [items] = useFetch('products/filter/1');
+  const [pageNum, setPageNum] = useState({ selected: 1 });
+  const [pageInfo, setPageInfo] = useState();
+
+  const handlePageChange = (page) => {
+    setPageNum({ selected: page.selected + 1 });
+  };
+
+  const [items] = useFetch('products/filter/1', pageNum, setPageInfo);
 
   return (
     <div className="sellerProducts">
@@ -36,6 +45,20 @@ export default function SellerProducts() {
             </div>
           );
         })}
+      <ReactPaginate
+        pageCount={pageInfo && pageInfo.totalPages}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        breakLabel={''}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination-ul'}
+        pageClassName={'pageButton'}
+        activeClassName={'currentPage'}
+        previousClassName={'switchPage'}
+        nextClassName={'switchPage'}
+      />
     </div>
   );
 }

@@ -1,19 +1,18 @@
 import '../css/SellerReview.scss';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
+
 import Review from '../../../components/seller/js/Review';
 import useFetch from '../../../util/useFetch';
-// import { Link } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
+import { useState } from 'react';
 
 export default function SellerReview() {
-  // const [items, setItems] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/review/').then((res) => {
-  //     setItems(res.data);
-  //   });
-  // }, []);
+  const [pageNum, setPageNum] = useState({ selected: 1 });
+  const [pageInfo, setPageInfo] = useState();
 
-  const [items] = useFetch('/review/seller');
+  const handlePageChange = (page) => {
+    setPageNum({ selected: page.selected + 1 });
+  };
+  const [items] = useFetch('/review/seller', pageNum, setPageInfo);
 
   return (
     <div className="sellerReview">
@@ -37,6 +36,20 @@ export default function SellerReview() {
             </div>
           );
         })}
+      <ReactPaginate
+        pageCount={pageInfo && pageInfo.totalPages}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        breakLabel={''}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination-ul'}
+        pageClassName={'pageButton'}
+        activeClassName={'currentPage'}
+        previousClassName={'switchPage'}
+        nextClassName={'switchPage'}
+      />
     </div>
   );
 }

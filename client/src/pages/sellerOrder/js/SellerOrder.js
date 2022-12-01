@@ -1,9 +1,18 @@
 import '../css/SellerOrder.scss';
 import Order from '../../../components/seller/js/Order';
 import useFetch from '../../../util/useFetch';
+import ReactPaginate from 'react-paginate';
+import { useState } from 'react';
 
 export default function SellerOrder() {
-  const [items] = useFetch('orders/all');
+  const [pageNum, setPageNum] = useState({ selected: 1 });
+  const [pageInfo, setPageInfo] = useState();
+
+  const handlePageChange = (page) => {
+    setPageNum({ selected: page.selected + 1 });
+  };
+
+  const [items] = useFetch('orders/all', pageNum, setPageInfo);
 
   return (
     <div className="sellerProducts orderTop">
@@ -28,6 +37,20 @@ export default function SellerOrder() {
             </div>
           );
         })}
+      <ReactPaginate
+        pageCount={pageInfo && pageInfo.totalPages}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        breakLabel={''}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination-ul'}
+        pageClassName={'pageButton'}
+        activeClassName={'currentPage'}
+        previousClassName={'switchPage'}
+        nextClassName={'switchPage'}
+      />
     </div>
   );
 }
