@@ -48,12 +48,16 @@ public class PointService {
     }
 
     public PointHistory addPointHistory(User user, int price, PointType pointType) {
+        long userRestCash = 0L;
+        if (user.getRestCash() != null) {
+            userRestCash = user.getRestCash();
+        }
         PointHistory pointHistory = PointHistory.builder()
                 .user(user)
                 .cash(price)
                 .pointType(pointType)
                 .createdAt(LocalDateTime.now())
-                .restCash(user.getRestCash() + price)
+                .restCash(userRestCash + price)
                 .build();
         log.info("service / 포인트 사용,충전 내역 저장");
         pointHistoryRepository.save(pointHistory);
