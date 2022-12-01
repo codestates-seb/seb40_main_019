@@ -26,6 +26,11 @@ export default function shopProductDetail() {
   const [myPoint, setMyPoint] = useState(0);
 
   useEffect(() => {
+    if (!JSON.parse(window.localStorage.getItem('cartItem'))) {
+      // window.alert('장바구니 없음');
+      window.localStorage.setItem('cartItem', JSON.stringify({}));
+    }
+
     getPoint().then((res) => {
       setMyPoint(res.data);
     });
