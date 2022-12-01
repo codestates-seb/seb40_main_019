@@ -80,8 +80,6 @@ public class AwsS3Service implements ImageUploadService{
 
             BufferedImage imageNoAlpha = imageMarvin.getBufferedImageNoAlpha();
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(imageNoAlpha, fileFormatName, baos);
-            baos.flush();
 
             return new MockMultipartFile(fileName, baos.toByteArray());
 
