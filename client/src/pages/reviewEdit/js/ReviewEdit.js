@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import ModalOk from '../../../components/modal/js/ModalOk';
 import ReviewForm from '../../../components/review/js/ReviewForm';
 import ReviewStar from '../../../components/review/js/ReviewStar';
 import { handleEditReview } from '../../../util/api/review';
@@ -10,15 +11,19 @@ export default function ReviewEdit() {
   const location = useLocation();
   const { item } = location.state;
 
-  const [reviewImg, setReviewImg] = useState([item.reviewImg]);
-  const [reviewContent, setReviewContent] = useState(item.reviewContent);
-  const [clickStar, setClickStar] = useState(item.star);
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
+
+  const [reviewImg, setReviewImg] = useState([item[0].reviewImg]);
+  const [reviewContent, setReviewContent] = useState(item[0].reviewContent);
+  const [clickStar, setClickStar] = useState(item[0].star);
 
   const data = { reviewImg, reviewContent, star: clickStar };
 
   const handleEdit = () => {
-    handleEditReview(data, item);
+    handleEditReview(data, item[0], setModalOn, setModalText);
   };
+  console.log(reviewImg);
 
   return (
     <div className="reviewAdd">
@@ -38,6 +43,11 @@ export default function ReviewEdit() {
         </button>
         <button onClick={handleEdit}>리뷰 수정</button>
       </div>
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </div>
   );
 }

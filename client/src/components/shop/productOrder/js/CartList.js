@@ -9,9 +9,14 @@ export default function CartList({
   decreaseQuantity,
   increaseQuantity,
   deleteItem,
+  deleteOk,
   checkBuyItem,
   checkBuyAllItem,
   allSelect,
+  setModalOn,
+  modalOn,
+  modalText,
+  api,
 }) {
   return (
     <div className="CartListContatner">
@@ -44,7 +49,12 @@ export default function CartList({
                 decreaseQuantity={decreaseQuantity}
                 increaseQuantity={increaseQuantity}
                 deleteItem={deleteItem}
+                deleteOk={deleteOk}
                 checkBuyItem={checkBuyItem}
+                setModalOn={setModalOn}
+                modalOn={modalOn}
+                modalText={modalText}
+                api={api}
               />
             </div>
           );

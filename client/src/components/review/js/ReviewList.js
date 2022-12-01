@@ -2,22 +2,25 @@ import '../css/ReviewList.scss';
 import { useNavigate } from 'react-router-dom';
 import ReviewStar from '../../review/js/ReviewStar';
 import useFetch from '../../../util/useFetch';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
-import { handleDltReview } from '../../../util/api/review';
+import {
+  handleDltReview,
+  handleDltReviewAlert,
+} from '../../../util/api/review';
+import Empty from '../../empty/js/Empty';
+import ModalYesorNo from '../../modal/js/ModalYesorNo';
+import { useState } from 'react';
 
 export default function ReviewList({ item }) {
   const navigate = useNavigate();
 
-  //임시
-  // const [pastData, setPastData] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/review/').then((res) => {
-  //     setPastData(res.data[1]);
-  //   });
-  // }, []);
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
 
   const clickDlt = () => {
+    handleDltReviewAlert(setModalText, setModalOn);
+  };
+
+  const clickDltOk = () => {
     handleDltReview(item.reviewId);
   };
 
@@ -33,9 +36,9 @@ export default function ReviewList({ item }) {
     });
   };
   return (
-    <div className="reviewListContainer">
-      {item && (
-        <>
+    <>
+      {item ? (
+        <div className="reviewListContainer">
           <div className="reviewTitle">
             <img className="titleImg" src={item.titleImg} alt="productImg" />
             <div className="title">{item.productName}</div>
@@ -45,7 +48,7 @@ export default function ReviewList({ item }) {
               <ReviewStar clickStar={item.star} type={'small'} />
               <p>{item.star}</p>
             </div>
-            <div className="reviewContent">{item.reviewContent}원</div>
+            <div className="reviewContent">{item.reviewContent}</div>
           </div>
           <div className="reviewBtn">
             <button className="edit" onClick={clickEdit}>
@@ -56,8 +59,16 @@ export default function ReviewList({ item }) {
               <i className="fa-solid fa-trash-can"></i>
             </button>
           </div>
-        </>
+        </div>
+      ) : (
+        <Empty text={'최근 작성된 리뷰가 없습니다'} />
       )}
-    </div>
+      <ModalYesorNo
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+        api={clickDltOk}
+      />
+    </>
   );
 }

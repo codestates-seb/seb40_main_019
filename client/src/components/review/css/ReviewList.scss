@@ -9,6 +9,8 @@
   padding-bottom: 20px;
   border-bottom: 1px solid var(--color-blue);
   .reviewTitle {
+    display: flex;
+    gap: 10px;
     padding-left: 20px;
     margin-bottom: 0px;
     align-items: center;

@@ -90,6 +90,11 @@
     font-size: 14px;
     }
   }
+  @media (max-width: 750px) {
+    .lineTitle {
+      display: none;
+    }
+  }
   
   @media (max-width: 750px) {
     .lineBold {

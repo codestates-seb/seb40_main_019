@@ -3,6 +3,7 @@ import '../css/Review.scss';
 // import axios from 'axios';
 import ReviewList from '../../../components/review/js/ReviewList';
 import useFetch from '../../../util/useFetch';
+import Empty from '../../../components/empty/js/Empty';
 
 export default function Review() {
   // const [items, setItems] = useState();
@@ -24,14 +25,17 @@ export default function Review() {
         <li>리뷰</li>
         <li>수정 / 삭제</li>
       </ul>
-      {items &&
+      {items && items.length !== 0 ? (
         items.map((item) => {
           return (
             <div key={item.orederId}>
               <ReviewList item={item} />
             </div>
           );
-        })}
+        })
+      ) : (
+        <Empty text={'작성한 리뷰가 없습니다'} />
+      )}
     </div>
   );
 }

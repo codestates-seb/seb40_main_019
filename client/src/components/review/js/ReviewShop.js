@@ -1,12 +1,13 @@
 import '../css/ReviewShop.scss';
 import ReviewStar from '../../review/js/ReviewStar';
+import { formatDate } from '../../../util/function/formatData';
 
 export default function ReviewShop({ item }) {
   return (
     <div className="reviewShop">
       <div className="reviewTitle">
         <h2>{item.reviewWriter}</h2>
-        <p>{item.createdAt}</p>
+        <p>{formatDate(item.createdAt)}</p>
         <ReviewStar clickStar={item.star} type={'small'} />
       </div>
 

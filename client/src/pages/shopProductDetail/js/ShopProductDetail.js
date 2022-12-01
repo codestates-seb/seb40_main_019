@@ -48,7 +48,7 @@ export default function shopProductDetail() {
           {clickBtn === 'detail' ? (
             <ProductDetailBox product={product} setClickBtn={setClickBtn} />
           ) : (
-            <ProductDetailReview setClickBtn={setClickBtn} />
+            <ProductDetailReview setClickBtn={setClickBtn} id={params.id} />
           )}
           <ProductDetailReadme />
         </div>

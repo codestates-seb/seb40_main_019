@@ -2,6 +2,9 @@ import ImageUploader from 'react-images-upload';
 import '../css/ImgUploader.scss';
 
 export default function ImgUploader({ pictures, setPictures }) {
+  if (!pictures[0]) {
+    pictures = [];
+  }
   const onDrop = (picture) => {
     setPictures(picture);
   };

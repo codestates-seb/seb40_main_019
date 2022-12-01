@@ -4,11 +4,15 @@ import textLogoYellow from '../../../assets/img/LUXMEALy.svg';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { userLogout } from '../../../util/api/loginForm';
+import { useState } from 'react';
+import ModalOk from '../../modal/js/ModalOk';
 
 export default function Nav() {
   const location = useLocation();
   const user = useSelector((state) => state.user);
   const loginData = useSelector((state) => state.login);
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
 
   //마이페이지 구매자 로그인시 페이지 사용가능
   const handleMypage = (e) => {
@@ -17,7 +21,8 @@ export default function Nav() {
       user.userRole === 'ROLE_ADMIN_TEST' ||
       user.userRole === 'ROLE_ADMIN'
     ) {
-      alert('구매자로 로그인 시 이용 가능합니다');
+      setModalOn(true);
+      setModalText('구매자로 로그인 시 이용 가능합니다');
       e.preventDefault();
     }
   };
@@ -29,14 +34,16 @@ export default function Nav() {
       user.userRole === 'ROLE_USER' ||
       user.userRole === 'ROLE_USER_TEST'
     ) {
-      alert('판매자로 로그인 시 이용 가능합니다');
+      setModalOn(true);
+      setModalText('판매자로 로그인 시 이용 가능합니다');
       e.preventDefault();
     }
   };
 
   const handleCart = (e) => {
     if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
-      alert('판매자는 이용 할 수 없습니다');
+      setModalOn(true);
+      setModalText('판매자는 이용 할 수 없습니다');
       e.preventDefault();
     }
   };
@@ -87,6 +94,11 @@ export default function Nav() {
           </div>
         </nav>
       </div>
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </>
   );
 }

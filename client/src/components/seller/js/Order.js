@@ -1,5 +1,7 @@
 import '../css/Order.scss';
-import { handleDelivery } from '../../../util/api/order';
+import { handleDelivery, handleDeliveryAlert } from '../../../util/api/order';
+import ModalYesorNo from '../../modal/js/ModalYesorNo';
+import { useState } from 'react';
 
 export default function Order({ item }) {
   let status = '상품준비중';
@@ -7,7 +9,14 @@ export default function Order({ item }) {
   else if (item.orderStatus === 'SHIPPED') status = '배송 완료';
   else if (item.orderStatus === 'CANCLE') status = '주문 취소';
 
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
+
   const clickDelivery = () => {
+    handleDeliveryAlert(setModalText, setModalOn);
+  };
+
+  const clickDeliveryOk = () => {
     handleDelivery(item.orderId);
   };
   return (
@@ -41,6 +50,12 @@ export default function Order({ item }) {
           })}
         </div>
       </div>
+      <ModalYesorNo
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+        api={clickDeliveryOk}
+      />
     </div>
   );
 }

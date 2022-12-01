@@ -2,6 +2,7 @@ import '../css/mypagePointList.scss';
 import MypagePointListItem from './MypagePointListItem';
 import { useState, useEffect } from 'react';
 import { getPointList } from '../../../../util/api/point';
+import Empty from '../../../empty/js/Empty';
 
 export default function MypagePointList() {
   const [pointList, setPointList] = useState([]);
@@ -27,14 +28,17 @@ export default function MypagePointList() {
         <li>잔여 포인트</li>
       </ul>
 
-      {pointList &&
+      {pointList ? (
         pointList.map((point) => {
           return (
             <div key={point.pointHistoryId}>
               <MypagePointListItem point={point} />
             </div>
           );
-        })}
+        })
+      ) : (
+        <Empty text={'포인트 거래내역이 없습니다'} />
+      )}
     </div>
   );
 }
