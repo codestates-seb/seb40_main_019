@@ -84,14 +84,21 @@ export const handleOrderSingle = async (data) => {
   }
 };
 
+//주문발송알람
+export const handleDeliveryAlert = async (setModalText, setModalOn) => {
+  setModalOn(true);
+  setModalText('발송하시겠습니까?');
+};
+
 //주문 발송처리
 export const handleDelivery = async (orderId) => {
   try {
     const res = await axios.patch(
       `${REACT_APP_API_URL}orders/status/${orderId}`
     );
-    if (res.status === 201) {
+    if (res.status === 200) {
       console.log(res.data);
+      location.reload();
     }
   } catch (error) {
     console.error(error);
