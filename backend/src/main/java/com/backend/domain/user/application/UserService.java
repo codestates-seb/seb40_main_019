@@ -388,6 +388,7 @@ public class UserService {
 
     @Transactional
     public void deleteGustAccount() {
+        pointHistoryRepository.deleteByUser_UserRoleOrUser_UserRole("ROLE_USER_TEST", "ROLE_ADMIN_TEST");
         userRepository.deleteAllByUserRoleOrUserRole("ROLE_USER_TEST", "ROLE_ADMIN_TEST");
     }
 }
