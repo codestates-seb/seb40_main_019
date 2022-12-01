@@ -28,8 +28,9 @@ export default function Footer() {
             <div className="secondBox">
               LUXMEAL © 2022 All rights reserved.{' '}
             </div>
+
             <div className="thirdBox">
-              <div className="frontMember">
+              <div>
                 <a href="https://github.com/Liieonking" target="blank">
                   <i className="fa-brands fa-github" />
                   손현지
@@ -43,7 +44,7 @@ export default function Footer() {
                   이지연
                 </a>
               </div>
-              <div className="backMember">
+              <div>
                 <a href="https://github.com/hyojoonm" target="blank">
                   <i className="fa-brands fa-github" />
                   김효준
