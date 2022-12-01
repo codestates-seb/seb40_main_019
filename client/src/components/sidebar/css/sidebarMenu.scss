@@ -22,6 +22,10 @@
     margin: 10px;
 
     cursor: pointer;
+
+      @media (max-width: 1364px) {
+        display: none;  
+      }
   }
   .logoBox:hover {
     background: url('../../../assets/img/logo_side_yellow.png');
