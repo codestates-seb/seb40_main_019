@@ -4,8 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import { findEmailController } from '../../../util/api/userAccount';
+import ModalOk from '../../modal/js/ModalOk';
 export default function FindEmailModal({ setEmailModal }) {
   const [inputPhone, setInputPhone] = useState('');
+
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
 
   const changeInputPhone = (e) => {
     setInputPhone(e.target.value);
@@ -14,7 +18,7 @@ export default function FindEmailModal({ setEmailModal }) {
     setEmailModal(false);
   };
   const findEmail = () => {
-    findEmailController(inputPhone);
+    findEmailController(inputPhone, setModalOn, setModalText);
     // window.alert('아이디 찾기');
   };
   return (
@@ -46,6 +50,11 @@ export default function FindEmailModal({ setEmailModal }) {
           />
         </div>
       </div>
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </>
   );
 }

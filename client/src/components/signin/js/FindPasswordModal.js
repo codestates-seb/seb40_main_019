@@ -7,6 +7,7 @@ import {
   findPasswordSendEmail,
   changePasssword,
 } from '../../../util/api/userAccount';
+import ModalOk from '../../modal/js/ModalOk';
 
 export default function FindPasswordModal({ setPasswordModal }) {
   const [step, setStep] = useState(0);
@@ -19,6 +20,9 @@ export default function FindPasswordModal({ setPasswordModal }) {
 
   const [inputPassword, setInputPassword] = useState('');
 
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
+
   const closeModal = () => {
     setPasswordModal(false);
   };
@@ -26,44 +30,54 @@ export default function FindPasswordModal({ setPasswordModal }) {
   // step 0
   const sendEmail = () => {
     // 인증번호 받아오기
-    let res = findPasswordSendEmail(inputEmail);
+    let res = findPasswordSendEmail(inputEmail, setModalOn, setModalText);
     res.then((data) => {
       console.log(data);
       if (data.status === 200) {
-        window.alert('인증코드 발송 완료');
+        setModalOn(true);
+        setModalText('인증코드 발송 완료');
         console.log(data.data);
         setValidationCode(data.data);
+        // 상태코드 200 이면 설정 후 다음 단계로 이동
+        setValidationCode('123456');
+        setStep(1);
       }
     });
-    // 상태코드 200 이면 설정 후 다음 단계로 이동
-    setValidationCode('123456');
-    setStep(1);
   };
 
   // step 1
   const checkEmailValidation = () => {
     // 인증코드, 입력코드 비교하기
     if (!inputEmailValidationInput) {
-      window.alert('인증코드를 입력하세요.');
+      setModalOn(true);
+      setModalText('인증코드를 입력하세요.');
       return;
     }
     if (inputEmailValidationInput !== validationCode) {
-      window.alert('인증코드가 일치하지 않습니다.');
+      setModalOn(true);
+      setModalText('인증코드가 일치하지 않습니다.');
       return;
     }
-    window.alert('이메일 인증 완료');
+    setModalOn(true);
+    setModalText('이메일 인증 완료');
     setStep(2);
   };
 
   // step 2
   const changePassword = () => {
-    let res = changePasssword(inputEmail, inputPassword);
+    let res = changePasssword(
+      inputEmail,
+      inputPassword,
+      setModalOn,
+      setModalText
+    );
     // 응답이 200 이면 변경 완료.
     console.log(res);
     res.then((data) => {
       console.log(data);
       if (data.status === 200) {
-        window.alert('비밀번호 변경 완료');
+        setModalOn(true);
+        setModalText('비밀번호 변경 완료');
         closeModal();
       }
     });
@@ -153,6 +167,11 @@ export default function FindPasswordModal({ setPasswordModal }) {
           />
         </div>
       </div>
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </>
   );
 }
