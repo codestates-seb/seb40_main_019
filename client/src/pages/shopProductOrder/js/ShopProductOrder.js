@@ -20,7 +20,10 @@ export default function ShopProductOrder() {
       setMyPoint(res.data);
     });
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-
+    // console.log(data);
+    if (!data) {
+      data = {};
+    }
     let price = 0;
     let arr = [];
     let checked = true;
