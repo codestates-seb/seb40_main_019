@@ -32,20 +32,18 @@ public class PointService {
 
     @Transactional
     public Long addCash(User user, int price, PointType pointType) {
-        PointHistory pointHistory = addPointHistory(user, price, pointType);
+        addPointHistory(user, price, pointType);
+        long userRestCash = getUserRestCash(user);
         log.info("service / 포인트 사용 및 충전 시작");
-        Long newRestCash = user.getRestCash() + price;
+        Long newRestCash = userRestCash + price;
         user.setRestCash(newRestCash);
         userRepository.save(user);
 
         return newRestCash;
     }
 
-    public PointHistory addPointHistory(User user, int price, PointType pointType) {
-        long userRestCash = 0L;
-        if (user.getRestCash() != null) {
-            userRestCash = user.getRestCash();
-        }
+    public void addPointHistory(User user, int price, PointType pointType) {
+        long userRestCash = getUserRestCash(user);
         PointHistory pointHistory = PointHistory.builder()
                 .user(user)
                 .cash(price)
@@ -55,8 +53,14 @@ public class PointService {
                 .build();
         log.info("service / 포인트 사용,충전 내역 저장");
         pointHistoryRepository.save(pointHistory);
+    }
 
-        return pointHistory;
+    private long getUserRestCash(User user) {
+        long userRestCash = 0L;
+        if (user.getRestCash() != null) {
+            userRestCash = user.getRestCash();
+        }
+        return userRestCash;
     }
 
     public Long getRestCash(User user) {
