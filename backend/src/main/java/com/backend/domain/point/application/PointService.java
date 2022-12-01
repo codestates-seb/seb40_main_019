@@ -1,13 +1,11 @@
 package com.backend.domain.point.application;
 
 
-import com.backend.domain.order.dao.OrderRepository;
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.point.dao.PointHistoryRepository;
 import com.backend.domain.point.domain.PointHistory;
 import com.backend.domain.point.domain.PointType;
 import com.backend.domain.point.dto.PointResponseDto;
-import com.backend.domain.point.mapper.PointMapper;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.global.error.BusinessLogicException;
@@ -31,10 +29,6 @@ public class PointService {
     private final PointHistoryRepository pointHistoryRepository;
 
     private final UserRepository userRepository;
-
-    private final OrderRepository orderRepository;
-
-    private final PointMapper mapper;
 
     @Transactional
     public Long addCash(User user, int price, PointType pointType) {

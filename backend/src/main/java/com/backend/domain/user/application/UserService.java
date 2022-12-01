@@ -290,8 +290,6 @@ public class UserService {
         pointService.addCash(testUser, 1000000, PointType.SignUpPoint);
         log.info("회원가입 포인트 지급");
 
-        userRepository.save(testUser);
-
         return TestUserResponseDto.builder()
                 .email(testUser.getEmail())
                 .password(randomPassword)
