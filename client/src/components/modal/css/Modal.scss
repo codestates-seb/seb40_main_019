@@ -20,6 +20,23 @@
   width: 400px;
   height: 200px;
 
+  .modalYesorNoBtn{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    .close{
+      border-right: 1px solid rgb(224, 224, 224);
+    }
+    .close:hover{
+      background-color: rgb(224, 224, 224);
+      border-radius: 0px 0px 0px 15px;
+    }
+    button:hover{
+      background-color: rgb(224, 224, 224);
+      border-radius: 0px 0px 15px 0px;
+    }
+  }
+
   button{
     font-size: 20px;
     color: var(--color-blue);
@@ -36,6 +53,7 @@
 .modalText {
   align-items: center;
   padding: 30px;
+  line-height: 22px;
 }
 
 .modalOpen{

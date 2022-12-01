@@ -7,7 +7,7 @@ const useFetch = (url, state, state2) => {
 
   useEffect(() => {
     let params = {
-      page: 0,
+      page: 1,
     };
     //요청과 통신하거나 중단하는 데에 사용하는 신호 역할
     axios

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ProductForm from '../../../components/seller/js/ProductForm';
 import { handleEdit } from '../../../util/api/product';
 import { useState } from 'react';
+import ModalOk from '../../../components/modal/js/ModalOk';
 
 export default function SellerEditProduct() {
   const navigate = useNavigate();
@@ -10,6 +11,9 @@ export default function SellerEditProduct() {
   const { item } = location.state;
 
   //state
+  const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
+
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState(item.productName);
   const [price, setPrice] = useState(item.price);
@@ -26,7 +30,7 @@ export default function SellerEditProduct() {
   };
 
   const clickEdit = () => {
-    handleEdit(data, item);
+    handleEdit(data, item, setModalOn, setModalText);
   };
 
   return (
@@ -53,6 +57,11 @@ export default function SellerEditProduct() {
         </button>
         <button onClick={clickEdit}>수정하기</button>
       </div>
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </div>
   );
 }

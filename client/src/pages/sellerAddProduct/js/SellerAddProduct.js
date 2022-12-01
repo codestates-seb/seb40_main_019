@@ -4,11 +4,10 @@ import ProductForm from '../../../components/seller/js/ProductForm';
 import { useState } from 'react';
 import ModalOk from '../../../components/modal/js/ModalOk';
 import { handleSubmit } from '../../../util/api/product';
-// import { useSelector } from 'react-redux';
 
 export default function SellerAddProduct() {
-  // const loginData = useSelector((state) => state.login);
   const [modalOn, setModalOn] = useState(false);
+  const [modalText, setModalText] = useState('');
 
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState('');
@@ -27,7 +26,7 @@ export default function SellerAddProduct() {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(data, setModalOn);
+    handleSubmit(data, setModalOn, setModalText);
   };
 
   return (
@@ -53,7 +52,11 @@ export default function SellerAddProduct() {
         </Link>
         <button onClick={formSubmit}>저장하기</button>
       </div>
-      <ModalOk setClick={setModalOn} modalOn={modalOn} />
+      <ModalOk
+        setModalOn={setModalOn}
+        modalOn={modalOn}
+        modalText={modalText}
+      />
     </div>
   );
 }

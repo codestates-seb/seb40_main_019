@@ -2,11 +2,11 @@ import '../css/Modal.scss';
 import { Transition } from 'react-transition-group';
 import { useEffect, useRef } from 'react';
 
-export default function ModalOk({ setClick, modalOn }) {
+export default function ModalOk({ setModalOn, modalOn, modalText }) {
   const box = useRef();
   const handleColseModal = (e) => {
     if (modalOn && (!box.current || !box.current.contains(e.target)))
-      setClick(false);
+      setModalOn(false);
   };
   useEffect(() => {
     if (modalOn) {
@@ -31,9 +31,9 @@ export default function ModalOk({ setClick, modalOn }) {
       >
         <div className="modalBox">
           <div className="modalText">
-            <h3>상품명이 5~30자여야 합니다</h3>
+            <h3>{modalText}</h3>
           </div>
-          <button onClick={() => setClick(false)}>확인</button>
+          <button onClick={() => setModalOn(false)}>확인</button>
         </div>
       </div>
     </Transition>
