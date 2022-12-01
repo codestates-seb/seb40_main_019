@@ -38,24 +38,35 @@ public class AwsS3Service implements ImageUploadService{
     @SneakyThrows
     public String StoreImage(MultipartFile img) {
         validateFileExists(img);
-        String originalFilename = img.getOriginalFilename();
-        String storeFileName = createStoreFileName(originalFilename);
+        String fileName = createFileName(img.getOriginalFilename());
+        String fileFormatName = img.getContentType().substring(img.getContentType().lastIndexOf("/") + 1);
 
-        MultipartFile resizedFile = resizeImage(originalFilename,storeFileName,img,500);
+        MultipartFile resizedFile = resizeImage(fileName, fileFormatName, img, 768);
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(img.getContentType());
         objectMetadata.setContentLength(resizedFile.getSize());
 
         try (InputStream inputStream = resizedFile.getInputStream()) {
-            amazonS3.putObject(new PutObjectRequest(bucketName, storeFileName, inputStream, objectMetadata)
+            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata)
                     .withCannedAcl(CannedAccessControlList.PublicRead));
         } catch (IOException e) {
             throw new UploadFailed();
 
         }
 
-        return amazonS3.getUrl(bucketName, storeFileName).toString();
+        return amazonS3.getUrl(bucketName,fileName).toString();
+    }
+
+    private String createFileName(String filename) {
+        return UUID.randomUUID().toString().concat(getFileExtension(filename));
+    }
+    private String getFileExtension(String fileName) {
+        try {
+            return fileName.substring(fileName.lastIndexOf("."));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 형식의 파일(" + fileName + ") 입니다.");
+        }
     }
 
     MultipartFile resizeImage(String fileName, String fileFormatName, MultipartFile originalImage, int targetWidth) {
