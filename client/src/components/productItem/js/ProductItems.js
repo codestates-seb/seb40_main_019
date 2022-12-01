@@ -1,18 +1,26 @@
 import '../css/productItems.scss';
 import ProductItem from './ProductItem';
 import useFetch from '../../../util/useFetch';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 
 function ProductItems() {
   const [pageNum, setPageNum] = useState({ selected: 1 });
+  // const [categoryPage, setCategoryPage] = useState({ selected: 1 });
+  const dispatch = useDispatch();
   const handlePageChange = (page) => {
-    setPageNum({ selected: page.selected + 1 });
+    if (categoryState.allProduct) {
+      setPageNum({ selected: page.selected + 1 });
+    } else {
+      dispatch({ categoryPage: page.selected + 1 });
+    }
   };
+
   const [pageInfo, setPageInfo] = useState();
   const [filterId, setFilter] = useState('1');
   const categoryState = useSelector((state) => state.product);
+  console.log(categoryState);
   let [products] = [];
   if (categoryState.allProduct) {
     [products] = useFetch(
@@ -25,7 +33,7 @@ function ProductItems() {
   } else {
     [products] = useFetch(
       `products/category/${categoryState.category}/${filterId}`,
-      pageNum,
+      categoryState.categoryPage,
       setPageInfo,
       categoryState,
       filterId

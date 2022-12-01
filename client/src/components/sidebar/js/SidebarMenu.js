@@ -20,6 +20,7 @@ export default function SidebarMenu() {
                 setCategory({
                   allProduct: true,
                   category: '',
+                  categoryPage: { selected: 1 },
                 })
               )
             }
@@ -32,6 +33,7 @@ export default function SidebarMenu() {
                 setCategory({
                   allProduct: false,
                   category: '1',
+                  categoryPage: { selected: 1 },
                 })
               )
             }
@@ -44,6 +46,7 @@ export default function SidebarMenu() {
                 setCategory({
                   allProduct: false,
                   category: '2',
+                  categoryPage: { selected: 1 },
                 })
               )
             }
@@ -56,6 +59,7 @@ export default function SidebarMenu() {
                 setCategory({
                   allProduct: false,
                   category: '3',
+                  categoryPage: { selected: 1 },
                 })
               )
             }
@@ -68,6 +72,7 @@ export default function SidebarMenu() {
                 setCategory({
                   allProduct: false,
                   category: '4',
+                  categoryPage: { selected: 1 },
                 })
               )
             }
