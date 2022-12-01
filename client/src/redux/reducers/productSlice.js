@@ -15,7 +15,7 @@ export const productSlice = createSlice({
         ...state,
         allProduct: payload.allProduct,
         category: payload.category,
-        categoryPage: { selected: 1 },
+        categoryPage: payload.categoryPage,
       };
     },
     // clearUser: (state) => {
