@@ -17,6 +17,7 @@ import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +39,7 @@ public class ReviewService {
 
     private final OrderProductRepository orderProductRepository;
 
+    @SneakyThrows
     @Transactional
     public Review create(Long userId,Long productId,String reviewContent,int star,ReviewImg reviewImg) {
 
@@ -76,6 +78,7 @@ public class ReviewService {
         log.info("리뷰 생성 ");
         return reviewRepository.save(review);
     }
+    @SneakyThrows
     @Transactional
     public Review update(Long reviewId, Long userId, String reviewContent, int star, ReviewImg reviewImg,String delete) {
         log.info("upate 실행");

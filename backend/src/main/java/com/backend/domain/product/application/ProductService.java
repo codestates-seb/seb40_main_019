@@ -15,6 +15,7 @@ import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,6 +40,7 @@ public class ProductService {
     private final CategoryRepository categoryRepository;
     private final AwsS3Service awsS3Service;
     // 제품 생성
+    @SneakyThrows
     @Transactional
     public Product create(Long userId, int price, String productName,TitleImg titleImg,DetailImg detailImg,String tag,Long categoryId){
 
@@ -72,6 +74,7 @@ public class ProductService {
     }
 
     // 상품 수정
+    @SneakyThrows
     @Transactional
     public Product update(Long productId, Long categoryId, int price , String productName, TitleImg titleImg, DetailImg detailImg) {
         Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
