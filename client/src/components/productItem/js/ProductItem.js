@@ -1,13 +1,13 @@
 import '../css/productItem.scss';
 import { useNavigate } from 'react-router-dom';
 
-const ProductItem = ({ data }) => {
+const ProductItem = ({ data, key }) => {
   const navigate = useNavigate();
   const clickProduct = () => {
     navigate(`/product/detail/${data.productId}`);
   };
   return (
-    <div className="flexInner">
+    <div key={key} className="flexInner">
       <div
         role="button"
         className="itemContainer"
