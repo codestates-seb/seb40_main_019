@@ -1,0 +1,13 @@
+.emptyBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(165, 165, 165);
+  padding: 10px;
+  i{
+    font-size: 40px;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+}

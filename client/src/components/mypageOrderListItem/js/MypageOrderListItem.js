@@ -1,5 +1,6 @@
 import '../css/mypageOrderListItem.scss';
 import { Link } from 'react-router-dom';
+import Empty from '../../empty/js/Empty';
 
 export default function MypageOrderListItem({ item }) {
   let status = '상품준비중';
@@ -10,33 +11,42 @@ export default function MypageOrderListItem({ item }) {
   }
 
   return (
-    <div className="mypageOrderContainer">
-      <div className="orderDate">
-        <p>{item && item.orderDate}</p>
-      </div>
-      <div className="orderContainer">
-        {item &&
-          item.orderProductDtoList.map((item) => {
-            return (
-              <div className="orderContent" key={item.productId}>
-                <img className="titleImg" src={item.imgUrl} alt="productImg" />
-                <div className="text">
-                  <div className="preparing">{status}</div>
-                  <div className="title">{item.productName}</div>
-                </div>
-                <div className="priceAndCount">
-                  <div className="price">{item.totalPrice}원</div>
-                  <div className="orderCount">{item.quantity}개</div>
-                </div>
-                <Link to={`/mypage/reviewadd/${item.productId}`}>
-                  <div className="reviewBtn">
-                    <button>리뷰작성</button>
+    <>
+      {item ? (
+        <div className="mypageOrderContainer">
+          <div className="orderDate">
+            <p>{item.orderDate}</p>
+          </div>
+          <div className="orderContainer">
+            {item.orderProductDtoList.map((item) => {
+              return (
+                <div className="orderContent" key={item.productId}>
+                  <img
+                    className="titleImg"
+                    src={item.imgUrl}
+                    alt="productImg"
+                  />
+                  <div className="text">
+                    <div className="preparing">{status}</div>
+                    <div className="title">{item.productName}</div>
                   </div>
-                </Link>
-              </div>
-            );
-          })}
-      </div>
-    </div>
+                  <div className="priceAndCount">
+                    <div className="price">{item.totalPrice}원</div>
+                    <div className="orderCount">{item.quantity}개</div>
+                  </div>
+                  <Link to={`/mypage/reviewadd/${item.productId}`}>
+                    <div className="reviewBtn">
+                      <button>리뷰작성</button>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <Empty text={'최근 주문한 목록이 없습니다'} />
+      )}
+    </>
   );
 }
