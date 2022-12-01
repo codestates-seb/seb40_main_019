@@ -8,14 +8,19 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.backend.domain.product.exception.NoImage;
 import com.backend.domain.product.exception.UploadFailed;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.imgscalr.Scalr;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
+import java.io.File;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,10 +31,18 @@ public class AwsS3Service implements ImageUploadService{
     @Value("${cloud.aws.s3.bucket}")
     private String bucketName;
 
+    @SneakyThrows
     public String StoreImage(MultipartFile img) {
         validateFileExists(img);
         String originalFilename = img.getOriginalFilename();
         String storeFileName = createStoreFileName(originalFilename);
+
+        //mutipartfile->bufferedImage
+        BufferedImage bi= ImageIO.read(img.getInputStream());
+        //이미지 사이즈변경
+        bi=resizeImage(bi);
+        //이미지 위치에 저장
+        ImageIO.write(bi,"jpg",new File(storeFileName));
 
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentType(img.getContentType());
@@ -43,6 +56,10 @@ public class AwsS3Service implements ImageUploadService{
         }
 
         return amazonS3.getUrl(bucketName, storeFileName).toString();
+    }
+
+    private BufferedImage resizeImage(BufferedImage src) {
+        return Scalr.resize(src, Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_EXACT, 500, 500, Scalr.OP_ANTIALIAS);
     }
 
     public void deleteImage(String fileUrl) {
