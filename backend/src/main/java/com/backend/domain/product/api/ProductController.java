@@ -64,7 +64,7 @@ public class ProductController {
     // 상품 조회 (필터링)
     @GetMapping("/products/filter/{filterId}")
     public ResponseEntity getLists(@RequestParam int page,@PathVariable int filterId){
-        int size= 15;
+        int size= 12;
         log.info("getLists 실행 ");
         Page<Product> pageProduct = productService.getLists(page-1, size,filterId);
         log.info(" 페이징 리스트로 변환 ");
@@ -89,7 +89,7 @@ public class ProductController {
     // 카테고리 필터 출력
     @GetMapping("/products/category/{categoryId}/{filterId}")
     public ResponseEntity getListCategory(@PathVariable Long categoryId,@RequestParam int page,@PathVariable int filterId){
-        int size= 15;
+        int size= 12;
         log.info(" getListCategory 실행 ");
         Page<Product> pageProduct = productService.getCategory(categoryId,filterId, page-1, size);
         log.info(" getcategory 리스트로 변환 ");
