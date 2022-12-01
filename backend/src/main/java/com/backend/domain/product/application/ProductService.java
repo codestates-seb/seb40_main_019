@@ -54,7 +54,7 @@ public class ProductService {
 
         String titleUrl = awsS3Service.StoreImage(titleImg.getTitleImg());
         log.info("타이틀 이미지 완료");
-        String detailUrl = awsS3Service.StoreImage(detailImg.getDetailImg());
+        String detailUrl = awsS3Service.DetailImage(detailImg.getDetailImg());
         log.info("디테일 이미지 완료");
         Product product = Product.builder()
                 .productName(productName)
@@ -103,7 +103,7 @@ public class ProductService {
         log.info(" 타이틀 이미지 완료 ");
         if ( detailImg.getDetailImg() != null) {
             awsS3Service.deleteImage(findProduct.getDetailImg());
-            findProduct.setDetailImg(awsS3Service.StoreImage(detailImg.getDetailImg()));
+            findProduct.setDetailImg(awsS3Service.DetailImage(detailImg.getDetailImg()));
         }
 
         log.info(" 수정 디테일 이미지 입력 ");

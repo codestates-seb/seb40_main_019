@@ -57,6 +57,26 @@ public class AwsS3Service implements ImageUploadService{
 
         return amazonS3.getUrl(bucketName,fileName).toString();
     }
+    @SneakyThrows
+    public String DetailImage(MultipartFile img) {
+        validateFileExists(img);
+        String fileName = createFileName(img.getOriginalFilename());
+        String fileFormatName = img.getContentType().substring(img.getContentType().lastIndexOf("/") + 1);
+
+
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(img.getContentType());
+
+        try (InputStream inputStream = img.getInputStream()) {
+            amazonS3.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata)
+                    .withCannedAcl(CannedAccessControlList.PublicRead));
+        } catch (IOException e) {
+            throw new UploadFailed();
+
+        }
+
+        return amazonS3.getUrl(bucketName,fileName).toString();
+    }
 
     private String createFileName(String filename) {
         return UUID.randomUUID().toString().concat(getFileExtension(filename));

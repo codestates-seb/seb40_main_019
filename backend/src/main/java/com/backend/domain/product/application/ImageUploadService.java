@@ -7,4 +7,6 @@ public interface ImageUploadService {
     @SneakyThrows
     String StoreImage(MultipartFile img);
 
+    @SneakyThrows
+    String DetailImage(MultipartFile img);
 }
