@@ -37,7 +37,7 @@ public class PointHistory  {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    private int restCash;
+    private Long restCash;
 
 
     }

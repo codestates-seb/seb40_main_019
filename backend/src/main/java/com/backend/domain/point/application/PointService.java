@@ -37,10 +37,10 @@ public class PointService {
     private final PointMapper mapper;
 
     @Transactional
-    public Integer addCash(User user, int price, PointType pointType) {
+    public Long addCash(User user, int price, PointType pointType) {
         PointHistory pointHistory = addPointHistory(user, price, pointType);
         log.info("service / 포인트 사용 및 충전 시작");
-        int newRestCash = user.getRestCash() + price;
+        Long newRestCash = user.getRestCash() + price;
         user.setRestCash(newRestCash);
         userRepository.save(user);
 
@@ -61,7 +61,7 @@ public class PointService {
         return pointHistory;
     }
 
-    public int getRestCash(User user) {
+    public Long getRestCash(User user) {
         return user.getRestCash();
     }
 
@@ -69,7 +69,7 @@ public class PointService {
     public void pay(Order order, Long userId) {
         log.info("service / 포인트로 상품결제 시작");
         User user = userRepository.findById(userId).orElseThrow(() -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
-        int restCash = user.getRestCash();
+        Long restCash = user.getRestCash();
         int payPrice = order.getOrderTotalPrice();
         if (payPrice > restCash) {
             throw new BusinessLogicException(ExceptionCode.NOT_ENOUGH_POINT);

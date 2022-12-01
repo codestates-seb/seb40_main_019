@@ -31,7 +31,7 @@ public class PaymentController {
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         Payment payment = paymentMapper.paymentRequestToPayment(paymentRequest);
         int price = payment.getAmount();
-        int newRestCash = pointService.addCash(user, price, PointType.AddPoint);
+        Long newRestCash = pointService.addCash(user, price, PointType.AddPoint);
 //        JsonNode jsonNode = paymentService.create(payment);
 
         return new ResponseEntity(HttpStatus.OK);

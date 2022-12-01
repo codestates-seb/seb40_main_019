@@ -42,7 +42,7 @@ public class User extends Auditable {
 //    @Column(nullable = false)
 //    private String about;
 
-    @Column(nullable = true)
+    @Column
     private String userRole;
 
     @Column(nullable = false)
@@ -65,8 +65,7 @@ public class User extends Auditable {
     private String username;
 
     @Column
-    @ColumnDefault("-1")
-    private int restCash;
+    private Long restCash;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
@@ -88,7 +87,7 @@ public class User extends Auditable {
                 String socialLogin,
                 String zipCode,
                 String address,
-                int restCash) {
+                Long restCash) {
         this.email = email;
         this.password = password;
         this.nickname = nickname;

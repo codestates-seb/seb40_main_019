@@ -89,8 +89,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             user.setPassword(passwordEncoder.encode(user.getNickname()));
         }
 
-        if (user.getRestCash() == -1) {
-            user.setRestCash(0);
+        if (user.getRestCash() == null) {
+            user.setRestCash(0L);
             pointService.addCash(user, 1000000, PointType.SignUpPoint);
             log.info("회원가입 포인트 지급");
         }

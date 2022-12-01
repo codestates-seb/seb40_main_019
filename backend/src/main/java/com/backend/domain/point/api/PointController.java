@@ -40,19 +40,19 @@ public class PointController {
     private final OrderRepository orderRepository;
 
     @PostMapping
-    public ResponseEntity<Integer> charge(@CurrentUser CustomUserDetails authUser, @RequestBody PointChargeDto pointChargeDto) {
+    public ResponseEntity<Long> charge(@CurrentUser CustomUserDetails authUser, @RequestBody PointChargeDto pointChargeDto) {
         Long userId = authUser.getUser().getUserId();
         User user = userRepository.findById(userId).orElseThrow(MemberNotFound::new);
         int price = pointChargeDto.getPrice();
         PointType pointType = pointChargeDto.getPointType();
-        int newRestCash = pointService.addCash(user, price, pointType);
-        return new ResponseEntity<Integer>(newRestCash, HttpStatus.OK);
+        Long newRestCash = pointService.addCash(user, price, pointType);
+        return new ResponseEntity<>(newRestCash, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity find(@CurrentUser CustomUserDetails authUser) {
         User user = userRepository.findById(authUser.getUser().getUserId()).orElseThrow(MemberNotFound::new);
-        int restCash = pointService.getRestCash(user);
+        Long restCash = pointService.getRestCash(user);
 
         return new ResponseEntity<>(restCash, HttpStatus.OK);
     }

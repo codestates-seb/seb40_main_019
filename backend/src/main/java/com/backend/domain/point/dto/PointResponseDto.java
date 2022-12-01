@@ -14,7 +14,7 @@ public class PointResponseDto {
     long pointHistoryId;
     int cash;
     private PointType pointType;
-    int restCash;
+    Long restCash;
     private String createdAt;
 
     public PointResponseDto(PointHistory pointHistory) {
