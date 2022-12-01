@@ -57,7 +57,7 @@ public class ReviewService {
         orderProduct.setReviewStatus(OrderProductReviewStatus.WRITED);
         log.info("주문 중복 방지");
         String reviewUrl;
-        if (reviewImg.getReviewImg() != null)
+        if (reviewImg.getReviewImg() == null)
         {
             reviewUrl = null;
         }
