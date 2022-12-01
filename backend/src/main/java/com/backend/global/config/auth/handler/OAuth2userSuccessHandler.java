@@ -101,26 +101,25 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
         queryParams.add("access_token", "Bearer " + accessToken);
         queryParams.add("refresh_token", refreshToken);
 
-        return UriComponentsBuilder
-                .newInstance()
-                .scheme("http")
-                .host("localhost")
-                .port(3000)
-                .path("/oauth/" + registrationId)
-                .queryParams(queryParams)
-                .build()
-                .toUri();
-
-        // todo 주소 변경
 //        return UriComponentsBuilder
 //                .newInstance()
-//                .scheme("https")
-//                .host("app")
-//                .port(443)
+//                .scheme("http")
+//                .host("localhost")
+//                .port(3000)
 //                .path("/oauth/" + registrationId)
 //                .queryParams(queryParams)
 //                .build()
 //                .toUri();
+
+        return UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host("luxmeal.xyz")
+                .port(80)
+                .path("/oauth/" + registrationId)
+                .queryParams(queryParams)
+                .build()
+                .toUri();
     }
 
     // todo 토큰 발급 중복 메소드 통합 (JwtAuthenticationFilter, OAuth2userSuccessHandler)
