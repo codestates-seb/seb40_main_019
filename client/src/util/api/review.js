@@ -105,8 +105,9 @@ export const handleDltReviewAlert = async (setModalText, setModalOn) => {
 export const handleDltReview = async (id) => {
   try {
     const res = await axios.delete(`${REACT_APP_API_URL}review/${id}`);
-    if (res.status === 200) {
+    if (res.status === 204) {
       console.log(res.data);
+      location.reload();
     }
   } catch (error) {
     console.error(error);
