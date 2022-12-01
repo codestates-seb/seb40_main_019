@@ -18,9 +18,9 @@ function ProductItems() {
   };
 
   const [pageInfo, setPageInfo] = useState();
+
   const [filterId, setFilter] = useState('1');
   const categoryState = useSelector((state) => state.product);
-  console.log(categoryState);
   let [products] = [];
   if (categoryState.allProduct) {
     [products] = useFetch(

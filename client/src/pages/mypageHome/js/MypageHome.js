@@ -1,14 +1,14 @@
 import MypageOrderListItem from '../../../components/mypageOrderListItem/js/MypageOrderListItem';
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
-import useFetch from '../../../util/useFetch';
 import '../../review/css/Review.scss';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 
 export default function MypageHome() {
-  const [order] = useFetch('orders'); //page 0으로
-  const [review] = useFetch('user/review'); // page 0으로
+  const [order] = useFetchNotPage('orders'); //page 0으로
+  const [review] = useFetchNotPage('user/review'); // page 0으로
 
-  console.log(review);
+  // console.log(review);
   return (
     <div className="mypageHome">
       <div className="orderSummery">

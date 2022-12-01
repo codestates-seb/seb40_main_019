@@ -2,20 +2,18 @@ import '../css/shopMypageOrderList.scss';
 import MypageOrderListItem from '../../../components/mypageOrderListItem/js/MypageOrderListItem';
 import useFetch from '../../../util/useFetch';
 import Empty from '../../../components/empty/js/Empty';
-// import { useEffect, useState } from 'react';
-// import axios from 'axios';
+import ReactPaginate from 'react-paginate';
+import { useState } from 'react';
 
 export default function ShopMypageOrderList() {
-  //임시
-  // const [items, setItems] = useState();
-  // useEffect(() => {
-  //   axios.get('http://localhost:3001/ordersMypage/').then((res) => {
-  //     setItems(res.data);
-  //   });
-  // }, []);
+  const [pageNum, setPageNum] = useState({ selected: 1 });
+  const [pageInfo, setPageInfo] = useState();
 
-  const [items] = useFetch('orders'); //page필요
-  console.log(items);
+  const handlePageChange = (page) => {
+    setPageNum({ selected: page.selected + 1 });
+  };
+
+  const [items] = useFetch('orders', pageNum, setPageInfo); //page필요
   return (
     <div className="MypageOrderContainer">
       <div className="orderListTitle">
@@ -41,6 +39,20 @@ export default function ShopMypageOrderList() {
       ) : (
         <Empty text={'주문한 목록이 없습니다'} />
       )}
+      <ReactPaginate
+        pageCount={pageInfo && pageInfo.totalPages}
+        pageRangeDisplayed={5}
+        marginPagesDisplayed={0}
+        breakLabel={''}
+        previousLabel={'<'}
+        nextLabel={'>'}
+        onPageChange={handlePageChange}
+        containerClassName={'pagination-ul'}
+        pageClassName={'pageButton'}
+        activeClassName={'currentPage'}
+        previousClassName={'switchPage'}
+        nextClassName={'switchPage'}
+      />
     </div>
   );
 }
