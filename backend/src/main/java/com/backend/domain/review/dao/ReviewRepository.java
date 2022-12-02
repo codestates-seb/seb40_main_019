@@ -22,4 +22,6 @@ public interface ReviewRepository extends JpaRepository<Review,Long> {
 
     @Query("select r from Review r join Product p on p.productId = r.proId where p.user.userId = :userId")
     Page<Review> findByUserId(@Param("userId") Long userId,Pageable pageable);
+
+    void deleteByUser_UserRoleOrUser_UserRole(String roleUserTest, String roleAdminTest);
 }
