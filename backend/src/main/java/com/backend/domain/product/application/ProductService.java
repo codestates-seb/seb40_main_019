@@ -80,7 +80,10 @@ public class ProductService {
     @Transactional
     public Product update(Long productId, Long categoryId, int price , String productName, TitleImg titleImg, DetailImg detailImg, User user) {
         Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
-        checkPermission(productId, user);
+
+        if (!user.getEmail().equals("admin@luxmeal.xyz") && !user.getUserRole().equals("ROLE_ADMIN"))
+            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
+
         log.info(" findProduct : ",findProduct);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
         log.info(" category : ", category);
@@ -116,7 +119,10 @@ public class ProductService {
     @Transactional
     public Long delete(Long productId, User user) {
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
-        checkPermission(productId, user);
+
+        if (!user.getEmail().equals("admin@luxmeal.xyz") && !user.getUserRole().equals("ROLE_ADMIN"))
+            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
+
         log.info(" product : ", product);
         productRepository.delete(product);
         log.info(" 상품 삭제 ");
@@ -208,10 +214,5 @@ public class ProductService {
             list.add(product);
         }
         return list;
-    }
-    private void checkPermission(Long productId, User user) {
-        if (productRepository.existsByProductIdAndUserUserId(productId, user.getUserId()) || user.getUserRole().equals("ROLE_ADMIN_TEST")) {
-            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
-        }
     }
 }
