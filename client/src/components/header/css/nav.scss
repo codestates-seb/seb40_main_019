@@ -64,13 +64,17 @@ nav {
   .textLogo {
     margin-top: 20px;
     img {
-      height: 20px;
+      // height: 20px;
+      margin-top: 2px;
+      width: 140px;
       position: absolute;
       left: 50%;
       transform: translate(-50%, 0%);
       cursor: pointer;
+      object-fit: contain;
+      overflow: hidden;
       @media (max-width: 980px) {
-        height: 15px;
+        width: 84px;
       }
       @media (max-width: 640px) {
         display: none;
