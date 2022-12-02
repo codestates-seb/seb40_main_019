@@ -8,6 +8,16 @@ export default function MypageHome() {
   const [order] = useFetchNotPage('orders'); //page 0으로
   const [review] = useFetchNotPage('user/review'); // page 0으로
 
+  console.log(order);
+  let orderSummery = [0, 0, 0, 0];
+
+  for (let i = 0; i < order.length; i++) {
+    if (order[i].orderStatus === 'PROCESS') orderSummery[0]++;
+    else if (order[i].orderStatus === 'SHIPPING') orderSummery[1]++;
+    else if (order[i].orderStatus === 'SHIPPED') orderSummery[2]++;
+    else if (order[i].orderStatus === 'CANCEL') orderSummery[3]++;
+  }
+
   // console.log(review);
   return (
     <div className="mypageHome">
@@ -18,28 +28,28 @@ export default function MypageHome() {
               <p>상품준비중</p>
               <i className="fa-solid fa-cart-flatbed"></i>
             </div>
-            <h1>0</h1>
+            <h1>{orderSummery[0]}</h1>
           </li>
           <li>
             <div className="orderIcon">
               <p>배송중</p>
               <i className="fa-solid fa-truck"></i>
             </div>
-            <h1>11</h1>
+            <h1>{orderSummery[1]}</h1>
           </li>
           <li>
             <div className="orderIcon">
               <p>배송완료</p>
               <i className="fa-solid fa-gift"></i>
             </div>
-            <h1>0</h1>
+            <h1>{orderSummery[2]}</h1>
           </li>
           <li>
             <div className="orderIcon">
               <p>취소/교환/반품</p>
               <i className="fa-solid fa-arrow-rotate-left"></i>
             </div>
-            <h1>0</h1>
+            <h1>{orderSummery[3]}</h1>
           </li>
         </ul>
       </div>
