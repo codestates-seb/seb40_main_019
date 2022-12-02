@@ -1,7 +1,8 @@
 .signinTitle{
   h1{
     font-size: 30px;
-    margin-bottom: 45px;
+    // margin-bottom: 25px;
+    margin-top: 45px;
     color: #5C4B29;
   }
   
@@ -11,12 +12,14 @@
     display: flex;
     align-items: center;
     margin-top: 20px;
+    width: 100%;
     p{
       padding: 0px 10px;
       color: var(--color-brown);
     }
     .line{
-      width: 170px;
+      // width: 170px;
+      flex-grow: 1;
       height: 2px;
       background-color: var(--color-brown);
     }
@@ -25,7 +28,6 @@
   width: 100%;
   height: 100%;
   // padding: 20px 40px;
-  padding: 10px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;
