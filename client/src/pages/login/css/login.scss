@@ -1,7 +1,14 @@
 .loginInner{
-  width: 480px;
+  max-width: 480px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px;
+  @media (max-width: 480px){
+    padding: 30px 20px;
+    button{
+      font-size: 15px;
+    }
+  }
 }
