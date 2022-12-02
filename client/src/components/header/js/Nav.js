@@ -60,9 +60,9 @@ export default function Nav() {
               <Link to="/seller" onClick={handleSeller}>
                 <button className="margin">Seller</button>
               </Link>
-              <Link to="/mypage" onClick={handleMypage}>
+              {/* <Link to="/mypage" onClick={handleMypage}>
                 <button>Mypage</button>
-              </Link>
+              </Link> */}
             </div>
             <Link to="/">
               <div className="textLogo">
@@ -76,10 +76,13 @@ export default function Nav() {
             </Link>
             <div className="navRight">
               <Link to="/product/order" onClick={handleCart}>
-                <button>
+                <button className="cartMargin">
                   <i className="fa-solid fa-cart-shopping"></i>
                   Cart
                 </button>
+              </Link>
+              <Link to="/mypage" onClick={handleMypage}>
+                <button className="mypageMargin">Mypage</button>
               </Link>
               {loginData.isLogin ? (
                 <button className="margin" onClick={userLogout}>
