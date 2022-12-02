@@ -33,6 +33,10 @@
         border: 0;
         outline: none;
       }
+      .titleBlock{
+        color: #5C4B29;
+        font-size: 18px;      
+      }
       p{
         color: #5C4B29;
         font-size: 18px;
@@ -108,3 +112,24 @@
     }
   }
 }
+//포인트 충전 버튼 추가함
+  .chargeContainer{
+    justify-content: center;
+    background-color: var(--color-white);
+    color: var(--color-blue);
+    margin: auto;
+    width: 50px;
+    font-size: 13px;
+
+    .yellowBtn{
+      background-color: var(--color-yellow);
+      border-radius: 10px;
+      color: var(--color-white);
+      padding: 10px;
+      &:hover{
+        border: 1px solid var(--color-yellow);
+        background-color: var(--color-white);
+        color: var(--color-yellow);
+      }
+      }
+  }

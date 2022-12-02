@@ -24,7 +24,7 @@ export default function MypagePointButton() {
       <div className="pointBtnArea">
         <div className="pointBtnFlex">
           <div className="pointBtn">
-            <p>포인트</p>
+            {/* <p>포인트</p> */}
             <div className="pointCircle colorBlue">
               <FontAwesomeIcon className="pointIcon" icon={faCoins} />
             </div>
@@ -35,13 +35,13 @@ export default function MypagePointButton() {
         </div>
         <div className="pointBtnFlex">
           <div className="pointBtn">
-            <p>포인트 충전</p>
-            <button
-              onClick={() => tossPay(user.nickname, value)}
+            {/* <p>포인트 충전</p> */}
+            <div
+              // onClick={() => tossPay(user.nickname, value)}
               className="pointCircle colorYellow"
             >
               <FontAwesomeIcon className="pointIcon" icon={faCoins} />
-            </button>
+            </div>
           </div>
           <div className="point">
             <input
@@ -50,6 +50,14 @@ export default function MypagePointButton() {
               type="text"
               placeholder="포인트 입력"
             />
+            <div className="chargeContainer">
+              <button
+                onClick={() => tossPay(user.nickname, value)}
+                className="yellowBtn"
+              >
+                충전
+              </button>
+            </div>
           </div>
         </div>
       </div>
