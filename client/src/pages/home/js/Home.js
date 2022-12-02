@@ -15,21 +15,37 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [scroll, setScroll] = useState('');
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { capture: true }); // 스크롤 이벤트 등록
-    return () => {
-      window.removeEventListener('scroll', handleScroll); // 스크롤 이벤트 등록 제거(성능저하방지)
-    };
-  }, []);
+
+  const [aniTime, setAniTime] = useState([400, 900, 1700, 2500]);
+
+  const handleResize = () => {
+    setAniTime([
+      400 - Math.floor((1920 - window.innerWidth) / 5),
+      900 - Math.floor((1920 - window.innerWidth) / 5),
+      1700 - Math.floor((1920 - window.innerWidth) / 2),
+      2500 - Math.floor((1920 - window.innerWidth) / 1.2),
+    ]);
+  };
 
   const handleScroll = () => {
-    // if (scrollY > 120) {
-    //   setFixNav({
-
-    //   });
     setScroll(scrollY);
   };
-  console.log(scrollY);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { capture: true }); // 스크롤 이벤트 등록
+    window.addEventListener('resize', handleResize);
+    setAniTime([
+      400 - Math.floor((1920 - window.innerWidth) / 5),
+      900 - Math.floor((1920 - window.innerWidth) / 5),
+      1700 - Math.floor((1920 - window.innerWidth) / 2),
+      2500 - Math.floor((1920 - window.innerWidth) / 1.2),
+    ]);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll); // 스크롤 이벤트 등록 제거(성능저하방지)
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <>
@@ -72,7 +88,9 @@ export default function Home() {
         <div className="main2Wrap">
           <div
             className={
-              scroll > 400 ? 'main2Text main2TextAni' : 'main2Text hidden'
+              scroll > aniTime[0]
+                ? 'main2Text main2TextAni'
+                : 'main2Text hidden'
             }
           >
             <h1>건강에 대한 바른 집념</h1>
@@ -86,7 +104,7 @@ export default function Home() {
           </div>
           <div
             className={
-              scroll > 400 ? 'main2Img main2ImgAni' : 'main2Img hidden'
+              scroll > aniTime[0] ? 'main2Img main2ImgAni' : 'main2Img hidden'
             }
           >
             <img className="main1" src={mainCircle3} alt="mainImg" />
@@ -95,21 +113,25 @@ export default function Home() {
         <div className="main3Wrap">
           <div className="main3WrapParent">
             <img
-              className={scroll > 900 ? 'aiDog aiDogAni' : 'aiDog hidden'}
+              className={
+                scroll > aniTime[1] ? 'aiDog aiDogAni' : 'aiDog hidden'
+              }
               src={aiDog}
               alt="aiDog"
             />
             <div className="aiText">
               <div
                 className={
-                  scroll > 900 ? 'aiTextTop aiTextTopAni' : 'aiTextTop hidden'
+                  scroll > aniTime[1]
+                    ? 'aiTextTop aiTextTopAni'
+                    : 'aiTextTop hidden'
                 }
               >
                 <h1>AI를 이용한 맞춤 추천</h1>
               </div>
               <div
                 className={
-                  scroll > 900
+                  scroll > aniTime[1]
                     ? 'aiTextBottom aiTextBottomAni'
                     : 'aiTextBottom hidden'
                 }
@@ -117,7 +139,7 @@ export default function Home() {
                 <h3>나이별, 건강 상태별, 라이프 스타일에 따라</h3>
                 <h3>필요로 하는 영양 맞춤 사료를 만나보세요.</h3>
               </div>
-              <button className={scroll > 900 ? 'aiBtnAni' : 'hidden'}>
+              <button className={scroll > aniTime[1] ? 'aiBtnAni' : 'hidden'}>
                 AI 추천 바로가기
               </button>
             </div>
@@ -127,7 +149,7 @@ export default function Home() {
           <div className="mainBoxWrap">
             <div
               className={
-                scroll > 1700 ? 'boxLeft boxLeftAni' : 'boxLeft hidden'
+                scroll > aniTime[2] ? 'boxLeft boxLeftAni' : 'boxLeft hidden'
               }
             >
               <div className="firstBox">
@@ -137,7 +159,7 @@ export default function Home() {
             </div>
             <div
               className={
-                scroll > 1700 ? 'boxRight boxRightAni' : 'boxRight hidden'
+                scroll > aniTime[2] ? 'boxRight boxRightAni' : 'boxRight hidden'
               }
             >
               <div className="firstBox">
@@ -147,7 +169,7 @@ export default function Home() {
             </div>
             <div
               className={
-                scroll > 1700
+                scroll > aniTime[2]
                   ? 'mainBoxBack mainBoxBackAni'
                   : 'mainBoxBack hidden'
               }
@@ -159,10 +181,12 @@ export default function Home() {
             src={reviewBar}
             alt="reviewBar"
             className={
-              scroll > 2500 ? 'reviewBar reviewBarAni' : 'reviewBar hidden'
+              scroll > aniTime[3]
+                ? 'reviewBar reviewBarAni'
+                : 'reviewBar hidden'
             }
           />
-          <MainReview scroll={scroll} />
+          <MainReview scroll={scroll} aniTime={aniTime} />
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import './App.scss';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './components/layout/js/Layout';
 import Home from './pages/home/js/Home';
 import Login from './pages/login/js/Login';
@@ -37,14 +37,13 @@ import Review from './pages/review/js/Review';
 import MypageHome from './pages/mypageHome/js/MypageHome';
 
 function App() {
-  //json-server 주소
-  //json-server --watch data.json --port 3001
   const dispatch = useDispatch();
-  // const user = useSelector((state) => state.user);
-  // const loginData = useSelector((state) => state.login);
 
-  // console.log(user);
-  // console.log(loginData);
+  //페이지이동시 맨위로
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
 
   useEffect(() => {
     const userData = JSON.parse(window.sessionStorage.getItem('userData'));

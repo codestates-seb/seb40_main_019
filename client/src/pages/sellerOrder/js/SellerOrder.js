@@ -13,6 +13,7 @@ export default function SellerOrder() {
   };
 
   const [items] = useFetch('orders/all', pageNum, setPageInfo);
+  console.log(pageInfo);
 
   return (
     <div className="sellerProducts orderTop">

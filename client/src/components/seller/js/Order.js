@@ -22,7 +22,7 @@ export default function Order({ item }) {
     handleDelivery(item.orderId);
   };
 
-  console.log(item);
+  // console.log(item);
   return (
     <div className="sellerproduct order">
       {/* <div className="createdAt">

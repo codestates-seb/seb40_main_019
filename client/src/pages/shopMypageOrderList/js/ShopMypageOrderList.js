@@ -14,6 +14,7 @@ export default function ShopMypageOrderList() {
   };
 
   const [items] = useFetch('orders', pageNum, setPageInfo); //page필요
+
   return (
     <div className="MypageOrderContainer">
       <div className="orderListTitle">
