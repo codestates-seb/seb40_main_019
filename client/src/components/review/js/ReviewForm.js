@@ -6,11 +6,16 @@ export default function ReviewForm({
   setReviewImg,
   setReviewContent,
   reviewContent,
+  pastImg,
 }) {
   return (
     <div className="reviewForm">
       <div>
-        <ImgUploader pictures={reviewImg} setPictures={setReviewImg} />
+        <ImgUploader
+          pictures={reviewImg}
+          setPictures={setReviewImg}
+          pastImg={pastImg}
+        />
       </div>
       <div className="reviewContent">
         <div className="userInfo"></div>

@@ -1,5 +1,6 @@
 import '../css/productItem.scss';
 import { useNavigate } from 'react-router-dom';
+import { formatMoney } from '../../../util/function/formatData';
 
 const ProductItem = ({ data, key }) => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const ProductItem = ({ data, key }) => {
             <span>{data.productName}</span>
           </div>
           <div className="priceBox">
-            <p>{data.price}원</p>
+            <p>{formatMoney(data.price)}원</p>
             {data.new === true && (
               <button style={{ backgroundColor: '#FFB526' }}>New</button>
             )}

@@ -12,7 +12,7 @@ export default function SellerReview() {
   const handlePageChange = (page) => {
     setPageNum({ selected: page.selected + 1 });
   };
-  const [items] = useFetch('/review/seller', pageNum, setPageInfo);
+  const [items] = useFetch('review/seller', pageNum, setPageInfo);
 
   return (
     <div className="sellerReview">

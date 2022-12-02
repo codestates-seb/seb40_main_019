@@ -10,7 +10,9 @@ export default function Header() {
       <div>
         <div
           className={
-            location.pathname === '/seller' ? 'header sellerHeader' : 'header'
+            location.pathname.split('/')[1] === 'seller'
+              ? 'header sellerHeader'
+              : 'header'
           }
         >
           <Link to={'/'}>

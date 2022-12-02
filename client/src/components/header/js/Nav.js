@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { userLogout } from '../../../util/api/loginForm';
 import { useState } from 'react';
 import ModalOk from '../../modal/js/ModalOk';
+import ModalMove from '../../modal/js/ModalMove';
 
 export default function Nav() {
   const location = useLocation();
@@ -13,11 +14,16 @@ export default function Nav() {
   const loginData = useSelector((state) => state.login);
   const [modalOn, setModalOn] = useState(false);
   const [modalText, setModalText] = useState('');
+  const [modalMoveOn, setModalMoveOn] = useState(false);
+  const [modalMoveText, setModalMoveText] = useState('');
 
   //마이페이지 구매자 로그인시 페이지 사용가능
   const handleMypage = (e) => {
-    if (
-      user.userRole === '' ||
+    if (user.userRole === '') {
+      setModalMoveOn(true);
+      setModalMoveText(`구매자로 로그인 시 이용 가능합니다\n이동하시겠습니까?`);
+      e.preventDefault();
+    } else if (
       user.userRole === 'ROLE_ADMIN_TEST' ||
       user.userRole === 'ROLE_ADMIN'
     ) {
@@ -29,8 +35,13 @@ export default function Nav() {
 
   //seller페이지 판매자 로그인시 페이지 사용가능
   const handleSeller = (e) => {
-    if (
-      user.userRole === '' ||
+    if (user.userRole === '') {
+      setModalMoveOn(true);
+      setModalMoveText(
+        `판매자게스트로 로그인 시 이용 가능합니다\n체험하러 이동하시겠습니까?`
+      );
+      e.preventDefault();
+    } else if (
       user.userRole === 'ROLE_USER' ||
       user.userRole === 'ROLE_USER_TEST'
     ) {
@@ -40,13 +51,13 @@ export default function Nav() {
     }
   };
 
-  const handleCart = (e) => {
-    if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
-      setModalOn(true);
-      setModalText('판매자는 이용 할 수 없습니다');
-      e.preventDefault();
-    }
-  };
+  // const handleCart = (e) => {
+  //   if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
+  //     setModalOn(true);
+  //     setModalText('판매자는 이용 할 수 없습니다');
+  //     e.preventDefault();
+  //   }
+  // };
 
   return (
     <>
@@ -68,7 +79,9 @@ export default function Nav() {
               <div className="textLogo">
                 <img
                   src={
-                    location.pathname === '/seller' ? textLogoYellow : textLogo
+                    location.pathname.split('/')[1] === 'seller'
+                      ? textLogoYellow
+                      : textLogo
                   }
                   alt="textLogo"
                 />
@@ -101,6 +114,12 @@ export default function Nav() {
         setModalOn={setModalOn}
         modalOn={modalOn}
         modalText={modalText}
+      />
+      <ModalMove
+        setModalOn={setModalMoveOn}
+        modalOn={modalMoveOn}
+        modalText={modalMoveText}
+        link={'/login'}
       />
     </>
   );
