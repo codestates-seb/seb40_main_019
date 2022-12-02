@@ -63,6 +63,8 @@ export default function SigninForm() {
       <div className="signinTitle">
         <h1>Log in</h1>
       </div>
+      <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
+      <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
       <form
         className="signinForm"
         action="#"
@@ -101,8 +103,8 @@ export default function SigninForm() {
             <img src={googleIcon} alt="googleAuth" />
           </a>
         </div>
-        <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
-        <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
+        {/* <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
+        <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} /> */}
       </form>
       {emailModal && (
         <>
