@@ -15,7 +15,7 @@ import { getCookie } from './util/cookie/cookie';
 import ShopProductList from './pages/shopProductList/js/ShopProductList';
 import ShopProductDetail from './pages/shopProductDetail/js/ShopProductDetail';
 import ShopProductOrder from './pages/shopProductOrder/js/ShopProductOrder';
-// import { tokenReissue } from './util/api/Reissue';
+import { tokenReissue } from './util/api/Reissue';
 import Seller from './pages/seller/js/Seller';
 import SellerLayout from './components/layout/js/SellerLayout';
 import ShopLayout from './components/layout/js/ShopLayout';
@@ -50,20 +50,22 @@ function App() {
     const accesstoken = JSON.parse(
       window.sessionStorage.getItem('accesstoken')
     );
-    // console.log(userData);
-    // console.log(accessToken);
-    // 스토리지에서 받아온 데이터가 null 이 아니면 리덕스에 데이터 저장.
     if (userData && accesstoken) {
-      // console.log('리덕스에 저장');
       dispatch(setUser(userData));
       dispatch(login({ accesstoken }));
     } else {
-      // console.log(getCookie('refreshtoken'));
       if (getCookie('refreshtoken')) {
-        // console.log('재발급 요청');
-        // tokenReissue(getCookie('refreshtoken'));
-      } else {
-        // console.log('리프레시 토큰 없음');
+        let res = tokenReissue(getCookie('refreshtoken'));
+        res.then((data) => {
+          if (data.status === 200) {
+            dispatch(
+              setUser(JSON.parse(window.sessionStorage.getItem('userData')))
+            );
+            dispatch(
+              login(JSON.parse(window.sessionStorage.getItem('accesstoken')))
+            );
+          }
+        });
       }
     }
   }, []);
