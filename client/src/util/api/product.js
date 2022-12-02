@@ -76,16 +76,21 @@ export const handleEdit = async (data, pastData, setModalOn, setModalText) => {
     setModalText('상세이미지를 업로드하셔야 합니다');
   } else {
     try {
+      console.log('상품수정');
       const res = await axios.patch(
         `${REACT_APP_API_URL}products/${data.categoryId}/${data.productId}`,
         formData
       );
+      console.log(res);
       if (res.status === 200) {
         console.log(res.data);
         window.location.replace('/seller/product');
       }
     } catch (error) {
-      console.error(error);
+      if (error.response.status === 403) {
+        setModalOn(true);
+        setModalText('직접 등록한 상품만 수정이 가능합니다.');
+      }
       return error;
     }
   }
@@ -110,7 +115,10 @@ export const handleDelete = async (data) => {
       console.log(res.data);
     }
   } catch (error) {
-    console.error(error);
+    if (error.response.status === 403) {
+      // setModalOn(true);
+      // setModalText('직접 등록한 상품만 삭제가 가능합니다.');
+    }
     return error;
   }
 };
