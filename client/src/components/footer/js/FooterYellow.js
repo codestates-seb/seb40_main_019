@@ -5,7 +5,7 @@ export default function Footer() {
     <>
       <footer>
         <img src={footerYellow} alt="footer" />
-        <section className="footer">
+        <section className="footerYellow">
           <div className="footerContainer">
             <div className="firstBox">
               <div className="titleDiv">LUXMEAL</div>

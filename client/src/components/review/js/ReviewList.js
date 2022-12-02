@@ -1,5 +1,5 @@
 import '../css/ReviewList.scss';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ReviewStar from '../../review/js/ReviewStar';
 import useFetchNotPage from '../../../util/useFetchNotPage';
 import {
@@ -35,14 +35,17 @@ export default function ReviewList({ item }) {
       state: { item: pastData },
     });
   };
+  console.log(item);
   return (
     <>
       {item ? (
         <div className="reviewListContainer">
-          <div className="reviewTitle">
-            <img className="titleImg" src={item.titleImg} alt="productImg" />
-            <div className="title">{item.productName}</div>
-          </div>
+          <Link to={`/product/detail/${item.proId}`}>
+            <div className="reviewTitle">
+              <img className="titleImg" src={item.titleImg} alt="productImg" />
+              <p className="title">{item.productName}</p>
+            </div>
+          </Link>
           <div className="reviewBox">
             <div className="reviewStars">
               <ReviewStar clickStar={item.star} type={'small'} />

@@ -40,14 +40,18 @@ export default function MypageOrderListItem({ item }) {
             {item.orderProductDtoList.map((item) => {
               return (
                 <div className="orderContent" key={item.productId}>
-                  <img
-                    className="titleImg"
-                    src={item.imgUrl}
-                    alt="productImg"
-                  />
+                  <Link to={`/product/detail/${item.productId}`}>
+                    <img
+                      className="titleImg"
+                      src={item.imgUrl}
+                      alt="productImg"
+                    />
+                  </Link>
                   <div className="text">
                     <div className="preparing">{status}</div>
-                    <div className="title">{item.productName}</div>
+                    <Link to={`/product/detail/${item.productId}`}>
+                      <div className="title">{item.productName}</div>
+                    </Link>
                   </div>
                   <div className="priceAndCount">
                     <div className="price">

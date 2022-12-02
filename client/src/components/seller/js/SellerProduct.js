@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../css/SellerProduct.scss';
 import { handleDelete, handleDeleteAlert } from '../../../util/api/product';
 import { formatDate } from '../../../util/function/formatData';
@@ -28,8 +28,12 @@ export default function SellerProduct({ item }) {
       <div className="createdAt">
         <p>{formatDate(item.createdAt)}</p>
       </div>
-      <img className="titleImg" src={item.titleImg} alt="productImg" />
-      <div className="title">{item.productName}</div>
+      <Link to={`/product/detail/${item.productId}`}>
+        <img className="titleImg" src={item.titleImg} alt="productImg" />
+      </Link>
+      <Link to={`/product/detail/${item.productId}`}>
+        <div className="title">{item.productName}</div>
+      </Link>
       <div className="price">{item.price} 원</div>
       <div className="productBtn">
         <button className="edit" onClick={clickEdit}>

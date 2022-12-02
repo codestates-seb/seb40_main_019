@@ -51,7 +51,7 @@ export default function MainReview({ scroll }) {
       <div className="mainReview">
         <div
           className={
-            scroll > 2800 ? 'reviewBtn reviewTextAni' : 'reviewBtn hidden'
+            scroll > 2600 ? 'reviewBtn reviewTextAni' : 'reviewBtn hidden'
           }
         >
           <button onClick={handleLeft}>
@@ -63,7 +63,7 @@ export default function MainReview({ scroll }) {
         </div>
         <div
           className={
-            scroll > 2800 ? 'mainReviewWrap reviewAni' : 'mainReviewWrap hidden'
+            scroll > 2600 ? 'mainReviewWrap reviewAni' : 'mainReviewWrap hidden'
           }
         >
           {data &&

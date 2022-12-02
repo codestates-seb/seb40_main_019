@@ -2,6 +2,8 @@ import '../css/Order.scss';
 import { handleDelivery, handleDeliveryAlert } from '../../../util/api/order';
 import ModalYesorNo from '../../modal/js/ModalYesorNo';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Empty from '../../empty/js/Empty';
 
 export default function Order({ item }) {
   let status = '상품준비중';
@@ -19,6 +21,8 @@ export default function Order({ item }) {
   const clickDeliveryOk = () => {
     handleDelivery(item.orderId);
   };
+
+  console.log(item);
   return (
     <div className="sellerproduct order">
       {/* <div className="createdAt">
@@ -31,7 +35,7 @@ export default function Order({ item }) {
               발송처리
             </button>
           ) : (
-            <h3>{status}</h3>
+            <h2>{status}</h2>
           )}
         </div>
         <div className="orderInfo">
@@ -39,15 +43,27 @@ export default function Order({ item }) {
           <span>{item.receiverAddress}</span>
         </div>
         <div className="orderBox">
-          {item.orderProductDtoList.map((item) => {
-            return (
-              <div className="sellerOrderContent" key={item.productId}>
-                <img className="titleImg" src={item.imgUrl} alt="productImg" />
-                <div className="title">{item.productName}</div>
-                <div className="orderCount">{item.quantity} 개</div>
-              </div>
-            );
-          })}
+          {item && item.orderProductDtoList.length !== 0 ? (
+            item.orderProductDtoList.map((item) => {
+              return (
+                <div className="sellerOrderContent" key={item.productId}>
+                  <Link to={`/product/detail/${item.productId}`}>
+                    <img
+                      className="titleImg"
+                      src={item.imgUrl}
+                      alt="productImg"
+                    />
+                  </Link>
+                  <Link to={`/product/detail/${item.productId}`}>
+                    <div className="title">{item.productName}</div>
+                  </Link>
+                  <div className="orderCount">{item.quantity} 개</div>
+                </div>
+              );
+            })
+          ) : (
+            <Empty text={'현재 삭제된 상품입니다'} />
+          )}
         </div>
       </div>
       <ModalYesorNo

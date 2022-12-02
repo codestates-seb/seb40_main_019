@@ -159,10 +159,9 @@ export default function Home() {
             src={reviewBar}
             alt="reviewBar"
             className={
-              scroll > 2600 ? 'reviewBar reviewBarAni' : 'reviewBar hidden'
+              scroll > 2500 ? 'reviewBar reviewBarAni' : 'reviewBar hidden'
             }
           />
-          <h3 className={scroll > 2800 ? 'reviewTextAni' : 'hidden'}>REVIEW</h3>
           <MainReview scroll={scroll} />
         </div>
       </div>

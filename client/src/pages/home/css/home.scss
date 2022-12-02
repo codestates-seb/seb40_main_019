@@ -13,8 +13,6 @@
       margin-top: 60px;
     }
   }
-  
-  
 
   .videoCenterWrap {
     margin: 0px 128px;
@@ -32,7 +30,7 @@
     font-family: 'Work Sans', sans-serif;
     text-align: center;
 
-    .mainTextTopOverflow{
+    .mainTextTopOverflow {
       overflow: hidden;
       height: 2vw;
       margin-bottom: 10px;
@@ -42,17 +40,16 @@
     }
 
     .mainTextTop {
-      
       background-color: var(--color-yellow);
       max-width: 38vw;
       height: 2vw;
       position: relative;
       left: 30%;
       animation: slideInUp;
-        animation-duration: 2s; 
-        animation-fill-mode: backwards;
-        animation-delay: .9s;
-      
+      animation-duration: 2s;
+      animation-fill-mode: backwards;
+      animation-delay: 0.9s;
+
       h2 {
         position: relative;
         top: 2px;
@@ -62,7 +59,7 @@
         font-weight: 500;
         color: var(--color-white);
         transform: scaleY(1);
-        
+
         @media (max-width: 640px) {
           font-size: 3vw;
         }
@@ -72,7 +69,7 @@
       }
     }
 
-    .mainTextBottomOverflow{
+    .mainTextBottomOverflow {
       overflow: hidden;
       // height: 130px;
     }
@@ -80,7 +77,7 @@
     .mainTextBottom {
       h1 {
         animation: slideInUp;
-        animation-duration: 2s; 
+        animation-duration: 2s;
         animation-fill-mode: backwards;
         animation-delay: 1.1s;
         color: var(--color-blue);
@@ -100,59 +97,59 @@
   display: flex;
   justify-content: space-around;
   // margin-top: 50px;
-  .main2Text{
+  .main2Text {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto 0;
-    h1{
+    h1 {
       font-size: 32px;
       font-weight: 600;
       color: var(--color-blue);
       margin-bottom: 30px;
     }
-    p{
+    p {
       width: 500px;
       text-align: center;
       color: var(--color-brown);
       line-height: 28px;
     }
-    @media (max-width:640px){
-        margin-top: 50px;
+    @media (max-width: 640px) {
+      margin-top: 50px;
 
-      h1{
+      h1 {
         font-size: 20px;
       }
-      p{
+      p {
         width: 350px;
         font-size: 14px;
       }
     }
   }
-  .main2TextAni{
+  .main2TextAni {
     animation: fadeInLeft;
-    animation-duration: 1.5s; 
+    animation-duration: 1.5s;
     animation-fill-mode: forwards;
   }
 
-  .main2Img{
-    .main1{
+  .main2Img {
+    .main1 {
       max-width: 500px;
       width: 30vw;
-      @media (max-width:980px){
+      @media (max-width: 980px) {
         display: none;
       }
     }
   }
-  .main2ImgAni{
+  .main2ImgAni {
     animation: bounceIn;
-    animation-duration: 1s; 
+    animation-duration: 1s;
     animation-fill-mode: backwards;
-    animation-delay: .5s;
+    animation-delay: 0.5s;
   }
-  @media (max-width:980px){
-      justify-content: center;
-      }
+  @media (max-width: 980px) {
+    justify-content: center;
+  }
 }
 
 .main3Wrap {
@@ -169,9 +166,9 @@
       position: relative;
       right: 5vw;
     }
-    .aiDogAni{
+    .aiDogAni {
       animation: fadeInLeft;
-      animation-duration: 2s; 
+      animation-duration: 2s;
       animation-fill-mode: backwards;
     }
 
@@ -215,21 +212,21 @@
         font-weight: 300;
       }
     }
-    .aiTextTopAni{
+    .aiTextTopAni {
       animation: fadeInUp;
-      animation-duration: 1s; 
+      animation-duration: 1s;
       animation-fill-mode: backwards;
       animation-delay: 1s;
     }
-    .aiTextBottomAni{
+    .aiTextBottomAni {
       animation: fadeInUp;
-      animation-duration: 1s; 
+      animation-duration: 1s;
       animation-fill-mode: backwards;
       animation-delay: 1.2s;
     }
-    .aiBtnAni{
+    .aiBtnAni {
       animation: fadeInUp;
-      animation-duration: 1s; 
+      animation-duration: 1s;
       animation-fill-mode: backwards;
       animation-delay: 1.4s;
     }
@@ -250,11 +247,11 @@
         margin-left: auto;
       }
     }
-    .boxLeftAni{
+    .boxLeftAni {
       animation: fadeInUp;
-      animation-duration: 2s; 
+      animation-duration: 2s;
       animation-fill-mode: backwards;
-      animation-delay: .5s;
+      animation-delay: 0.5s;
     }
 
     .boxRight {
@@ -262,9 +259,9 @@
       position: relative;
       bottom: 50px;
     }
-    .boxRightAni{
+    .boxRightAni {
       animation: fadeInUp;
-      animation-duration: 2s; 
+      animation-duration: 2s;
       animation-fill-mode: backwards;
     }
     .firstBox {
@@ -281,9 +278,9 @@
     background-color: #6ea9bf;
     border-radius: 15px 0px 0px 15px;
   }
-  .mainBoxBackAni{
+  .mainBoxBackAni {
     animation: slideInRight;
-    animation-duration: 2s; 
+    animation-duration: 2s;
     animation-fill-mode: backwards;
     animation-delay: 1.5s;
   }
@@ -295,25 +292,21 @@
   align-items: center;
   .reviewBar {
     width: 60vw;
+    margin-bottom: 50px;
   }
-  .reviewBarAni{
+  .reviewBarAni {
     animation: fadeInUp;
-    animation-duration: 1s; 
+    animation-duration: 1s;
     animation-fill-mode: backwards;
     // animation-delay: 1.4s;
   }
-  h3 {
-    font-weight: 500;
-    font-family: var(--font-notoSans);
-    margin: 50px 0px;
-  }
-  .reviewTextAni{
+  .reviewTextAni {
     animation: fadeInUp;
-    animation-duration: 1s; 
+    animation-duration: 1s;
     animation-fill-mode: backwards;
   }
 }
 
-.hidden{
+.hidden {
   opacity: 0;
 }

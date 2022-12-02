@@ -7,7 +7,7 @@ footer {
     position: relative;
     top: 10px;
   }
-  .footer {
+  .footerYellow {
     position: relative;
     background-color: var(--color-yellow);
     z-index: 2;
@@ -58,16 +58,16 @@ footer {
 }
 
 //푸터 반응형
-@media (max-width: 980px){
-  .secondBox{
+@media (max-width: 980px) {
+  .secondBox {
     display: none;
   }
 }
-@media (max-width: 640px){
-  .footerContainer{
+@media (max-width: 640px) {
+  .footerContainer {
     padding-top: 12px;
   }
-  .thirdBox{
+  .thirdBox {
     display: none;
   }
 }

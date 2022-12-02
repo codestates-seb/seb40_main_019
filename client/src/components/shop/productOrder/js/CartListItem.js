@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { formatMoney } from '../../../../util/function/formatData';
 import ModalYesorNo from '../../../modal/js/ModalYesorNo';
 import '../css/cartListItem.scss';
@@ -24,8 +25,12 @@ const CartListItem = ({
           checked={item.check}
         ></input>
       </div>
-      <img className="titleImg" src={item.titleImg} alt="productImg" />
-      <div className="title">{item.productName}</div>
+      <Link to={`/product/detail/${item.productId}`}>
+        <img className="titleImg" src={item.titleImg} alt="productImg" />
+      </Link>
+      <Link to={`/product/detail/${item.productId}`}>
+        <div className="title">{item.productName}</div>
+      </Link>
       <div className="quantity">
         <CartQuantityBtn
           item={item}
