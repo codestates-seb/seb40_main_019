@@ -67,8 +67,23 @@ export default function SigninForm() {
       <div className="signinTitle">
         <h1>Log in</h1>
       </div>
-      <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
-      <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
+      <FormButtonBlue
+        btnContent="Guest User"
+        formSubmit={guestLogin}
+        setModalOn={setModalOn}
+        setModalText={setModalText}
+      />
+      <FormButtonBlue
+        btnContent="Guest Seller"
+        formSubmit={sellerLogin}
+        setModalOn={setModalOn}
+        setModalText={setModalText}
+      />
+      <div className="orLine">
+        <div className="line"></div>
+        <p>OR</p>
+        <div className="line"></div>
+      </div>
       <form
         className="signinForm"
         action="#"
@@ -90,11 +105,11 @@ export default function SigninForm() {
           onChangeInput={onChangeInput}
           placeholder="Please enter your password"
         />
-        <FormButtonYellow formSubmit={formSubmit} btnContent="Log in" />
         <div className="flexContainer">
           <button onClick={() => setEmailModal(true)}>아이디 찾기</button>
           <button onClick={() => setPasswordModal(true)}>비밀번호 찾기</button>
         </div>
+        <FormButtonYellow formSubmit={formSubmit} btnContent="Log in" />
         <div className="signupLink">
           Don’t have an account?
           <Link to={'/signup'}>Sign in</Link>
@@ -107,18 +122,6 @@ export default function SigninForm() {
             <img src={googleIcon} alt="googleAuth" />
           </a>
         </div>
-        <FormButtonBlue
-          btnContent="Guest User"
-          formSubmit={guestLogin}
-          setModalOn={setModalOn}
-          setModalText={setModalText}
-        />
-        <FormButtonBlue
-          btnContent="Guest Seller"
-          formSubmit={sellerLogin}
-          setModalOn={setModalOn}
-          setModalText={setModalText}
-        />
       </form>
       {emailModal && (
         <>
