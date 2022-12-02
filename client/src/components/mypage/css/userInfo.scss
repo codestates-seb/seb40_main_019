@@ -44,6 +44,9 @@
   font-size: 11px;
   margin: 10px auto 19px;
   color: #8a8a93;
+  @media (max-width: 420px) {
+    font-size: 10px;
+  }
 }
 .blank{
   margin-bottom: 30px;
