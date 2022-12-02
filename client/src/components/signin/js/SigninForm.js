@@ -68,13 +68,13 @@ export default function SigninForm() {
         <h1>Log in</h1>
       </div>
       <FormButtonBlue
-        btnContent="Guest User"
+        btnContent="사용자 체험"
         formSubmit={guestLogin}
         setModalOn={setModalOn}
         setModalText={setModalText}
       />
       <FormButtonBlue
-        btnContent="Guest Seller"
+        btnContent="판매자 체험"
         formSubmit={sellerLogin}
         setModalOn={setModalOn}
         setModalText={setModalText}
