@@ -26,10 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -81,8 +78,7 @@ public class ProductService {
     public Product update(Long productId, Long categoryId, int price , String productName, TitleImg titleImg, DetailImg detailImg, User user) {
         Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
 
-        if (!user.getEmail().equals("admin@luxmeal.xyz") && !user.getUserRole().equals("ROLE_ADMIN"))
-            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
+        checkAccess(productId, user, findProduct);
 
         log.info(" findProduct : ",findProduct);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
@@ -116,12 +112,18 @@ public class ProductService {
         return productRepository.save(findProduct);
     }
 
+    private static void checkAccess(Long productId, User user, Product findProduct) {
+        if ((!user.getEmail().equals("admin@luxmeal.xyz") && !user.getUserRole().equals("ROLE_ADMIN"))
+        ||(!Objects.equals(findProduct.getUser().getUserId(), user.getUserId()) || productId <= 37)) {
+            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
+        }
+    }
+
     @Transactional
     public Long delete(Long productId, User user) {
         Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
 
-        if (!user.getEmail().equals("admin@luxmeal.xyz") && !user.getUserRole().equals("ROLE_ADMIN"))
-            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
+        checkAccess(productId, user, product);
 
         log.info(" product : ", product);
         productRepository.delete(product);
