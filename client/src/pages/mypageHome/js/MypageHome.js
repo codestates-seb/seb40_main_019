@@ -11,7 +11,7 @@ export default function MypageHome() {
   console.log(order);
   let orderSummery = [0, 0, 0, 0];
 
-  for (let i = 0; i < order.length; i++) {
+  for (let i = 0; i < (order && order.length); i++) {
     if (order[i].orderStatus === 'PROCESS') orderSummery[0]++;
     else if (order[i].orderStatus === 'SHIPPING') orderSummery[1]++;
     else if (order[i].orderStatus === 'SHIPPED') orderSummery[2]++;

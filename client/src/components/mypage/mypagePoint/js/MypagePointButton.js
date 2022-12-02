@@ -6,6 +6,7 @@ import { faCoins } from '@fortawesome/free-solid-svg-icons';
 import { getPoint } from '../../../../util/api/point';
 import { tossPay } from '../../../../util/api/payment';
 import { useSelector } from 'react-redux';
+import { formatMoney } from '../../../../util/function/formatData';
 
 export default function MypagePointButton() {
   const [point, setPoint] = useState(0);
@@ -29,7 +30,7 @@ export default function MypagePointButton() {
             </div>
           </div>
           <div className="point">
-            <p>{point}</p>
+            <p>{formatMoney(point)}</p>
           </div>
         </div>
         <div className="pointBtnFlex">
