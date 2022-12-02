@@ -13,6 +13,7 @@ import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -22,6 +23,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 /**
  * Spring Security 설정
@@ -73,9 +76,12 @@ public class SecurityConfig {
                 .httpBasic().disable()
                 .apply(new CustomFilterConfigurer())
                 .and()
-                .authorizeRequests(authorize -> authorize
-                        // todo : 테스트용 추후 수정
-                        .anyRequest().permitAll())
+                .authorizeRequests(authorize -> {
+                    authorize
+                            .antMatchers(HttpMethod.DELETE, "/products/**").hasAnyRole("ADMIN", "ADMIN_TEST")
+                            .antMatchers(HttpMethod.PATCH, "/products/**").hasAnyRole("ADMIN", "ADMIN_TEST")
+                            .anyRequest().permitAll();
+                })
                 .oauth2Login(oauth2 -> {
                     oauth2.userInfoEndpoint().userService(customOAuth2UserService);
                     log.info("customOAuth2UserService 완료하고 다시 filterChain 진입");
