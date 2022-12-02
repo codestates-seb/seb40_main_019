@@ -65,6 +65,7 @@ export default function AiComponent() {
                     name="weight"
                     value={data.weight}
                     type="text"
+                    placeholder="               kg"
                   />
                 </form>
                 <button onClick={handleClick}>입력</button>

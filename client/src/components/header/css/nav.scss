@@ -19,6 +19,14 @@
   justify-content: space-between;
   margin: 0px 20px;
 }
+.mypageMargin{
+    padding-left: 60px;
+
+    @media (max-width: 640px) {
+      padding-left: 80px;
+    }
+  
+  }
 
 nav {
   display: flex;
@@ -80,5 +88,42 @@ nav {
         display: none;
       }
     }
+  }
+}
+
+
+@media (max-width:500px) {
+  .navbar{
+      width: 100%;
+  }
+  .header{
+    .img{
+      right:2px
+    }
+  }
+  .maxNav{
+    display:flex;
+    justify-content: center;
+    margin: 6px 0px 0 0;
+      // padding: 0px;
+  }
+  .navLeft{
+    display: flex;
+      button{
+        padding: 0px;
+      }
+  }
+  .navRight {
+    display: flex;
+  }
+  .cartMargin{
+    padding-left: 0px;
+    padding-right: 10px;
+      >i{
+        display: none;
+      }
+  }
+  .mypageMargin{
+    padding-left: 42px;
   }
 }

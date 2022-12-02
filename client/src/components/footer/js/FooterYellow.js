@@ -1,10 +1,10 @@
-import '../css/footer.scss';
-import footer from '../../../assets/img/footer.png';
+import '../css/footerYellow.scss';
+import footerYellow from '../../../assets/img/footerYellow.png';
 export default function Footer() {
   return (
     <>
       <footer>
-        <img src={footer} alt="footer" />
+        <img src={footerYellow} alt="footer" />
         <section className="footer">
           <div className="footerContainer">
             <div className="firstBox">

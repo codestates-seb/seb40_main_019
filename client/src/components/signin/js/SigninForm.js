@@ -67,6 +67,8 @@ export default function SigninForm() {
       <div className="signinTitle">
         <h1>Log in</h1>
       </div>
+      <FormButtonBlue btnContent="Guest User" formSubmit={guestLogin} />
+      <FormButtonBlue btnContent="Guest Seller" formSubmit={sellerLogin} />
       <form
         className="signinForm"
         action="#"
