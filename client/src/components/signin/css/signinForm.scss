@@ -12,12 +12,14 @@
     display: flex;
     align-items: center;
     margin-top: 20px;
+    width: 100%;
     p{
       padding: 0px 10px;
       color: var(--color-brown);
     }
     .line{
-      width: 170px;
+      // width: 170px;
+      flex-grow: 1;
       height: 2px;
       background-color: var(--color-brown);
     }
