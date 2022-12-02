@@ -4,7 +4,7 @@
 .beforeAiContainer{
     display: flex;
     justify-content: space-around; 
-    // flex-wrap: wrap;
+
     @media (max-width: 890px) {
         display: block;
     }
@@ -111,7 +111,7 @@
     .poppyImgRowBox{
         position: relative;
         top: -40px; //강아지 이미지
-        left: 250px; //위치 조정
+        // left: 250px; //위치 조정
     }
 }
 
@@ -182,6 +182,7 @@
     }
 }
 
+//반응형
 @media (max-width: 1250px) {
     .itemListContainer {
         .listBox{
