@@ -3,6 +3,56 @@
   flex-direction: column;
   width: 100%;
 }
+.pandingPosition{
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  // animation: panding 5s ease-in;
+  // animation-fill-mode: forwards;
+}
+.pandingBox{
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  animation: panding 4s ease-out;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+}
+.mainPanding{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  margin-left:calc(-50vw+50%);
+  object-fit:fill;
+}
+@keyframes panding{
+  70%{
+    margin-top:0 ;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
+  95%{
+    margin-top: 305px;
+    width: 19vw;
+    height: 25vw;
+    z-index: -1;
+    opacity: 0.3;
+  }
+  100%{
+    margin-top: 305px;
+    width: 19vw;
+    height: 25vw;
+    z-index: -1;
+    opacity: 0;
+  }
+}
 
 .main1Wrap {
   .videoWrap {
@@ -15,7 +65,7 @@
   }
 
   .videoCenterWrap {
-    margin: 0px 128px;
+    margin: 0px 10vw;
 
     @media (max-width: 980px) {
       margin: 0px 60px;
@@ -32,7 +82,7 @@
 
     .mainTextTopOverflow {
       overflow: hidden;
-      height: 2vw;
+      height: 1.9vw;
       margin-bottom: 10px;
       @media (max-width: 640px) {
         height: 4vw;
@@ -48,7 +98,7 @@
       animation: slideInUp;
       animation-duration: 2s;
       animation-fill-mode: backwards;
-      animation-delay: 0.9s;
+      animation-delay: 4.9s;
 
       h2 {
         position: relative;
@@ -79,7 +129,7 @@
         animation: slideInUp;
         animation-duration: 2s;
         animation-fill-mode: backwards;
-        animation-delay: 1.1s;
+        animation-delay: 5.1s;
         color: var(--color-blue);
         font-family: 'Oswald';
         font-size: 9vw;
