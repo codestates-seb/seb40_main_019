@@ -5,7 +5,7 @@ import BuyAddBtn from './BuyAddBtn';
 import { formatMoney } from '../../../util/function/formatData';
 
 import ReviewStar from '../../review/js/ReviewStar';
-// 별점 지우고 Quantity 밑으로 내려서 제품사진과 간격 맞춤
+
 export default function ProductInfoBox({
   product,
   count,
@@ -27,8 +27,8 @@ export default function ProductInfoBox({
               {product.new === true && <button>NEW</button>}
               <div className="titleBox">{product.productName}</div>
               <div className="reviewStar">
-                <ReviewStar clickStar={product.average} type={'small'} />
                 <p>평점 {product.average}</p>
+                <ReviewStar clickStar={product.average} type={'small'} />
               </div>
             </div>
           </div>
