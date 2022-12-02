@@ -5,6 +5,7 @@ import com.backend.domain.point.dao.PointHistoryRepository;
 import com.backend.domain.point.domain.PointType;
 import com.backend.domain.refreshToken.dao.RefreshTokenRepository;
 import com.backend.domain.refreshToken.domain.RefreshToken;
+import com.backend.domain.review.dao.ReviewRepository;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.dto.PasswordDto;
@@ -18,7 +19,6 @@ import com.google.gson.JsonObject;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,7 +31,6 @@ import java.util.*;
 @Slf4j
 @Service
 @Transactional
-@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
@@ -40,9 +39,24 @@ public class UserService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final PointHistoryRepository pointHistoryRepository;
     private final PointService pointService;
+    private final ReviewRepository reviewRepository;
 
-    private Long guestId = 1L;
-    private Long adminId = 1L;
+    private Long guestId;
+    private Long adminTestId;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenizer jwtTokenizer, RefreshTokenRepository refreshTokenRepository, PointHistoryRepository pointHistoryRepository, PointService pointService, ReviewRepository reviewRepository) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtTokenizer = jwtTokenizer;
+        this.refreshTokenRepository = refreshTokenRepository;
+        this.pointHistoryRepository = pointHistoryRepository;
+        this.pointService = pointService;
+        this.reviewRepository = reviewRepository;
+
+        guestId = userRepository.countByUserRole("ROLE_USER_TEST") + 1L;
+        adminTestId = userRepository.countByUserRole("ROLE_ADMIN_TEST") + 1L;
+    }
+
 
     public User getLoginUser() { //로그인된 유저가 옳바른 지 확인하고 정보 가져옴
         return findUser(getUserByToken());
@@ -258,7 +272,7 @@ public class UserService {
             hitGuest();
         } else {
             testRole = "admin";
-            testUserId = String.valueOf(adminId);
+            testUserId = String.valueOf(adminTestId);
             hitAdmin();
         }
 
@@ -323,7 +337,7 @@ public class UserService {
     }
 
     private void hitAdmin() {
-        adminId++;
+        adminTestId++;
     }
 
     public String getLoginUserInfo(User user) {
@@ -382,6 +396,7 @@ public class UserService {
 
     @Transactional
     public void deleteGustAccount() {
+        reviewRepository.deleteByUser_UserRoleOrUser_UserRole("ROLE_USER_TEST", "ROLE_ADMIN_TEST");
         pointHistoryRepository.deleteByUser_UserRoleOrUser_UserRole("ROLE_USER_TEST", "ROLE_ADMIN_TEST");
         userRepository.deleteAllByUserRoleOrUserRole("ROLE_USER_TEST", "ROLE_ADMIN_TEST");
     }

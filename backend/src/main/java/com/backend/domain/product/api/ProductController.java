@@ -33,22 +33,22 @@ public class ProductController {
     public ResponseEntity create(@CurrentUser CustomUserDetails authUser, @PathVariable Long categoryId,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
                                  @RequestParam("tag") String tag,
-                                 TitleImg titleImg, DetailImg detailImg){
+                                 TitleImg titleImg, DetailImg detailImg) {
         log.info("post 맵핑 실행 ");
         Long userId = authUser.getUser().getUserId();
         log.info("user 조회 완료 ");
-        Product response = productService.create(userId,price,productName,titleImg,detailImg,tag,categoryId);
+        Product response = productService.create(userId, price, productName, titleImg, detailImg, tag, categoryId);
 
         return new ResponseEntity(new SingleResponseDto<>(productMapper.productToProductResponseDto(response)), HttpStatus.CREATED);
     }
 
     @PatchMapping("/products/{categoryId}/{productsId}")
-    public ResponseEntity update(@PathVariable Long productsId,@CurrentUser CustomUserDetails authUser,
+    public ResponseEntity update(@PathVariable Long productsId, @CurrentUser CustomUserDetails authUser,
                                  @RequestParam("price") int price, @RequestParam("productName") String productName,
-                                 TitleImg titleImg,DetailImg detailImg,@PathVariable Long categoryId){
+                                 TitleImg titleImg, DetailImg detailImg, @PathVariable Long categoryId) {
         log.info(" 수정 실행 ");
 
-        Product response = productService.update(productsId,categoryId,price,productName,titleImg,detailImg);
+        Product response = productService.update(productsId, categoryId, price, productName, titleImg, detailImg, authUser.getUser());
         ProductResponseDto productResponseDto = productMapper.productToProductResponseDto(response);
         productResponseDto.setCategoryId(response.getCategory().getCategoryId());
         log.info(" 수정 된 상품 출력 ");
@@ -56,26 +56,26 @@ public class ProductController {
     }
 
     @DeleteMapping("/products/{productsId}")
-    public ResponseEntity<Long> delete(@PathVariable Long productsId){
+    public ResponseEntity<Long> delete(@PathVariable Long productsId, @CurrentUser CustomUserDetails authUser) {
         log.info("삭제 맵핑 실행");
-        return ResponseEntity.ok(productService.delete(productsId));
+        return ResponseEntity.ok(productService.delete(productsId, authUser.getUser()));
     }
 
     // 상품 조회 (필터링)
     @GetMapping("/products/filter/{filterId}")
-    public ResponseEntity getLists(@RequestParam int page,@PathVariable int filterId){
-        int size= 12;
+    public ResponseEntity getLists(@RequestParam int page, @PathVariable int filterId) {
+        int size = 12;
         log.info("getLists 실행 ");
-        Page<Product> pageProduct = productService.getLists(page-1, size,filterId);
+        Page<Product> pageProduct = productService.getLists(page - 1, size, filterId);
         log.info(" 페이징 리스트로 변환 ");
         List<Product> response = pageProduct.getContent();
         log.info(" 상품 목록 조회 완료 ");
-        return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(response),pageProduct), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(response), pageProduct), HttpStatus.OK);
     }
 
     // 제품 상세 조회
     @GetMapping("/products/{productsId}")
-    public ResponseEntity getListReview(@PathVariable Long productsId){
+    public ResponseEntity getListReview(@PathVariable Long productsId) {
         log.info("getListReview 실행");
         Product product = productService.getList(productsId);
         String average = productService.calculateReviewAverage(productsId);
@@ -84,24 +84,25 @@ public class ProductController {
         proResponseDto.setAverage(average);
         proResponseDto.setCategoryId(product.getCategory().getCategoryId());
         log.info(" getListReview 완료 ");
-        return new ResponseEntity(new SingleResponseDto<>(proResponseDto),HttpStatus.OK);
+        return new ResponseEntity(new SingleResponseDto<>(proResponseDto), HttpStatus.OK);
     }
+
     // 카테고리 필터 출력
     @GetMapping("/products/category/{categoryId}/{filterId}")
-    public ResponseEntity getListCategory(@PathVariable Long categoryId,@RequestParam int page,@PathVariable int filterId){
-        int size= 12;
+    public ResponseEntity getListCategory(@PathVariable Long categoryId, @RequestParam int page, @PathVariable int filterId) {
+        int size = 12;
         log.info(" getListCategory 실행 ");
-        Page<Product> pageProduct = productService.getCategory(categoryId,filterId, page-1, size);
+        Page<Product> pageProduct = productService.getCategory(categoryId, filterId, page - 1, size);
         log.info(" getcategory 리스트로 변환 ");
         List<Product> content = pageProduct.getContent();
         log.info(" getListCategory 완료 ");
-        return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(content),pageProduct), HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponse<>(productMapper.productsToProductResponseDto(content), pageProduct), HttpStatus.OK);
     }
 
     // 랜덤 추천
     @GetMapping("/products/random")
-    public ResponseEntity getRandomList(){
+    public ResponseEntity getRandomList() {
         List<Product> random = productService.random();
-        return new ResponseEntity<>(new SingleResponseDto<>(productMapper.productsToProductResponseDto(random)),HttpStatus.OK);
+        return new ResponseEntity<>(new SingleResponseDto<>(productMapper.productsToProductResponseDto(random)), HttpStatus.OK);
     }
 }

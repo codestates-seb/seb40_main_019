@@ -14,6 +14,8 @@ import com.backend.domain.review.domain.Review;
 import com.backend.domain.user.dao.UserRepository;
 import com.backend.domain.user.domain.User;
 import com.backend.domain.user.exception.MemberNotFound;
+import com.backend.global.error.BusinessLogicException;
+import com.backend.global.error.ExceptionCode;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -76,8 +78,9 @@ public class ProductService {
     // 상품 수정
     @SneakyThrows
     @Transactional
-    public Product update(Long productId, Long categoryId, int price , String productName, TitleImg titleImg, DetailImg detailImg) {
+    public Product update(Long productId, Long categoryId, int price , String productName, TitleImg titleImg, DetailImg detailImg, User user) {
         Product findProduct = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        checkPermission(productId, user);
         log.info(" findProduct : ",findProduct);
         Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFound::new);
         log.info(" category : ", category);
@@ -111,13 +114,13 @@ public class ProductService {
     }
 
     @Transactional
-    public Long delete(Long productsId) {
-
-        Product product = productRepository.findById(productsId).orElseThrow(ProductNotFound::new);
+    public Long delete(Long productId, User user) {
+        Product product = productRepository.findById(productId).orElseThrow(ProductNotFound::new);
+        checkPermission(productId, user);
         log.info(" product : ", product);
         productRepository.delete(product);
         log.info(" 상품 삭제 ");
-        return  productsId;
+        return  productId;
     }
 
     @Transactional
@@ -205,5 +208,10 @@ public class ProductService {
             list.add(product);
         }
         return list;
+    }
+    private void checkPermission(Long productId, User user) {
+        if (productRepository.existsByProductIdAndUserUserId(productId, user.getUserId()) || user.getUserRole().equals("ROLE_ADMIN_TEST")) {
+            throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
+        }
     }
 }

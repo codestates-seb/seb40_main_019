@@ -113,9 +113,9 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 
         return UriComponentsBuilder
                 .newInstance()
-                .scheme("http")
+                .scheme("https")
                 .host("luxmeal.xyz")
-                .port(80)
+                .port(443)
                 .path("/oauth/" + registrationId)
                 .queryParams(queryParams)
                 .build()

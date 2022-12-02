@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    boolean existsByNickname(String nickname);
+//    boolean existsByNickname(String nickname);
 
     Optional<User> findByEmailAndUserStatusAndSocialLogin(String email,User.UserStatus userStatus,String socialLogin);
 
@@ -15,4 +15,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     Optional<User> findByPhone(String phoneNumber);
     void deleteAllByUserRoleOrUserRole(String guestUserRole, String guestAdminRole);
+    long countByUserRole(String userRole);
 }
