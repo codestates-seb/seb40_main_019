@@ -1,9 +1,9 @@
 import '../css/mypageOrderListItem.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Empty from '../../empty/js/Empty';
-import { formatDate } from '../../../util/function/formatData';
+import { formatDate, formatMoney } from '../../../util/function/formatData';
 import { handleDltReview } from '../../../util/api/review';
-import useFetch from '../../../util/useFetch';
+import useFetchNotPage from '../../../util/useFetchNotPage';
 
 export default function MypageOrderListItem({ item }) {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function MypageOrderListItem({ item }) {
   let [pastData] = '';
 
   if (item) {
-    pastData = useFetch(`review/read/${item.reviewId}`);
+    pastData = useFetchNotPage(`review/read/${item.reviewId}`);
   }
 
   const clickEdit = () => {
@@ -50,7 +50,9 @@ export default function MypageOrderListItem({ item }) {
                     <div className="title">{item.productName}</div>
                   </div>
                   <div className="priceAndCount">
-                    <div className="price">{item.totalPrice}원</div>
+                    <div className="price">
+                      {formatMoney(item.totalPrice)}원
+                    </div>
                     <div className="orderCount">{item.quantity}개</div>
                   </div>
                   {item.reviewStatus === 'WRITING' ? (

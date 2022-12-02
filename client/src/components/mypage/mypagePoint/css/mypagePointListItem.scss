@@ -1,34 +1,33 @@
-.pointContainer{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-bottom: 1px solid var(--color-blue);
-    padding: 15px 0px;
+.pointContainer {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--color-blue);
+  padding: 15px 0px;
 
-    div{
-        color: var(--color-brown);
-        font-size: 13px;
-    }
+  div {
+    color: var(--color-brown);
+    font-size: 13px;
+    text-align: center;
+  }
 
-    p{
-        text-align: center;
-        color: #969696;
-    }
-    .createdAt{
-        color: var(--color-brown);
-    }
-    .plusPoint{
-        color: var(--color-yellow);
-        font-weight: bold;
-        padding-right: 6em; //수정
-    }
-    .minusPoint{
-        color: var(--color-blue);
-        padding-right: 2em; //수정
-
-    }
-    .remainingPoint{
-        font-weight: bold;
-    }
-    
+  p {
+    text-align: center;
+    color: #969696;
+  }
+  .createdAt {
+    color: var(--color-brown);
+  }
+  .plusPoint {
+    color: var(--color-yellow);
+    font-weight: bold;
+    // padding-right: 6em; //수정
+  }
+  .minusPoint {
+    color: var(--color-blue);
+    // padding-right: 2em; //수정
+  }
+  .remainingPoint {
+    font-weight: bold;
+  }
 }

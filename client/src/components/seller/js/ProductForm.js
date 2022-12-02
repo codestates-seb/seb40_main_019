@@ -13,6 +13,8 @@ export default function ProductForm({
   setTitleImg,
   detailImg,
   setDetailImg,
+  pastTitleImg,
+  pastDetailImg,
 }) {
   const handleCategory = (e) => {
     setCategoryId(e.target.value);
@@ -92,11 +94,19 @@ export default function ProductForm({
         </section>
         <div className="titleImg">
           <h1>대표이미지</h1>
-          <ImgUploader pictures={titleImg} setPictures={setTitleImg} />
+          <ImgUploader
+            pictures={titleImg}
+            setPictures={setTitleImg}
+            pastImg={pastTitleImg}
+          />
         </div>
         <div className="detailImg">
           <h1>상세이미지</h1>
-          <ImgUploader pictures={detailImg} setPictures={setDetailImg} />
+          <ImgUploader
+            pictures={detailImg}
+            setPictures={setDetailImg}
+            pastImg={pastDetailImg}
+          />
         </div>
       </div>
     </>
