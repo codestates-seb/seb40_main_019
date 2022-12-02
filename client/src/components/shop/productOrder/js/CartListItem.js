@@ -1,3 +1,4 @@
+import { formatMoney } from '../../../../util/function/formatData';
 import ModalYesorNo from '../../../modal/js/ModalYesorNo';
 import '../css/cartListItem.scss';
 // import QuantityBtn from '../../js/QuantityBtn';
@@ -33,7 +34,7 @@ const CartListItem = ({
         />
       </div>
       <div className="price">
-        <div>{item.price * item.count}원</div>
+        <div>{formatMoney(item.price * item.count)}원</div>
       </div>
       <div className="delete">
         <button onClick={() => deleteItem(item)}>

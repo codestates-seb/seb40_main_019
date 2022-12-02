@@ -1,12 +1,17 @@
 import '../css/orderSummary.scss';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { formatMoney } from '../../../../util/function/formatData';
+import ModalOk from '../../../modal/js/ModalOk';
 
 export default function OrderSummary({ totalPrice, myPoint, setModal }) {
   const user = useSelector((state) => state.user);
   const [total, setTotal] = useState(0);
   const [point, setPoint] = useState(0);
   const [remain, setRemain] = useState(0);
+
+  const [modalOkOn, setModalOkOn] = useState(false);
+  const [modalOkText, setModalOkText] = useState('');
   // const [minus, setRemain] = useState(0);
   useEffect(() => {
     setTotal(totalPrice);
@@ -16,19 +21,23 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
 
   const payment = () => {
     if (user.userRole === '') {
-      window.alert('로그인이 필요한 서비스입니다');
+      setModalOkOn(true);
+      setModalOkText('로그인이 필요한 서비스입니다');
       return;
     }
     if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
-      window.alert('판매자는 이용할 수 없습니다.');
+      setModalOkOn(true);
+      setModalOkText('판매자는 이용할 수 없습니다.');
       return;
     }
     if (total === 0) {
-      window.alert('선택한 상품이 없습니다.');
+      setModalOkOn(true);
+      setModalOkText('선택한 상품이 없습니다.');
       return;
     }
     if (myPoint < totalPrice + 3000) {
-      window.alert('포인트가 부족합니다');
+      setModalOkOn(true);
+      setModalOkText('포인트가 부족합니다');
       return;
     }
     setModal(true);
@@ -46,22 +55,22 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
           <div className="orderInfoContainer">
             <div className="orderTextAlign">결제</div>
             <div className="productPriceBox">
-              <div>제품 금액</div>
-              <div>{total}원</div>
+              <h3>제품 금액</h3>
+              <div>{formatMoney(total)}원</div>
             </div>
             <div className="deliveryFeeBox">
-              <div>배송비</div>
-              <div>3000원</div>
+              <h3>배송비</h3>
+              <div>3,000원</div>
             </div>
           </div>
 
           {/* 총 금액 정보 */}
           <div>
             <div className="totalPointBox">
-              <div>사용 가능 포인트</div>
+              <h3>사용 가능 포인트</h3>
               {user.userRole !== '' ? (
                 <>
-                  <div>{point}원</div>
+                  <div>{formatMoney(point)}원</div>
                 </>
               ) : (
                 <>
@@ -70,14 +79,14 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
               )}
             </div>
             <div className="totalPriceBox">
-              <div>결제 금액</div>
-              <div>{total + 3000}원</div>
+              <h3>결제 금액</h3>
+              <div>{formatMoney(total + 3000)}원</div>
             </div>
             <div className="remainPoint">
               <div>잔여 포인트</div>
               {user.userRole !== '' ? (
                 <>
-                  <div>{remain}원</div>
+                  <div>{formatMoney(remain)}원</div>
                 </>
               ) : (
                 <>
@@ -93,6 +102,11 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
           </div>
         </div>
       </div>
+      <ModalOk
+        setModalOn={setModalOkOn}
+        modalOn={modalOkOn}
+        modalText={modalOkText}
+      />
     </>
   );
 }
