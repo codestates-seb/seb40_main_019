@@ -9,3 +9,7 @@ export const formatDate = (date) => {
 
   return [year, month, day].join('-');
 };
+
+export const formatMoney = (data) => {
+  return data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
