@@ -13,16 +13,16 @@ export default function SidebarMypageMenu() {
             <button>마이페이지</button>
           </Link>
           <Link to="/mypage/user">
-            <button>회원정보수정</button>
+            <button>회원정보</button>
           </Link>
           <Link to="/mypage/point">
-            <button>포인트적립</button>
+            <button>포인트</button>
           </Link>
           <Link to="/mypage/order">
             <button>주문목록</button>
           </Link>
           <Link to="/mypage/review">
-            <button>내가작성한리뷰</button>
+            <button>리뷰</button>
           </Link>
         </ul>
       </div>
