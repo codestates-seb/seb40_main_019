@@ -2,6 +2,7 @@ package com.backend.domain.order.dao;
 
 import com.backend.domain.order.domain.Order;
 import com.backend.domain.order.domain.OrderStatus;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,12 +23,10 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     )
     Long countOrder(@Param("userId") Long userId);
 
-    @Query("select count(o) from Order o "
+    @Query("select count(o) from Order o"
     )
     Long countAllOrder();
 
-
-    List<Order> findAll();
 
     List<Order> findByOrderStatus(OrderStatus orderStatus);
 
@@ -37,4 +36,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "order by o.createdAt desc"
     )
     List<Order> findByUserId(@Param("userId") Long userId);
+
+
+
+    Page<Order> findAll(Pageable pageable);
 }

@@ -124,7 +124,8 @@ import static com.backend.global.error.ExceptionCode.CANNOT_CHANGE_ORDER;
 
     public Page<OrderHistoryDto> getAllList(Pageable pageable) {
         log.info("Service/ 모든 주문내역 조회 시작");
-        List<Order> orders = orderRepository.findAll();
+        Page<Order> orderPage= orderRepository.findAll(pageable);
+        List<Order> orders = orderPage.getContent();
         Long totalQuantity = orderRepository.countAllOrder();
 
 
