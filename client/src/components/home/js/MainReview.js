@@ -9,7 +9,7 @@ import review6 from '../../../assets/img/review6.svg';
 import reviewStar from '../../../assets/img/reviewStar.svg';
 import { useState } from 'react';
 
-export default function MainReview({ scroll }) {
+export default function MainReview({ scroll, aniTime }) {
   const data = [
     {
       src: review1,
@@ -51,7 +51,7 @@ export default function MainReview({ scroll }) {
       <div className="mainReview">
         <div
           className={
-            scroll > 2600 ? 'reviewBtn reviewTextAni' : 'reviewBtn hidden'
+            scroll > aniTime[3] ? 'reviewBtn reviewTextAni' : 'reviewBtn hidden'
           }
         >
           <button onClick={handleLeft}>
@@ -63,7 +63,9 @@ export default function MainReview({ scroll }) {
         </div>
         <div
           className={
-            scroll > 2600 ? 'mainReviewWrap reviewAni' : 'mainReviewWrap hidden'
+            scroll > aniTime[3]
+              ? 'mainReviewWrap reviewAni'
+              : 'mainReviewWrap hidden'
           }
         >
           {data &&
