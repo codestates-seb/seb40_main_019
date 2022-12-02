@@ -66,16 +66,16 @@ public class UserService {
 
     @Transactional
     public void createUser(User user) {
-        Optional<User> notExistUser = null;
         log.info("회원가입 시작");
         if (!isNotExistsEmailByOriginal(user.getEmail())) {
             log.info("신규 유저");
             verifyExistsEmailByOriginal(user.getEmail());
+            verifyExistsNicknameByOriginal(user.getNickname());
         } else {
             log.info("탈퇴했던 유저");
             user.setUserStatus(User.UserStatus.USER_EXIST);
             log.info("탈퇴했던 유저의 상태를 USER_EXIST로 변경");
-            notExistUser = userRepository.findByEmail(user.getEmail());
+            Optional<User> notExistUser = userRepository.findByEmail(user.getEmail());
             user.setUserId(notExistUser.get().getUserId());
             if (!Objects.equals(notExistUser.get().getNickname(), user.getNickname())) {
                 log.info("기존과 다른 닉네임 입력");
@@ -83,10 +83,6 @@ public class UserService {
             } else {
                 log.info("기존과 같은 닉네임 입력");
             }
-        }
-
-        if (notExistUser == null) {
-            verifyExistsNicknameByOriginal(user.getNickname());
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
