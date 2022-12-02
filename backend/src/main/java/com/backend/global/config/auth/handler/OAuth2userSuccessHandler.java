@@ -115,7 +115,7 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
                 .newInstance()
                 .scheme("http")
                 .host("luxmeal.xyz")
-                .port(80)
+                .port(443)
                 .path("/oauth/" + registrationId)
                 .queryParams(queryParams)
                 .build()
