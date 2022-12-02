@@ -69,12 +69,12 @@ export default function PaymentModal({
   const order = () => {
     if (type === 'multi') {
       setModalYesOn(true);
-      setModalYesText('상품울 주문하시겠습니까?');
+      setModalYesText('상품을 주문하시겠습니까?');
       // setApi(multiOrder);
       setModalYesType('multi');
     } else {
       setModalYesOn(true);
-      setModalYesText('상품울 주문하시겠습니까?');
+      setModalYesText('상품을 주문하시겠습니까?');
       setModalYesType('single');
     }
   };
