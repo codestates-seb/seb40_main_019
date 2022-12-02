@@ -28,7 +28,7 @@ export const getUserInfo = async () => {
 };
 // 유저 정보 수정
 export const editUserInfo = async (data) => {
-  let check = window.confirm('회원 정보를를 수정하시겠습니까?');
+  let check = window.confirm('회원 정보를 수정하시겠습니까?');
   if (check) {
     // 닉네임 유효성 확인
     if (data.nickname.length < 2 || data.nickname.length > 16) {
