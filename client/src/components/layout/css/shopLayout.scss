@@ -14,7 +14,7 @@
   }
   .sideBar{
     width: 150px;
-    // border: 1px solid black;
+    z-index: 100;
     position: relative;
     .sticky{
       position: sticky;
