@@ -17,4 +17,5 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     List<Product> findByUserId(@Param("userId") long userId);
     @Query("select p from Product p where p.category.categoryId = :categoryId")
     Page<Product> findByCategory(@Param("categoryId")long categoryId , Pageable pageable);
+    boolean existsByProductIdAndUserUserId(long productId,long userId);
 }
