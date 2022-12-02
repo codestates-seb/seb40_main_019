@@ -1,8 +1,14 @@
 .signupInner{
-  width: 480px;
-  height: 100%;
+  max-width: 480px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px;
+  @media (max-width: 480px){
+    padding: 30px 30px;
+    button{
+      font-size: 15px;
+    }
+  }
 }
