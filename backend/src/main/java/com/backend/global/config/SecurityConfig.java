@@ -32,11 +32,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
 
     private final JwtTokenizer jwtTokenizer;
-
     private final UserService userService;
-
     private final UserRepository userRepository;
-
     private final CustomOAuth2UserService customOAuth2UserService;
     private final RefreshTokenRepository refreshTokenRepository;
 
@@ -45,6 +42,9 @@ public class SecurityConfig {
 
     @Value("${address.front-s3}")
     private String FRONT_REMOTE;
+
+    @Value("${address.front-https}")
+    private String FRONT_REMOTE_HTTPS;
 
     @Value("${address.domain}")
     private String DOMAIN;
@@ -95,6 +95,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.addAllowedOrigin(FRONT_LOCAL);
         configuration.addAllowedOrigin(FRONT_REMOTE);
+        configuration.addAllowedOrigin(FRONT_REMOTE_HTTPS);
         configuration.addAllowedOrigin(DOMAIN);
         configuration.addAllowedOrigin(LOCAL);
         configuration.addAllowedMethod("*");

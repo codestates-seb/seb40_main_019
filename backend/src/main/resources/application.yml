@@ -81,6 +81,7 @@ address:
   domain: ${/config/cloud-parameter-store/domain-address}
   front-local: ${/config/cloud-parameter-store/front-local}
   front-s3: ${/config/cloud-parameter-store/front-s3}
+  front-https: ${/config/cloud-parameter-store/front-https}
 ### JWT ###
 jwt:
   access-token-expiration-time: ${/config/cloud-parameter-store/atk-exp}
