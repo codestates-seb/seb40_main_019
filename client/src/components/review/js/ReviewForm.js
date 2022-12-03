@@ -25,7 +25,7 @@ export default function ReviewForm({
             setReviewContent(e.target.value);
           }}
           value={reviewContent}
-        ></input>
+        />
       </div>
     </div>
   );

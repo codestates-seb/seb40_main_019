@@ -23,18 +23,15 @@ export default function MypageUserEdit() {
   const user = useSelector((state) => state.user);
   const onChangeInput = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
-    console.log(data);
   };
   useEffect(() => {
     let userData = getUserInfo();
     userData.then((res) => {
-      // null 값 처리 나중에 서버에서 빈문자열로 변경
       Object.keys(res).forEach(function (el) {
         if (res[el] === null) {
           res[el] = '';
         }
       });
-      console.log(res);
       setData({
         email: res.email,
         nickname: res.nickname,

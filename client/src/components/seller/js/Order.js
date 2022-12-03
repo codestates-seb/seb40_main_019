@@ -22,12 +22,8 @@ export default function Order({ item }) {
     handleDelivery(item.orderId);
   };
 
-  // console.log(item);
   return (
     <div className="sellerproduct order">
-      {/* <div className="createdAt">
-        <p>{item.orderDate}</p>
-      </div> */}
       <div className="orderContainer">
         <div className="productBtn">
           {status === '상품준비중' ? (

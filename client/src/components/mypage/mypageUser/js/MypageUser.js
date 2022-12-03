@@ -5,10 +5,7 @@ import FormButtonYellow from '../../../sign/js/FormButtonYellow';
 import FormButtonBlue from '../../../sign/js/FormButtonBlue';
 import { Link } from 'react-router-dom';
 import DeleteUserModal from './DeleteUserModal';
-import {
-  // deleteUserAccount,
-  getUserInfo,
-} from '../../../../util/api/mypageUser';
+import { getUserInfo } from '../../../../util/api/mypageUser';
 export default function MypageUser() {
   const [data, setData] = useState({
     email: '',
@@ -45,9 +42,7 @@ export default function MypageUser() {
   const deleteUser = () => {
     let check = window.confirm('회원 탈퇴를 진행하시겠습니까?');
     if (check) {
-      // deleteUserAccount();
       setDeleteModalOpen(true);
-      // window.alert('회원탈퇴 이메일 모달창');
     }
   };
 

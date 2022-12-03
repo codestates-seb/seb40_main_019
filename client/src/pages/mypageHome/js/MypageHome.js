@@ -8,7 +8,6 @@ export default function MypageHome() {
   const [order] = useFetchOne('orders'); //page 0으로
   const [review] = useFetchOne('user/review'); // page 0으로
 
-  console.log(order);
   let orderSummery = [0, 0, 0, 0];
 
   for (let i = 0; i < (order && order.length); i++) {

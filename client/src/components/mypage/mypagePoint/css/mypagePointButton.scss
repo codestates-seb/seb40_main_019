@@ -13,14 +13,12 @@
     justify-content: center;
     width: 50%;
     height: 100%;
-    // border: 1px solid black;
     @media screen and (max-width: 600px) {
       width: 100%;
       margin-bottom: 20px;
     }
     .pointBtn{
       width: 120px;
-      // border: 1px solid black;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -30,7 +28,6 @@
         width: 90px;
       }
       button{
-        border: 0;
         outline: none;
       }
       p{
@@ -53,10 +50,6 @@
           width: 80px;
           height: 80px;
         }
-        // @media screen and (max-width: 600px) {
-        //   width: 90px;
-        //   height: 90px;
-        // }
         .pointIcon{
           color: rgb(255, 255, 255);
           font-size: 40px;
@@ -70,31 +63,37 @@
       }
       .colorBlue{
         background-color: var(--color-blue);
+        border: 1px solid var(--color-blue);
       }
       .colorYellow{
         background-color: var(--color-yellow);
+        border: 1px solid var(--color-yellow);
+        transition: all 0.2s;
+      }
+      .colorYellow:hover{
+        .pointIcon{
+          color: var(--color-yellow);
+
+        }
+        background-color: var(--color-white);
       }
     }
     .point{
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       font-size: 30px;
       width: 200px;
       height: 100%;
-      // border: 1px solid black;
       padding-top: 15px;
       input{
         width: 80%;
         padding: 0.6rem 0;
-        // font-size: 16px;
         text-align: center;
         border: none;
         outline: none;
         border-bottom: 3px solid var(--color-blue);
-      }
-      input:focus{
-        // outline: 3px solid #b5deff;
       }
       @media screen and (max-width: 800px) {
         width: 170px;

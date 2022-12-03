@@ -4,7 +4,6 @@ const initialState = {
   isLogin: false,
   accesstoken: null,
 };
-
 export const loginSlice = createSlice({
   name: 'login',
   initialState,
@@ -27,5 +26,4 @@ export const loginSlice = createSlice({
 });
 
 export const { login, logout } = loginSlice.actions;
-
 export default loginSlice.reducer;

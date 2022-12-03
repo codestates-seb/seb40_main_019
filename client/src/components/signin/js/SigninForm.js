@@ -64,9 +64,6 @@ export default function SigninForm() {
   };
   return (
     <>
-      <div className="signinTitle">
-        <h1>Log in</h1>
-      </div>
       <FormButtonBlue
         btnContent="사용자 체험"
         formSubmit={guestLogin}
@@ -83,6 +80,9 @@ export default function SigninForm() {
         <div className="line"></div>
         <p>OR</p>
         <div className="line"></div>
+      </div>
+      <div className="signinTitle">
+        <h1>Log in</h1>
       </div>
       <form
         className="signinForm"

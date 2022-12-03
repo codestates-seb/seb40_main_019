@@ -36,7 +36,6 @@ export default function Signup() {
   };
   // 인풋 변경 함수
   const onChangeInput = (e) => {
-    console.log(data);
     setDate({ ...data, [e.target.name]: e.target.value });
   };
   // 이메일 인증 모달창 함수
@@ -89,7 +88,6 @@ export default function Signup() {
       email: data.email,
       password: data.password,
     };
-    // console.log(temp);
     dispatch(setFormData(temp));
     dispatch(openModal());
   };

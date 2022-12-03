@@ -6,11 +6,6 @@ export default function ShopLayout() {
   return (
     <>
       <div className="mainInner">
-        {/* <div className="sidebar1280">
-          <div className="sidebarAb">
-            <Sidebar />
-          </div>
-        </div> */}
         <div className="sideBar">
           <div className="sticky">
             <SidebarMypage />
@@ -18,7 +13,6 @@ export default function ShopLayout() {
         </div>
         <div className="container">
           <Outlet />
-          {/* <div className="test"></div> */}
         </div>
       </div>
     </>

@@ -44,7 +44,6 @@
   .price {
     margin-bottom: 10px;
   }
-  //리뷰작성 버튼
   .reviewAddBtn {
     align-items: center;
     text-align: center;
@@ -77,7 +76,6 @@
       color: #ba4242;
     }
   }
-  //반응형
   @media (max-width: 750px) {
     display: flex;
     flex-direction: column;

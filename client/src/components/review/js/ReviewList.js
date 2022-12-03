@@ -35,7 +35,6 @@ export default function ReviewList({ item }) {
       state: { item: pastData[0] },
     });
   };
-  console.log(item);
   return (
     <>
       {item ? (

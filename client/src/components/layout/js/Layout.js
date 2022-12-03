@@ -22,7 +22,6 @@ export default function Layout() {
       <div className="appLayout">
         <Header />
         <Nav />
-        {/* <div /> */}
         <Main>
           <Outlet />
         </Main>

@@ -14,7 +14,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 // 서버에 휴대폰 번호 전송.
 export const findEmailController = async (phone, setModalOn, setModalText) => {
-  console.log(phone);
   //휴대폰 번호 유효성 확인
   if (!phone) {
     setModalOn(true);
@@ -32,14 +31,11 @@ export const findEmailController = async (phone, setModalOn, setModalText) => {
     const submitResult = await axios.post(`${REACT_APP_API_URL}users/find-id`, {
       phoneNumber: phone,
     });
-    // //이메일 정보 받아옴
+    //이메일 정보 받아옴
     if (submitResult.status === 200) {
-      // window.alert(`${submitResult.data}`);
       setModalOn(true);
       setModalText(`아이디: ${submitResult.data.email}`);
     }
-    // console.log(submitResult);
-    // alert로 보여주기
     return submitResult;
   } catch (error) {
     if (error.response.data.status === 404) {
@@ -55,7 +51,6 @@ export const findPasswordSendEmail = async (
   setModalOn,
   setModalText
 ) => {
-  console.log(email);
   if (!email) {
     setModalOn(true);
     setModalText('이메일을 입력하세요.');
@@ -92,9 +87,6 @@ export const changePasssword = async (
   setModalOn,
   setModalText
 ) => {
-  console.log(email);
-  console.log(password);
-
   if (!password) {
     setModalOn(true);
     setModalText('새로운 비밀번호를 입력하세요.');

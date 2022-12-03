@@ -1,4 +1,3 @@
-// import { useEffect } from 'react';
 import { useEffect, useState } from 'react';
 import '../css/mypagePointButton.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,6 +46,11 @@ export default function MypagePointButton() {
             <input
               value={value}
               onChange={(e) => setValue(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.charCode === 13) {
+                  tossPay(user.nickname, value);
+                }
+              }}
               type="text"
               placeholder="포인트 입력"
             />

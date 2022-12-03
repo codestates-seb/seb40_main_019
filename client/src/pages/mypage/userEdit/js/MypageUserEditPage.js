@@ -1,4 +1,3 @@
-// import React from 'react';
 import '../css/mypageUserEditPage.scss';
 import MypageUserEdit from '../../../../components/mypage/mypageUserEdit/js/MypageUserEdit';
 

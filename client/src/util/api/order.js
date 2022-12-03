@@ -14,7 +14,6 @@ let reg_mobile = /^\d{3}-\d{3,4}-\d{4}$/;
 
 //주문생성- 장바구니
 export const handleOrderCart = async (data, setModalOkText, setModalOkOn) => {
-  console.log('실행');
   if (!reg_name1.test(data.receiverName)) {
     setModalOkOn(true);
     setModalOkText('올바른 이름을 입력해주세요');
@@ -43,12 +42,10 @@ export const handleOrderCart = async (data, setModalOkText, setModalOkOn) => {
 
   try {
     const res = await axios.post(`${REACT_APP_API_URL}orders/cart`, data);
-    console.log(res);
     if (res.status === 201) {
       return res.data;
     }
   } catch (error) {
-    console.error(error);
     return error;
   }
 };
@@ -83,12 +80,10 @@ export const handleOrderSingle = async (data, setModalOkText, setModalOkOn) => {
 
   try {
     const res = await axios.post(`${REACT_APP_API_URL}orders`, data);
-    console.log(res);
     if (res.status === 201) {
       return res.data;
     }
   } catch (error) {
-    console.error(error);
     return error;
   }
 };
@@ -106,11 +101,9 @@ export const handleDelivery = async (orderId) => {
       `${REACT_APP_API_URL}orders/status/${orderId}`
     );
     if (res.status === 200) {
-      console.log(res.data);
       location.reload();
     }
   } catch (error) {
-    console.error(error);
     return error;
   }
 };

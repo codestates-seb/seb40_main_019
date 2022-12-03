@@ -35,9 +35,7 @@ export const handleAddReview = async (
         `${REACT_APP_API_URL}review/${productId}`,
         formData
       );
-      console.log(res.data);
       if (res.status === 201) {
-        console.log(res.data);
         window.location.replace('/mypage/review');
       }
     } catch (error) {
@@ -56,14 +54,12 @@ export const handleEditReview = async (
   const formData = new FormData();
   formData.append('reviewContent', data.reviewContent);
   formData.append('star', data.star);
-  // formData.append('reviewImg', data.reviewImg[0]);
 
   if (
     data &&
     data.reviewImg.length !== 0 &&
     data.reviewImg[0] !== pastData.reviewImg
   ) {
-    // formData.delete('reviewImg', '');
     formData.append('reviewImg', data.reviewImg[0][0]);
   }
   if (data.reviewImg[0] === undefined) {
@@ -71,7 +67,6 @@ export const handleEditReview = async (
   } else {
     formData.append('delete', false);
   }
-  console.log(data.reviewImg[0]);
   if (data.reviewContent.length < 5 || data.reviewContent.length >= 100) {
     setModalOn(true);
     setModalText('리뷰가 5~100자여야 합니다');
@@ -84,9 +79,7 @@ export const handleEditReview = async (
         `${REACT_APP_API_URL}review/${pastData.reviewId}`,
         formData
       );
-      console.log(res.data);
       if (res.status === 200) {
-        console.log(res.data);
         window.location.replace('/mypage/review');
       }
     } catch (error) {
@@ -106,11 +99,9 @@ export const handleDltReview = async (id) => {
   try {
     const res = await axios.delete(`${REACT_APP_API_URL}review/${id}`);
     if (res.status === 204) {
-      console.log(res.data);
       location.reload();
     }
   } catch (error) {
-    console.error(error);
     return error;
   }
 };

@@ -21,7 +21,7 @@ export default function SellerAddProduct() {
     price,
     titleImg,
     detailImg,
-    tag: 'new', //비엇으면 빈문자열로 보냄
+    tag: 'new',
   };
 
   const formSubmit = (e) => {

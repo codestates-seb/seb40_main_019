@@ -17,7 +17,6 @@ export default function ProductInfoSmall({
   const [modalOkText, setModalOkText] = useState('');
   const [modalMoveOn, setModalMoveOn] = useState(false);
   const [modalMoveText, setModalMoveText] = useState('');
-  // addToCart 버튼 누르면 장바구니에 상품담기
   const user = useSelector((state) => state.user);
 
   function addToCart() {

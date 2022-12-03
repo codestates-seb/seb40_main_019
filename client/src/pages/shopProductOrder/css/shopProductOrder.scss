@@ -1,30 +1,23 @@
 .productOrderContainer{
-    display: flex;
+  display: flex;
 	width: 100%;
-    
-    @media(max-width: 980px) {
-        flex-direction: column;
-    }
-
-
-.orderCartListBox{
+  @media(max-width: 980px) {
+    flex-direction: column;
+  }
+  .orderCartListBox{
     width: 70%;
-
     @media(max-width: 980px) {
-        width: 100%;
-        height: auto;
+      width: 100%;
+      height: auto;
     }
-}
-
-.orderSummaryBox{
+  }
+  .orderSummaryBox{
     width: 30%;
-
     @media(max-width: 980px) {
-        width: 100%;
+      width: 100%;
     }
-}
-
-.MobileBtnContainer{
+  }
+  .MobileBtnContainer{
     display: none;
     width: 100%;
     position: fixed;
@@ -34,5 +27,5 @@
       width: 100%;
       display: block;
     }
-}
+  }
 }

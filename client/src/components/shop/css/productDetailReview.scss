@@ -1,8 +1,6 @@
 .reviewContainer {
   display: block;
   width: 100%;
-  // max-width: 150px;
-
   .reviewText {
     border-top: solid 2px var(--color-blue);
     border-bottom: solid 2px var(--color-blue);
@@ -15,18 +13,6 @@
     padding-top: 12px;
     font-weight: bold;
   }
-  //   .reviewTextContainer {
-  //     width: 100%;
-
-  //     div {
-  //       width: 100%;
-  //       height: 240px;
-  //       border-radius: 15px;
-  //       background-color: #f9f3e5;
-  //       padding: 12px;
-  //     }
-  //   }
-
   .reviewBtn {
     background-color: var(--color-white);
     color: var(--color-blue);

@@ -17,7 +17,7 @@ export default function SellerEditProduct() {
   const [categoryId, setCategoryId] = useState('1');
   const [productName, setProductName] = useState(item.productName);
   const [price, setPrice] = useState(item.price);
-  const [titleImg, setTitleImg] = useState([item.titleImg]); //배열로 해야 이미지 보임
+  const [titleImg, setTitleImg] = useState([item.titleImg]);
   const [detailImg, setDetailImg] = useState([item.detailImg]);
 
   const data = {

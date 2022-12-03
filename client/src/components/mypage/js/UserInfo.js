@@ -1,4 +1,3 @@
-// import React from 'react';
 import '../css/userInfo.scss';
 export default function UserInfo({
   labelName,

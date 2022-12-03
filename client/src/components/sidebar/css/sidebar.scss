@@ -1,5 +1,5 @@
 .sidebarMenuBtn {
-  z-index: 1000;
+  z-index: 999;
   display: none;
   margin-left: 10px;
   margin-bottom: 20px;
@@ -19,6 +19,7 @@
 
 .sidebarModal {
   display: none;
+  z-index: 999;
   @media (max-width: 1364px) {
     display: block;
   }
@@ -28,4 +29,8 @@
   @media (max-width: 1364px) {
     display: none;
   }
+}
+
+.sidebarContainer{
+  z-index: 999;
 }

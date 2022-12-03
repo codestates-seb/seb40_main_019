@@ -1,4 +1,3 @@
-// import { checkIsLogin } from '../lib/checkIsLogin';
 import axios from 'axios';
 import { setCookie } from '../cookie/cookie';
 

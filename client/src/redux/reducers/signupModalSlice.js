@@ -6,7 +6,6 @@ const initialState = {
   email: '',
   password: '',
 };
-
 export const modalSlice = createSlice({
   name: 'modal',
   initialState,
@@ -29,5 +28,4 @@ export const modalSlice = createSlice({
 });
 
 export const { openModal, closeModal, setFormData } = modalSlice.actions;
-
 export default modalSlice.reducer;

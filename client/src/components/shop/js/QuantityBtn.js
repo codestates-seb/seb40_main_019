@@ -4,7 +4,6 @@ import '../css/quantityBtn.scss';
 export default function QuantityBtn({ count, setCount }) {
   return (
     <div className="quantityContainer">
-      {/* <span>Quantity</span> */}
       <div className="controlBtn">
         <button
           onClick={() => {
@@ -16,7 +15,7 @@ export default function QuantityBtn({ count, setCount }) {
         <span>{count}</span>
         <button
           onClick={() => {
-            if (count < 100) setCount(count + 1);
+            if (count < 9) setCount(count + 1);
           }}
         >
           <i className="fa-solid fa-plus"></i>

@@ -3,7 +3,6 @@
   box-sizing: border-box;
   position: sticky !important;
   top: 80px !important;
-  // width: 15vw;
   border-radius: 15px;
   z-index: 100;
   
@@ -20,12 +19,10 @@
     width: 45px;
     height: 47px;
     margin: 10px;
-
     cursor: pointer;
-
-      @media (max-width: 1364px) {
-        display: none;  
-      }
+    @media (max-width: 1364px) {
+      display: none;  
+    }
   }
   .logoBox:hover {
     background: url('../../../assets/img/logo_side_yellow.png');

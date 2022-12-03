@@ -1,6 +1,4 @@
 import '../css/cartList.scss';
-// import axios from 'axios';
-// import { useState } from 'react';
 
 import CartListItem from './CartListItem';
 
@@ -43,7 +41,6 @@ export default function CartList({
         items.map((item) => {
           return (
             <div key={item.productId}>
-              {/* <CartListItem item={item} count={count} setCount={setCount} /> */}
               <CartListItem
                 item={item}
                 decreaseQuantity={decreaseQuantity}

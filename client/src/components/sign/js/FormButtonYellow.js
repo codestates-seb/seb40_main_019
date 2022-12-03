@@ -1,4 +1,3 @@
-// import React from 'react';
 import '../css/formButtonYellow.scss';
 
 export default function FormButtonYellow({ formSubmit, btnContent }) {

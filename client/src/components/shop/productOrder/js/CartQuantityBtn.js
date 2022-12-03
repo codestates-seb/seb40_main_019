@@ -1,6 +1,5 @@
 import '../css/cartQuantityBtn.scss';
 
-//수량 + - 버튼
 export default function QuantityBtn({
   item,
   decreaseQuantity,
@@ -8,7 +7,6 @@ export default function QuantityBtn({
 }) {
   return (
     <div className="quantityContainer">
-      {/* <span>Quantity</span> */}
       <div className="controlBtn">
         <button onClick={() => decreaseQuantity(item)}>
           <i className="fa-solid fa-minus"></i>

@@ -12,7 +12,6 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
 // 유저 정보 상세 조회
 export const recommendProduct = async (data) => {
-  console.log(data.age);
   if (!check.test(data.age)) {
     window.alert('숫자만 입력 가능합니다.');
     return;
@@ -32,7 +31,6 @@ export const recommendProduct = async (data) => {
   }
 
   try {
-    console.log('유저 정보 상세조회 내부');
     const res = await axios.get(`${REACT_APP_API_URL}products/random`);
     return res.data;
   } catch (error) {

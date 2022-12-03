@@ -5,6 +5,7 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import FormButtonBlue from '../../sign/js/FormButtonBlue';
 import { findEmailController } from '../../../util/api/userAccount';
 import ModalOk from '../../modal/js/ModalOk';
+
 export default function FindEmailModal({ setEmailModal }) {
   const [inputPhone, setInputPhone] = useState('');
 
@@ -19,7 +20,6 @@ export default function FindEmailModal({ setEmailModal }) {
   };
   const findEmail = () => {
     findEmailController(inputPhone, setModalOn, setModalText);
-    // window.alert('아이디 찾기');
   };
   return (
     <>
@@ -41,7 +41,6 @@ export default function FindEmailModal({ setEmailModal }) {
               onChange={changeInputPhone}
             />
             <FormButtonBlue formSubmit={findEmail} btnContent="아이디 찾기" />
-            {/* <FormButtonBlue formSubmit={deleteUser} btnContent="탈퇴하기" /> */}
           </div>
           <FontAwesomeIcon
             className="closeBtn"

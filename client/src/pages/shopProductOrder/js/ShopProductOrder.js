@@ -1,13 +1,11 @@
 import '../css/shopProductOrder.scss';
 import { useState, useEffect } from 'react';
-// import { useEffect } from 'react';
 import PaymentModal from '../../../components/payment/js/PaymentModal';
 import CartList from '../../../components/shop/productOrder/js/CartList';
 import OrderSummary from '../../../components/shop/productOrder/js/OrderSummary';
 import OrderMobileButton from './OrderMobileButton';
 import { getPoint } from '../../../util/api/point';
 import ModalOk from '../../../components/modal/js/ModalOk';
-// import ModalYesorNo from '../../../components/modal/js/ModalYesorNo';
 
 export default function ShopProductOrder() {
   const [modalOkOn, setModalOkOn] = useState(false);
@@ -27,7 +25,6 @@ export default function ShopProductOrder() {
       setMyPoint(res.data);
     });
     let data = JSON.parse(window.localStorage.getItem('cartItem'));
-    // console.log(data);
     if (!data) {
       data = {};
     }
@@ -47,9 +44,6 @@ export default function ShopProductOrder() {
     setAllSelect(checked);
     setItems(arr);
   }, []);
-
-  //갯수 증가, 감소 , 물품 삭제 시
-  // useState 값 바꾸기 -> 로컬 스토리지 값 바꾸기
 
   // 수량 감소 함수
   const decreaseQuantity = (item) => {
@@ -222,12 +216,6 @@ export default function ShopProductOrder() {
         modalOn={modalOkOn}
         modalText={modalOkText}
       />
-      {/* <ModalYesorNo
-        setModalOn={setModalYesOn}
-        modalOn={modalYesOn}
-        modalText={modalYesText}
-        api={deleteOk}
-      /> */}
     </div>
   );
 }
