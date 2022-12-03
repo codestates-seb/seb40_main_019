@@ -77,7 +77,7 @@ export default function Nav() {
               </div>
             </Link>
             <div className="navRight">
-              <Link to="/product/order" onClick={handleMypage}>
+              <Link to="/product/order">
                 <button className="cartMargin">
                   <i className="fa-solid fa-cart-shopping"></i>
                   Cart
