@@ -19,6 +19,7 @@ import com.google.gson.JsonObject;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -200,6 +201,7 @@ public class UserService {
      * @param response     재발급한 Access Token을 Response Header에 담기 위한 HttpServletResponse
      * @return 재발급 받은 User 정보
      */
+    @SneakyThrows
     public UserLoginResponseDto createAccessToken(String refreshToken, HttpServletResponse response) {
         User user = getUser(refreshToken);
 
@@ -212,6 +214,13 @@ public class UserService {
         String accessToken = "Bearer " + jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
         log.info("재발급 : accessToken 생성완료 {}", accessToken);
         log.info("accessToken : {}", accessToken);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
+                "\"nickname\":\"" + user.getNickname() + "\"," +
+                "\"userRole\":\"" + user.getUserRole() + "\"," +
+                "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
 
         response.setHeader("Authorization", accessToken);
 
