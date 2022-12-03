@@ -1,4 +1,3 @@
-// import React from 'react';
 import '../css/mypageUserPage.scss';
 import MypageUser from '../../../../components/mypage/mypageUser/js/MypageUser';
 export default function MypageUserPage() {

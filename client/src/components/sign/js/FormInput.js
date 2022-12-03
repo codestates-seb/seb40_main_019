@@ -1,4 +1,3 @@
-// import React from 'react';
 import '../css/formInput.scss';
 
 export default function FormInput({

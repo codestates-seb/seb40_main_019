@@ -31,7 +31,6 @@
     gap: 10px;
     text-align: center;
     align-items: center;
-    // margin-bottom: 20px;
     img {
       margin: 0 auto;
     }
@@ -81,37 +80,3 @@
     }
   }
 }
-
-// .order {
-//   @media (max-width: 980px) {
-//     display: grid;
-//     grid-gap: 10px;
-//     grid-template-areas:
-//       'data data orderCount delivery'
-//       'Img title orderCount delivery'
-//       'Img orderInfo orderCount delivery';
-
-//     .createAt {
-//       grid-area: data;
-//     }
-//     .titleImg {
-//       grid-area: Img;
-//     }
-//     .title {
-//       grid-area: title;
-//     }
-//     .orderInfo {
-//       grid-area: orderInfo;
-//     }
-//     .orderCount {
-//       grid-area: orderCount;
-//     }
-//     .productBtn {
-//       grid-area: delivery;
-//     }
-//     p {
-//       text-align: center;
-//       color: #969696;
-//     }
-//   }
-// }

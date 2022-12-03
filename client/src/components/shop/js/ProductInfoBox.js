@@ -1,5 +1,4 @@
 import '../css/productInfoBox.scss';
-// import { useEffect } from 'react';
 import QuantityBtn from './QuantityBtn';
 import BuyAddBtn from './BuyAddBtn';
 import { formatMoney } from '../../../util/function/formatData';
@@ -32,7 +31,6 @@ export default function ProductInfoBox({
               </div>
             </div>
           </div>
-          {/* footer - +Quantity total, buybtn+Nowbtn, addCartBtn */}
           <div className="itemFooterContainer">
             <div className="QuantityBox">
               <div className="totalbox">Quantity</div>

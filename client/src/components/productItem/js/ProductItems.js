@@ -14,12 +14,7 @@ function ProductItems() {
 
   const [filterId, setFilter] = useState('1');
 
-  // const [pageNum, setPageNum] = useState({ selected: 1 });
-
   const handlePageChange = (page) => {
-    // if (categoryState.allProduct) {
-    //   setPageNum({ selected: page.selected + 1 });
-    // } else {
     dispatch(
       setCategory({
         allProduct: categoryState.allProduct,
@@ -29,7 +24,6 @@ function ProductItems() {
     );
     // }
   };
-  console.log(categoryState);
 
   let [products] = [];
   if (categoryState.allProduct) {

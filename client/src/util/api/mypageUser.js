@@ -19,7 +19,6 @@ let reg_mobile = /^\d{3}-\d{3,4}-\d{4}$/;
 // 유저 정보 상세 조회
 export const getUserInfo = async () => {
   try {
-    console.log('유저 정보 상세조회 내부');
     const res = await axios.get(`${REACT_APP_API_URL}users`);
     return res.data;
   } catch (error) {
@@ -87,9 +86,6 @@ export const editUserInfo = async (data) => {
       return;
     }
     try {
-      console.log('유저 정보 수정 내부');
-      console.log(data);
-      console.log(REACT_APP_API_URL);
       let temp = {
         nickname: data.nickname,
         password: data.newPassword,
@@ -100,7 +96,6 @@ export const editUserInfo = async (data) => {
         username: data.username,
       };
       const res = await axios.patch(`${REACT_APP_API_URL}users`, temp);
-      console.log(res);
       if (res.status === 200) {
         window.location.replace('/mypage/user');
       }
@@ -116,9 +111,7 @@ export const deleteUserAccount = async () => {
   let check = window.confirm('회원 탈퇴를 진행하시겠습니까?');
   if (check) {
     try {
-      console.log('유저 정보 삭제 내부');
       const res = await axios.delete(`${REACT_APP_API_URL}users`);
-      console.log(res);
       if (res.status === 200) {
         window.sessionStorage.removeItem('accesstoken');
         window.sessionStorage.removeItem('userData');
@@ -134,7 +127,6 @@ export const deleteUserAccount = async () => {
       }
       return;
     } catch (error) {
-      console.error(error);
       window.alert('회원 탈퇴 실패.');
       return;
     }
@@ -143,11 +135,9 @@ export const deleteUserAccount = async () => {
 // 비밀번호 일치 확인
 export const checkCurPassword = async (password) => {
   try {
-    console.log('비밀번호 확인요청');
     const res = await axios.post(`${REACT_APP_API_URL}users/password/confirm`, {
       password,
     });
-    console.log(res);
     return res;
   } catch (error) {
     return error.response.data;

@@ -21,7 +21,6 @@ export default function AiComponent() {
   const handleClick = () => {
     let res = recommendProduct(data);
     res.then((data) => {
-      console.log(data.data);
       setRandomItems(data.data);
     });
   };
@@ -29,7 +28,6 @@ export default function AiComponent() {
   return (
     <>
       <div className="aiContainer">
-        {/* input 폼 보여주는 창 */}
         {randomItems.length === 0 ? (
           <div className="beforeAiContainer">
             <div className="leftContainer">
@@ -73,7 +71,6 @@ export default function AiComponent() {
             </div>
           </div>
         ) : (
-          // 추천 상품 3개 보여주는 창
           <div className="afterAiContainer">
             <div className="poppyImgRowBox">
               <img src={poppyImg} alt="dogImg" />

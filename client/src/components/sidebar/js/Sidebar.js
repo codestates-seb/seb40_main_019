@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../css/sidebar.scss';
 import SidebarMenu from './SidebarMenu';
+
 export default function Sidebar() {
   const [click, setClick] = useState(false);
   const handleClickMenu = () => {

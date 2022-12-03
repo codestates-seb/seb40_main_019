@@ -1,7 +1,6 @@
 footer {
   img {
     width: 100%;
-    // height: 157px;
     object-fit: cover;
     z-index: 1;
     position: relative;
@@ -21,10 +20,8 @@ footer {
   justify-content: space-around;
   color: var(--color-white);
 }
-
 .firstBox {
   display: flex;
-
   .titleDiv {
     font-weight: bold;
     padding-right: 50px;
@@ -40,11 +37,9 @@ footer {
     }
   }
 }
-
 .secondBox {
   margin: 32px 0 0 30px;
 }
-
 .thirdBox {
   a {
     color: var(--color-white);
@@ -56,7 +51,6 @@ footer {
     font-size: 20px;
   }
 }
-
 //푸터 반응형
 @media (max-width: 980px) {
   .secondBox {

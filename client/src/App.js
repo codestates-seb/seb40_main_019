@@ -8,7 +8,6 @@ import Signup from './pages/signup/js/Signup';
 import OauthKakao from './pages/oauth/js/OauthKakao';
 import OauthGoogle from './pages/oauth/js/OauthGoogle';
 import { useDispatch } from 'react-redux';
-// import { useSelector, useDispatch } from 'react-redux';
 import { login } from './redux/reducers/loginSlice';
 import { setUser } from './redux/reducers/userSlice';
 import { getCookie } from './util/cookie/cookie';

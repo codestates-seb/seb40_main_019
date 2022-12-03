@@ -1,4 +1,3 @@
-// import React from 'react';
 import '../css/formButtonBlue.scss';
 
 export default function FormButtonBlue({

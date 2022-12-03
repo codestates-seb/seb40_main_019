@@ -24,7 +24,7 @@ export default function OrderMobileButton({ totalPrice, myPoint, setModal }) {
       setModalOkText('선택한 상품이 없습니다.');
       return;
     }
-    if (myPoint < totalPrice + 3000) {
+    if (myPoint < totalPrice) {
       setModalOkOn(true);
       setModalOkText('포인트가 부족합니다');
       return;
@@ -35,7 +35,7 @@ export default function OrderMobileButton({ totalPrice, myPoint, setModal }) {
   return (
     <div className="mobileButtonContainer">
       <div className="buttonBox">
-        <button className="priceBtn">{totalPrice + 3000}원</button>
+        <button className="priceBtn">{totalPrice}원</button>
         <button onClick={payment}>포인트 결제</button>
       </div>
       <ModalOk

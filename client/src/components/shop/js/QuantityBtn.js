@@ -4,7 +4,6 @@ import '../css/quantityBtn.scss';
 export default function QuantityBtn({ count, setCount }) {
   return (
     <div className="quantityContainer">
-      {/* <span>Quantity</span> */}
       <div className="controlBtn">
         <button
           onClick={() => {

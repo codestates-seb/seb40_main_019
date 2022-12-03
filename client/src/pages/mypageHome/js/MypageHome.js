@@ -8,7 +8,6 @@ export default function MypageHome() {
   const [order] = useFetchNotPage('orders'); //page 0으로
   const [review] = useFetchNotPage('user/review'); // page 0으로
 
-  console.log(order);
   let orderSummery = [0, 0, 0, 0];
 
   for (let i = 0; i < (order && order.length); i++) {
@@ -18,7 +17,6 @@ export default function MypageHome() {
     else if (order[i].orderStatus === 'CANCEL') orderSummery[3]++;
   }
 
-  // console.log(review);
   return (
     <div className="mypageHome">
       <div className="orderSummery">

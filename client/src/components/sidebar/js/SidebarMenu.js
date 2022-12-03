@@ -1,6 +1,5 @@
 import '../css/sidebarMenu.scss';
 import { Link } from 'react-router-dom'; //수정 삭제?
-
 import { useDispatch } from 'react-redux';
 import { setCategory } from '../../../redux/reducers/productSlice';
 

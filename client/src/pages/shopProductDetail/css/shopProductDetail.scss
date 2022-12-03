@@ -6,7 +6,6 @@
     flex-direction: column;
   }
   .leftContainer {
-    // width: 50%;
     flex-grow: 1;
     width: 50%;
     @media screen and (max-width: 1050px) {
@@ -37,7 +36,6 @@
     display: flex;
     justify-content: center;
     @media screen and (max-width: 1050px) {
-      // width: 100%;
       display: none;
     }
   }
@@ -49,7 +47,6 @@
     bottom: 0;
     z-index: 100;
     @media screen and (max-width: 1050px) {
-      // width: 100%;
       display: block;
     }
   }

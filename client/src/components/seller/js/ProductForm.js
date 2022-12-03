@@ -1,6 +1,5 @@
 import '../css/ProductForm.scss';
 import ImgUploader from '../../../components/seller/js/ImgUploader';
-// import { useState } from 'react';
 
 export default function ProductForm({
   categoryId,

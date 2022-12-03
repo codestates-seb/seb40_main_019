@@ -13,7 +13,6 @@ export default function MypageOrderListItem({ item }) {
     else if (item.orderStatus === 'SHIPPED') status = '배송 완료';
     else if (item.orderStatus === 'CANCLE') status = '주문 취소';
   }
-  console.log(item);
   const clickDlt = () => {
     handleDltReview(item.reviewId);
   };

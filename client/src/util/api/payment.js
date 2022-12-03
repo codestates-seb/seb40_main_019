@@ -1,4 +1,3 @@
-// 포인트를 충전
 import { loadTossPayments } from '@tosspayments/payment-sdk';
 import axios from 'axios';
 
@@ -8,15 +7,11 @@ axios.defaults.headers.common['Authorization'] = JSON.parse(
 );
 const clientKey = process.env.REACT_APP_PAYMENT_CLIENT_KEY;
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-// const REACT_APP_CLIENT_URL = process.env.REACT_APP_CLIENT_URL;
 
 let check = /^[0-9]+$/;
 
 // 토스페이 결제
 export const tossPay = (nickname, amount) => {
-  //orderId가 필요해서 만든 랜덤 아이디값
-  console.log(nickname);
-  console.log(amount);
   const random = new Date().getTime() + Math.random();
   const randomId = btoa(random);
 
@@ -42,12 +37,9 @@ export const tossPay = (nickname, amount) => {
         easyPay: '토스페이',
       });
     } catch (error) {
-      console.log(error);
       if (error.code === 'USER_CANCEL') {
         // 결제 고객이 결제창을 닫았을 때 에러 처리
         window.alert('닫음');
-      } else if (error.code === 'INVALID_CARD_COMPANY') {
-        console.log('error');
       }
     }
   });
@@ -56,16 +48,12 @@ export const tossPay = (nickname, amount) => {
 // 포인트 충전
 // 결제 성공 시 정보 서버로 전송.
 export const addPoint = async (data) => {
-  console.log('결제 데이터 전송 함수');
-  console.log(data);
   try {
     const res = await axios.post(`${REACT_APP_API_URL}payment/success`, data);
-    console.log(res);
     if (res.status === 200) {
       return res;
     }
   } catch (error) {
-    console.error(error);
     return error;
   }
 };

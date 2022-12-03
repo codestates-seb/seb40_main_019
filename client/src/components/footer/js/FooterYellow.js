@@ -1,5 +1,6 @@
 import '../css/footerYellow.scss';
 import footerYellow from '../../../assets/img/footerYellow.png';
+
 export default function Footer() {
   return (
     <>

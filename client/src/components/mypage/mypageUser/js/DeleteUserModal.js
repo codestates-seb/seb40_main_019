@@ -5,12 +5,10 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import FormButtonBlue from '../../../sign/js/FormButtonBlue';
 import { deleteUserAccount } from '../../../../util/api/mypageUser';
 export default function DeleteUserModal({ email, setDeleteModalOpen }) {
-  // const [number, setNumber] = useState(123456);
   const [inputEmail, setInputEmail] = useState('');
 
   const changeInputNumber = (e) => {
     setInputEmail(e.target.value);
-    console.log(inputEmail);
   };
   const closeModal = () => {
     setDeleteModalOpen(false);

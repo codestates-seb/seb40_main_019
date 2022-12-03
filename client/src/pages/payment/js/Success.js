@@ -12,10 +12,6 @@ export default function Success() {
       'paymentKey'
     );
     const amount = new URL(window.location.href).searchParams.get('amount');
-    // console.log(orderId);
-    // console.log(paymentKey);
-    // console.log(amount);
-    // console.log(point);
     let data = {
       orderId: orderId,
       paymentKey: paymentKey,

@@ -23,7 +23,6 @@ export default function ReviewEdit() {
   const handleEdit = () => {
     handleEditReview(data, item[0], setModalOn, setModalText);
   };
-  console.log(reviewImg);
 
   return (
     <div className="reviewAdd">

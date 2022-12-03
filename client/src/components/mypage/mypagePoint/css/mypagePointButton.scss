@@ -1,7 +1,6 @@
 .pointBtnArea{
   display: flex;
-  // justify-content: center;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
   height: 150px;
@@ -9,49 +8,17 @@
     flex-direction: column;
     height: auto;
   }
-
-  .titleBox{
-    margin-top: 10px;
-    .pointMargin{
-      margin: 0 0 8px 60px;
-      p{
-        color: #5C4B29;
-        font-size: 18px;
-        font-weight: 700;    
-      }
-    }
-
-    .chargeMargin{
-      margin: 0 0 4px 38px;
-      p{
-        color: #5C4B29;
-        font-size: 18px;
-        font-weight: 700;    
-      }
-    }
-    @media screen and (max-width: 600px) {
-      .titleBox{
-        margin-top: 10px;
-      }
-      .chargeMargin{
-        margin-top: 2em;
-      }
-    }
-  }
-
   .pointBtnFlex{
     display: flex;
     justify-content: center;
     width: 50%;
     height: 100%;
-    // border: 1px solid black;
     @media screen and (max-width: 600px) {
       width: 100%;
       margin-bottom: 20px;
     }
     .pointBtn{
       width: 120px;
-      // border: 1px solid black;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -61,12 +28,7 @@
         width: 90px;
       }
       button{
-        border: 0;
         outline: none;
-      }
-      .titleBlock{
-        color: #5C4B29;
-        font-size: 18px;      
       }
       p{
         color: #5C4B29;
@@ -88,10 +50,6 @@
           width: 80px;
           height: 80px;
         }
-        // @media screen and (max-width: 600px) {
-        //   width: 90px;
-        //   height: 90px;
-        // }
         .pointIcon{
           color: rgb(255, 255, 255);
           font-size: 40px;
@@ -105,33 +63,38 @@
       }
       .colorBlue{
         background-color: var(--color-blue);
+        border: 1px solid var(--color-blue);
       }
       .colorYellow{
         background-color: var(--color-yellow);
+        border: 1px solid var(--color-yellow);
+        transition: all 0.2s;
+      }
+      .colorYellow:hover{
+        .pointIcon{
+          color: var(--color-yellow);
+
+        }
+        background-color: var(--color-white);
       }
     }
     .point{
       display: flex;
+      flex-direction: column;
       align-items: center;
-      // justify-content: center;
-      font-size: 28px;
+      justify-content: center;
+      font-size: 30px;
       width: 200px;
       height: 100%;
-      // border: 1px solid black;
-
+      padding-top: 15px;
       input{
-        width: 135px;
-        // width: 80%;
+        width: 80%;
         padding: 0.6rem 0;
-        // font-size: 16px;
         text-align: center;
         border: none;
         outline: none;
         border-bottom: 3px solid var(--color-blue);
       }
-      // input:focus{
-      //   outline: 3px solid #b5deff;
-      // }
       @media screen and (max-width: 800px) {
         width: 170px;
         font-size: 25px;
@@ -142,38 +105,5 @@
         font-size: 27px;
       }
     }
-  }
-}
-//포인트 충전 버튼 추가함
-.chargeContainer{
-  justify-content: center;
-  background-color: var(--color-white);
-  color: var(--color-blue);
-  margin: auto;
-  width: 50px;
-  font-size: 12px;
-  .yellowBtn{
-    background-color: var(--color-yellow);
-    border-radius: 10px;
-    color: var(--color-white);
-    padding: 10px;
-    margin-left: 2px;
-    &:hover{
-      border: 1px solid var(--color-yellow);
-      background-color: var(--color-white);
-      color: var(--color-yellow);
-    }
-  }
-}
-.memo{
-  margin-left: 2.5em;
-  margin-top: -16px;
-  p{  
-  color: var(--color-brown);
-  font-size: 11px;
-  font-weight: bold;
-  }
-  @media screen and (max-width: 600px) {
-    display: none;
   }
 }

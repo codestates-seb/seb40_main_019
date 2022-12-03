@@ -1,36 +1,36 @@
 .CartListContatner{
-    min-height: 200px; //반응형 때문에 1000->568 줄임
-    margin-bottom: 100px;
-    border-bottom: 2px solid var(--color-blue);
-    .productTitle{
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 25px;
-        align-items: center;
-        h1{
-            color: var(--color-blue);
-            font-size: 18px;
-            font-weight: 600;
-        } 
+  min-height: 200px; //반응형 때문에 1000->568 줄임
+  margin-bottom: 100px;
+  border-bottom: 2px solid var(--color-blue);
+  .productTitle{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    align-items: center;
+    h1{
+        color: var(--color-blue);
+        font-size: 18px;
+        font-weight: 600;
+    } 
+  }
+  .lineBold{
+    height: 3px;
+    width: 100%;
+    background-color: var(--color-blue);
+  }
+  .lineTitle{
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 1fr 1fr 0.5fr 
+    !important;
+    text-align: center;
+    padding: 10px 0px;
+    border-bottom: 1px solid  var(--color-blue);
+    li{
+      color: var(--color-blue);
+      font-size: 14px;
+  }
+    @media(max-width: 750px) {
+      display: none;
     }
-    .lineBold{
-        height: 3px;
-        width: 100%;
-        background-color: var(--color-blue);
-    }
-    .lineTitle{
-        display: grid;
-        grid-template-columns: 0.5fr 4fr 1fr 1fr 0.5fr 
-        !important;
-        text-align: center;
-        padding: 10px 0px;
-        border-bottom: 1px solid  var(--color-blue);
-        li{
-            color: var(--color-blue);
-            font-size: 14px;
-        }
-        @media(max-width: 750px) {
-            display: none;
-        }
-    }
+  }
 }

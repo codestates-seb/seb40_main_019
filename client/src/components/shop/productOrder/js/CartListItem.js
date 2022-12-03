@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { formatMoney } from '../../../../util/function/formatData';
 import ModalYesorNo from '../../../modal/js/ModalYesorNo';
 import '../css/cartListItem.scss';
-// import QuantityBtn from '../../js/QuantityBtn';
 import CartQuantityBtn from './CartQuantityBtn';
 
 const CartListItem = ({

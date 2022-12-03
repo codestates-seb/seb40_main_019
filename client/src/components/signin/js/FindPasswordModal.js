@@ -11,15 +11,11 @@ import ModalOk from '../../modal/js/ModalOk';
 
 export default function FindPasswordModal({ setPasswordModal }) {
   const [step, setStep] = useState(0);
-
   const [inputEmail, setInputEmail] = useState('');
-
   const [validationCode, setValidationCode] = useState('');
   const [inputEmailValidationInput, setInputEmailValidationInput] =
     useState('');
-
   const [inputPassword, setInputPassword] = useState('');
-
   const [modalOn, setModalOn] = useState(false);
   const [modalText, setModalText] = useState('');
 
@@ -27,27 +23,19 @@ export default function FindPasswordModal({ setPasswordModal }) {
     setPasswordModal(false);
   };
 
-  // step 0
   const sendEmail = () => {
-    // 인증번호 받아오기
     let res = findPasswordSendEmail(inputEmail, setModalOn, setModalText);
     res.then((data) => {
-      console.log(data);
       if (data.status === 200) {
         setModalOn(true);
         setModalText('인증코드 발송 완료');
-        console.log(data.data);
         setValidationCode(data.data);
-        // 상태코드 200 이면 설정 후 다음 단계로 이동
-        setValidationCode('123456');
         setStep(1);
       }
     });
   };
 
-  // step 1
   const checkEmailValidation = () => {
-    // 인증코드, 입력코드 비교하기
     if (!inputEmailValidationInput) {
       setModalOn(true);
       setModalText('인증코드를 입력하세요.');
@@ -63,7 +51,6 @@ export default function FindPasswordModal({ setPasswordModal }) {
     setStep(2);
   };
 
-  // step 2
   const changePassword = () => {
     let res = changePasssword(
       inputEmail,
@@ -71,19 +58,13 @@ export default function FindPasswordModal({ setPasswordModal }) {
       setModalOn,
       setModalText
     );
-    // 응답이 200 이면 변경 완료.
-    console.log(res);
     res.then((data) => {
-      console.log(data);
       if (data.status === 200) {
         setModalOn(true);
-        setModalText('비밀번호 변경 완료');
+        window.alert('비밀번호 변경 완료');
         closeModal();
       }
     });
-
-    // window.alert('비밀번호 변경 완료');
-    // setStep(2);
   };
   return (
     <>
@@ -110,7 +91,6 @@ export default function FindPasswordModal({ setPasswordModal }) {
                   formSubmit={sendEmail}
                   btnContent="비밀번호 찾기"
                 />
-                {/* <FormButtonBlue formSubmit={deleteUser} btnContent="탈퇴하기" /> */}
               </div>
             </>
           )}

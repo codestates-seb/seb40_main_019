@@ -23,8 +23,6 @@ export const kakaoCallback = async (accesstoken, refreshtoken) => {
         Authorization: JSON.parse(window.sessionStorage.getItem('accesstoken')),
       },
     });
-    console.log(res);
-    // window.location.replace('/');
     if (res.status === 200) {
       let userData = res.data;
       window.sessionStorage.setItem('userData', JSON.stringify(userData));

@@ -36,11 +36,9 @@ export const handleSubmit = async (data, setModalOn, setModalText) => {
         formData
       );
       if (res.status === 201) {
-        console.log(res.data);
         window.location.replace('/seller/product');
       }
     } catch (error) {
-      console.error(error);
       return error;
     }
   }
@@ -76,14 +74,11 @@ export const handleEdit = async (data, pastData, setModalOn, setModalText) => {
     setModalText('상세이미지를 업로드하셔야 합니다');
   } else {
     try {
-      console.log('상품수정');
       const res = await axios.patch(
         `${REACT_APP_API_URL}products/${data.categoryId}/${data.productId}`,
         formData
       );
-      console.log(res);
       if (res.status === 200) {
-        console.log(res.data);
         window.location.replace('/seller/product');
       }
     } catch (error) {
@@ -104,15 +99,12 @@ export const handleDeleteAlert = async (setModalText, setModalOn) => {
 
 //상품삭제
 export const handleDelete = async (data) => {
-  console.log('yes');
-
   try {
     const res = await axios.delete(
       `${REACT_APP_API_URL}products/${data.productId}`
     );
     if (res.status === 200) {
       location.reload();
-      console.log(res.data);
     }
   } catch (error) {
     if (error.response.status === 403) {

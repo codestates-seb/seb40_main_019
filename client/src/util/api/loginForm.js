@@ -5,14 +5,11 @@ axios.defaults['withCredentials'] = true;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-console.log(REACT_APP_API_URL);
 
 // 서버에 로그인 입력 데이터 전송
 export const submitForm = async (userInfo, setModalOn, setModalText) => {
-  console.log(userInfo);
   try {
     const res = await axios.post(`${REACT_APP_API_URL}users/login`, userInfo);
-    console.log(res);
     if (res.status === 200) {
       // 엑세스 토큰 세션 스토리지에 저장
       let accesstoken = res.headers.get('authorization');
@@ -32,26 +29,20 @@ export const submitForm = async (userInfo, setModalOn, setModalText) => {
       window.location.replace('/');
     }
   } catch (error) {
-    console.log(error);
     setModalOn(true);
     setModalText('로그인 실패.');
     return error;
   }
 };
 export const userLogout = async () => {
-  console.log('로그아웃');
-
   try {
     const res = await axios.delete(`${REACT_APP_API_URL}users/logout`, {
       headers: {
         Authorization: JSON.parse(window.sessionStorage.getItem('accesstoken')),
-        // 'ngrok-skip-browser-warning': '69420',
       },
     });
-    console.log(res);
     if (res.status === 200) {
       // 스토리지 데이터 삭제.
-      console.log('스토리지 데이터 삭제');
       window.sessionStorage.removeItem('accesstoken');
       window.sessionStorage.removeItem('userData');
       // 리프레시 토큰 삭제
@@ -64,7 +55,6 @@ export const userLogout = async () => {
       window.location.replace('/');
     }
   } catch (error) {
-    console.error(error);
     window.alert('로그아웃 실패');
     return error;
   }
@@ -75,10 +65,8 @@ export const userLogout = async () => {
 export const guestLogin = async (setModalOn, setModalText) => {
   try {
     const res = await axios.get(`${REACT_APP_API_URL}users/test/user`);
-    console.log(res);
     if (res.status === 200) {
       let userInfo = res.data;
-      console.log(userInfo);
       submitForm(userInfo);
     }
   } catch (error) {
@@ -95,7 +83,6 @@ export const sellerLogin = async (setModalOn, setModalText) => {
     const res = await axios.get(`${REACT_APP_API_URL}users/test/admin`);
     if (res.status === 200) {
       let userInfo = res.data;
-      console.log(userInfo);
       submitForm(userInfo);
       return;
     }

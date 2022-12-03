@@ -51,14 +51,6 @@ export default function Nav() {
     }
   };
 
-  // const handleCart = (e) => {
-  //   if (user.userRole === 'ROLE_ADMIN_TEST' || user.userRole === 'ROLE_ADMIN') {
-  //     setModalOn(true);
-  //     setModalText('판매자는 이용 할 수 없습니다');
-  //     e.preventDefault();
-  //   }
-  // };
-
   return (
     <>
       <div className="navbar">
@@ -71,9 +63,6 @@ export default function Nav() {
               <Link to="/seller" onClick={handleSeller}>
                 <button className="margin">Seller</button>
               </Link>
-              {/* <Link to="/mypage" onClick={handleMypage}>
-                <button>Mypage</button>
-              </Link> */}
             </div>
             <Link to="/">
               <div className="textLogo">

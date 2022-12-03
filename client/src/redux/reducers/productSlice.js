@@ -5,7 +5,6 @@ const initialState = {
   category: '',
   categoryPage: { selected: 1 },
 };
-
 export const productSlice = createSlice({
   name: 'product',
   initialState,
@@ -18,16 +17,8 @@ export const productSlice = createSlice({
         categoryPage: payload.categoryPage,
       };
     },
-    // clearUser: (state) => {
-    //   return {
-    //     ...state,
-    //     allProduct: '',
-    //     category: '',
-    //   };
-    // },
   },
 });
 
 export const { setCategory } = productSlice.actions;
-
 export default productSlice.reducer;

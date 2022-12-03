@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '../../../redux/reducers/signupModalSlice';
 import { submitForm, emailValidationCheck } from '../../../util/api/signupForm';
 import ModalMove from '../../modal/js/ModalMove';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignupModal() {
   const [number, setNumber] = useState(123456);
@@ -16,8 +17,8 @@ export default function SignupModal() {
 
   const data = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
-    // 인증번호 받아옴
     emailValidationCheck(data.email).then((data) => {
       setNumber(data.data);
     });
@@ -28,19 +29,17 @@ export default function SignupModal() {
   };
   const checkValidation = async () => {
     if (number === inputNumber) {
-      console.log('성공');
-
       const dataTemp = {
         nickname: data.nickname,
         email: data.email,
         password: data.password,
       };
-      // 폼 데이터 전송.
       const submit = await submitForm(dataTemp);
       if (submit.status === 201) {
         setModalMoveOn(true);
-        setModalMoveText('회원가입 성공');
+        window.alert('회원가입 성공');
         dispatch(closeModal());
+        navigate('/login');
       } else {
         window.alert(submit.message);
         dispatch(closeModal());

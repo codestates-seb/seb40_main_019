@@ -71,7 +71,6 @@
 
     .mainTextBottomOverflow {
       overflow: hidden;
-      // height: 130px;
     }
 
     .mainTextBottom {
@@ -96,7 +95,6 @@
 .main2Wrap {
   display: flex;
   justify-content: space-around;
-  // margin-top: 50px;
   .main2Text {
     display: flex;
     flex-direction: column;
@@ -298,7 +296,6 @@
     animation: fadeInUp;
     animation-duration: 1s;
     animation-fill-mode: backwards;
-    // animation-delay: 1.4s;
   }
   .reviewTextAni {
     animation: fadeInUp;

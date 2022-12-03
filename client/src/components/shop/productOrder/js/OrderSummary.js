@@ -12,11 +12,10 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
 
   const [modalOkOn, setModalOkOn] = useState(false);
   const [modalOkText, setModalOkText] = useState('');
-  // const [minus, setRemain] = useState(0);
   useEffect(() => {
     setTotal(totalPrice);
     setPoint(myPoint);
-    setRemain(myPoint - totalPrice - 3000);
+    setRemain(myPoint - totalPrice);
   }, [totalPrice, myPoint]);
 
   const payment = () => {
@@ -35,7 +34,7 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
       setModalOkText('선택한 상품이 없습니다.');
       return;
     }
-    if (myPoint < totalPrice + 3000) {
+    if (myPoint < totalPrice) {
       setModalOkOn(true);
       setModalOkText('포인트가 부족합니다');
       return;
@@ -51,7 +50,6 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
             <h1>Order Summary</h1>
           </div>
 
-          {/* 결제 정보 */}
           <div className="orderInfoContainer">
             <div className="orderTextAlign">결제</div>
             <div className="productPriceBox">
@@ -60,11 +58,10 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
             </div>
             <div className="deliveryFeeBox">
               <h3>배송비</h3>
-              <div>3,000원</div>
+              <div>0원</div>
             </div>
           </div>
 
-          {/* 총 금액 정보 */}
           <div>
             <div className="totalPointBox">
               <h3>사용 가능 포인트</h3>
@@ -80,7 +77,7 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
             </div>
             <div className="totalPriceBox">
               <h3>결제 금액</h3>
-              <div>{formatMoney(total + 3000)}원</div>
+              <div>{formatMoney(total)}원</div>
             </div>
             <div className="remainPoint">
               <div>잔여 포인트</div>
@@ -96,7 +93,6 @@ export default function OrderSummary({ totalPrice, myPoint, setModal }) {
             </div>
           </div>
 
-          {/* order버튼 -> 결제창 띄우가 */}
           <div className="orderBtnBox">
             <button onClick={payment}>포인트 결제</button>
           </div>
