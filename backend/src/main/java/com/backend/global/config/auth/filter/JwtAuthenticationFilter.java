@@ -136,6 +136,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private String delegateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
+        claims.put("userRole", user.getUserRole());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
@@ -157,6 +158,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
+        claims.put("userRole", user.getUserRole());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());

@@ -132,6 +132,7 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     private String delegateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
+        claims.put("userRole", user.getUserRole());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
@@ -152,6 +153,7 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
     private String delegateRefreshToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getUserId());
+        claims.put("userRole", user.getUserRole());
 
         String subject = user.getUserId().toString();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());
