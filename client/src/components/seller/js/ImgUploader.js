@@ -13,7 +13,7 @@ export default function ImgUploader({ pictures, setPictures, pastImg }) {
       withPreview={true}
       maxFileSize={5242880}
       singleImage={true}
-      defaultImages={pastImg && [pastImg]}
+      defaultImages={(pastImg || pastImg !== null) && [pastImg]}
       buttonText={'이미지 업로드'}
       label={'최대크기: 5MB, 확장자: jpg, png'}
       fileSizeError={'파일크기가 5MB 이상입니다'}

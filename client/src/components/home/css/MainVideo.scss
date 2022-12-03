@@ -5,7 +5,7 @@
   
   @media (max-width: 640px) {
     height: 70vw;
-    margin: 0px 60px;
+    margin: 0px 50px;
     right: 0px;
   }
 }
@@ -21,6 +21,8 @@
   max-height: 12vw;
   animation: slideInDown;
   animation-duration: 2s; 
+  animation-fill-mode: backwards;
+  animation-delay: 4s;
   @media (max-width: 640px) {
     display: none;
   }
@@ -38,7 +40,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: .7s;
+  animation-delay: 4.7s;
   @media (max-width: 640px) {
     display: none;
   }
@@ -56,7 +58,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: .3s;
+  animation-delay: 4.3s;
   @media (max-width: 640px) {
     display: none;
   }
@@ -74,7 +76,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: .5s;
+  animation-delay: 4.5s;
   @media (max-width: 640px) {
     display: none;
   }

@@ -14,9 +14,14 @@ export default function ReviewEdit() {
   const [modalOn, setModalOn] = useState(false);
   const [modalText, setModalText] = useState('');
 
-  const [reviewImg, setReviewImg] = useState([item[0].reviewImg]);
-  const [reviewContent, setReviewContent] = useState(item[0].reviewContent);
-  const [clickStar, setClickStar] = useState(item[0].star);
+  const [reviewImg, setReviewImg] = useState([item.reviewImg]);
+
+  const [reviewContent, setReviewContent] = useState(item.reviewContent);
+  const [clickStar, setClickStar] = useState(item.star);
+
+  if (reviewImg[0] === null) {
+    setReviewImg([]);
+  }
 
   const data = { reviewImg, reviewContent, star: clickStar };
 
@@ -35,7 +40,7 @@ export default function ReviewEdit() {
         setReviewImg={setReviewImg}
         setReviewContent={setReviewContent}
         reviewContent={reviewContent}
-        pastImg={item[0].reviewImg}
+        pastImg={item.reviewImg}
       />
       <div className="reviewAddBtn">
         <button className="close" onClick={() => navigate('/mypage/review')}>

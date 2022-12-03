@@ -2,11 +2,11 @@ import MypageOrderListItem from '../../../components/mypageOrderListItem/js/Mypa
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
 import '../../review/css/Review.scss';
-import useFetchNotPage from '../../../util/useFetchNotPage';
+import useFetchOne from '../../../util/useFetchOne';
 
 export default function MypageHome() {
-  const [order] = useFetchNotPage('orders'); //page 0으로
-  const [review] = useFetchNotPage('user/review'); // page 0으로
+  const [order] = useFetchOne('orders'); //page 0으로
+  const [review] = useFetchOne('user/review'); // page 0으로
 
   let orderSummery = [0, 0, 0, 0];
 

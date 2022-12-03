@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
-const useFetch = (url) => {
+const useFetchOne = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -27,4 +27,4 @@ const useFetch = (url) => {
   return [data, error];
 };
 
-export default useFetch;
+export default useFetchOne;

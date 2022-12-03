@@ -4,6 +4,7 @@ import video2 from '../../../assets/video/main3.webm';
 import video3 from '../../../assets/video/main4.webm';
 import video4 from '../../../assets/video/main5.webm';
 import video5 from '../../../assets/video/main6.webm';
+// import mainPanding from '../../../assets/video/mainPanding1080p.webm';
 import aiDog from '../../../assets/img/aiDog.svg';
 import reviewBar from '../../../assets/img/reviewBar.svg';
 import MainVideo from '../../../components/home/js/MainVideo';
@@ -50,6 +51,13 @@ export default function Home() {
   return (
     <>
       <div className="home ">
+        {/* <div className="pandingPosition">
+          <div className="pandingBox">
+            <video className="mainPanding" autoPlay={true} muted loop={false}>
+              <source src={mainPanding} type="video/webm" />
+            </video>
+          </div>
+        </div> */}
         <div className="main1Wrap">
           <div className="videoWrap">
             <div className="videoLeftWrap">
