@@ -2,7 +2,7 @@ import MypageOrderListItem from '../../../components/mypageOrderListItem/js/Mypa
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
 import '../../review/css/Review.scss';
-import useFetchNotPage from '../../../util/useFetchNotPage';
+import useFetchNotPage from '../../../util/useFetchOne';
 
 export default function MypageHome() {
   const [order] = useFetchNotPage('orders'); //page 0으로

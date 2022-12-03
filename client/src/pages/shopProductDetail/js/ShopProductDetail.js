@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 import ProductInfoSmall from '../../../components/shop/js/ProductInfoSmall';
 import { useParams } from 'react-router-dom';
 import PaymentModal from '../../../components/payment/js/PaymentModal';
-import useFetchNotPage from '../../../util/useFetchNotPage';
+import useFetchNotPage from '../../../util/useFetchOne';
 import { getPoint } from '../../../util/api/point';
 
 export default function shopProductDetail() {
