@@ -2,11 +2,11 @@ import MypageOrderListItem from '../../../components/mypageOrderListItem/js/Mypa
 import ReviewList from '../../../components/review/js/ReviewList';
 import '../css/MypageHome.scss';
 import '../../review/css/Review.scss';
-import useFetchNotPage from '../../../util/useFetchOne';
+import useFetchOne from '../../../util/useFetchOne';
 
 export default function MypageHome() {
-  const [order] = useFetchNotPage('orders'); //page 0으로
-  const [review] = useFetchNotPage('user/review'); // page 0으로
+  const [order] = useFetchOne('orders'); //page 0으로
+  const [review] = useFetchOne('user/review'); // page 0으로
 
   console.log(order);
   let orderSummery = [0, 0, 0, 0];
@@ -18,7 +18,6 @@ export default function MypageHome() {
     else if (order[i].orderStatus === 'CANCEL') orderSummery[3]++;
   }
 
-  // console.log(review);
   return (
     <div className="mypageHome">
       <div className="orderSummery">
