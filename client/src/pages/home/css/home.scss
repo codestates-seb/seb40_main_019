@@ -325,6 +325,10 @@
     height: 40vw;
     background-color: #6ea9bf;
     border-radius: 15px 0px 0px 15px;
+    @media (max-width: 400px) {
+      right: -50px;
+      width: 70vw;
+    }
   }
   .mainBoxBackAni {
     animation: slideInRight;
