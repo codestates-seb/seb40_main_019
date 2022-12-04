@@ -116,7 +116,7 @@ public class ProductService {
     private static void checkAccess(Long productId, User user, Product findProduct) {
         if (user.getEmail().equals("admin@luxmeal.xyz") && user.getUserRole().equals("ROLE_ADMIN")) {
             return;
-        } else if (productId <= 37) {
+        } else if (productId > 37) {
             return;
         }
         throw new BusinessLogicException(ExceptionCode.HANDLE_ACCESS_DENIED);
