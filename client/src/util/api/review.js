@@ -20,7 +20,7 @@ export const handleAddReview = async (
   formData.append('star', data.star);
 
   if (data && data.reviewImg.length !== 0) {
-    formData.append('reviewImg', data.reviewImg[0][0]);
+    formData.append('reviewImg', data.reviewImg[0]);
   }
 
   if (data.reviewContent.length < 5 || data.reviewContent.length >= 100) {
@@ -54,13 +54,12 @@ export const handleEditReview = async (
   const formData = new FormData();
   formData.append('reviewContent', data.reviewContent);
   formData.append('star', data.star);
-
   if (
     data &&
     data.reviewImg.length !== 0 &&
     data.reviewImg[0] !== pastData.reviewImg
   ) {
-    formData.append('reviewImg', data.reviewImg[0][0]);
+    formData.append('reviewImg', data.reviewImg[0]);
   }
   if (data.reviewImg[0] === undefined) {
     formData.append('delete', true);

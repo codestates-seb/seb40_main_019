@@ -24,9 +24,8 @@ export default function ReviewEdit() {
   }
 
   const data = { reviewImg, reviewContent, star: clickStar };
-
   const handleEdit = () => {
-    handleEditReview(data, item[0], setModalOn, setModalText);
+    handleEditReview(data, item, setModalOn, setModalText);
   };
 
   return (
