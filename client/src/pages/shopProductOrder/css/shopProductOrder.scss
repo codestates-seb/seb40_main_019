@@ -1,0 +1,31 @@
+.productOrderContainer{
+  display: flex;
+	width: 100%;
+  @media(max-width: 980px) {
+    flex-direction: column;
+  }
+  .orderCartListBox{
+    width: 70%;
+    @media(max-width: 980px) {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .orderSummaryBox{
+    width: 30%;
+    @media(max-width: 980px) {
+      width: 100%;
+    }
+  }
+  .MobileBtnContainer{
+    display: none;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 100;
+    @media screen and (max-width: 980px) {
+      width: 100%;
+      display: block;
+    }
+  }
+}

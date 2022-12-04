@@ -1,0 +1,36 @@
+.signUpTitle{
+  h1{
+    font-size: 30px;
+    margin-bottom: 45px;
+    color: #5C4B29;
+  }
+}
+.signupForm{
+  width: 100%;
+  height: 100%;
+  padding: 20px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .addressFlexBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button{
+      border-radius: 5px;
+      width: 80px;
+      height: 40px;
+      margin: 10px 0px 25px 1px;
+      background-color: var(--color-blue);
+      color: white;
+    }
+  }
+}
+.loginLink{
+  font-size: 14px;
+  a{
+    margin-left: 10px;
+    color: rgb(0, 138, 169);
+  }
+}

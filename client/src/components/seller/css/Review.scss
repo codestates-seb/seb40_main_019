@@ -1,0 +1,43 @@
+.review {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr 3fr 1fr;
+  align-items: center;
+  text-align: center;
+  .product {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .title {
+    text-align: start;
+  }
+  button {
+    padding: 0px 2px;
+  }
+  @media (max-width: 750px) {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 2fr 1fr;
+    text-align: left;
+    grid-template-areas:
+      'data data star'
+      'Img title star'
+      'Img reviewcontent star';
+
+    .createAt {
+      grid-area: data;
+    }
+    .titleImg {
+      grid-area: Img;
+    }
+    .title {
+      grid-area: title;
+    }
+    .reviewcontent {
+      grid-area: reviewcontent;
+    }
+    .star {
+      grid-area: star;
+    }
+  }
+}

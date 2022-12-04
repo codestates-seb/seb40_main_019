@@ -1,0 +1,28 @@
+.disabledinputArea{
+  margin-bottom: 35px;
+  width: 100%;
+  padding: 0;
+  .formInput{
+    width: 100%;
+    padding: 0.6em 0.7em;
+    border: none;
+    border-bottom: 1px solid #5C4B29;
+    border-radius: 3px;
+    margin-top: 10px;
+  }
+  .formInput:focus {
+    border: 1px solid #53baff;
+    outline: 3px solid #b5deff;
+  }
+}
+.labelArea{
+  width: 100%;
+  .formLabel{
+    
+    width: auto;
+    height: 30px;
+    font-weight: 600;
+    color: #5C4B29;
+    cursor: pointer;
+  }
+}

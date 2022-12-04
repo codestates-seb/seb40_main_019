@@ -1,0 +1,8 @@
+.orderTop {
+  .lineTitle {
+    grid-template-columns: 1fr 2fr 3fr 1fr;
+    @media (max-width: 750px) {
+      display: none;
+    }
+  }
+}

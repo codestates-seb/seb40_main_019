@@ -1,0 +1,21 @@
+.btn{
+  width: 100%;
+  padding: 0.8em 0.6em;
+  font-size: 17px;
+  font-weight: 600;
+  outline: none;
+  border-radius: 35px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btnColorYellow{
+  color: white;
+  background-color:var(--color-yellow);
+  border: 1px solid var(--color-yellow);
+  transition: all 0.2s;
+}
+  .btnColorYellow:hover{
+    color: var(--color-yellow);
+    background-color: var(--color-white);
+  }

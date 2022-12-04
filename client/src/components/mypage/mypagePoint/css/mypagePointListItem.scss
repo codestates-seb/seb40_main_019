@@ -1,0 +1,31 @@
+.pointContainer {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--color-blue);
+  padding: 15px 0px;
+
+  div {
+    color: var(--color-brown);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    color: #969696;
+  }
+  .createdAt {
+    color: var(--color-brown);
+  }
+  .plusPoint {
+    color: var(--color-yellow);
+    font-weight: bold;
+  }
+  .minusPoint {
+    color: var(--color-blue);
+  }
+  .remainingPoint {
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,359 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.pandingPosition{
+  z-index: 1000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  // animation: panding 5s ease-in;
+  // animation-fill-mode: forwards;
+}
+.pandingBox{
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  animation: panding 4s ease-out;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+}
+.mainPanding{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  margin-left:calc(-50vw+50%);
+  object-fit:fill;
+}
+@keyframes panding{
+  70%{
+    margin-top:0 ;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
+  95%{
+    margin-top: 305px;
+    width: 19vw;
+    height: 25vw;
+    z-index: -10;
+    opacity: 0.3;
+  }
+  100%{
+    margin-top: 305px;
+    width: 19vw;
+    height: 25vw;
+    z-index: -10;
+    opacity: 0;
+  }
+}
+
+.main1Wrap {
+  .videoWrap {
+    display: flex;
+    margin-top: 120px;
+    justify-content: center;
+    @media (max-width: 640px) {
+      margin-top: 60px;
+    }
+  }
+
+  .videoCenterWrap {
+    margin: 0px 10vw;
+
+    @media (max-width: 980px) {
+      margin: 0px 60px;
+    }
+  }
+
+  .mainText {
+    position: relative;
+    left: 50%;
+    bottom: 11vw;
+    transform: translate(-50%, 0%);
+    font-family: 'Work Sans', sans-serif;
+    text-align: center;
+
+    .mainTextTopOverflow {
+      overflow: hidden;
+      height: 1.9vw;
+      margin-bottom: 10px;
+      @media (max-width: 640px) {
+        height: 4vw;
+      }
+    }
+
+    .mainTextTop {
+      background-color: var(--color-yellow);
+      max-width: 38vw;
+      height: 2vw;
+      position: relative;
+      left: 30%;
+      animation: slideInUp;
+      animation-duration: 2s;
+      animation-fill-mode: backwards;
+      animation-delay: .9s;
+
+      h2 {
+        position: relative;
+        top: 2px;
+        font-size: 1.5vw;
+        font-family: var(--font-notoSans);
+        letter-spacing: -1px;
+        font-weight: 500;
+        color: var(--color-white);
+        transform: scaleY(1);
+
+        @media (max-width: 640px) {
+          font-size: 3vw;
+        }
+      }
+      @media (max-width: 640px) {
+        height: 4vw;
+      }
+    }
+
+    .mainTextBottomOverflow {
+      overflow: hidden;
+    }
+
+    .mainTextBottom {
+      h1 {
+        animation: slideInUp;
+        animation-duration: 2s;
+        animation-fill-mode: backwards;
+        animation-delay: 1.1s;
+        color: var(--color-blue);
+        font-family: 'Oswald';
+        font-size: 9vw;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 640px) {
+      bottom: 50px;
+    }
+  }
+}
+
+.main2Wrap {
+  display: flex;
+  justify-content: space-around;
+  .main2Text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto 0;
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--color-blue);
+      margin-bottom: 30px;
+    }
+    p {
+      width: 500px;
+      text-align: center;
+      color: var(--color-brown);
+      line-height: 28px;
+    }
+    @media (max-width: 640px) {
+      margin-top: 50px;
+
+      h1 {
+        font-size: 20px;
+      }
+      p {
+        width: 350px;
+        font-size: 14px;
+      }
+    }
+  }
+  .main2TextAni {
+    animation: fadeInLeft;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+  }
+
+  .main2Img {
+    .main1 {
+      max-width: 500px;
+      width: 30vw;
+      @media (max-width: 980px) {
+        display: none;
+      }
+    }
+  }
+  .main2ImgAni {
+    animation: bounceIn;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+    animation-delay: 0.5s;
+  }
+  @media (max-width: 980px) {
+    justify-content: center;
+  }
+}
+
+.main3Wrap {
+  margin-bottom: 200px;
+
+  .main3WrapParent {
+    width: 100%;
+    margin-top: 150px;
+    display: flex;
+    flex-direction: row;
+
+    .aiDog {
+      width: 55%;
+      position: relative;
+      right: 5vw;
+    }
+    .aiDogAni {
+      animation: fadeInLeft;
+      animation-duration: 2s;
+      animation-fill-mode: backwards;
+    }
+
+    .aiText {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .aiTextTop {
+        p {
+          font-size: 1vw;
+          color: var(--color-brown);
+          margin-bottom: 5px;
+        }
+        h1 {
+          font-size: 3vw;
+          font-weight: 600;
+          color: var(--color-blue);
+        }
+      }
+
+      .aiTextBottom {
+        text-align: center;
+        margin: 30px 0px;
+        h3 {
+          font-size: 1.2vw;
+          color: var(--color-brown);
+          opacity: 0.5;
+          margin-bottom: 10px;
+        }
+      }
+
+      button {
+        background-color: var(--color-blue);
+        color: var(--color-white);
+        font-size: 1vw;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-family: var(--font-notoSans);
+        font-weight: 300;
+      }
+    }
+    .aiTextTopAni {
+      animation: fadeInUp;
+      animation-duration: 1s;
+      animation-fill-mode: backwards;
+      animation-delay: 1s;
+    }
+    .aiTextBottomAni {
+      animation: fadeInUp;
+      animation-duration: 1s;
+      animation-fill-mode: backwards;
+      animation-delay: 1.2s;
+    }
+    .aiBtnAni {
+      animation: fadeInUp;
+      animation-duration: 1s;
+      animation-fill-mode: backwards;
+      animation-delay: 1.4s;
+    }
+  }
+}
+
+.main4Wrap {
+  margin-bottom: 200px;
+  .mainBoxWrap {
+    display: flex;
+    justify-content: center;
+
+    .boxLeft {
+      display: flex;
+      flex-direction: column;
+      margin-right: 30px;
+      :nth-child(2) {
+        margin-left: auto;
+      }
+    }
+    .boxLeftAni {
+      animation: fadeInUp;
+      animation-duration: 2s;
+      animation-fill-mode: backwards;
+      animation-delay: 0.5s;
+    }
+
+    .boxRight {
+      flex-direction: column;
+      position: relative;
+      bottom: 50px;
+    }
+    .boxRightAni {
+      animation: fadeInUp;
+      animation-duration: 2s;
+      animation-fill-mode: backwards;
+    }
+    .firstBox {
+      margin-bottom: 30px;
+    }
+  }
+
+  .mainBoxBack {
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    width: 45vw;
+    height: 40vw;
+    background-color: #6ea9bf;
+    border-radius: 15px 0px 0px 15px;
+  }
+  .mainBoxBackAni {
+    animation: slideInRight;
+    animation-duration: 2s;
+    animation-fill-mode: backwards;
+    animation-delay: 1.5s;
+  }
+}
+
+.main5Wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .reviewBar {
+    width: 60vw;
+    margin-bottom: 50px;
+  }
+  .reviewBarAni {
+    animation: fadeInUp;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+  }
+  .reviewTextAni {
+    animation: fadeInUp;
+    animation-duration: 1s;
+    animation-fill-mode: backwards;
+  }
+}
+
+.hidden {
+  opacity: 0;
+}

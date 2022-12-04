@@ -1,0 +1,36 @@
+.sidebarMenuBtn {
+  z-index: 999;
+  display: none;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  width: 35px;
+  height: 35px;
+  background-color: var(--color-blue);
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px rgba(75, 73, 72, 0.3);
+  i {
+    color: var(--color-white);
+  }
+
+  @media (max-width: 1364px) {
+    display: block;
+  }
+}
+
+.sidebarModal {
+  display: none;
+  z-index: 999;
+  @media (max-width: 1364px) {
+    display: block;
+  }
+}
+
+.sidebarDesktop {
+  @media (max-width: 1364px) {
+    display: none;
+  }
+}
+
+.sidebarContainer{
+  z-index: 999;
+}

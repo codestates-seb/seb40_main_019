@@ -1,0 +1,67 @@
+footer {
+  img {
+    width: 100%;
+    object-fit: cover;
+    z-index: 1;
+    position: relative;
+    top: 10px;
+  }
+  .footerYellow {
+    position: relative;
+    background-color: var(--color-yellow);
+    z-index: 2;
+    height: 100px;
+    width: 100%;
+  }
+}
+.footerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  color: var(--color-white);
+}
+.firstBox {
+  display: flex;
+  .titleDiv {
+    font-weight: bold;
+    padding-right: 50px;
+    margin-top: 5px;
+  }
+  .aTag {
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 1px;
+    a {
+      color: var(--color-white);
+      padding: 5px;
+    }
+  }
+}
+.secondBox {
+  margin: 32px 0 0 30px;
+}
+.thirdBox {
+  a {
+    color: var(--color-white);
+    padding: 5px;
+  }
+  i {
+    color: var(--color-white);
+    padding: 5px;
+    font-size: 20px;
+  }
+}
+//푸터 반응형
+@media (max-width: 980px) {
+  .secondBox {
+    display: none;
+  }
+}
+@media (max-width: 640px) {
+  .footerContainer {
+    padding-top: 12px;
+  }
+  .thirdBox {
+    display: none;
+  }
+}
