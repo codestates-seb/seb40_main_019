@@ -42,7 +42,10 @@
       'Img Price editDlt';
 
     .createAt {
-      grid-area: data;
+      p{
+        grid-area: data;
+      }
+      
     }
     .titleImg {
       grid-area: Img;

@@ -18,6 +18,10 @@
   display: flex;
   justify-content: space-between;
   margin: 0px 20px;
+  @media (max-width:515px) {
+    margin: 0px 0px;
+      justify-content: center;
+  }
 }
 .mypageMargin{
     padding-left: 60px;
@@ -33,6 +37,9 @@ nav {
   justify-content: center;
   max-width: 1418px; //헤더 최대길이
   margin: auto;
+  @media (max-width:515px) {
+    justify-content: baseline;
+  }
 
   button {
     margin-top: 20px;
@@ -54,6 +61,11 @@ nav {
     .margin {
       margin-right: 50px;
     }
+    @media (max-width:515px) {
+      .margin {
+        margin-right: 30px;
+      }
+    }
   }
 
   .navRight {
@@ -67,6 +79,12 @@ nav {
     i:hover {
       color: #ffb526;
     }
+    @media (max-width:515px) {
+      .margin {
+        margin-left: 30px;
+      }
+    }
+
   }
 
   .textLogo {
@@ -91,7 +109,7 @@ nav {
 }
 
 
-@media (max-width:500px) {
+@media (max-width:515px) {
   .navbar{
       width: 100%;
   }
