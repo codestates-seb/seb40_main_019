@@ -46,6 +46,10 @@
     border-radius: 10px;
     font-weight: 600;
     font-size: 16px;
+    white-space: nowrap;
+    @media (max-width: 750px) {
+      font-size: 14px;
+    }
   }
   @media (max-width: 750px) {
     .orderContainer {

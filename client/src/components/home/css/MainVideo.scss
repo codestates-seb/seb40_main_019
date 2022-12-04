@@ -22,7 +22,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: 4s;
+  // animation-delay: 4s;
   @media (max-width: 640px) {
     display: none;
   }
@@ -40,7 +40,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: 4.7s;
+  animation-delay: .7s;
   @media (max-width: 640px) {
     display: none;
   }
@@ -58,7 +58,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: 4.3s;
+  animation-delay: .3s;
   @media (max-width: 640px) {
     display: none;
   }
@@ -76,7 +76,7 @@
   animation: slideInDown;
   animation-duration: 2s; 
   animation-fill-mode: backwards;
-  animation-delay: 4.5s;
+  animation-delay: .5s;
   @media (max-width: 640px) {
     display: none;
   }

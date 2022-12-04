@@ -12,8 +12,8 @@ const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 export const handleSubmit = async (data, setModalOn, setModalText) => {
   //formdata에 data입력
   const formData = new FormData();
-  formData.append('titleImg', data.titleImg[0][0]);
-  formData.append('detailImg', data.detailImg[0][0]);
+  formData.append('titleImg', data.titleImg[data.titleImg.length - 1][0]);
+  formData.append('detailImg', data.detailImg[data.detailImg.length - 1][0]);
   formData.append('productName', data.productName);
   formData.append('price', data.price);
   formData.append('tag', data.tag);
@@ -48,8 +48,8 @@ export const handleSubmit = async (data, setModalOn, setModalText) => {
 export const handleEdit = async (data, pastData, setModalOn, setModalText) => {
   //formdata에 data입력
   const formData = new FormData();
-  formData.append('titleImg', data.titleImg[0][0]);
-  formData.append('detailImg', data.detailImg[0][0]);
+  formData.append('titleImg', data.titleImg[data.titleImg.length - 1][0]);
+  formData.append('detailImg', data.detailImg[data.detailImg.length - 1][0]);
   formData.append('productName', data.productName);
   formData.append('price', data.price);
 

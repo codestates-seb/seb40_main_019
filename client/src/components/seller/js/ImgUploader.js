@@ -1,10 +1,11 @@
 import ImageUploader from 'react-images-upload';
 import '../css/ImgUploader.scss';
 
-export default function ImgUploader({ pictures, setPictures, pastImg }) {
+export default function ImgUploader({ pictures, setPictures }) {
   const onDrop = (picture) => {
     setPictures([...pictures, picture]);
   };
+  console.log(pictures);
   return (
     <ImageUploader
       withIcon={false}
@@ -13,7 +14,12 @@ export default function ImgUploader({ pictures, setPictures, pastImg }) {
       withPreview={true}
       maxFileSize={5242880}
       singleImage={true}
-      defaultImages={(pastImg || pastImg !== null) && [pastImg]}
+      // defaultImages={() => {
+      //   if (pastImg && pictures && pictures.length === 0) return [pastImg];
+      //   else if (pictures && pictures.length !== 0) return [pictures];
+      //   else return [];
+      // }}
+      // defaultImages={pastImg && [pastImg]}
       buttonText={'이미지 업로드'}
       label={'최대크기: 5MB, 확장자: jpg, png'}
       fileSizeError={'파일크기가 5MB 이상입니다'}
