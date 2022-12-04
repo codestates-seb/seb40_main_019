@@ -41,7 +41,7 @@
 
   // body = new, 제품명, -quantity
   .itemBodyContainer {
-    padding: 0px 0 0 15px;
+    padding: 0px 0 0 10px;
     > button {
       display: block;
       background-color: var(--color-blue);
@@ -59,6 +59,8 @@
       padding-top: 10px;
       line-height: 20px;
       margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: 400;
     }
     .reviewStar {
       display: flex;
