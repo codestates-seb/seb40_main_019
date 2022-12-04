@@ -1,0 +1,24 @@
+.mainImgWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 20vw;
+
+  p {
+    margin: 10px;
+    font-size: 1vw;
+  }
+}
+
+.mainImg {
+  width: 20vw;
+  height: 25vw;
+  border-radius: 1vw;
+  background-color: rgb(224, 224, 224);
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1vw;
+  }
+}

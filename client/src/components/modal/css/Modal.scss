@@ -1,0 +1,98 @@
+.modalsBackground {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modalBox {
+  position: absolute;
+  top: calc(50vh - 100px);
+  left: calc(50vw - 200px);
+  background-color: white;
+  display: grid;
+  grid-template-rows: 3fr 1fr;
+  text-align: center;
+  align-items: center;
+  border-radius: 10px;
+  width: 400px;
+  height: 200px;
+
+  .modalYesorNoBtn {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    .close {
+      border-right: 1px solid rgb(224, 224, 224);
+    }
+    .close:hover {
+      background-color: rgb(224, 224, 224);
+      border-radius: 0px 0px 0px 15px;
+    }
+    button:hover {
+      background-color: rgb(224, 224, 224);
+      border-radius: 0px 0px 15px 0px;
+    }
+  }
+
+  button {
+    font-size: 20px;
+    color: var(--color-blue);
+    font-weight: 600;
+    border-top: 1px solid rgb(224, 224, 224);
+    height: 100%;
+  }
+  button:hover {
+    background-color: rgb(224, 224, 224);
+    border-radius: 0px 0px 15px 15px;
+  }
+}
+
+.modalText {
+  align-items: center;
+  padding: 30px;
+  line-height: 22px;
+  h3 {
+    font-size: 16px;
+    font-weight: 400;
+    white-space: pre-wrap;
+  }
+}
+
+.modalOpen {
+  opacity: 1;
+  animation: FadeIn 0.3s ease-in;
+}
+
+.modalClose {
+  opacity: 0;
+  pointer-events: none;
+  animation: FadeOut 0.3s ease-out;
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  1% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes FadeOut {
+  0% {
+    opacity: 1;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

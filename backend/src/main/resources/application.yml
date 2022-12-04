@@ -1,1 +1,89 @@
-
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB # 업로드 시 하나의 파일 최대 크기
+      max-request-size: 100MB # 업로드 요청 시 모든 파일크기의 합 제한
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true # SQL 로그 출력
+    properties:
+      hibernate:
+        format_sql: true # pretty print SQL
+        use_sql_comments: true
+        default_batch_fetch_size: 500 #일대다 컬렉션 조회 시 성능 최적화 -> 100 ~ 1000 권장 (default: 1)
+    open-in-view: false # JPA 엔티티를 영속성 컨텍스트에서 분리하여 성능 최적화 -> false (default: true)
+    # 상대적으로 트래픽이 적은 관리자 페이지의 경우 true로 설정해도 무방
+  sql:
+    init:
+      mode: always # DB 초기화 모드 -> always, never, embedded
+  profiles:
+    active: server # local / server
+    include: oauth
+  security:
+    # 해당 파일을 읽어 OAuth2ClientProperties 생성
+    # OAuth2ClientPropertiesRegistrationAdapter를 통해 OAuth2ClientProperties에서 각 OAuth2 server마다 ClientRegistration 생성
+    # ClientRegistration 리스트를 InMemoryClientRegistrationRepository에 저장
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${/config/cloud-parameter-store/google-client-id}
+            client-secret: ${/config/cloud-parameter-store/google-client-secret}
+            scope:
+              - email
+              - profile
+            redirect-uri: ${/config/cloud-parameter-store/google-redirect-uri} # 해당 라인없으면 로드밸런서 때문인가 https로 인식을 못한다..
+          kakao:
+            client-id: ${/config/cloud-parameter-store/kakao-client-id}
+            client-secret: ${/config/cloud-parameter-store/kakao-client-secret}
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+            client-name: Kakao
+            authorization-grant-type: authorization_code
+            redirect-uri: ${/config/cloud-parameter-store/kakao-redirect-uri} # {baseUrl}/login/oauth2/code/{registrationId}
+            client-authentication-method: POST
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize # 인증 요청
+            token-uri: https://kauth.kakao.com/oauth/token # 토큰 요청
+            user-info-uri: https://kapi.kakao.com/v2/user/me # 사용자 정보 요청
+            user-name-attribute: id # 사용자 정보에서 사용자 이름을 가져올 때 사용할 필드
+### loging ###
+logging:
+  level:
+    org:
+      springframework:
+        orm:
+          jpa: DEBUG # JPA 로그 출력
+### Mail ###
+naver:
+  id: ${/config/cloud-parameter-store/naver-id}
+  password: ${/config/cloud-parameter-store/naver-password}
+### AWS ###
+awsParameterStorePropertySource:
+  enabled: true # AWS 파라미터 스토어 사용 여부
+cloud:
+  aws:
+    credentials:
+      access-key: ${/config/cloud-parameter-store/aws-access-key}
+      secret-key: ${/config/cloud-parameter-store/aws-secret-key}
+    region:
+      static: ${/config/cloud-parameter-store/aws-region}
+    s3:
+      bucket: ${/config/cloud-parameter-store/aws-s3-bucket}
+    stack:
+      auto: false
+### Address ###
+address:
+  local: ${/config/cloud-parameter-store/local-address}
+  domain: ${/config/cloud-parameter-store/domain-address}
+  front-local: ${/config/cloud-parameter-store/front-local}
+  front-s3: ${/config/cloud-parameter-store/front-s3}
+  front-https: ${/config/cloud-parameter-store/front-https}
+### JWT ###
+jwt:
+  access-token-expiration-time: ${/config/cloud-parameter-store/atk-exp}
+  refresh-token-expiration-time: ${/config/cloud-parameter-store/rtk-exp}
+  secret: ${/config/cloud-parameter-store/jwt-secret}

@@ -1,0 +1,20 @@
+.reviewForm{
+  display: flex;
+  flex-direction: column;
+  .fileUploader{
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
+  
+}
+.reviewContent{
+  display: flex;
+  flex-direction: column;
+  width: 330px;
+  input{
+    min-height: 100px;
+    border-radius: 10px;
+    border: 1px solid grey;
+  }
+  
+}

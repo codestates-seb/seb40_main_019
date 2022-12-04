@@ -1,0 +1,256 @@
+{
+  "products": [
+    {
+      "productsId": 1,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 2,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 3,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "18000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 4,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "12000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 5,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 6,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 7,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 8,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 9,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 10,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 11,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "sale": false,
+      "quantity": 1
+    },
+    {
+      "productsId": 12,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    }
+  ],
+  "orders": [
+    {
+      "productsId": 1250,
+      "productName": "하림펫푸드더리얼 그레인프리",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "orderDate": "2022.11.11",
+      "orderName": "김먕먕",
+      "orderAdress": "세종시청 금강수변공원쪽 시드니하트 건물 306호",
+      "orderCount": 1
+    },
+    {
+      "productsId": 1250,
+      "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "orderDate": "2022.11.11",
+      "orderName": "김먕먕",
+      "orderAdress": "세종시청 금강수변공원쪽 시드니하트 건물 306호",
+      "orderCount": 1
+    }
+  ],
+  "ordersMypage": [
+    {
+      "orderId": 1,
+      "orderDate": "2022-11-25",
+      "orderStatus": "SHIPPING",
+      "orderProductDtoList": [
+        {
+          "productId": 1,
+          "quantity": 4,
+          "price": 1030,
+          "totalPrice": 4120,
+          "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+          "imgUrl": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/3910d070-bd0e-47ca-acdf-1771dc379551.jpg"
+        },
+        {
+          "productId": 2,
+          "quantity": 5,
+          "price": 100,
+          "totalPrice": 500,
+          "productName": "사료1",
+          "imgUrl": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/7114f8c0-f65c-4569-9a0f-1e099bd31265.jpg"
+        }
+      ],
+      "receiverAddress": "부평동 102번지 101동 1008호",
+      "receiverName": "한별",
+      "receiverZipcode": "2133",
+      "receiverPhone": "010-2222-333"
+    },
+    {
+      "orderId": 2,
+      "orderDate": "2022-11-25",
+      "orderStatus": "PROCESS",
+      "orderProductDtoList": [
+        {
+          "productId": 2,
+          "quantity": 5,
+          "price": 100,
+          "totalPrice": 500,
+          "productName": "하림펫푸드더리얼 그레인프리",
+          "imgUrl": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/7114f8c0-f65c-4569-9a0f-1e099bd31265.jpg"
+        }
+      ],
+      "receiverAddress": "부평동 103번지 서울특별시 101동 403호",
+      "receiverName": "한별",
+      "receiverZipcode": "2133",
+      "receiverPhone": "010-2222-333"
+    }
+  ],
+  "productdetail": {
+    "productsId": 1250,
+    "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+    "titleImg": "https://cdn.discordapp.com/attachments/386786128939843606/1044512663264296980/mainImg2.png",
+    "detailImg": "https://cdn.discordapp.com/attachments/386786128939843606/1043406127515320390/A97-01-03_1.jpg",
+    "price": "16000",
+    "new": true,
+    "average": 3,
+    "quantity": 1
+  },
+  "sellerproducts": [
+    {
+      "productsId": 1250,
+      "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "createdAt": "2022.11.11"
+    },
+    {
+      "productsId": 1253,
+      "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "createdAt": "2022.11.11"
+    }
+  ],
+  "review": [
+    {
+      "reviewId": 1,
+      "createdAt": "2022-11-26",
+      "reviewWriter": "윈터",
+      "reviewContent": "맛있",
+      "star": 5,
+      "reviewImg": null,
+      "productId": 1,
+      "productName": "사료2",
+      "titleImg": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/3910d070-bd0e-47ca-acdf-1771dc379551.jpg"
+    },
+    {
+      "reviewId": 2,
+      "createdAt": "2022-11-26",
+      "reviewWriter": "윈터",
+      "reviewContent": "맛있어용용요요요요요ㅛㅇㅇ요용",
+      "star": 3,
+      "reviewImg": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "productId": 2,
+      "productName": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "titleImg": "https://practice-bucket-deploy.s3.ap-northeast-2.amazonaws.com/3910d070-bd0e-47ca-acdf-1771dc379551.jpg"
+    }
+  ],
+  "randomproducts": [
+    {
+      "productsId": 1,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 2,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "16000",
+      "new": true,
+      "quantity": 1
+    },
+    {
+      "productsId": 3,
+      "title": "하림펫푸드더리얼 그레인프리 크런치어덜트 연어 50g",
+      "img": "https://cdn.discordapp.com/attachments/386786128939843606/1040949752998662195/664a0ccdd29f2239a222c8026a41afb4.jpg",
+      "price": "18000",
+      "new": true,
+      "quantity": 1
+     }
+   ],
+   "points": [
+    {
+      "productsId": 1,
+      "createdAt": "2022.11.18",
+      "price": "100000",
+      "newRestCash": "50000",
+      "restCash": "50000"
+    }
+   ]
+}

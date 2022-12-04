@@ -1,0 +1,22 @@
+.btn{
+  width: 100%;
+  padding: 1em 0.6em;
+  font-size: 17px;
+  letter-spacing: 3px;
+  font-weight: 600;
+  outline: none;
+  border-radius: 35px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btnColorBlue{
+  color: white;
+  background-color:var(--color-blue);
+  border: 1px solid var(--color-blue);
+  transition: all 0.2s;
+}
+  .btnColorBlue:hover{
+    color: var(--color-blue);
+    background-color: var(--color-white);
+  }

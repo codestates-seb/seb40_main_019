@@ -1,0 +1,17 @@
+.quantityContainer{
+  display: flex;
+  font-weight: bold;
+  justify-content: space-evenly;
+  .controlBtn{
+    width: 80px;
+    padding: 4px;
+    border: 2px solid var(--color-blue);
+    border-radius: 15px;
+    text-align: center;
+    font-size: 14px;
+    margin-left: 20px;
+    span{
+      margin: 0px 5px;
+    }
+  }
+}

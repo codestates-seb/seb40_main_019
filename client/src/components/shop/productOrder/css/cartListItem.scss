@@ -1,0 +1,62 @@
+.cartListContainer{
+  display: grid;
+  align-items: center;
+  grid-template-columns: 0.5fr 1fr 3fr 1fr 1fr 0.5fr;
+  text-align: center;
+  border-bottom: 1px solid var(--color-blue);
+  padding: 15px 0px;
+  button{
+    padding: 0;
+    border: 0;
+    outline: none;
+  }
+  button:focus{
+    outline: none;
+  }
+  img{
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+  }
+  div{
+    color: var(--color-brown);
+    font-size: 13px;
+  }
+  .title{
+    text-align: left;
+  }
+  .price{
+    font-weight: bold;
+  }
+  .delete{
+    margin-bottom: 100px;
+  }
+  @media (max-width: 750px){
+    display: grid;
+    grid-gap: 10px;
+    grid-template-areas:
+      'check . . . . delete'
+      'check Img title title quantity delete'
+      'check Img price . quantity delete';
+    .checkbox{
+      grid-area: check;
+    }
+    .titleImg{
+      grid-area: Img;
+    }
+    .title{
+      grid-area: title;
+    }
+    .price{
+      grid-area: price;
+      font-weight: bold;
+
+    }
+    .quantity{
+      grid-area: quantity
+    }
+    .delete{
+      grid-area: delete;
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.sellerDashboard {
+  width: 100%;
+
+  h2 {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: var(--color-brown);
+  }
+
+  .dashboardTop {
+    display: flex;
+    @media (max-width: 980px) {
+      flex-direction: column;
+    }
+  }
+  .dashboardHalf {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .dashboardBox {
+    width: 100%;
+    background-color: rgba(217, 217, 217, 0.17);
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .dashboardBottom {
+    display: flex;
+    margin-top: 20px;
+
+    @media (max-width: 980px) {
+      flex-direction: column;
+    }
+  }
+  .gap {
+    margin-right: 20px;
+  }
+
+  .graph {
+    position: relative;
+    left: 30px;
+  }
+}

@@ -1,0 +1,47 @@
+
+.sidebarContainer {
+  box-sizing: border-box;
+  position: sticky !important;
+  top: 80px !important;
+  border-radius: 15px;
+  z-index: 100;
+  
+  @media (max-width: 1364px) {
+    background-color: var(--color-white);
+    width: 120px;
+    box-shadow: 5px 5px 5px rgba(75, 73, 72, 0.3);
+  }
+  
+  .logoBox {
+    background: url('../../../assets/img/logo_side_blue.png');
+    background-size: cover;
+    display: flex;
+    width: 45px;
+    height: 47px;
+    margin: 10px;
+    cursor: pointer;
+    @media (max-width: 1364px) {
+      display: none;  
+    }
+  }
+  .logoBox:hover {
+    background: url('../../../assets/img/logo_side_yellow.png');
+    background-size: cover;
+  }
+
+  .tittleList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    cursor: pointer;
+    button {
+      padding: 10px;
+      color: var(--color-blue);
+      font-size: 14px;
+    }
+    button:hover {
+      color: var(--color-yellow);
+    }
+  }
+}

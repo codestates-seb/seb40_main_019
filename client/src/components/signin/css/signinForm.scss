@@ -1,0 +1,70 @@
+.signinTitle{
+  h1{
+    font-size: 30px;
+    margin-bottom: 25px;
+    margin-top: 45px;
+    color: #5C4B29;
+  }
+}
+.orLine{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  width: 100%;
+  p{
+    padding: 0px 10px;
+    color: var(--color-brown);
+  }
+  .line{
+    flex-grow: 1;
+    height: 2px;
+    background-color: var(--color-brown);
+  }
+}
+.signinForm{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .flexContainer{
+    width: 100%;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 10px;
+    margin: -20px 10px 20px 0px;
+    button{
+      color: black;
+      padding: 0;
+      border: none;
+      outline: none;
+    }
+    button:hover{
+      color: var(--color-blue);
+    }
+    button:first-child{
+      margin-right: 10px;
+    }
+  }
+  .signupLink{
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    a{
+      margin-left: 10px;
+      color: rgb(0, 138, 169);
+    }
+  }
+  .flexBox{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    img{
+      width: 40px;
+      cursor: pointer;
+    }
+  }
+}

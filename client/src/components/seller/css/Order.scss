@@ -1,0 +1,86 @@
+.order {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px 20px 0px;
+  .orderContainer {
+    width: 100%;
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: 1fr 2fr 4fr;
+    align-items: center;
+
+    h2 {
+      font-size: 16px;
+      color: var(--color-blue);
+      font-weight: 600;
+    }
+  }
+  .createdAt {
+    margin-bottom: 10px;
+  }
+
+  .orderInfo {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .sellerOrderContent {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 10px;
+    text-align: center;
+    align-items: center;
+    img {
+      margin: 0 auto;
+    }
+    .title {
+      text-align: start;
+    }
+  }
+
+  .delivery {
+    background-color: var(--color-yellow);
+    padding: 8px 14px;
+    color: var(--color-brown);
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    white-space: nowrap;
+    @media (max-width: 750px) {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 750px) {
+    .orderContainer {
+      padding: 0px 20px;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      grid-template-areas:
+        'delivery info'
+        'content content';
+      .productBtn {
+        grid-area: delivery;
+      }
+      .orderInfo {
+        grid-area: info;
+      }
+      .orderBox {
+        border-top: 1px solid var(--color-lightblue);
+        padding-top: 20px;
+        grid-area: content;
+        margin-top: 20px;
+      }
+      .delivery {
+        width: 80px;
+      }
+    }
+    .sellerOrderContent {
+      display: flex;
+      justify-content: space-between;
+      img {
+        margin: 0px;
+      }
+    }
+  }
+}
