@@ -15,6 +15,10 @@ export default function Graph() {
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
+    if (window.innerWidth < 640) setData(graphData2);
+    else {
+      setData(graphData);
+    }
     return () => {
       window.removeEventListener('resize', handleResize);
     };

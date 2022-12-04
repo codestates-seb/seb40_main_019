@@ -10,12 +10,16 @@ export default function Review({ item }) {
       <div className="createdAt">
         <p>{formatDate(item.createdAt)}</p>
       </div>
-      <Link to={`/product/detail/${item.proId}`}>
-        <img className="titleImg" src={item.titleImg} alt="productImg" />
-      </Link>
-      <Link to={`/product/detail/${item.proId}`}>
-        <div className="title">{item.productName}</div>
-      </Link>
+      <div className="titleImg">
+        <Link to={`/product/detail/${item.proId}`}>
+          <img className="titleImg" src={item.titleImg} alt="productImg" />
+        </Link>
+      </div>
+      <div className="title">
+        <Link to={`/product/detail/${item.proId}`}>
+          <div className="title">{item.productName}</div>
+        </Link>
+      </div>
       <div className="reviewcontent">{item.reviewContent}</div>
       <div className="star">
         <ReviewStar clickStar={item.star} type={'small'} />
