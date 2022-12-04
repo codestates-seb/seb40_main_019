@@ -1,4 +1,90 @@
 package com.backend.domain.review.domain;
 
-public class Review {
+import com.backend.domain.product.domain.Product;
+import com.backend.domain.user.domain.User;
+import com.backend.global.audit.Auditable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+
+@Entity
+@Getter
+@NoArgsConstructor
+public class Review extends Auditable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long reviewId;
+
+    @Column(nullable = false)
+    private String reviewWriter;
+
+    @Column(nullable = false)
+    private String reviewContent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    @JsonIgnore
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+    private int star;
+
+    private String reviewImg;
+
+    private Long proId;
+
+    private String productName;
+
+    private String titleImg;
+
+    @Builder
+    public Review(Long reviewId, String reviewWriter, String reviewContent, Product product, User user, int star, String reviewImg, Long productId, String productName, String titleImg) {
+        this.reviewId = reviewId;
+        this.reviewWriter = reviewWriter;
+        this.reviewContent = reviewContent;
+        this.product = product;
+        this.user = user;
+        this.star = star;
+        this.reviewImg = reviewImg;
+        this.proId = productId;
+        this.productName = productName;
+        this.titleImg = titleImg;
+    }
+
+
+
+    public void setReviewImg(String reviewImg) {
+        this.reviewImg = reviewImg;
+    }
+
+    public void setStar(int star) {
+        this.star = star;
+    }
+
+    public void setReviewWriter(String reviewWriter) {
+        this.reviewWriter = reviewWriter;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public void setReviewId(Long reviewId) {
+        this.reviewId = reviewId;
+    }
+
+    public void setReviewContent(String reviewContent) {
+        this.reviewContent = reviewContent;
+    }
 }
