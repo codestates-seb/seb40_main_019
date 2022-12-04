@@ -1,5 +1,8 @@
 # Codestates 40기 취직하고19조팀🙏
 
+![luxmeal깃허브](https://user-images.githubusercontent.com/100991074/205244837-0cc7ff78-5c76-46ae-a0f1-30ad065de2b2.jpg)
+
+
 ### 2022.11.9 ~ 2022.12.05
 
 ## 📌 배포 URL
