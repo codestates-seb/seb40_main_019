@@ -146,9 +146,9 @@ public class ReviewService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Review> getProductReview(Long userId,int page,int size) {
+    public Page<Review> getProductReview(int page, int size) {
         log.info("getProductReview 실행");
-        return reviewRepository.findByUserId(userId,PageRequest.of(page,size,Sort.by("reviewId").descending()));
+        return reviewRepository.findAllPageable(PageRequest.of(page,size,Sort.by("reviewId").descending()));
 
     }
 }
