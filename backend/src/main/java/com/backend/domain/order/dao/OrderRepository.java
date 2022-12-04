@@ -38,6 +38,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findByUserId(@Param("userId") Long userId);
 
 
-
+    @Query("select o from Order o " +
+            "order by o.createdAt desc"
+    )
     Page<Order> findAll(Pageable pageable);
 }
