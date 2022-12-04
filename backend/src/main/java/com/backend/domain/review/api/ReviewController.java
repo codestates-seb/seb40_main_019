@@ -102,10 +102,10 @@ public class ReviewController {
 
 
     @GetMapping("/review/seller")
-    public ResponseEntity getProductReview(@CurrentUser CustomUserDetails authUser,@RequestParam int page){
+    public ResponseEntity getProductReview(@RequestParam int page){
         int size = 15;
-        Long userId = authUser.getUser().getUserId();
-        Page<Review> reviews = reviewService.getProductReview(userId, page-1, size);
+//        Long userId = authUser.getUser().getUserId();
+        Page<Review> reviews = reviewService.getProductReview(page-1, size);
         List<Review> content = reviews.getContent();
         return new ResponseEntity(new MultiResponse<>(reviewMapper.reviewsToReviewResponseDto(content),reviews),HttpStatus.OK);
     }
