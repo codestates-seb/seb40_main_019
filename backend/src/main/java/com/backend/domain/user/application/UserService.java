@@ -215,13 +215,6 @@ public class UserService {
         log.info("재발급 : accessToken 생성완료 {}", accessToken);
         log.info("accessToken : {}", accessToken);
 
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"email\":\"" + user.getEmail() + "\"," +
-                "\"nickname\":\"" + user.getNickname() + "\"," +
-                "\"userRole\":\"" + user.getUserRole() + "\"," +
-                "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
-
         response.setHeader("Authorization", accessToken);
 
         return UserLoginResponseDto.toResponse(user);
