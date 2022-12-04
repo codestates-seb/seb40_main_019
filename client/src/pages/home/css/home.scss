@@ -248,6 +248,9 @@
           opacity: 0.5;
           margin-bottom: 10px;
         }
+        @media (max-width: 400px) {
+          margin: 20px 0px;
+        }
       }
 
       button {
@@ -257,7 +260,10 @@
         padding: 12px 20px;
         border-radius: 10px;
         font-family: var(--font-notoSans);
-        font-weight: 300;
+        font-weight: 600;
+        @media (max-width: 400px) {
+          padding: 8px 10px;
+        }
       }
     }
     .aiTextTopAni {
@@ -327,7 +333,7 @@
     border-radius: 15px 0px 0px 15px;
     @media (max-width: 400px) {
       right: -50px;
-      width: 70vw;
+      width: 57vw;
     }
   }
   .mainBoxBackAni {
