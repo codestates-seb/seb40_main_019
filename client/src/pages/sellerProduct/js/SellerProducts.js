@@ -12,6 +12,9 @@ export default function SellerProducts() {
 
   const handlePageChange = (page) => {
     setPageNum({ selected: page.selected + 1 });
+    window.scrollTo({
+      top: 200,
+    });
   };
 
   const [items] = useFetch('products/filter/1', pageNum, setPageInfo);
