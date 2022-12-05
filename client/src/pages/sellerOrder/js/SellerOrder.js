@@ -10,6 +10,9 @@ export default function SellerOrder() {
 
   const handlePageChange = (page) => {
     setPageNum({ selected: page.selected + 1 });
+    window.scrollTo({
+      top: 200,
+    });
   };
 
   const [items] = useFetch('orders/all', pageNum, setPageInfo);
