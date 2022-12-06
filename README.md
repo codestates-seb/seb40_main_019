@@ -22,14 +22,14 @@
 
 | FE손현지 | FE최민수 | FE이지연 |
 | --- | --- | --- |
-| 이미지1 | <img src='https://user-images.githubusercontent.com/91947958/205761854-1637df9b-d6e9-4f6a-84c4-06506c088db2.png' width='200'> | 이미지3 |
+| <img src='' width='200'> | <img src='https://user-images.githubusercontent.com/91947958/205761854-1637df9b-d6e9-4f6a-84c4-06506c088db2.png' width='200'> | <img src='' width='200'> |
 | [@Liieonking](https://github.com/Liieonking) | [@shinker1002](https://github.com/shinker1002) | [@GitHubJIYEON](https://github.com/GitHubJIYEON) | 
 
 ### Back-End
 
 | BE김효준 | BE박재원 | BE허준호 |
 | --- | --- | --- |
-| 이미지5 | 이미지6 | 이미지7 |
+| <img src='' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049471951757918228/90be94d1d21a74c8.png' width='200'> | <img src='' width='200'> |
 | [@hyojoonm](https://github.com/hyojoonm) | [@Taekgil99](https://github.com/Taekgil99) | [@junohheo](https://github.com/junohheo) |
 
 
