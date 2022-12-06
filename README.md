@@ -42,7 +42,7 @@
 <ul>
 	<li><a href="https://www.notion.so/codestates/40-Team019-LUXMEAL-3910653031a143bf9631d345eee7d642" target='_blank'>프로젝트 노션 페이지</a></li>
 	<li><a href="https://docs.google.com/spreadsheets/d/1gyK1nZu6h4VMpvENX3PsdQIWU83baUEzAl4ZkSrt9tA/edit#gid=0" target='_blank'>사용자 요구사항 정의서</a></li>
-	<li><a href="https://www.notion.so/codestates/API-7469f4e05dba4ae9a8275ce99e9f5535" target='_blank'>API 명세서</a></li>
+	<li><a href="https://documenter.getpostman.com/view/22536337/2s8YzP1PuK" target='_blank'>API 명세서</a></li>
 	<li><a href="https://docs.google.com/spreadsheets/d/1kEefRyu4W3oiIp0L9AGcJrL5fcoAyMJLPi9-KZggP_Q/edit#gid=214454112" target='_blank'>화면 정의서</a></li>
 	<li><a href="https://www.notion.so/codestates/Flow-chart-e52a934e6f4e49ce9a37dd86de6b4afa" target='_blank'>UserFlow</a></li>
 	<li><a href="https://www.figma.com/file/8jWU5gNupBcBIKvKwdogTY/%EB%A9%94%EC%9D%B8%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8?node-id=16%3A147" target='_blank'>Figma</a></li>
