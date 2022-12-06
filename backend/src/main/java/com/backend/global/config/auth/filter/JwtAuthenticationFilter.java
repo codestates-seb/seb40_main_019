@@ -102,9 +102,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         User user = customUserDetails.getUser();
 
-        String accessToken = delegateAccessToken(user);
+        String accessToken = jwtTokenizer.delegateAccessToken(user);
         log.info("JwtAuthenticationFilter: accessToken 생성완료");
-        String refreshToken = delegateRefreshToken(user);
+        String refreshToken = jwtTokenizer.delegateRefreshToken(user);
         log.info("JwtAuthenticationFilter: refreshToken 생성완료");
 
 
@@ -127,45 +127,4 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 "\"imageUrl\":\"" + user.getProfileImage() + "\"}");
     }
 
-    /**
-     * accessToken 생성
-     *
-     * @param user 유저
-     * @return accessToken
-     */
-    private String delegateAccessToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getUserId());
-        claims.put("userRole", user.getUserRole());
-
-        String subject = user.getUserId().toString();
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
-
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
-
-        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
-
-        return accessToken;
-    }
-
-    /**
-     * refreshToken 생성
-     *
-     * @param user 유저
-     * @return refreshToken
-     */
-    private String delegateRefreshToken(User user) {
-
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getUserId());
-        claims.put("userRole", user.getUserRole());
-
-        String subject = user.getUserId().toString();
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
-
-        String refreshToken = jwtTokenizer.generateRefreshToken(claims, subject, expiration, base64EncodedSecretKey);
-
-        return refreshToken;
-    }
 }

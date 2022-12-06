@@ -62,8 +62,8 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 
         User user = userRepository.findByEmailAndUserStatusAndSocialLogin(email, User.UserStatus.USER_EXIST, registrationId).get();
 
-        String accessToken = delegateAccessToken(user);
-        String refreshToken = delegateRefreshToken(user);
+        String accessToken = jwtTokenizer.delegateAccessToken(user);
+        String refreshToken = jwtTokenizer.delegateRefreshToken(user);
         log.info("JWT 발급 완료");
 
         saveRefreshToken(refreshToken, user);
@@ -121,48 +121,5 @@ public class OAuth2userSuccessHandler extends SimpleUrlAuthenticationSuccessHand
                 .build()
                 .toUri();
     }
-
-    // todo 토큰 발급 중복 메소드 통합 (JwtAuthenticationFilter, OAuth2userSuccessHandler)
-    /**
-     * 액세스 토큰 발급
-     *
-     * @param user 유저
-     * @return 액세스 토큰
-     */
-    private String delegateAccessToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getUserId());
-        claims.put("userRole", user.getUserRole());
-
-        String subject = user.getUserId().toString();
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMillisecond());
-
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getAccessSecretKey());
-
-        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
-
-        return accessToken;
-    }
-
-    /**
-     * 리프레시 토큰 발급
-     *
-     * @param user 유저
-     * @return 리프레시 토큰
-     */
-    private String delegateRefreshToken(User user) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getUserId());
-        claims.put("userRole", user.getUserRole());
-
-        String subject = user.getUserId().toString();
-        Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getRefreshTokenExpirationMillisecond());
-        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getRefreshSecretKey());
-
-        String refreshToken = jwtTokenizer.generateRefreshToken(claims, subject, expiration, base64EncodedSecretKey);
-
-        return refreshToken;
-    }
-
 
 }
