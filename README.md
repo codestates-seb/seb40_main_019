@@ -27,7 +27,7 @@
 
 ### Back-End
 
-| BE김효준 | BE박재원 | BE허준호 |
+| BE김효준 | BE박재원 | BE허준오 |
 | --- | --- | --- |
 | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049476638095704064/khj-removebg-preview_1.png' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049471951757918228/90be94d1d21a74c8.png' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049476469388230717/hj5-removebg-preview_2.png' width='200'> |
 | [@hyojoonm](https://github.com/hyojoonm) | [@Taekgil99](https://github.com/Taekgil99) | [@junohheo](https://github.com/junohheo) |
