@@ -22,14 +22,14 @@
 
 | FE손현지 | FE최민수 | FE이지연 |
 | --- | --- | --- |
-| <img src='' width='200'> | <img src='https://user-images.githubusercontent.com/91947958/205761854-1637df9b-d6e9-4f6a-84c4-06506c088db2.png' width='200'> | <img src='' width='200'> |
+| <img src='https://media.discordapp.net/attachments/961390348838506496/1049476170023972944/shj-removebg-preview.png' width='200'> | <img src='https://user-images.githubusercontent.com/91947958/205761854-1637df9b-d6e9-4f6a-84c4-06506c088db2.png' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049476169721970698/2jy-removebg-preview.png' width='200'> |
 | [@Liieonking](https://github.com/Liieonking) | [@shinker1002](https://github.com/shinker1002) | [@GitHubJIYEON](https://github.com/GitHubJIYEON) | 
 
 ### Back-End
 
 | BE김효준 | BE박재원 | BE허준호 |
 | --- | --- | --- |
-| <img src='' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049471951757918228/90be94d1d21a74c8.png' width='200'> | <img src='' width='200'> |
+| <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049476638095704064/khj-removebg-preview_1.png' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049471951757918228/90be94d1d21a74c8.png' width='200'> | <img src='https://cdn.discordapp.com/attachments/961390348838506496/1049476469388230717/hj5-removebg-preview_2.png' width='200'> |
 | [@hyojoonm](https://github.com/hyojoonm) | [@Taekgil99](https://github.com/Taekgil99) | [@junohheo](https://github.com/junohheo) |
 
 
