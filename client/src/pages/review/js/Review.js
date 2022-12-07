@@ -12,6 +12,9 @@ export default function Review() {
 
   const handlePageChange = (page) => {
     setPageNum({ selected: page.selected + 1 });
+    window.scrollTo({
+      top: 200,
+    });
   };
 
   const [items] = useFetch('user/review', pageNum, setPageInfo); // 페이지도 있음

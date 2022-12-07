@@ -34,10 +34,11 @@
   @media (max-width: 750px){
     display: grid;
     grid-gap: 10px;
+    grid-template-columns: 0.5fr 1fr 3fr 0.5fr;
     grid-template-areas:
-      'check . . . . delete'
-      'check Img title title quantity delete'
-      'check Img price . quantity delete';
+      'check Img title delete'
+      'check Img title delete'
+      'check price quantity delete';
     .checkbox{
       grid-area: check;
     }

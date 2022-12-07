@@ -11,6 +11,9 @@ export default function SellerReview() {
 
   const handlePageChange = (page) => {
     setPageNum({ selected: page.selected + 1 });
+    window.scrollTo({
+      top: 200,
+    });
   };
   const [items] = useFetch('review/seller', pageNum, setPageInfo);
 

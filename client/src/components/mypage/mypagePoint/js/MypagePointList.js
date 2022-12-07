@@ -12,6 +12,9 @@ export default function MypagePointList() {
 
   const handlePageChange = (page) => {
     setPageNum({ selected: page.selected + 1 });
+    window.scrollTo({
+      top: 200,
+    });
   };
   const [pointList] = useFetch('point/history', pageNum, setPageInfo);
   return (

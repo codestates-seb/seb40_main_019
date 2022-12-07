@@ -14,67 +14,82 @@ export default function SidebarMenu() {
         </Link>
         <ul className="tittleList">
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
                 setCategory({
                   allProduct: true,
                   category: '',
                   categoryPage: { selected: 1 },
                 })
-              )
-            }
+              );
+              window.scrollTo({
+                top: 700,
+              });
+            }}
           >
             NEW
           </button>
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
                 setCategory({
                   allProduct: false,
                   category: '1',
                   categoryPage: { selected: 1 },
                 })
-              )
-            }
+              );
+              window.scrollTo({
+                top: 700,
+              });
+            }}
           >
             건식 사료
           </button>
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
                 setCategory({
                   allProduct: false,
                   category: '2',
                   categoryPage: { selected: 1 },
                 })
-              )
-            }
+              );
+              window.scrollTo({
+                top: 700,
+              });
+            }}
           >
             습식 사료
           </button>
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
                 setCategory({
                   allProduct: false,
                   category: '3',
                   categoryPage: { selected: 1 },
                 })
-              )
-            }
+              );
+              window.scrollTo({
+                top: 700,
+              });
+            }}
           >
             자연식
           </button>
           <button
-            onClick={() =>
+            onClick={() => {
               dispatch(
                 setCategory({
                   allProduct: false,
                   category: '4',
                   categoryPage: { selected: 1 },
                 })
-              )
-            }
+              );
+              window.scrollTo({
+                top: 700,
+              });
+            }}
           >
             동결 사료
           </button>

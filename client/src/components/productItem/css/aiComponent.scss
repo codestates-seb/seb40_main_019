@@ -110,6 +110,9 @@
 		font-weight: bold;   
 		position: relative;
 		top: -118px;
+		@media (max-width: 640px) {
+      padding: 40px 10px 20px 10px;
+    }
 		.listBox{
 			display: flex;
 			justify-content: center;

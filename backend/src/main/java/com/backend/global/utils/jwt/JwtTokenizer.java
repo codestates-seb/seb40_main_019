@@ -1,5 +1,6 @@
 package com.backend.global.utils.jwt;
 
+import com.backend.domain.user.domain.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -14,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 @Component
@@ -104,5 +106,43 @@ public class JwtTokenizer {
         Key key = Keys.hmacShaKeyFor(keyBytes);
 
         return key;
+    }
+
+    /**
+     * accessToken 생성
+     *
+     * @param user 유저
+     * @return accessToken
+     */
+    public String delegateAccessToken(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getUserId());
+        claims.put("userRole", user.getUserRole());
+
+        String subject = user.getUserId().toString();
+        Date expiration = getTokenExpiration(getAccessTokenExpirationMillisecond());
+
+        String base64EncodedSecretKey = encodeBase64SecretKey(getAccessSecretKey());
+
+        return generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+    }
+
+    /**
+     * refreshToken 생성
+     *
+     * @param user 유저
+     * @return refreshToken
+     */
+    public String delegateRefreshToken(User user) {
+
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getUserId());
+        claims.put("userRole", user.getUserRole());
+
+        String subject = user.getUserId().toString();
+        Date expiration = getTokenExpiration(getRefreshTokenExpirationMillisecond());
+        String base64EncodedSecretKey = encodeBase64SecretKey(getRefreshSecretKey());
+
+        return generateRefreshToken(claims, subject, expiration, base64EncodedSecretKey);
     }
 }

@@ -22,7 +22,9 @@ function ProductItems() {
         categoryPage: { selected: page.selected + 1 },
       })
     );
-    // }
+    window.scrollTo({
+      top: 700,
+    });
   };
 
   let [products] = [];

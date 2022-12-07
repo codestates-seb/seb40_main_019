@@ -6,7 +6,8 @@ export default function ShopLayout() {
   return (
     <>
       <div className="mainInner">
-        {location.pathname.split('/')[2] === 'detail' ? null : (
+        {location.pathname.split('/')[2] === 'detail' ||
+        location.pathname.split('/')[2] === 'order' ? null : (
           <div className="sideBar">
             <div className="sticky">
               <Sidebar />

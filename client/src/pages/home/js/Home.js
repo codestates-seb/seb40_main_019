@@ -24,7 +24,7 @@ export default function Home() {
       400 - Math.floor((1920 - window.innerWidth) / 5),
       900 - Math.floor((1920 - window.innerWidth) / 5),
       1700 - Math.floor((1920 - window.innerWidth) / 2),
-      2500 - Math.floor((1920 - window.innerWidth) / 1.2),
+      2500 - Math.floor((1920 - window.innerWidth) / 1.1),
     ]);
   };
 
@@ -39,7 +39,7 @@ export default function Home() {
       400 - Math.floor((1920 - window.innerWidth) / 5),
       900 - Math.floor((1920 - window.innerWidth) / 5),
       1700 - Math.floor((1920 - window.innerWidth) / 2),
-      2500 - Math.floor((1920 - window.innerWidth) / 1.2),
+      2500 - Math.floor((1920 - window.innerWidth) / 1.1),
     ]);
 
     return () => {
